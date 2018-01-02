@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<TableModel id="SUser" desc="用户信息" tblName="s_user" pageSize="20" listURL="/fmp/SUser/DoList">
+		<Fields>
+			<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR2" length="40" required="F" isPK="T"  order="ASC"  dicType="" isSearch="F" create="VLAU" hidden="VLAU" webType="" webTypeExt=""   tableAlias="user1" />
+			<TableField id="USERID" colName="USERID" desc="用户码" dataType="VARCHAR2" length="10"  required="T" isSearch="T" create="LAVU" hidden="LAVU" readOnly="VU"  webType="text" fuzzy="T" orderInList="T" autoCode="S_YHM" tableAlias="user1" />
+			<TableField id="USERNAME" colName="USERNAME" desc="姓名" dataType="VARCHAR2" length="20" required="T" isSearch="T" fuzzy="T" isPK="T" isEncrypted="F"  create="LAVU" webType="text" orderInList="T" tableAlias="user1" />
+			<TableField id="NICKNAME" colName="NICKNAME" desc="呢称" dataType="VARCHAR2" length="40"  required="F" isSearch="F" create="LAVU" hidden="L" webType="text"  tableAlias="user1" />
+			<TableField id="LOGINCODE" colName="LOGINCODE" desc="登录帐号" dataType="VARCHAR2" length="20"  required="T" isSearch="F" create="LAVU"  webType="text"  tableAlias="user1"  orderInList="T" order="ASC"/>
+			<TableField id="ISMODIFYLOGINCODE" colName="ISMODIFYLOGINCODE" desc="是否修改登录帐号" dataType="VARCHAR2" length="20"  required="F" isSearch="F" create="LAVU" hidden="LVAU" webType="text"  tableAlias="user1" />
+			<TableField id="LOGINPASSWORD" colName="LOGINPASSWORD" desc="登录密码" dataType="VARCHAR2" length="100"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text"  tableAlias="user1" />
+			<TableField id="STARTDATE" colName="STARTDATE" desc="启用日期" dataType="CHAR" length="10"  required="F" isSearch="F" create="AVU" webType="text" webTypeExt="date" tableAlias="user1" />
+			<TableField id="PASSWVALDA" colName="PASSWVALDA" desc="密码失效日期" dataType="CHAR" length="10"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text" webTypeExt="date"  tableAlias="user1" />
+			<TableField id="FIREDATE" colName="FIREDATE" desc="解雇日期" dataType="CHAR" length="10"  required="F" isSearch="F" create="AVU"  webType="text" webTypeExt="date"  tableAlias="user1" />
+			<TableField id="IDCARDNO" colName="IDCARDNO" desc="身份证号码" dataType="VARCHAR2" length="20"  required="F" isSearch="F" create="AVU"  webType="text" webTypeExt="idcard"  tableAlias="user1" />
+			<TableField id="BIRTHDAY" colName="BIRTHDAY" desc="生日" dataType="CHAR" length="10"  required="F" isSearch="F" create="AVU" readOnly=""  webType="text"  webTypeExt="date"  tableAlias="user1" />
+			<TableField id="TELNUM" colName="TELNUM" desc="联系电话" dataType="VARCHAR2" length="20"  required="F" isSearch="F" create="LAVU"  webType="text" tableAlias="user1" />
+			<TableField id="LASTLOGDAT" colName="LASTLOGDAT" desc="最后登录日期" dataType="CHAR" length="10"  required="F" isSearch="F" create="LAVU" hidden="LAU"  webType="text" webTypeExt="date" tableAlias="user1" />
+			<TableField id="RETIREDATE" colName="RETIREDATE" desc="退休时间" dataType="CHAR" length="20"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text" webTypeExt="date" tableAlias="user1" />
+			<TableField id="USERMAIL" colName="USERMAIL" desc="用户邮箱" dataType="VARCHAR2" length="50"  required="F" isSearch="F" create="AVU"  webType="text" webTypeExt="email"  tableAlias="user1" />
+			<TableField id="WRONGPINNUM" colName="WRONGPINNUM" desc="密码输入错误次数" dataType="INTEGER" length="10"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text" webTypeExt="number"  tableAlias="user1" defValue="0" />
+			<TableField id="STATE" colName="STATE" desc="状态" dataType="CHAR" length="1"  required="F" isSearch="T" create="LAVU"  webType="select" dicType="S_QYZT" defValue="2"  tableAlias="user1" />
+			<TableField id="IPMASK" colName="IPMASK" desc="用户IP掩码" dataType="VARCHAR2" length="40"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text"  tableAlias="user1" />
+			<TableField id="ORDERNO" colName="ORDERNO" desc="用户排序字段" dataType="INTEGER" length="10"  required="F" isSearch="F" create="LAVU" hidden="L" webType="text" webTypeExt="number"  tableAlias="user1" />
+			<TableField id="QUESTION" colName="QUESTION" desc="用户防伪问题" dataType="VARCHAR2" length="50"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text"  tableAlias="user1" />
+			<TableField id="ANSWER" colName="ANSWER" desc="用户防伪答案" dataType="VARCHAR2" length="50"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text"  tableAlias="user1" />
+			<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text"  tableAlias="user1" />
+			<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text" tableAlias="user1" />
+			<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text" webTypeExt="time"  tableAlias="user1" />
+			<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text"   tableAlias="user1" />
+			<TableField id="LIABMAN" colName="LIABMAN" desc="责任人" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text"  tableAlias="user1" />
+			<TableField id="LIABORG" colName="LIABORG" desc="责任机构" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text" tableAlias="user1" />
+			<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  required="F" isSearch="F" create="VU" hidden="VLAU"  webType="text"  tableAlias="user1" />
+			<TableField id="ORGID" colName="ORGID" desc="所属机构" dataType="VARCHAR2" length="20"  required="T" isSearch="T" create="LAVU"   webType="pop" webTypeExt="openSinPop('SOrg','ORGID','ORGID','ORGNAME')" dblClick="viewSOrgByOrgId($(this).attr('truevalue'));" orderInList="T" tableAlias="user1" />
+			<TableField id="DEPTID" colName="DEPTID" desc="所属部门" dataType="VARCHAR2" length="20"  required="T" isSearch="T" create="LAVU"   webType="pop" webTypeExt="openDeptPop()" dblClick="viewSDeptByDeptId($(this).attr('truevalue'));" orderInList="T" tableAlias="user1" />
+			<TableField id="POSTID" colName="POSTID" desc="所属职位" dataType="VARCHAR2" length="20"  required="" isSearch="T" create="LAVU" hidden="LVAU"  webType="pop" webTypeExt="openSinPop('SPost','POSTID','POSTID','POSTNAME')" dblClick="viewSPostByPostId($(this).attr('truevalue'));" orderInList="T" tableAlias="spu" />
+			<TableField id="ROLEID" colName="ROLEID" desc="所属岗位" dataType="VARCHAR2" length="20"  required="" isSearch="T" create="LAVU"  hidden="LVAU"  webType="pop" webTypeExt="openSinPop('SRole','ROLEID','ROLEID','ROLENAME')" dblClick="viewSRoleByRoleId($(this).attr('truevalue'));" orderInList="T" tableAlias="sru" />
+			<TableField id="MEMO" colName="MEMO" desc="备注" dataType="VARCHAR2" length="200"  required="F" isSearch="F" create="LAVU" hidden="L" webType="textarea" tableAlias="user1" />
+			<TableField id="IFHYPOTHEC" colName="IFHYPOTHEC" desc="是否抵押权人" dataType="CHAR" length="1"  required="F" isSearch="F" create="LAVU" hidden="VAUL" webType="select" dicType="S_SF" defValue=""  tableAlias="user1" />
+		    <TableField id="HYPOTHECQUOTA" colName="HYPOTHECQUOTA" desc="抵押权额度" dataType="DECIMAL" length="18"  webType="text" webTypeExt="money" min="0" max="999999999999" create="LVUA" hidden="LVAU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="user1" />
+		    <TableField id="OCCUPYAMT" colName="OCCUPYAMT" desc="在押额度" dataType="DECIMAL" length="18"  webType="text" webTypeExt="money" min="0" max="999999999999" create="LVUA" hidden="LVAU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="user1" />
+			
+		</Fields>
+	</TableModel>

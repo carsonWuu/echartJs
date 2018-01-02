@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SUser"> 
+<sql id="suserColumns">RID, USERID, USERNAME, NICKNAME, LOGINCODE, LOGINPASSWORD, STARTDATE, PASSWVALDA, FIREDATE, BIRTHDAY, TELNUM, IDCARDNO, LASTLOGDAT, RETIREDATE, USERMAIL, WRONGPINNUM, MEMO, STATE, IPMASK, ORDERNO, QUESTION, ANSWER, CREATORID, CREATTIME, MODIFIEDTIME, MODIFIERID, LIABMAN, LIABORG, RECORDSTATE,ORGID,DEPTID,IFHYPOTHEC,HYPOTHECQUOTA,OCCUPYAMT </sql> 
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select distinct user1.*,
+		   org1.ORGANSHORTFORM as TRANS_ORGID,
+		   dept1.DEPSHORTFORM as TRANS_DEPTID
+	from S_USER user1
+	left outer join S_ORG org1
+		on user1.ORGID = org1.ORGID
+	left outer join S_DEPT dept1
+		on user1.DEPTID = dept1.DEPTID 
+	left outer join S_POSTUSER spu
+		on spu.USERID = user1.USERID
+	left outer join S_POST sp
+		on sp.POSTID = spu.POSTID
+	left outer join S_ROLEUSER sru
+		on sru.USERID = user1.USERID
+	left outer join S_ROLE sr
+		on sr.ROLEID = sru.ROLEID
+	<where>
+        user1.RECORDSTATE='0'	
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+		order by user1.STATE
+        <if test="order!=null and order!='' ">   
+             ,${order}
+        </if>				
+</select>
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(distinct user1.RID) NUM 
+	from S_USER user1
+	left outer join S_ORG org1
+		on user1.ORGID = org1.ORGID
+	left outer join S_DEPT dept1
+		on user1.DEPTID = dept1.DEPTID 
+	left outer join S_POSTUSER spu
+		on spu.USERID = user1.USERID
+	left outer join S_POST sp
+		on sp.POSTID = spu.POSTID
+	left outer join S_ROLEUSER sru
+		on sru.USERID = user1.USERID
+	left outer join S_ROLE sr
+		on sr.ROLEID = sru.ROLEID
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>
+        and user1.RECORDSTATE='0'		
+	</where>
+</select>
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_USER set                     
+                        RECORDSTATE=#{RECORDSTATE}
+	where RID=#{RID}
+</update>
+
+
+
+<update id="updateDeptByUSERID" parameterType="hashmap" > 
+	update S_USER set                     
+                        DEPTID=#{DEPTID}
+	where USERID=#{USERID}
+</update>
+
+<update id="setHypothec" parameterType="hashmap" > 
+<!-- 设置指定RID中的抵押权人 -->
+	update S_USER set IFHYPOTHEC='1' where RID=#{RID}
+</update>
+
+<update id="cancleHypothec" parameterType="hashmap" > 
+<!-- 取消指定RID中的抵押权人 -->
+	update S_USER set IFHYPOTHEC='2' where RID=#{RID}
+</update>
+ 
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_USER where RID = #{RID}
+</delete> 
+
+<select id="selectUserName" parameterType="hashmap" resultType="hashmap"> 
+	select USERNAME,DEPTID from S_USER where USERID = #{USERID}  
+</select>
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select org1.ORGANSHORTFORM as TRANS_ORGID,dept1.DEPSHORTFORM as TRANS_DEPTID, user1.* from S_USER user1
+	left outer join S_ORG org1
+	on user1.ORGID = org1.ORGID
+	left outer join S_DEPT dept1
+	on user1.DEPTID = dept1.DEPTID
+	<where>
+	 user1.RID = #{RID}  
+	</where>  
+</select> 
+
+<select id="isExistLoginCode" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_USER where LOGINCODE = #{LOGINCODE}  
+</select>
+
+<select id="isExistIdCardNo" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_USER where IDCARDNO = #{IDCARDNO}  
+</select>
+
+<select id="selectUserIdByOrgId" parameterType="hashmap" resultType="hashmap"> 
+	select USERID from S_USER where ORGID = #{ORGID}  and RECORDSTATE='0' and STATE != '1'
+</select>
+
+<select id="selectUserIdByDeptId" parameterType="hashmap" resultType="hashmap"> 
+	select USERID from S_USER where DEPTID = #{DEPTID}   and RECORDSTATE='0'  and STATE != '1'
+</select>
+
+<select id="selectAllUserId" parameterType="hashmap" resultType="hashmap"> 
+	select USERID from S_USER where  RECORDSTATE='0'
+</select>
+
+<select id="validateUser" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_USER where logincode = #{loginCode} AND loginPassword= #{loginPassword}  and RECORDSTATE = '0' and STATE != '1'
+</select> 
+
+<select id="getUserByRid" parameterType="String" resultType="hashmap"> 
+	select * from S_USER where RID = #{RID} 
+</select> 
+
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+	select org1.ORGANSHORTFORM as TRANS_ORGID,dept1.DEPSHORTFORM as TRANS_DEPTID, user1.* from S_USER user1
+	left outer join S_ORG org1
+	on user1.ORGID = org1.ORGID
+	left outer join S_DEPT dept1
+	on user1.DEPTID = dept1.DEPTID
+	<where>
+	 user1.RID = #{RID}  
+	</where>  
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" > 
+	insert into S_USER(RID, USERID, USERNAME, NICKNAME, LOGINCODE, LOGINPASSWORD, STARTDATE, PASSWVALDA, FIREDATE, BIRTHDAY, TELNUM, IDCARDNO, LASTLOGDAT, RETIREDATE, USERMAIL, WRONGPINNUM, MEMO, STATE, IPMASK, ORDERNO, QUESTION, ANSWER, CREATORID, CREATTIME, MODIFIEDTIME, MODIFIERID, LIABMAN, LIABORG, RECORDSTATE,ORGID,DEPTID,IFHYPOTHEC,HYPOTHECQUOTA,OCCUPYAMT)
+	values(#{RID}, #{USERID}, #{USERNAME}, #{NICKNAME}, #{LOGINCODE}, #{LOGINPASSWORD}, #{STARTDATE}, #{PASSWVALDA}, #{FIREDATE}, #{BIRTHDAY}, #{TELNUM}, #{IDCARDNO}, #{LASTLOGDAT}, #{RETIREDATE}, #{USERMAIL}, #{WRONGPINNUM}, #{MEMO}, #{STATE}, #{IPMASK}, #{ORDERNO}, #{QUESTION}, #{ANSWER}, #{CREATORID}, #{CREATTIME}, #{MODIFIEDTIME}, #{MODIFIERID}, #{LIABMAN}, #{LIABORG}, #{RECORDSTATE},#{ORGID},#{DEPTID},#{IFHYPOTHEC},#{HYPOTHECQUOTA},#{OCCUPYAMT})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_USER 
+	<set> 
+		<if test="USERID!=null">USERID = #{USERID}, </if>
+		<if test="USERNAME!=null">USERNAME = #{USERNAME},</if>
+		<if test="NICKNAME!=null">NICKNAME = #{NICKNAME}, </if>
+		<if test="LOGINCODE!=null">LOGINCODE = #{LOGINCODE}, </if>
+		<if test="LOGINPASSWORD!=null">LOGINPASSWORD = #{LOGINPASSWORD}, </if>
+		<if test="STARTDATE!=null">STARTDATE = #{STARTDATE},</if>
+		<if test="PASSWVALDA!=null">PASSWVALDA = #{PASSWVALDA},</if>
+		<if test="FIREDATE!=null">FIREDATE = #{FIREDATE}, </if>
+		<if test="BIRTHDAY!=null">BIRTHDAY = #{BIRTHDAY}, </if>
+		<if test="TELNUM!=null">TELNUM = #{TELNUM}, </if>
+		<if test="IDCARDNO!=null">IDCARDNO = #{IDCARDNO},</if>
+		<if test="LASTLOGDAT!=null">LASTLOGDAT = #{LASTLOGDAT},</if>
+		<if test="RETIREDATE!=null">RETIREDATE = #{RETIREDATE},</if>
+		<if test="USERMAIL!=null">USERMAIL = #{USERMAIL}, </if>
+		<if test="WRONGPINNUM!=null">WRONGPINNUM = #{WRONGPINNUM},</if>
+		<if test="MEMO!=null">MEMO = #{MEMO},</if>
+		<if test="STATE!=null">STATE = #{STATE}, </if>
+		<if test="IPMASK!=null">IPMASK = #{IPMASK}, </if>
+		<if test="ORDERNO!=null">ORDERNO = #{ORDERNO},</if>
+		<if test="QUESTION!=null">QUESTION = #{QUESTION},</if>
+		<if test="ANSWER!=null">ANSWER = #{ANSWER},</if>
+		<if test="MODIFIEDTIME!=null">MODIFIEDTIME = #{MODIFIEDTIME},</if>
+		<if test="MODIFIERID!=null">MODIFIERID = #{MODIFIERID},</if>
+		<if test="LIABMAN!=null">LIABMAN = #{LIABMAN}, </if>
+		<if test="LIABORG!=null">LIABORG = #{LIABORG}, </if>
+		<if test="RECORDSTATE!=null">RECORDSTATE = #{RECORDSTATE},</if>
+		<if test="ORGID!=null">ORGID=#{ORGID},</if>
+		<if test="DEPTID!=null">DEPTID=#{DEPTID},  </if>
+		<if test="IFHYPOTHEC!=null">IFHYPOTHEC=#{IFHYPOTHEC},</if>
+		<if test="HYPOTHECQUOTA!=null">HYPOTHECQUOTA=#{HYPOTHECQUOTA},</if>
+		<if test="OCCUPYAMT!=null">OCCUPYAMT=#{OCCUPYAMT},</if>
+	</set>
+	where RID=#{RID}
+</update>
+
+
+<select id="checkExistForExcel" parameterType="hashmap" resultType="int"> 
+	select count(*) from S_USER
+     where USERNAME = #{USERNAME}  and LOGINCODE =#{LOGINCODE}
+</select>
+
+
+<insert id="insertFromExcel" parameterType="hashmap" > 
+	insert into S_USER(RID, USERID, USERNAME, NICKNAME, LOGINCODE, LOGINPASSWORD, STARTDATE, PASSWVALDA, FIREDATE, BIRTHDAY, TELNUM, IDCARDNO, LASTLOGDAT, RETIREDATE, USERMAIL, WRONGPINNUM, MEMO, STATE, IPMASK, ORDERNO, QUESTION, ANSWER, CREATORID, CREATTIME, MODIFIEDTIME, MODIFIERID, LIABMAN, LIABORG, RECORDSTATE,ORGID,DEPTID)values(#{RID}, #{USERID}, #{USERNAME}, #{NICKNAME}, #{LOGINCODE}, #{LOGINPASSWORD}, #{STARTDATE}, #{PASSWVALDA}, #{FIREDATE}, #{BIRTHDAY}, #{TELNUM}, #{IDCARDNO}, #{LASTLOGDAT}, #{RETIREDATE}, #{USERMAIL}, #{WRONGPINNUM}, #{MEMO}, #{STATE}, #{IPMASK}, #{ORDERNO}, #{QUESTION}, #{ANSWER}, #{CREATORID}, #{CREATTIME}, #{MODIFIEDTIME}, #{MODIFIERID}, #{LIABMAN}, #{LIABORG}, #{RECORDSTATE},#{ORGID},#{DEPTID})
+</insert> 
+
+<update id="updateFromExcel" parameterType="hashmap" > 
+	update S_USER 
+	<set> 
+		<if test="USERID!=null">USERID = #{USERID}, </if>
+		<if test="USERNAME!=null">USERNAME = #{USERNAME},</if>
+		<if test="NICKNAME!=null">NICKNAME = #{NICKNAME}, </if>
+		<if test="LOGINCODE!=null">LOGINCODE = #{LOGINCODE}, </if>
+		<if test="LOGINPASSWORD!=null">LOGINPASSWORD = #{LOGINPASSWORD}, </if>
+		<if test="STARTDATE!=null">STARTDATE = #{STARTDATE},</if>
+		<if test="PASSWVALDA!=null">PASSWVALDA = #{PASSWVALDA},</if>
+		<if test="FIREDATE!=null">FIREDATE = #{FIREDATE}, </if>
+		<if test="BIRTHDAY!=null">BIRTHDAY = #{BIRTHDAY}, </if>
+		<if test="TELNUM!=null">TELNUM = #{TELNUM}, </if>
+		<if test="IDCARDNO!=null">IDCARDNO = #{IDCARDNO},</if>
+		<if test="LASTLOGDAT!=null">LASTLOGDAT = #{LASTLOGDAT},</if>
+		<if test="RETIREDATE!=null">RETIREDATE = #{RETIREDATE},</if>
+		<if test="USERMAIL!=null">USERMAIL = #{USERMAIL}, </if>
+		<if test="WRONGPINNUM!=null">WRONGPINNUM = #{WRONGPINNUM},</if>
+		<if test="MEMO!=null">MEMO = #{MEMO},</if>
+		<if test="STATE!=null">STATE = #{STATE}, </if>
+		<if test="IPMASK!=null">IPMASK = #{IPMASK}, </if>
+		<if test="ORDERNO!=null">ORDERNO = #{ORDERNO},</if>
+		<if test="QUESTION!=null">QUESTION = #{QUESTION},</if>
+		<if test="ANSWER!=null">ANSWER = #{ANSWER},</if>
+		<if test="MODIFIEDTIME!=null">MODIFIEDTIME = #{MODIFIEDTIME},</if>
+		<if test="MODIFIERID!=null">MODIFIERID = #{MODIFIERID},</if>
+		<if test="LIABMAN!=null">LIABMAN = #{LIABMAN}, </if>
+		<if test="LIABORG!=null">LIABORG = #{LIABORG}, </if>
+		<if test="RECORDSTATE!=null">RECORDSTATE = #{RECORDSTATE},</if>
+		<if test="ORGID!=null">ORGID=#{ORGID},</if>
+		<if test="DEPTID!=null">DEPTID=#{DEPTID}, </if>
+		<if test="IFHYPOTHEC!=null">IFHYPOTHEC=#{IFHYPOTHEC},</if>
+		<if test="HYPOTHECQUOTA!=null">HYPOTHECQUOTA=#{HYPOTHECQUOTA},</if>
+		<if test="OCCUPYAMT!=null">OCCUPYAMT=#{OCCUPYAMT}</if>
+	</set>
+	where RID=#{RID}
+</update>
+  
+
+<update id="SavePassword" parameterType="hashmap">
+	update S_USER set LOGINPASSWORD = #{NEWPWD}
+	where USERID = #{USERID} AND LOGINPASSWORD = #{OLDPWD}
+</update>
+
+<update id="ReSavePassword" parameterType="hashmap">
+	update S_USER set LOGINPASSWORD = #{LOGINPASSWORD}
+	where USERID = #{USERID} 
+</update>
+
+
+<!-- 根据用户码更新用户表的在押金额-->
+<update id="updateOccupyAmt" parameterType="hashmap">
+	update S_USER set OCCUPYAMT = #{OCCUPYAMT}
+	where USERID = #{USERID} and RECORDSTATE='0' 
+</update>
+
+
+<select id="GetUserInfoByUserId" parameterType="String" resultType="hashmap">
+	select * from S_USER
+	where USERID = #{USERID} and RECORDSTATE = '0' 
+</select>
+
+
+<!--获取流程节点审批人用户ID-->
+<select id="getUserID" parameterType="hashmap" resultType="hashmap">
+	select distinct usr.USERID,usr.USERNAME from s_user usr,S_POSTUSER posusr 
+	<where>
+        <if test="userCondition!=null and userCondition!='' ">   
+             ${userCondition}
+        </if>
+	</where>
+</select>
+
+
+
+<update id="saveUserQuotaInfo" parameterType="hashmap" > 
+	update S_USER set
+		 IFHYPOTHEC=#{IFHYPOTHEC},
+		 HYPOTHECQUOTA=#{HYPOTHECQUOTA},
+		 OCCUPYAMT=#{OCCUPYAMT}
+	where USERID=#{USERID}
+</update>
+
+<select id="getUserQuotaInfo" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_USER
+	where RID = #{RID}
+</select>
+
+
+<select id="getReaderIdInfo" parameterType="hashmap" resultType="hashmap"> 
+	select usr.* from S_USER usr 
+	<where> usr.RECORDSTATE = '0' AND
+	      exists( select userid from s_postuser pu 
+	      <where>
+          <if test="INCEPTPOST!=null and INCEPTPOST!='' ">   
+              pu.USERID = usr.USERID AND pu.POSTID = #{INCEPTPOST}
+          </if>	
+          
+	      </where>
+	      )
+	      <if test="INCEPTORGID!=null and INCEPTORGID!='' ">   
+             and usr.ORGID = #{INCEPTORGID}
+          </if>
+          <if test="INCEPTDEPTID!=null and INCEPTDEPTID!='' ">   
+             and usr.DEPTID = #{INCEPTDEPTID}
+          </if>
+	</where>
+</select>
+
+
+
+<select id="getTelNumByUserId" parameterType="hashmap" resultType="hashmap">
+	select TELNUM,USERNAME from S_USER  
+	where RECORDSTATE = '0'  and  ${userCondition}
+</select>
+
+
+
+<!-- 根据用户ID获取手机号码-->
+<select id="getTelNumData" parameterType="String" resultType="String">
+	select TELNUM from S_USER  
+	where RECORDSTATE = '0' and USERID = #{inceptUserId}
+</select>
+
+<select id="getNumByUserId" parameterType="String" resultType="hashmap">
+	select TELNUM,USERNAME from S_USER  
+	where RECORDSTATE = '0'  and USERID = #{USERID}
+</select>
+<!-- 获取用户联系方式 -->
+<select id="getUserContactWay" parameterType="hashmap" resultType="hashmap">
+	select 
+		USERMAIL,
+		TELNUM
+	from 
+		S_USER  
+	where 
+		RECORDSTATE = '0'  
+	and USERID = #{USERID}
+	
+</select>
+</mapper>

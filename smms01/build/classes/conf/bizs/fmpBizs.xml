@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<include file="conf/bizs/fmp/system/SDicBiz.xml"/>
+	<include file="conf/bizs/fmp/FrameBiz.xml"/>
+	<include file="conf/bizs/fmp/system/SModuleBiz.xml"/>
+	<include file="conf/bizs/fmp/system/SWorkCalenderBiz.xml"/>
+	<include file="conf/bizs/fmp/system/SModuleOpperationBiz.xml"/>
+	<include file="conf/bizs/fmp/system/SOrgBiz.xml"/>
+	<include file="conf/bizs/fmp/system/SDeptBiz.xml"/>
+	<include file="conf/bizs/fmp/SampleAjaxBiz.xml"/>
+	<include file="conf/bizs/fmp/system/SRoleRightBiz.xml"/>
+	<include file="conf/bizs/fmp/SAttachmentBiz.xml"/>
+	<include file="conf/bizs/fmp/FrameCommonBiz.xml"/>
+	<include file="conf/bizs/fmp/system/SUserBiz.xml"/>
+	<include file="conf/bizs/fmp/FrameStatePicBiz.xml"/>
+	<include file="conf/bizs/fmp/BuildRightBiz.xml"/>
+	<include file="conf/bizs/fmp/system/notice/SAfficheListBiz.xml"/>
+	<include file="conf/bizs/fmp/system/notice/SAfficheDetailBiz.xml"/>
+	<include file="conf/bizs/fmp/system/autocode/SAutoCodeBiz.xml"/>
+	<include file="conf/bizs/fmp/system/riskwarning/SRiskWaringBiz.xml"/>
+	<include file="conf/bizs/fmp/system/sysAffiche/affich/SAfficheBiz.xml"/>
+	<include file="conf/bizs/fmp/author/moduleDataRange/SModleDataRangeBiz.xml"/>
+	<include file="conf/bizs/fmp/author/customModule/SCustomModuleBiz.xml"/>
+	<include file="conf/bizs/fmp/system/notice/NoticeBiz.xml"/>
+	<include file="conf/bizs/fmp/system/notice/RiskListBiz.xml"/>
+	<include file="conf/bizs/fmp/system/notice/RiskDetailBiz.xml"/>
+	<include file="conf/bizs/fmp/workflow/WorkFlowBiz.xml"/>
+	<include file="conf/bizs/fmp/system/jobInfo/SJobInfoBiz.xml"/>
+	<include file="conf/bizs/fmp/system/report/reportSubTemplet/SReportSubTempletBiz.xml"/>
+	<include file="conf/bizs/fmp/system/report/reportTemplet/SReportTempletBiz.xml"/>
+	<include file="conf/bizs/fmp/system/orgTransactArea/orgTransactAreaBiz.xml"/>
+	<include file="conf/bizs/fmp/workflow/ApproveWorkFlowBiz.xml"/>
+	<include file="conf/bizs/fmp/mobileSms/MmAccountInfoBiz.xml"/>
+	<include file="conf/bizs/fmp/freereport/wabacus/SFreeReportBiz.xml"/>
+	<include file="conf/bizs/fmp/system/runLog/SysRunLogBiz.xml"/>
+	<include file="conf/bizs/fmp/system/cleanup/SCleanUpBiz.xml"/>
+	<include file="conf/bizs/fmp/report/ReportPrintBiz.xml"/>
+	<include file="conf/bizs/fmp/system/sysParams/SSysparamsBiz.xml"/>
+	<include file="conf/bizs/fmp/system/sysParams/SSysBizParamsBiz.xml"/>
+	<include file="conf/bizs/fmp/analyse/SAnaMainBiz.xml"/>
+	<include file="conf/bizs/fmp/analyse/SAnaFieldMappingBiz.xml"/>	
+	<include file="conf/bizs/fmp/system/riskwarning/SRiskWaringBiz.xml"/>
+ 	<include file="conf/bizs/fmp/system/orgBankAcc/SOrgbankaccBiz.xml"/>
+</struts>

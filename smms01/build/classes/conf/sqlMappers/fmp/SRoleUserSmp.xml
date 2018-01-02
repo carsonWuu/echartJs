@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SRoleUser"> 
+<sql id="sroleUserColumns">
+	ru.RID,
+	ru.ROLEID,
+	ru.USERID,
+	ru.CREATORID,
+	ru.CREATTIME
+</sql> 
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select r.ROLENAME as TRANS_ROLEID,
+		   org.ORGANSHORTFORM as TRANS_ORGID,
+		   dept.DEPSHORTFORM as TRANS_DEPTID,
+		   user1.TELNUM,
+		   user1.USERNAME,
+		   user1.NICKNAME,
+		   user1.IDCARDNO,
+		   user1.STATE,
+		   user1.ORGID,
+		   user1.DEPTID,
+	<include refid="sroleUserColumns"/>
+	from S_ROLEUSER ru
+	left outer join S_ROLE r
+		on r.ROLEID = ru.ROLEID
+	left outer join S_USER user1
+		on user1.USERID = ru.USERID
+	left outer join S_ORG org
+		on user1.ORGID = org.ORGID
+	left outer join S_DEPT dept
+		on user1.DEPTID = dept.DEPTID 
+	<where>
+		1=1
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM 
+	from S_ROLEUSER ru
+	left outer join S_ROLE r
+		on r.ROLEID = ru.ROLEID
+	left outer join S_USER u
+		on u.USERID = ru.USERID
+	left outer join S_ORG org
+		on u.ORGID = org.ORGID
+	left outer join S_DEPT dept
+		on u.DEPTID = dept.DEPTID 
+	<where>
+		1=1
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+</select> 
+
+<delete id="deleteDataByUSERID" parameterType="hashmap" > 
+	delete from S_ROLEUSER where USERID = #{USERID}
+</delete> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_ROLEUSER where RID = #{RID}
+</delete> 
+
+<select id="selectUserIdByRoleId" parameterType="hashmap" resultType="hashmap"> 
+	select USERID from S_ROLEUSER where ROLEID = #{ROLEID}  
+</select>
+
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_ROLEUSER where RID = #{RID}  
+</select> 
+
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+	select * from S_ROLEUSER where RID = #{RID} 
+</select>
+
+<select id="getRoleIdByUserID" parameterType="hashmap" resultType="hashmap"> 
+	select ROLEID from S_ROLEUSER where  USERID = #{ USERID} 
+    </select>  
+    
+    
+     
+   <select id="getRoleInfoByUserID" parameterType="hashmap" resultType="hashmap"> 
+	select r.ROLENAME,ru.ROLEID from S_ROLE r ,S_ROLEUSER ru 
+	   where r.ROLEID = ru.ROLEID AND ru.USERID =#{USERID}
+   </select> 
+
+<insert id="insertSave" parameterType="hashmap" > 
+   insert into S_ROLEUSER (
+	    	 RID
+		    ,ROLEID
+		    ,USERID
+		    ,CREATORID
+		    ,CREATTIME
+		    
+		)
+	    values(
+	         #{RID}
+		    ,#{ROLEID}
+		    ,#{USERID}
+		    ,#{CREATORID}
+		    ,#{CREATTIME}
+	    )
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_ROLEUSER  set
+	    	ROLEID = #{ROLEID},
+	    	USERID = #{USERID},
+	    	CREATORID = #{CREATORID},
+	    	CREATTIME = #{CREATTIME},
+	where RID =#{RID}
+</update> 
+
+
+<select id="getUserByRoleID" parameterType="hashmap" resultType="hashmap"> 
+	select u.USERID,u.USERNAME
+	from S_ROLEUSER  ru
+	LEFT OUTER JOIN s_user u
+	  on u.USERID = ru.USERID AND u.RECORDSTATE ='0'
+	where ru.ROLEID = #{ROLEID} AND u.ORGID = #{ORGID}
+</select>
+
+</mapper>

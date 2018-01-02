@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<TableModel id="UserInfoWithPost" desc="带职位的用户信息" tblName="UserInfoWithPost" pageSize="10" listURL="">
+		<Fields>
+	        <TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR2" length="30" required="F" isPK="T"  order="ASC"  dicType="" isSearch="F" create="VAU" hidden="VAU" webType="" webTypeExt=""  />			
+			<TableField id="USERID" colName="USERID" desc="用户码" dataType="VARCHAR2" length="10"  required="T" isSearch="T" create="LAVU" hidden="LAVU" webType="text" tableAlias="u" />
+			<TableField id="USERNAME" colName="USERNAME" desc="姓名" dataType="VARCHAR2" length="20" required="T" isSearch="T"   create="LAVU" webType="text"  tableAlias="u" fuzzy="T"/>
+		    <TableField id="POSTID" colName="POSTID" desc="职位码" dataType="VARCHAR2" length="10" required="T" isSearch="T"   create="LAVU" hidden="LAVU" webType="text" tableAlias="pu" />
+			<TableField id="POSTNAME" colName="POSTNAME" desc="职位" dataType="VARCHAR2" length="40" required="T" isSearch="T"   create="LAVU" webType="text"  tableAlias="p" fuzzy="T"/>
+	        <TableField id="DEPTID" colName="DEPTID" desc="所属部门" dataType="VARCHAR2" length="40" required="T" isSearch="T"   create="LAVU" hidden="LAVU" webType="text"  tableAlias="u" />
+	        <TableField id="ORGID" colName="ORGID" desc="所属机构" dataType="VARCHAR2" length="16"  required="T" isSearch="F" create="LAVU" hidden="LAVU" readOnly="U" webType="pop" webTypeExt="openSinPop('SOrg','ORGID','ORGID','ORGNAME')" tableAlias="org" />
+			<TableField id="ROLEID" colName="ROLEID" desc="岗位码" dataType="VARCHAR2" length="10" required="T" isSearch="F"   create="L" hidden="LAVU" webType="text" tableAlias="ru" />
+			<TableField id="ROLENAME" colName="ROLENAME" desc="岗位" dataType="VARCHAR2" length="10" required="T" isSearch="F"   create="L" webType="text" tableAlias="r" />
+		</Fields>
+	</TableModel>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="SMMS.BaseData.SmmsWebCaseIp.SmmsWebCaseIpBiz" namespace="/SMMS/SmmsWebCaseIpBiz" extends="SMMS-default">        
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.SMMS.BaseData.SmmsWebCaseIp.action.{1}SmmsWebCaseIpAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+        </action>    
+		<!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.SMMS.BaseData.SmmsWebCaseIp.action.SaveSmmsWebCaseIpAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>   
+		<!--保存可修改的列表信息-->
+        <action  name="SaveDataList" class="com.zstar.SMMS.BaseData.SmmsWebCaseIp.action.SaveSmmsWebCaseIpDataListAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>  
+		<!--保存联合主从表信息-->
+        <action  name="SaveUniteSubTableList" class="com.zstar.SMMS.BaseData.SmmsWebCaseIp.action.SaveSmmsWebCaseIpUniteSubTableAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>        
+        </action>
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.SMMS.BaseData.SmmsWebCaseIp.action.DeleteSmmsWebCaseIpAction">
+        </action>                    
+    </package>
+</struts>

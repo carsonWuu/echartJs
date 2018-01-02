@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsRpcLog"> 
+<sql id="listColumns">
+	
+            srl.RID,
+            srl.ITF_NUM,
+            srl.CALL_DIRECTION,
+            srl.IDC_ID,
+            srl.OUT_JSON,
+            srl.IN_JSON,
+            srl.RPC_RESULT,
+            srl.CREATTIME,
+            srl.RECORDSTATE,
+            sii.IDC_ID,
+            sii.IDC_NAME
+</sql>
+<sql id="detailColumns">
+	
+            srl.RID,
+            srl.ITF_NUM,
+            srl.CALL_DIRECTION,
+            srl.IDC_ID,
+            srl.OUT_JSON,
+            srl.IN_JSON,
+            srl.RPC_RESULT,
+            srl.CREATTIME,
+            srl.RECORDSTATE,
+            sii.IDC_ID,
+            sii.IDC_NAME
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> , sii.IDC_NAME as TRANS_IDC_ID
+
+	from SMMS_RPC_LOG as srl LEFT JOIN smms_idc_info as sii on srl.IDC_ID=sii.IDC_ID 
+	<where>
+		srl.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_RPC_LOG as srl LEFT JOIN smms_idc_info as sii on srl.IDC_ID=sii.IDC_ID
+	<where>
+		srl.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_RPC_LOG  where srl.RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>,sii.IDC_NAME as TRANS_IDC_ID  from SMMS_RPC_LOG as srl left join smms_idc_info as sii on srl.idc_id = sii.idc_id where srl.RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_RPC_LOG  set RECORDSTATE=#{RECORDSTATE} where srl.RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_RPC_LOG  where srl.RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_RPC_LOG (
+            <if test="RID != null ">RID,</if>
+            <if test="ITF_NUM != null ">ITF_NUM,</if>
+            <if test="CALL_DIRECTION != null ">CALL_DIRECTION,</if>
+            <if test="IDC_ID != null ">IDC_ID,</if>
+            <if test="OUT_JSON != null ">OUT_JSON,</if>
+            <if test="IN_JSON != null ">IN_JSON,</if>
+            <if test="RPC_RESULT != null ">RPC_RESULT,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="ITF_NUM != null ">#{ITF_NUM},</if>
+           <if test="CALL_DIRECTION != null ">#{CALL_DIRECTION},</if>
+           <if test="IDC_ID != null ">#{IDC_ID},</if>
+           <if test="OUT_JSON != null ">#{OUT_JSON},</if>
+           <if test="IN_JSON != null ">#{IN_JSON},</if>
+           <if test="RPC_RESULT != null ">#{RPC_RESULT},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_RPC_LOG   
+		<set>
+				    <if test="ITF_NUM!=null"> ITF_NUM=#{ITF_NUM},</if> 
+		    <if test="CALL_DIRECTION!=null"> CALL_DIRECTION=#{CALL_DIRECTION},</if> 
+		    <if test="IDC_ID!=null"> IDC_ID=#{IDC_ID},</if> 
+		    <if test="OUT_JSON!=null"> OUT_JSON=#{OUT_JSON},</if> 
+		    <if test="IN_JSON!=null"> IN_JSON=#{IN_JSON},</if> 
+		    <if test="RPC_RESULT!=null"> RPC_RESULT=#{RPC_RESULT},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

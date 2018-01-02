@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SReportTemplet" desc="报表模板信息" tblName="S_REPORTTEMPLET" pageSize="20" uniteTableModelId="" listURL="/fmp/system/report/reportTemplet/SReportTempletBiz/DoList?tableModelId=SReportTemplet" sqlMapNamespace="SReportTemplet">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="REPORTTEMPLETID" colName="REPORTTEMPLETID" desc="报表模板编号" dataType="VARCHAR" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="VUA" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F" autoCode="S_BBMBBM"/>
+		<TableField id="REPORTTEMPLETNAME" colName="REPORTTEMPLETNAME" desc="报表模板名称" dataType="VARCHAR" length="30"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="T" fuzzy="T" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		
+		<TableField id="REPORTTEMPLETTYPE" colName="REPORTTEMPLETTYPE" desc="报表模板类型" dataType="VARCHAR" length="3"  listGroupName="" webType="select" webTypeExt="" create="LVUA" dicType="S_BBMBLX" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="REPORTDATACLASS" colName="REPORTDATACLASS" desc="报表模板取数类" dataType="VARCHAR" length="200" colSpan="2"  listGroupName="" webType="textarea" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="T" isRangeSearch="F"/>
+		
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+	</Fields>
+	<SubTableModels>
+		<SubTableModel id="SReportSubTemplet" keyField="REPORTTEMPLETID" mKeyField="REPORTTEMPLETID"/>
+	</SubTableModels>
+</tablemodel>

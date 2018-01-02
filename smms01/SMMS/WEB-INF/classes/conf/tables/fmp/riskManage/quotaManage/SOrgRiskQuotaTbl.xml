@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SOrgRiskQuota" desc="机构额度信息" tblName="S_ORG" pageSize="10" uniteTableModelId="" listURL="/fmp/FrameCommonBiz/DoList?tableModelId=SOrgRiskQuota" sqlMapNamespace="SOrgRiskQuota">
+	<Fields>
+			<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR2" length="40" required="F" isPK="T"  order="ASC"  dicType="" isSearch="F" create="VLAU" hidden="VLAU" webType="" webTypeExt="" tableAlias="sorg1" />
+			<TableField id="ORGID" colName="ORGID" desc="机构码" dataType="VARCHAR2" length="10"  required="F" isSearch="T" create="LAVU" hidden="LAVU" readOnly="U" webType="text" dblClick="viewSOrgByOrgId($(this).attr('truevalue'));" tableAlias="sorg1"/>
+			<TableField id="ORGANSHORTFORM" colName="ORGANSHORTFORM" desc="机构简称" dataType="VARCHAR2" length="40"  required="T" isSearch="T" create="LAVU"  webType="text"  tableAlias="sorg1"/>
+			<TableField id="ORGNAME" colName="ORGNAME" desc="机构全称" dataType="VARCHAR2" length="40"  required="T" isSearch="T" create="LAVU"  webType="text" tableAlias="sorg1" />
+			<TableField id="SUPORGID" colName="SUPORGID" desc="上级机构" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="VU" dblClick="viewSOrgByOrgId($(this).attr('truevalue'));" webType="pop" webTypeExt="openSinPop('SOrg','SUPORGID','ORGID','ORGNAME')" tableAlias="sorg1" />
+			<TableField id="LOCATE" colName="LOCATE" desc="位置属性" dataType="VARCHAR2" length="100"  required="F" isSearch="F" create="LAVU" hidden="LAVU" webType="text" tableAlias="sorg1" />	
+			<TableField id="ENNAME" colName="ENNAME" desc="英文名" dataType="VARCHAR2" length="40"  required="F" isSearch="F" create="LAVU" hidden="LVU" webType="text"  tableAlias="sorg1"/>
+			<TableField id="ORDERNO" colName="ORDERNO" desc="序号" dataType="INTEGER" length="20"  required="F" isSearch="F" create="LAVU" hidden="LVU" webType="text" tableAlias="sorg1" />
+			<TableField id="DISTNO" colName="DISTNO" desc="所属地区" dataType="VARCHAR2" length="12"  required="F" isSearch="F" create="LAVU" hidden="LVU" webType="area"  tableAlias="sorg1"/>		
+		    <TableField id="SINGLEQUOTA" colName="SINGLEQUOTA" desc="单笔额度" dataType="DECIMAL" length="18"  listGroupName="" webType="text" webTypeExt="money" min="0" max="999999999999" create="LVUA" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="T" tableAlias="sorg1"/>
+	    	<TableField id="TOTALQUOTA" colName="TOTALQUOTA" desc="总额度" dataType="DECIMAL" length="18"  listGroupName="" webType="text" webTypeExt="money" min="0" max="999999999999" create="LVUA" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="T"  tableAlias="sorg1"/>
+		    <TableField id="TOTALOCCUPYAMT" colName="TOTALOCCUPYAMT" desc="已占用总额度" dataType="DECIMAL" length="18"  webType="text" webTypeExt="money" min="0" max="999999999999" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="sorg1"/>
+			<TableField id="LAUNCHDATE" colName="LAUNCHDATE" desc="开办日期" dataType="CHAR" length="10"  required="F" isSearch="F" create="LAVU" hidden="LVU" webType="date"  tableAlias="sorg1"/>
+			<TableField id="ORGANLEVEL" colName="ORGANLEVEL" desc="机构级别" dataType="INTEGER" length="10"  required="F" isSearch="F" create="LAVU"  hidden="VUL" webType="text"  tableAlias="sorg1"/>
+			<TableField id="FINCODE" colName="FINCODE" desc="金融代码" dataType="VARCHAR2" length="21"  required="F" isSearch="F" create="LAVU" hidden="LVU" webType="text"  tableAlias="sorg1"/>
+			<TableField id="CONTROL" colName="CONTROL" desc="控制字" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="LVU" webType="text"  tableAlias="sorg1"/>
+			<TableField id="STATE" colName="STATE" desc="状态" dataType="CHAR" length="1"  required="F" isSearch="T" create="LAVU" hidden="VU" webType="select" dicType="S_ZT" defValue="0" readOnly="UV" tableAlias="sorg1"/>
+			<TableField id="LEGALPERSON" colName="LEGALPERSON" desc="法人" dataType="VARCHAR2" length="20"  required="F" isSearch="F" create="LAVU" hidden="LVU" webType="text"  tableAlias="sorg1"/>
+			<TableField id="FINANCENUMBER" colName="FINANCENUMBER" desc="财务编码" dataType="VARCHAR2" length="20"  required="F" isSearch="F" create="LAVU" hidden="LVU" webType="text" tableAlias="sorg1" />
+			<TableField id="TAXNUMBER" colName="TAXNUMBER" desc="税号" dataType="VARCHAR2" length="20"  required="F" isSearch="F" create="LAVU" hidden="LVU" webType="text" tableAlias="sorg1" />
+			<TableField id="ORGANCHIEF" colName="ORGANCHIEF" desc="机构负责人" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="LVU" webType="pop" webTypeExt="openSinPop('UserInfoWithPost','ORGANCHIEF','USERID','USERNAME')"  tableAlias="sorg1"/>
+			<TableField id="TELNUM" colName="TELNUM" desc="联系电话" dataType="VARCHAR2" length="20"  required="F" isSearch="F" create="LAVU" hidden="LVU"  webType="text" webTypeExt="mobilephone" tableAlias="sorg1"/>			
+			<TableField id="ADDRESS" colName="ADDRESS" desc="地址" dataType="VARCHAR2" length="200"  required="F" isSearch="F" create="LAVU" hidden="LVU" webType="text"  tableAlias="sorg1"/>
+			<TableField id="POSTCODE" colName="POSTCODE" desc="邮编" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="LVU" webType="text"  tableAlias="sorg1"/>
+			<TableField id="AREA_DEV_CATE_TYPE" colName="AREA_DEV_CATE_TYPE" desc="所属片区" dataType="CHAR" length="1"  required="F" isSearch="F" create="LAVU" hidden="LVU" webType="select" dicType="S_SSPQ" tableAlias="sorg1"/>
+			<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"   required="F" isSearch="F" create="LVAU" hidden="LAUV"  webType="text"  tableAlias="sorg1"/>
+			<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LVAU" hidden="LAUV" webType="text"  tableAlias="sorg1"/>
+		    <TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20"   required="F" isSearch="F" create="LVAU" hidden="LAUV" webType="text"  tableAlias="sorg1"/>
+			<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LVAU" hidden="LAUV"  webType="text"  tableAlias="sorg1"/>
+		    <TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"   required="F" isSearch="F" create="LVAU" hidden="LAUV" tableAlias="sorg1" />
+	</Fields>
+	<SubTableModels>
+		<SubTableModel id="CrdOrgProdQuota" keyField="ORGID" mKeyField="ORGID"/>
+	</SubTableModels>
+</tablemodel>

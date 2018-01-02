@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<TableModel id="SModule" desc="系统模块信息" tblName="s_module" pageSize="10" listURL="/fmp/SModuleBiz/DoList">
+		<Fields>
+			<TableField id="RID" colName="RID" desc="记录主键" dataType="VARCHAR2" length="30" required="F" isPK="T"  order="ASC"  dicType="" isSearch="T" create="VLAU" hidden="L" webType="" webTypeExt=""  />
+			<TableField id="MODULEID" colName="MODULEID" desc="模块ID" dataType="VARCHAR2" length="50"  required="T" isSearch="T" create="LVAU" fuzzy="T" order="ASC" orderInList="T" hidden="A"/>
+			<TableField id="MODULENAME" colName="MODULENAME" desc="模块名称" dataType="VARCHAR2" length="100" required="T" isPK="T" isEncrypted="F"  create="LVAU"  order="DESC" orderInList="T"/>
+			<TableField id="TABLEMODELID" colName="TABLEMODELID" desc="对应表模型ID" dataType="VARCHAR2" length="50" required="F" isPK="T" isEncrypted="F"  create="LVAU"  order="DESC" orderInList="T"/>
+			<TableField id="ORDERID" colName="ORDERID" desc="排序字段"  dataType="VARCHAR2"  length="20" required="T" isPK="T" isEncrypted="F"  create="LVAU"   orderInList="T"/>		
+			<TableField id="MODULEDESC" colName="MODULEDESC" desc="模块描述" dataType="VARCHAR2" length="250"  required="F" isSearch="T" create="LVAU"  webType="textarea"/>
+			<TableField id="URL" colName="URL" desc="模块URL" dataType="VARCHAR2" length="500"  required="F" isSearch="T" create="LVAU"  webType="textarea"/>
+			<TableField id="SHOWRECORDCOUNT" colName="SHOWRECORDCOUNT" desc="是否显示记录总数" dataType="VARCHAR2" length="1"  required="T" isSearch="F" create="VAU"  webType="radio" defValue="2" dicType="S_SF"/>
+			<TableField id="PARENTID" colName="PARENTID" desc="上级模块ID" dataType="VARCHAR2" length="30"  required="T" isSearch="T" create="LVAU" readOnly="V" webType=""/>
+			<TableField id="SYSTEMPK" colName="SYSTEMPK" desc="所属子系统" dataType="VARCHAR2" length="20"  required="F" isSearch="T" create="LVAU"  webType=""/>	
+		</Fields>
+	</TableModel>

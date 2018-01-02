@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsAcApp"> 
+<sql id="listColumns">
+	
+            app.RID,
+            app.USERNAME,
+            app.GROUPNAME,
+            app.IP,
+            app.SERV_CRC,
+            app.APP_CRC,
+            app.LOG_TIME,
+            app.DES_IP,
+            app.DES_PORT,
+            app.CREATTIME,
+            app.CONTENTPATH,
+            app.RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+            app.RID,
+            app.USERNAME,
+            app.GROUPNAME,
+            app.IP,
+            app.SERV_CRC,
+            app.APP_CRC,
+            app.LOG_TIME,
+            app.DES_IP,
+            app.DES_PORT,
+            app.CREATTIME,
+            app.CONTENTPATH,
+            app.RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select 
+	app.Rid as CONTENTPATH,
+	case WHEN 
+		app.CONTENTPATH is not null and app.CONTENTPATH!='' 
+	then 
+		'详情' 
+	else 
+		'无' 
+	end  as TRANS_CONTENTPATH,<include refid="listColumns"/>,crc1.CRC_VALUE as TRANS_SERV_CRC,
+	crc2.CRC_VALUE as TRANS_APP_CRC
+	from SMMS_AC_APP as app
+	left join smms_crc_mapting as crc1
+	on app.SERV_CRC = crc1.CRC_KEY 
+	left join smms_crc_mapting as crc2
+	on app.APP_CRC = crc2.CRC_KEY 
+	<where>
+		app.RECORDSTATE='0'
+		and (crc1.CRC_TYPE='a' or crc1.CRC_TYPE ='r' or crc1.CRC_TYPE ='t')
+		and (crc2.CRC_TYPE='a' or crc2.CRC_TYPE ='r' or crc2.CRC_TYPE ='t')
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+<select id="selectContentPathByRid" parameterType="hashmap" resultType="hashmap"> 
+	select  CONTENTPATH from SMMS_AC_APP as app where app.RID = #{RID} 
+</select> 
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  
+	from SMMS_AC_APP as app
+	left join smms_crc_mapting as crc1
+	on app.SERV_CRC = crc1.CRC_KEY 
+	left join smms_crc_mapting as crc2
+	on app.APP_CRC = crc2.CRC_KEY 
+	<where>
+		app.RECORDSTATE='0'
+		and (crc1.CRC_TYPE='a' or crc1.CRC_TYPE ='r' or crc1.CRC_TYPE ='t')
+		and (crc2.CRC_TYPE='a' or crc2.CRC_TYPE ='r' or crc2.CRC_TYPE ='t')
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_AC_APP  where RID = #{RID}
+</delete> 
+<delete id="deleteAll"> 
+	delete from SMMS_AC_APP
+</delete> 
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>,crc1.CRC_VALUE as TRANS_SERV_CRC,
+	crc2.CRC_VALUE as TRANS_APP_CRC  from SMMS_AC_APP as app left join smms_crc_mapting as crc1
+	on app.SERV_CRC = crc1.CRC_KEY 
+	left join smms_crc_mapting as crc2
+	on app.APP_CRC = crc2.CRC_KEY  where app.RID = #{RID} and app.RECORDSTATE='0'
+		and (crc1.CRC_TYPE='a' or crc1.CRC_TYPE ='r' or crc1.CRC_TYPE ='t')
+		and (crc2.CRC_TYPE='a' or crc2.CRC_TYPE ='r' or crc2.CRC_TYPE ='t')
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_AC_APP  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_AC_APP  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_AC_APP (
+            <if test="RID != null ">RID,</if>
+            <if test="USERNAME != null ">USERNAME,</if>
+            <if test="GROUPNAME != null ">GROUPNAME,</if>
+            <if test="IP != null ">IP,</if>
+            <if test="SERV_CRC != null ">SERV_CRC,</if>
+            <if test="APP_CRC != null ">APP_CRC,</if>
+            <if test="LOG_TIME != null ">LOG_TIME,</if>
+            <if test="DES_IP != null ">DES_IP,</if>
+            <if test="DES_PORT != null ">DES_PORT,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="CONTENTPATH != null ">CONTENTPATH,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="USERNAME != null ">#{USERNAME},</if>
+           <if test="GROUPNAME != null ">#{GROUPNAME},</if>
+           <if test="IP != null ">#{IP},</if>
+           <if test="SERV_CRC != null ">#{SERV_CRC},</if>
+           <if test="APP_CRC != null ">#{APP_CRC},</if>
+           <if test="LOG_TIME != null ">#{LOG_TIME},</if>
+           <if test="DES_IP != null ">#{DES_IP},</if>
+           <if test="DES_PORT != null ">#{DES_PORT},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if> 
+           <if test="CONTENTPATH != null ">#{CONTENTPATH},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_AC_APP   
+		<set>
+			<if test="USERNAME!=null"> USERNAME=#{USERNAME},</if> 
+		    <if test="GROUPNAME!=null"> GROUPNAME=#{GROUPNAME},</if> 
+		    <if test="IP!=null"> IP=#{IP},</if> 
+		    <if test="SERV_CRC!=null"> SERV_CRC=#{SERV_CRC},</if> 
+		    <if test="APP_CRC!=null"> APP_CRC=#{APP_CRC},</if> 
+		    <if test="LOG_TIME!=null"> LOG_TIME=#{LOG_TIME},</if> 
+		    <if test="DES_IP!=null"> DES_IP=#{DES_IP},</if> 
+		    <if test="DES_PORT!=null"> DES_PORT=#{DES_PORT},</if>  
+		    <if test="CONTENTPATH!=null"> CONTENTPATH=#{CONTENTPATH},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

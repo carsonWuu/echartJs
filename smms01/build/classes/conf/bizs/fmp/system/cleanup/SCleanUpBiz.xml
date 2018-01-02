@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="fmp.system.cleanup.SCleanUpBiz" namespace="/fmp/system/cleanup/SCleanUpBiz" extends="fmp.FrameCommonBiz">
+		<action name="*Save" class="com.zstar.fmp.system.cleanup.action.SdbCleanUpAction">
+		</action> 
+	</package>    
+</struts>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SOrg"> 
+	<sql id="sorgColumns">RID,ORGID,SUPORGID,LOCATE,ORGNAME,ORGANSHORTFORM,ENNAME,ORDERNO,DISTNO,LAUNCHDATE,ORGANLEVEL,FINCODE,CONTROL,STATE,LegalPerson,FinanceNumber,TaxNumber,ORGANCHIEF,TELNUM,ADDRESS,POSTCODE,AREA_DEV_CATE_TYPE,CREATTIME,CREATORID,MODIFIEDTIME,MODIFIERID,RECORDSTATE</sql> 
+	<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+		select op.ORGANSHORTFORM as TRANS_SUPORGID,sorg.* 
+		from S_ORG sorg
+		left outer join S_ORG op 
+		     on sorg.SUPORGID = op.ORGID
+		
+		<where>
+			sorg.RECORDSTATE='0'	
+			<if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+			</if>		
+		</where>
+			order by sorg.STATE
+			<if test="order!=null and order!='' ">   
+             	,${order}
+			</if>				
+	</select>
+	
+	<select id="getOrgTreeData" parameterType="hashmap" resultType="hashmap"> 
+		select op.ORGANSHORTFORM as TRANS_SUPORGID,sorg.* 
+		from S_ORG sorg
+		left outer join S_ORG op 
+		     on sorg.SUPORGID = op.ORGID
+		<where>
+			sorg.RECORDSTATE='0' and sorg.STATE='0'		
+		</where>
+			order by sorg.ORGID			
+	</select>	
+
+	<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM 
+	from S_ORG sorg
+	left outer join S_ORG op 
+		on sorg.SUPORGID = op.ORGID
+		<where>
+			sorg.RECORDSTATE = '0'	
+			<if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+			</if>		
+		</where>
+	</select> 
+	
+	<select id="getOrgById" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_ORG where ORGID = #{ORGID} and RECORDSTATE='0'
+    </select>
+	
+	<select id="lowerOrgIdList" parameterType="hashmap" resultType="hashmap"> 
+	<!-- 查询当前登录用户所在机构的下级机构 -->
+	select ORGID,SUPORGID 
+	from s_org 
+	where locate like CONCAT(CONCAT('%${CURR_ORGID}',','),'%') and ORGID != #{CURR_ORGID} and RECORDSTATE='0'
+    </select>
+    
+	<select id="superOrgIds" parameterType="String" resultType="hashmap"> 	 
+          select LOCATE 
+          from s_org 
+          where ORGID = #{CURR_ORGID} and RECORDSTATE='0'
+    </select>
+
+    <select id="getOrgByState" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_ORG 
+	<where>
+			RECORDSTATE='0'	
+			<if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+			</if>		
+		</where>
+		<if test="order!=null and order!='' ">   
+             order by o.${order}
+		</if> 
+    </select>
+       
+
+	<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_ORG where RID = #{RID}
+	</delete> 
+	
+	<delete id="deleteDataByORGID" parameterType="hashmap" > 
+	delete from S_ORG  where ORGID = #{ORGID}
+	</delete>
+	
+	<update id="updateSelectOrgLocate" parameterType="hashmap" > 
+	update s_org 
+	set locate = replace(locate,#{BEFORELOCATE},#{AFTERLOCATE})
+	</update>
+	
+	
+	<update id="updatestate" parameterType="hashmap" > 
+		update S_ORG 
+		set STATE=#{STATE} 
+		where ORGID = #{ORGID}
+    </update>
+	
+	<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_ORG 
+	set  RECORDSTATE=#{RECORDSTATE}
+	where ORGID= #{ORGID}
+	</update> 
+
+	<select id="selectOrgName" parameterType="hashmap" resultType="hashmap"> 
+	select ORGNAME from S_ORG where ORGID = #{ORGID}  
+    </select> 
+
+	<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select op.ORGANSHORTFORM as TRANS_SUPORGID,
+			su1.USERNAME as TRANS_ORGANCHIEF,
+			su2.USERNAME as TRANS_CREATORID,
+			su3.USERNAME as TRANS_MODIFIERID,sorg.*
+	from S_ORG sorg
+	left outer join S_ORG op 
+		on sorg.SUPORGID = op.ORGID
+	left outer join S_USER su1
+		on su1.USERID = sorg.ORGANCHIEF
+	left outer join S_USER su2
+		on su2.USERID = sorg.CREATORID
+	left outer join S_USER su3
+		on su3.USERID = sorg.MODIFIERID
+	where sorg.RID = #{RID}  
+	</select> 
+
+	<select id="viewDetailByORGID" parameterType="hashmap" resultType="hashmap"> 
+	   select 
+	    u1.USERNAME as TRANS_ORGANCHIEF,
+	    opa.ORGANSHORTFORM as TRANS_SUPORGID,
+	    org.*  
+	    from  S_ORG org 
+	     left outer join S_ORG opa on  org.SUPORGID = opa.ORGID
+	     left outer join S_USER u1 on  u1.USERID = org.ORGANCHIEF
+       where org.ORGID = #{ORGID}  
+	</select> 
+
+	<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+	select op.ORGANSHORTFORM as TRANS_SUPORGID,
+			su1.USERNAME as TRANS_ORGANCHIEF,
+			su2.USERNAME as TRANS_CREATORID,
+			su3.USERNAME as TRANS_MODIFIERID,sorg.*
+	from S_ORG sorg
+	left outer join S_ORG op 
+		on sorg.SUPORGID = op.ORGID
+	left outer join S_USER su1
+		on su1.USERID = sorg.ORGANCHIEF
+	left outer join S_USER su2
+		on su2.USERID = sorg.CREATORID
+	left outer join S_USER su3
+		on su3.USERID = sorg.MODIFIERID
+	where sorg.RID = #{RID}  
+	</select> 
+
+	<insert id="insertSave" parameterType="hashmap" > 
+		insert into S_ORG (
+	    	 RID
+		    ,ORGID
+		    ,SUPORGID
+		    ,LOCATE
+		    ,ORGNAME
+		    ,ORGANSHORTFORM
+		    ,ENNAME
+		    ,ORDERNO
+		    ,DISTNO
+		    ,LAUNCHDATE
+		    ,ORGANLEVEL
+		    ,FINCODE
+		    ,CONTROL
+		    ,STATE
+		    ,LegalPerson
+		    ,FinanceNumber
+		    ,TaxNumber
+		    ,ORGANCHIEF
+		    ,TELNUM
+		    ,ADDRESS
+		    ,POSTCODE
+		    ,AREA_DEV_CATE_TYPE
+		    ,CREATTIME
+		    ,CREATORID
+		    ,MODIFIEDTIME
+		    ,MODIFIERID
+		    ,RECORDSTATE
+	    )
+	    values(
+            #{RID}
+		    ,#{ORGID}
+		    ,#{SUPORGID}
+		    ,#{LOCATE}
+		    ,#{ORGNAME}
+		    ,#{ORGANSHORTFORM}
+		    ,#{ENNAME}
+		    ,#{ORDERNO}
+		    ,#{DISTNO}
+		    ,#{LAUNCHDATE}
+		    ,#{ORGANLEVEL}
+		    ,#{FINCODE}
+		    ,#{CONTROL}
+		    ,#{STATE}
+		    ,#{LegalPerson}
+		    ,#{FinanceNumber}
+		    ,#{TaxNumber}
+		    ,#{ORGANCHIEF}
+		    ,#{TELNUM}
+		    ,#{ADDRESS}
+		    ,#{POSTCODE}
+		    ,#{AREA_DEV_CATE_TYPE}
+		    ,#{CREATTIME}
+		    ,#{CREATORID}
+		    ,#{MODIFIEDTIME}
+		    ,#{MODIFIERID}
+		    ,#{RECORDSTATE}
+	    )
+	</insert> 
+
+	<update id="updateSave" parameterType="hashmap" > 
+	update S_ORG 
+  	<set>   
+	 <if test="ORGID != null ">ORGID = #{ORGID},</if>
+	 <if test="SUPORGID != null ">SUPORGID = #{SUPORGID},</if>
+	 <if test="LOCATE != null ">LOCATE = #{LOCATE},</if>
+	 <if test="ORGNAME != null ">ORGNAME = #{ORGNAME},</if>
+	 <if test="ORGANSHORTFORM != null ">ORGANSHORTFORM = #{ORGANSHORTFORM},</if>
+	 <if test="ENNAME != null ">ENNAME = #{ENNAME},</if>
+	 <if test="ORDERNO != null ">ORDERNO = #{ORDERNO},</if>
+	 <if test="DISTNO != null ">DISTNO = #{DISTNO},</if>	
+	 <if test="LAUNCHDATE != null ">LAUNCHDATE = #{LAUNCHDATE},</if>
+	 <if test="ORGANLEVEL != null ">ORGANLEVEL = #{ORGANLEVEL},</if>
+	 <if test="FINCODE != null ">FINCODE = #{FINCODE},</if>
+	 <if test="CONTROL != null ">CONTROL = #{CONTROL},</if> 
+	 <if test="STATE != null ">STATE = #{STATE},</if>
+	 <if test="LegalPerson != null ">LegalPerson = #{LegalPerson},</if>
+	 <if test="FinanceNumber != null ">FinanceNumber =#{FinanceNumber},</if>
+	 <if test="TaxNumber != null ">TaxNumber = #{TaxNumber},</if>	
+	 <if test="ORGANCHIEF != null ">ORGANCHIEF = #{ORGANCHIEF},</if>
+	 <if test="TELNUM != null ">TELNUM = #{TELNUM},</if>
+	 <if test="ADDRESS != null ">ADDRESS = #{ADDRESS},</if>
+	 <if test="POSTCODE != null ">POSTCODE = #{POSTCODE},</if>
+	 <if test="AREA_DEV_CATE_TYPE != null ">AREA_DEV_CATE_TYPE =#{AREA_DEV_CATE_TYPE},</if>
+	 <if test="MODIFIEDTIME != null ">MODIFIEDTIME = #{MODIFIEDTIME},</if>
+	 <if test="MODIFIERID != null ">MODIFIERID = #{MODIFIERID},</if>
+	 <if test="RECORDSTATE != null ">RECORDSTATE = #{RECORDSTATE}</if>
+  	</set>
+       where RID =#{RID}
+	</update> 
+
+
+<!--获取机构的单笔额度和总额度-->
+<select id="getOrgQuota" parameterType="String" resultType="hashmap"> 
+     select SINGLEQUOTA,TOTALQUOTA from S_ORG 
+     where ORGID = #{orgId} 
+</select>
+
+<select id="isExistOrgId" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_ORG where ORGID = #{ORGID}  
+</select>
+
+<!--获取机构的所属地区-->
+<select id="getDistNoMsg" parameterType="hashmap" resultType="hashmap"> 
+     select * from S_ORG 
+     where ORGID = #{ORGID}
+</select>
+
+</mapper>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="WfMeetingApvHis"> 
+<sql id="listColumns">
+	
+            RID,
+            FLOWINSTANCEID,
+            FLOWTEMPID,
+            NODEID,
+            APPROVER,
+            APPROVERESULT,
+            APPROVENOTION
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            FLOWINSTANCEID,
+            FLOWTEMPID,
+            NODEID,
+            APPROVER,
+            APPROVERESULT,
+            APPROVENOTION
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select u.USERNAME AS TRANS_APPROVER ,
+	mah.* from WF_MEETINGAPVHIS  mah
+	left outer join S_USER u 
+	on u.USERID = mah.APPROVER
+	<where>
+		mah.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from WF_MEETINGAPVHIS mah
+	<where>
+		mah.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from WF_MEETINGAPVHIS where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from WF_MEETINGAPVHIS where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update WF_MEETINGAPVHIS set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from WF_MEETINGAPVHIS where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into WF_MEETINGAPVHIS(
+            RID,
+            FLOWINSTANCEID,
+            FLOWTEMPID,
+            NODEID,
+            APPROVER,
+            APPROVERESULT,
+            APPROVENOTION)
+	   values (
+            #{RID},
+            #{FLOWINSTANCEID},
+            #{FLOWTEMPID},
+            #{NODEID},
+            #{APPROVER},
+            #{APPROVERESULT},
+            #{APPROVENOTION})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update WF_MEETINGAPVHIS  
+		<set>
+			<if test="FLOWINSTANCEID!=null"> FLOWINSTANCEID=#{FLOWINSTANCEID},</if> 
+		    <if test="FLOWTEMPID!=null"> FLOWTEMPID=#{FLOWTEMPID},</if> 
+		    <if test="NODEID!=null"> NODEID=#{NODEID},</if> 
+		    <if test="APPROVER!=null"> APPROVER=#{APPROVER},</if> 
+		    <if test="APPROVERESULT!=null"> APPROVERESULT=#{APPROVERESULT},</if> 
+		    <if test="APPROVENOTION!=null"> APPROVENOTION=#{APPROVENOTION},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+
+<!--根据流程实例id和节点id获取会签信息-->
+<select id="getMeetingApvHisData" parameterType="hashmap" resultType="hashmap"> 
+	SELECT u2.USERNAME as APPROVERNAME,
+		   d2.DATAVALUE as APPROVERESULT,
+		   fl.FLOWTEMPNAME,
+		   mah.APPROVER,
+		   u.USERNAME,
+		   d1.DATAVALUE  as RESULT 
+	FROM  wf_meetingapvhis mah
+	LEFT OUTER JOIN s_dic d1
+		ON mah.APPROVERESULT = d1.DATAKEY
+	LEFT OUTER JOIN s_user u
+		ON u.USERID = mah.APPROVER
+	LEFT OUTER JOIN wf_flowinstance fi
+		ON fi.FLOWINSTANCEID = mah.FLOWINSTANCEID 
+	LEFT OUTER JOIN wf_flowtemplet fl
+		ON fl.FLOWTEMPID = mah.FLOWTEMPID
+	LEFT OUTER JOIN wf_flowapvhis fh
+		ON fh.FLOWINSTANCEID = mah.FLOWINSTANCEID AND fh.NODEID = mah.NODEID
+	LEFT OUTER JOIN s_dic d2
+		ON fh.APPROVERESULT = d2.DATAKEY
+	LEFT OUTER JOIN s_user u2
+		ON u2.USERID = fh.APPROVER
+	WHERE mah.FLOWINSTANCEID = #{FLOWINSTANCEID} AND mah.NODEID = #{NODEID}
+		AND d1.DATATYPE = 'CRD_SPJG' AND d2.DATATYPE = 'CRD_SPJG'
+</select> 
+
+
+<!--根据流程实例id和节点id获取会签信息,用于消息提醒模板-->
+<select id="getMeetingApvHisDataForWarnSheme" parameterType="hashmap" resultType="hashmap"> 
+	SELECT u2.USERNAME as APPROVERNAME,
+		   d2.DATAVALUE as APPROVERESULT,
+		   fl.FLOWTEMPNAME,
+		   fi.BIZDESC,
+		   mah.APPROVER,
+		   mah.FLOWINSTANCEID,
+		   mah.NODEID,
+		   u.USERNAME,
+		   u.USERNAME as INCEPTUSERNAME,u.USERID as INCEPTUSERID,
+		   d1.DATAVALUE  as RESULT 
+	FROM  wf_meetingapvhis mah
+	LEFT OUTER JOIN s_dic d1
+		ON mah.APPROVERESULT = d1.DATAKEY
+	LEFT OUTER JOIN s_user u
+		ON u.USERID = mah.APPROVER
+	LEFT OUTER JOIN wf_flowinstance fi
+		ON fi.FLOWINSTANCEID = mah.FLOWINSTANCEID 
+	LEFT OUTER JOIN wf_flowtemplet fl
+		ON fl.FLOWTEMPID = mah.FLOWTEMPID
+	LEFT OUTER JOIN wf_flowapvhis fh
+		ON fh.FLOWINSTANCEID = mah.FLOWINSTANCEID AND fh.NODEID = mah.NODEID
+	LEFT OUTER JOIN s_dic d2
+		ON fh.APPROVERESULT = d2.DATAKEY
+	LEFT OUTER JOIN s_user u2
+		ON u2.USERID = fh.APPROVER
+	WHERE mah.FLOWINSTANCEID = #{FLOWINSTANCEID} AND mah.NODEID = #{NODEID}
+		AND d1.DATATYPE = 'CRD_SPJG' AND d2.DATATYPE = 'CRD_SPJG'
+</select> 
+
+
+
+</mapper>

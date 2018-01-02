@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<tree id="0"> 
+  <item text="日常处理" id="s_md_rccl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="待办事项" id="s_md_dbsx" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="已办事项" id="s_md_ybsx" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="办结事项" id="s_md_bjsx" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="用户密码" id="s_md_yhmm" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="修改密码" id="s_md_xgmm" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/SUser/SetPasswordUI?moduleId=s_md_xgmm</userdata>
+      </item>
+    </item>
+    <item text="首页" id="s_md_fhzy" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/system/notice/NoticeBiz/ShowNotice?moduleId=s_md_fhzy&amp;tableModelId=Notice</userdata>
+    </item>
+    <item text="消息反馈登记" id="s_md_xxfkdj" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=SMsgFeedback&amp;moduleId=s_md_xxfkdj</userdata>
+    </item>
+  </item>
+</tree>

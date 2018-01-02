@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<tree id="0"> 
+  <item text="资源管理" id="s_md_zygl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="客户管理" id="crd_md_khgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="客户跟进与投诉管理" id="crd_md_khgjytsgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/resource/cust/cusComplain/CrdCusComplainBiz/DoList?tableModelId=CrdCusComplain&amp;moduleId=crd_md_khgjytsgl</userdata>
+      </item>
+    </item>
+  </item>
+  <item text="项目管理" id="s_md_ajgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="项目进度监控" id="crd_md_ajjdjk" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/credit/caseManage/caseMonitor/CrdCaseMonitorBiz/DoList?tableModelId=CrdCaseMonitor&amp;moduleId=crd_md_ajjdjk</userdata>
+    </item>
+    <item text="项目抵押物信息" id="crd_md_ajdywxx" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="房贷抵押物信息" id="crd_md_fddywxx" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?moduleId=crd_md_fddywxx&amp;tableModelId=CrdGrtHouse</userdata>
+      </item>
+      <item text="车贷抵押物信息" id="crd_md_cddywxx" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?moduleId=crd_md_cddywxx&amp;tableModelId=CrdGrtCar</userdata>
+      </item>
+    </item>
+  </item>
+  <item text="财务管理" id="s_md_cwgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+  </item>
+  <item text="风控管理" id="s_md_fkgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="风控审批管理" id="crd_md_fkspgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="项目审批" id="crd_md_ajsp" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+        <item text="审批中" id="crd_md_ajspz" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/caseManage/caseApprove/CaseApproveBiz/DoList?tableModelId=CrdCaseInfo&amp;BIZTYPEID=010&amp;flowApproverFilter=true&amp;freezeCondition= and (fi.APPROVESTATE='100' or fi.APPROVESTATE='700' )&amp;moduleId=crd_md_ajspz</userdata>
+        </item>
+        <item text="审批结束" id="crd_md_ajspjs" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/caseManage/caseApprove/CaseApproveBiz/DoList?tableModelId=CrdCaseInfo&amp;flowHisApproverFilter=true&amp;BIZTYPEID=010&amp;freezeCondition= and ( fi.APPROVESTATE='800' or fi.APPROVESTATE='900' ) &amp;moduleId=crd_md_ajspjs</userdata>
+        </item>
+      </item>
+      <item text="请款审批" id="crd_md_qksp" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+        <item text="审批中" id="crd_md_qkspz" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/finance/finApprove/FinApproveBiz/DoList?tableModelId=FinFeeApplyBill&amp;BIZTYPEID=020&amp;flowApproverFilter=true&amp;freezeCondition= and (fi.APPROVESTATE='100' or fi.APPROVESTATE='700' )&amp;moduleId=crd_md_qkspz</userdata>
+        </item>
+        <item text="审批结束" id="crd_md_qkspjs" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/finance/finApprove/FinApproveBiz/DoList?tableModelId=FinFeeApplyBill&amp;flowHisApproverFilter=true&amp;BIZTYPEID=020&amp;freezeCondition= and ( fi.APPROVESTATE='800' or fi.APPROVESTATE='900' ) &amp;moduleId=crd_md_qkspjs</userdata>
+        </item>
+      </item>
+      <item text="退单审批" id="crd_md_tdsp" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+        <item text="审批中" id="crd_md_tdspz" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/caseManage/caseApprove/CaseApproveBiz/DoList?tableModelId=CrdCaseApproveUntread&amp;BIZTYPEID=030&amp;flowApproverFilter=true&amp;freezeCondition= and (fi.APPROVESTATE='100' or fi.APPROVESTATE='700' ) and (cu.REUNTREADSTATE ='0' or cu.REUNTREADSTATE='1')&amp;moduleId=crd_md_tdspz</userdata>
+        </item>
+        <item text="审批结束" id="crd_md_tdspjs" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/caseManage/caseApprove/CaseApproveBiz/DoList?tableModelId=CrdCaseApproveUntread&amp;flowHisApproverFilter=true&amp;BIZTYPEID=030&amp;freezeCondition= and (fi.APPROVESTATE='800' or fi.APPROVESTATE='900' ) and (cu.REUNTREADSTATE ='1' or cu.REUNTREADSTATE='2') &amp;moduleId=crd_md_tdspjs</userdata>
+        </item>
+      </item>
+      <item text="反退单审批" id="crd_md_ftdsp" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+        <item text="审批中" id="crd_md_ftdspz" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/caseManage/caseApprove/CaseApproveBiz/DoList?tableModelId=CrdCaseApproveUntread&amp;BIZTYPEID=035&amp;flowApproverFilter=true&amp;freezeCondition= and (fi.APPROVESTATE='100' or fi.APPROVESTATE='700' ) and (cu.REUNTREADSTATE ='0' or cu.REUNTREADSTATE='1')&amp;moduleId=crd_md_ftdspz</userdata>
+        </item>
+        <item text="审批结束" id="crd_md_ftdspjs" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/caseManage/caseApprove/CaseApproveBiz/DoList?tableModelId=CrdCaseApproveUntread&amp;flowHisApproverFilter=true&amp;BIZTYPEID=035&amp;freezeCondition= and ( fi.APPROVESTATE='800' or fi.APPROVESTATE='900') and (cu.REUNTREADSTATE ='1' or cu.REUNTREADSTATE='2')&amp;moduleId=crd_md_ftdspjs</userdata>
+        </item>
+      </item>
+      <item text="转银行审批" id="crd_md_zyhsp" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+        <item text="审批中" id="crd_md_zyhspz" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/caseManage/caseApprove/CaseApproveBiz/DoList?tableModelId=CrdChangeBankApp&amp;BIZTYPEID=040&amp;flowApproverFilter=true&amp;freezeCondition= and (fi.APPROVESTATE='100' or fi.APPROVESTATE='700' )&amp;moduleId=crd_md_zyhspz</userdata>
+        </item>
+        <item text="审批结束" id="crd_md_zyhspjs" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/caseManage/caseApprove/CaseApproveBiz/DoList?tableModelId=CrdChangeBankApp&amp;flowHisApproverFilter=true&amp;BIZTYPEID=040&amp;freezeCondition= and ( fi.APPROVESTATE='800' or fi.APPROVESTATE='900' ) &amp;moduleId=crd_md_zyhspjs</userdata>
+        </item>
+      </item>
+      <item text="项目特批" id="crd_md_ajtp" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+        <item text="审批中" id="crd_md_ajtpspz" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/finance/finApprove/FinApproveBiz/DoList?tableModelId=CrdCaseNode&amp;BIZTYPEID=050&amp;flowApproverFilter=true&amp;freezeCondition= and (fi.APPROVESTATE='100' or fi.APPROVESTATE='700' )&amp;moduleId=crd_md_ajtpspz</userdata>
+        </item>
+        <item text="审批结束" id="crd_md_ajtpspjs" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/caseManage/caseApprove/CaseApproveBiz/DoList?tableModelId=CrdCaseNode&amp;flowHisApproverFilter=true&amp;BIZTYPEID=050&amp;freezeCondition= and ( fi.APPROVESTATE='800' or fi.APPROVESTATE='900' ) &amp;moduleId=crd_md_ajtpspjs</userdata>
+        </item>
+      </item>
+      <item text="贷款变更申请" id="crd_md_dkbgsp" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+        <item text="审批中" id="crd_md_dkbgspz" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/caseManage/caseApprove/CaseApproveBiz/DoList?tableModelId=CrdLoanVaryApp&amp;BIZTYPEID=060&amp;flowApproverFilter=true&amp;freezeCondition= and (fi.APPROVESTATE='100' or fi.APPROVESTATE='700' )&amp;moduleId=crd_md_dkbgspz</userdata>
+        </item>
+        <item text="审批结束" id="crd_md_dkbgspjs" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/caseManage/caseApprove/CaseApproveBiz/DoList?tableModelId=CrdLoanVaryApp&amp;flowHisApproverFilter=true&amp;BIZTYPEID=060&amp;freezeCondition= and ( fi.APPROVESTATE='800' or fi.APPROVESTATE='900' ) &amp;moduleId=crd_md_dkbgspjs</userdata>
+        </item>
+      </item>
+    </item>
+    <item text="客户信用管理" id="crd_md_khxygl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="个人客户信用管理" id="crd_md_grkhxygl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdIndiCustRiskCredit&amp;moduleId=crd_md_grkhxygl</userdata>
+      </item>
+      <item text="公司客户信用管理" id="crd_md_gskhxygl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdCorpCustRiskCredit&amp;moduleId=crd_md_gskhxygl</userdata>
+      </item>
+    </item>
+  </item>
+  <item text="提醒与预警" id="s_md_txyyj" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="消息处理审核" id="s_md_xxclsh" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=SRiskWarnMsg&amp;freezeCondition = and (mfb.RESULTTYPE =10 or mfb.RESULTTYPE=29)and rw.MSGSTATE=0 and rr.READERID='${CURR_USERID}'&amp;moduleId=s_md_xxclsh</userdata>
+    </item>
+  </item>
+</tree>

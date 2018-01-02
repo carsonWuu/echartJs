@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="WebCase"> 
+<sql id="listColumns">
+	
+            a.RID,
+            a.ACCESS_ID,
+            a.ACCESS_TENANT,
+            a.ACCESS_IP,
+            a.SERVER_PLACE,
+            a.SPONSER,
+            a.SPONSER_CERT_TYPE,
+            a.SPONSER_CERT_NUM,
+            a.SPONSER_PROVINCE,
+            a.SPONSER_ADDRESS,
+            a.SPONSER_CERT_ADDRESS,
+            a.MANAGER,
+            a.MANAGER_CERT_TYPE,
+            a.MANAGER_CERT_NUM,
+            a.MANAGER_TEL_NUM,
+            a.MANAGER_MOBILE,
+            a.MANAGER_EMAIL,
+            a.SPONSER_CASE_NUM,
+            a.SPONSER_CASE_STATE,
+            a.WEBSITE_NAME,
+            a.WEBSITE_URL,
+            a.WEBSITE_MANAGER,
+            a.WEBSITE_MANAGER_TEL_NUM,
+            a.WEBSITE_MANAGER_MOBILE,
+            a.WEBSITE_MANAGER_EMAIL,
+            a.WEBSITE_CASE_NAME,
+            a.WEBSITE_CASE_STATE,
+            a.DOMAIN_NAME,
+            a.WEBSITE_MANAGER_CERT_NUM,
+            a.CREATTIME,
+            a.MODIFIEDTIME,
+            a.RECORDSTATE,
+            b.IDC_ID,
+            b.IDC_NAME
+</sql>
+<sql id="detailColumns">
+	
+            a.RID,
+            a.ACCESS_ID,
+            a.ACCESS_TENANT,
+            a.ACCESS_IP,
+            a.SERVER_PLACE,
+            a.SPONSER,
+            a.SPONSER_CERT_TYPE,
+            a.SPONSER_CERT_NUM,
+            a.SPONSER_PROVINCE,
+            a.SPONSER_ADDRESS,
+            a.SPONSER_CERT_ADDRESS,
+            a.MANAGER,
+            a.MANAGER_CERT_TYPE,
+            a.MANAGER_CERT_NUM,
+            a.MANAGER_TEL_NUM,
+            a.MANAGER_MOBILE,
+            a.MANAGER_EMAIL,
+            a.SPONSER_CASE_NUM,
+            a.SPONSER_CASE_STATE,
+            a.WEBSITE_NAME,
+            a.WEBSITE_URL,
+            a.WEBSITE_MANAGER,
+            a.WEBSITE_MANAGER_TEL_NUM,
+            a.WEBSITE_MANAGER_MOBILE,
+            a.WEBSITE_MANAGER_EMAIL,
+            a.WEBSITE_CASE_NAME,
+            a.WEBSITE_CASE_STATE,
+            a.DOMAIN_NAME,
+            a.WEBSITE_MANAGER_CERT_NUM,
+            a.CREATTIME,
+            a.MODIFIEDTIME,
+            a.RECORDSTATE,
+            b.IDC_ID,
+            b.IDC_NAME
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	SELECT <include refid="listColumns"/> FROM smms_web_case a LEFT JOIN smms_idc_info b ON a.ACCESS_ID = b.IDC_ID  
+	<where>
+		a.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="selectWebCaseInfo" parameterType="hashmap" resultType="hashmap">
+	select  RID as CASE_RID,
+            ACCESS_ID as access_id,
+            ACCESS_TENANT as access_tenant,
+         
+            SERVER_PLACE as server_place,
+            SPONSER as sponsor,
+            SPONSER_CERT_TYPE as sponsor_cert_type,
+            SPONSER_CERT_NUM as sponsor_cert_num,
+            SPONSER_PROVINCE as sponsor_province,
+            SPONSER_ADDRESS as sponsor_address,
+            SPONSER_CERT_ADDRESS as sponsor_cert_address,
+            MANAGER as manager,
+            MANAGER_CERT_TYPE asmanager_cert_type,
+            MANAGER_CERT_NUM as manager_cert_num,
+            MANAGER_TEL_NUM as manager_tel_num,
+            MANAGER_MOBILE as manager_mobile,
+            MANAGER_EMAIL as manager_email,
+            SPONSER_CASE_NUM as sponsor_case_num,
+            SPONSER_CASE_STATE as sponsor_case_state,
+            WEBSITE_NAME as website_name,
+            WEBSITE_URL as website_url,
+            WEBSITE_MANAGER as website_manager,
+            WEBSITE_MANAGER_TEL_NUM as website_manager_tel_num,
+            WEBSITE_MANAGER_MOBILE as website_manager_mobile,
+            WEBSITE_MANAGER_EMAIL as website_manager_email,
+            WEBSITE_CASE_NAME as website_case_num,
+            WEBSITE_CASE_STATE as website_case_state,
+            DOMAIN_NAME as domain_name,
+            WEBSITE_MANAGER_CERT_NUM as website_manager_cert_num
+            from smms_web_case where  RECORDSTATE='0' and ACCESS_ID = #{ACCESS_ID} and WEBSITE_CASE_NAME=#{WEBSITE_CASE_NAME} 
+</select>
+<select id="CountByAccessId" parameterType="hashmap" resultType="String">
+	select count(*) from smms_web_case where ACCESS_ID = #{ACCESS_ID} and RECORDSTATE='0'
+</select>
+
+<select id="listDomainName" parameterType="hashmap" resultType="List">
+	select DOMAIN_NAME from smms_web_case where RECORDSTATE='0'
+</select>
+
+<select id="getDomainNameByRid" parameterType="hashmap" resultType="hashmap">
+	select DOMAIN_NAME from smms_web_case where RECORDSTATE='0' and RID=#{RID}
+</select>
+
+<select id="getDomainNameAndWebstiteUrlByRid" parameterType="hashmap" resultType="hashmap">
+	select ACCESS_ID,DOMAIN_NAME,WEBSITE_URL,SPONSER_ADDRESS as SNAPSHOP from smms_web_case where RECORDSTATE='0' and RID=#{RID}
+</select>
+<select id="viewDoMainNameAndAccessId" parameterType="hashmap" resultType="hashmap">
+SELECT 
+	 swc.access_id as ACCESS_ID,swc.domain_name as DOMAIN_NAME,swc.SPONSER_ADDRESS as SNAPSHOP,swc.rid as rid
+FROM 
+	smms_web_case swc 
+where 
+	#{URL} like upper(CONCAT('%',swc.domain_name,'%')) and swc.RECORDSTATE='0'
+</select>
+
+<select id="judgeUrl" parameterType="hashmap" resultType="hashmap">
+	SELECT * FROM smms_web_case  WHERE WEBSITE_URL = #{WEBSITE_URL} and RECORDSTATE='0'
+</select>
+<select id="selectRidByAccessId" parameterType="hashmap" resultType="hashmap">
+	SELECT RID FROM smms_web_case  WHERE ACCESS_ID = #{ACCESS_ID} and RECORDSTATE='0'
+</select>
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_WEB_CASE a LEFT JOIN smms_idc_info b ON a.ACCESS_ID = b.IDC_ID
+	<where>
+		a.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+<select id="checkUrl" parameterType="hashmap" resultType="hashmap">
+SELECT 
+	sii.rid as siiRid,
+	sii.IDC_NAME as idc_name,
+	swc.rid as swcRid,
+	swc.WEBSITE_NAME as website_name,
+	swc.SPONSER_CASE_NUM as sponser_case_num,
+	swc.WEBSITE_URL as website_url
+FROM 
+	smms_web_case as swc 
+left join 
+	smms_idc_info as sii
+on 
+swc.ACCESS_ID=sii.IDC_ID
+where 
+	#{URL} like upper(CONCAT('%',swc.domain_name,'%')) and swc.RECORDSTATE='0'
+</select>
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_WEB_CASE  where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from SMMS_WEB_CASE a LEFT JOIN smms_idc_info b ON a.ACCESS_ID = b.IDC_ID  where a.RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_WEB_CASE  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_WEB_CASE  where a.RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_WEB_CASE (
+            <if test="RID != null ">RID,</if>
+            <if test="ACCESS_ID != null ">ACCESS_ID,</if>
+            <if test="ACCESS_TENANT != null ">ACCESS_TENANT,</if>
+            <if test="ACCESS_IP != null ">ACCESS_IP,</if>
+            <if test="SERVER_PLACE != null ">SERVER_PLACE,</if>
+            <if test="SPONSER != null ">SPONSER,</if>
+            <if test="SPONSER_CERT_TYPE != null ">SPONSER_CERT_TYPE,</if>
+            <if test="SPONSER_CERT_NUM != null ">SPONSER_CERT_NUM,</if>
+            <if test="SPONSER_PROVINCE != null ">SPONSER_PROVINCE,</if>
+            <if test="SPONSER_ADDRESS != null ">SPONSER_ADDRESS,</if>
+            <if test="SPONSER_CERT_ADDRESS != null ">SPONSER_CERT_ADDRESS,</if>
+            <if test="MANAGER != null ">MANAGER,</if>
+            <if test="MANAGER_CERT_TYPE != null ">MANAGER_CERT_TYPE,</if>
+            <if test="MANAGER_CERT_NUM != null ">MANAGER_CERT_NUM,</if>
+            <if test="MANAGER_TEL_NUM != null ">MANAGER_TEL_NUM,</if>
+            <if test="MANAGER_MOBILE != null ">MANAGER_MOBILE,</if>
+            <if test="MANAGER_EMAIL != null ">MANAGER_EMAIL,</if>
+            <if test="SPONSER_CASE_NUM != null ">SPONSER_CASE_NUM,</if>
+            <if test="SPONSER_CASE_STATE != null ">SPONSER_CASE_STATE,</if>
+            <if test="WEBSITE_NAME != null ">WEBSITE_NAME,</if>
+            <if test="WEBSITE_URL != null ">WEBSITE_URL,</if>
+            <if test="WEBSITE_MANAGER != null ">WEBSITE_MANAGER,</if>
+            <if test="WEBSITE_MANAGER_TEL_NUM != null ">WEBSITE_MANAGER_TEL_NUM,</if>
+            <if test="WEBSITE_MANAGER_MOBILE != null ">WEBSITE_MANAGER_MOBILE,</if>
+            <if test="WEBSITE_MANAGER_EMAIL != null ">WEBSITE_MANAGER_EMAIL,</if>
+            <if test="WEBSITE_CASE_NAME != null ">WEBSITE_CASE_NAME,</if>
+            <if test="WEBSITE_CASE_STATE != null ">WEBSITE_CASE_STATE,</if>
+            <if test="DOMAIN_NAME != null ">DOMAIN_NAME,</if>
+            <if test="WEBSITE_MANAGER_CERT_NUM != null ">WEBSITE_MANAGER_CERT_NUM,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="MODIFIEDTIME != null ">MODIFIEDTIME,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="ACCESS_ID != null ">#{ACCESS_ID},</if>
+           <if test="ACCESS_TENANT != null ">#{ACCESS_TENANT},</if>
+           <if test="ACCESS_IP != null ">#{ACCESS_IP},</if>
+           <if test="SERVER_PLACE != null ">#{SERVER_PLACE},</if>
+           <if test="SPONSER != null ">#{SPONSER},</if>
+           <if test="SPONSER_CERT_TYPE != null ">#{SPONSER_CERT_TYPE},</if>
+           <if test="SPONSER_CERT_NUM != null ">#{SPONSER_CERT_NUM},</if>
+           <if test="SPONSER_PROVINCE != null ">#{SPONSER_PROVINCE},</if>
+           <if test="SPONSER_ADDRESS != null ">#{SPONSER_ADDRESS},</if>
+           <if test="SPONSER_CERT_ADDRESS != null ">#{SPONSER_CERT_ADDRESS},</if>
+           <if test="MANAGER != null ">#{MANAGER},</if>
+           <if test="MANAGER_CERT_TYPE != null ">#{MANAGER_CERT_TYPE},</if>
+           <if test="MANAGER_CERT_NUM != null ">#{MANAGER_CERT_NUM},</if>
+           <if test="MANAGER_TEL_NUM != null ">#{MANAGER_TEL_NUM},</if>
+           <if test="MANAGER_MOBILE != null ">#{MANAGER_MOBILE},</if>
+           <if test="MANAGER_EMAIL != null ">#{MANAGER_EMAIL},</if>
+           <if test="SPONSER_CASE_NUM != null ">#{SPONSER_CASE_NUM},</if>
+           <if test="SPONSER_CASE_STATE != null ">#{SPONSER_CASE_STATE},</if>
+           <if test="WEBSITE_NAME != null ">#{WEBSITE_NAME},</if>
+           <if test="WEBSITE_URL != null ">#{WEBSITE_URL},</if>
+           <if test="WEBSITE_MANAGER != null ">#{WEBSITE_MANAGER},</if>
+           <if test="WEBSITE_MANAGER_TEL_NUM != null ">#{WEBSITE_MANAGER_TEL_NUM},</if>
+           <if test="WEBSITE_MANAGER_MOBILE != null ">#{WEBSITE_MANAGER_MOBILE},</if>
+           <if test="WEBSITE_MANAGER_EMAIL != null ">#{WEBSITE_MANAGER_EMAIL},</if>
+           <if test="WEBSITE_CASE_NAME != null ">#{WEBSITE_CASE_NAME},</if>
+           <if test="WEBSITE_CASE_STATE != null ">#{WEBSITE_CASE_STATE},</if>
+           <if test="DOMAIN_NAME != null ">#{DOMAIN_NAME},</if>
+           <if test="WEBSITE_MANAGER_CERT_NUM != null ">#{WEBSITE_MANAGER_CERT_NUM},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="MODIFIEDTIME != null ">#{MODIFIEDTIME},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+<update id="judgeUrlUpdate" parameterType="hashmap" > 
+	UPDATE smms_web_case SET RECORDSTATE =1 WHERE WEBSITE_URL = #{WEBSITE_URL}
+</update> 
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_WEB_CASE   
+		<set>
+				    <if test="ACCESS_ID!=null"> ACCESS_ID=#{ACCESS_ID},</if> 
+		    <if test="ACCESS_TENANT!=null"> ACCESS_TENANT=#{ACCESS_TENANT},</if> 
+		    <if test="ACCESS_IP!=null"> ACCESS_IP=#{ACCESS_IP},</if> 
+		    <if test="SERVER_PLACE!=null"> SERVER_PLACE=#{SERVER_PLACE},</if> 
+		    <if test="SPONSER!=null"> SPONSER=#{SPONSER},</if> 
+		    <if test="SPONSER_CERT_TYPE!=null"> SPONSER_CERT_TYPE=#{SPONSER_CERT_TYPE},</if> 
+		    <if test="SPONSER_CERT_NUM!=null"> SPONSER_CERT_NUM=#{SPONSER_CERT_NUM},</if> 
+		    <if test="SPONSER_PROVINCE!=null"> SPONSER_PROVINCE=#{SPONSER_PROVINCE},</if> 
+		    <if test="SPONSER_ADDRESS!=null"> SPONSER_ADDRESS=#{SPONSER_ADDRESS},</if> 
+		    <if test="SPONSER_CERT_ADDRESS!=null"> SPONSER_CERT_ADDRESS=#{SPONSER_CERT_ADDRESS},</if> 
+		    <if test="MANAGER!=null"> MANAGER=#{MANAGER},</if> 
+		    <if test="MANAGER_CERT_TYPE!=null"> MANAGER_CERT_TYPE=#{MANAGER_CERT_TYPE},</if> 
+		    <if test="MANAGER_CERT_NUM!=null"> MANAGER_CERT_NUM=#{MANAGER_CERT_NUM},</if> 
+		    <if test="MANAGER_TEL_NUM!=null"> MANAGER_TEL_NUM=#{MANAGER_TEL_NUM},</if> 
+		    <if test="MANAGER_MOBILE!=null"> MANAGER_MOBILE=#{MANAGER_MOBILE},</if> 
+		    <if test="MANAGER_EMAIL!=null"> MANAGER_EMAIL=#{MANAGER_EMAIL},</if> 
+		    <if test="SPONSER_CASE_NUM!=null"> SPONSER_CASE_NUM=#{SPONSER_CASE_NUM},</if> 
+		    <if test="SPONSER_CASE_STATE!=null"> SPONSER_CASE_STATE=#{SPONSER_CASE_STATE},</if> 
+		    <if test="WEBSITE_NAME!=null"> WEBSITE_NAME=#{WEBSITE_NAME},</if> 
+		    <if test="WEBSITE_URL!=null"> WEBSITE_URL=#{WEBSITE_URL},</if> 
+		    <if test="WEBSITE_MANAGER!=null"> WEBSITE_MANAGER=#{WEBSITE_MANAGER},</if> 
+		    <if test="WEBSITE_MANAGER_TEL_NUM!=null"> WEBSITE_MANAGER_TEL_NUM=#{WEBSITE_MANAGER_TEL_NUM},</if> 
+		    <if test="WEBSITE_MANAGER_MOBILE!=null"> WEBSITE_MANAGER_MOBILE=#{WEBSITE_MANAGER_MOBILE},</if> 
+		    <if test="WEBSITE_MANAGER_EMAIL!=null"> WEBSITE_MANAGER_EMAIL=#{WEBSITE_MANAGER_EMAIL},</if> 
+		    <if test="WEBSITE_CASE_NAME!=null"> WEBSITE_CASE_NAME=#{WEBSITE_CASE_NAME},</if> 
+		    <if test="WEBSITE_CASE_STATE!=null"> WEBSITE_CASE_STATE=#{WEBSITE_CASE_STATE},</if> 
+		    <if test="DOMAIN_NAME!=null"> DOMAIN_NAME=#{DOMAIN_NAME},</if> 
+		    <if test="WEBSITE_MANAGER_CERT_NUM!=null"> WEBSITE_MANAGER_CERT_NUM=#{WEBSITE_MANAGER_CERT_NUM},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

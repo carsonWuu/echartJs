@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TableModel id="SCleanUp" desc="清理数据" tblName="" pageSize="10" listURL="" sqlMapNamespace="SCleanUp">
+	<Fields>
+		<TableField id="CLEANUP_LOG" colName="CLEANUP_LOG" desc="清理日志" dataType="CHAR" length="50"  create="LAVU" webType="checkbox" webTypeExt="1" dicType="S_CLEANUPLOG"/>
+	</Fields>
+</TableModel>

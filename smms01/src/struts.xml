@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.custom.i18n.resources" value="app"/>
+    <constant name="struts.multipart.maxSize" value="10000000000"/>
+    <constant name="struts.multipart.saveDir" value="d:/tmp"/>
+    <constant name="struts.multipart.parser" value="jakarta"/>
+    
+    <package name="default" namespace="" extends="struts-default">
+        <default-action-ref name="index" />
+        <global-results>
+            <result name="error">/WEB-INF/jsp/fmp/frame/result/error.jsp</result>
+            <result name="msg">/WEB-INF/jsp/fmp/frame/result/messageWindow.jsp</result>
+            <result name="refresh">/WEB-INF/jsp/fmp/frame/result/refreshWindow.jsp</result>
+            <result name="warning">/WEB-INF/jsp/fmp/frame/result/warning.jsp</result>
+            <result name="empty">/WEB-INF/jsp/fmp/frame/result/empty.jsp</result>
+            <result name="login">/WEB-INF/jsp/fmp/frame/login.jsp</result>
+            <result name="timeout">/WEB-INF/jsp/fmp/frame/login.jsp</result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+    </package>
+
+    <package name="fmp-default" namespace="" extends="default">
+		<interceptors>
+			<interceptor name="permission" class="com.zstar.fmp.core.base.PermissionInterceptor"/>
+			<interceptor-stack name="permissionStack">
+				<interceptor-ref name="defaultStack"/>
+				<interceptor-ref name="permission" />
+			</interceptor-stack>
+		</interceptors> 
+	    <default-interceptor-ref name="permissionStack" />
+        <global-results>
+        	<result name="printview">/WEB-INF/jsp/fmp/frame/common/CommonPrintView.jsp</result>
+        	<result name="printdatadetail">/WEB-INF/jsp/fmp/frame/common/partialJsp/PrintViewTable.jsp</result>
+        </global-results>	    	
+    </package>    
+    
+    <package name="SMMS-default" namespace="" extends="fmp-default">
+	
+    </package>  
+    <include file="conf/bizs/SMMSBizs.xml"/>
+    <include file="conf/bizs/fmpBizs.xml"/>
+    <!-- Add packages  here -->
+
+</struts>

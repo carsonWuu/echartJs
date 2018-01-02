@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SmmsRpcLog" desc="远程接口调用日志表" recordNum="T" tblName="SMMS_RPC_LOG" pageSize="20" uniteTableModelId="" listURL="/SMMS/SmmsRpcLogBiz/DoList?tableModelId=SmmsRpcLog" sqlMapNamespace="SmmsRpcLog">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40" cssClass="" listGroupName="" create="LV" hidden="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="T" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="srl"/>
+		<TableField id="ITF_NUM" colName="ITF_NUM" desc="接口编号" dataType="VARCHAR" length="10" cssClass="" listGroupName="" webType="text" webTypeExt="" create="LV" groupEnd="F" isSearch="T" fuzzy="T" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="srl"/>
+		<TableField id="CALL_DIRECTION" colName="CALL_DIRECTION" desc="调用方向" dataType="CHAR" length="1" cssClass="" listGroupName="" dicType="SMMS_RPC_RESULT" webType="select" webTypeExt="" create="LV" hidden="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="srl"/>
+		<TableField id="IDC_ID" colName="IDC_ID" desc="IDC运营商名称" webType="pop" webTypeExt="openSinPop('IdcInfo', 'IDC_ID', 'IDC_ID', 'IDC_NAME', '','')" dataType="VARCHAR" length="10" cssClass="" listGroupName=""  dblClick="viewIdcByAccessId($(this).attr('truevalue'));" create="LV" hidden="" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="sii"/>
+		<TableField id="IDC_NAME" colName="IDC_NAME" desc="IDC运营商名称" dataType="VARCHAR" length="50"  cssClass="" listGroupName="" create="LVAU" hidden="LAVU" groupEnd="F" isSearch="T" fuzzy="T" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="sii"/>
+		<TableField id="OUT_JSON" colName="OUT_JSON" desc="返回JSON" dataType="VARCHAR" length="2000" cssClass="" listGroupName="" create="LV" hidden="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="srl"/>
+		<TableField id="IN_JSON" colName="IN_JSON" desc="传入JSON" dataType="VARCHAR" length="2000" cssClass="" listGroupName="" create="LV" hidden="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="srl"/>
+		<TableField id="RPC_RESULT" colName="RPC_RESULT" desc="调用结果" dataType="VARCHAR" length="20" cssClass="" listGroupName=""  webTypeExt="" create="LV" groupEnd="F" isSearch="T" fuzzy="T" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="srl"/>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="调用时间" dataType="CHAR" length="20" cssClass="" listGroupName="" webType="text" webTypeExt="date" create="LV" groupEnd="F" isSearch="T" fuzzy="F" orderInList="T" order="DESC" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="T" tableAlias="srl"/>
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1" cssClass="" listGroupName="" create="LV" hidden="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="srl"/>
+	</Fields>
+	<SubTableModels>
+		<SubTableModel id="IdcInfo" keyField="IDC_ID" mKeyField="IDC_ID" updateListMode=""/>
+	</SubTableModels>
+</tablemodel>

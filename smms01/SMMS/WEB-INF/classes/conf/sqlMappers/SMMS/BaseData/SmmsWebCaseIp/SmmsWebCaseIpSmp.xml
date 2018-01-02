@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsWebCaseIp"> 
+<sql id="listColumns">
+	
+            CREATTIME,
+            MODIFIEDTIME,
+            RECORDSTATE,
+            RID,
+            CASE_RID,
+            ACCESS_IP
+</sql>
+<sql id="detailColumns">
+	
+            CREATTIME,
+            MODIFIEDTIME,
+            RECORDSTATE,
+            RID,
+            CASE_RID,
+            ACCESS_IP
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from SMMS_WEB_CASE_IP 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_WEB_CASE_IP 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_WEB_CASE_IP  where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from SMMS_WEB_CASE_IP  where RID = #{RID} 
+</select> 
+<select id="selectRidByIp" parameterType="hashmap" resultType="hashmap"> 
+	select CASE_RID  as RID from SMMS_WEB_CASE_IP  where ACCESS_IP = #{IP} 
+</select> 
+<select id="webCaseRid" parameterType="hashmap" resultType="hashmap">
+	select  swc.rid as swcRid,
+		swc.WEBSITE_NAME as website_name,
+		swc.SPONSER_CASE_NUM as sponser_case_num,
+		swc.WEBSITE_URL as website_url
+		  from SMMS_WEB_CASE  as swc where RID=#{RID}
+</select>
+
+<select id="findAccessIpByCaseRid" parameterType="hashmap" resultType="hashmap">
+	select ACCESS_IP as access_ip from SMMS_WEB_CASE_IP  where RECORDSTATE='0' and CASE_RID=#{CASE_RID}
+</select>
+<select id="viewToJson" parameterType="hashmap" resultType="hashmap">
+select 
+	ssp.url,
+	ssp.SNAPSHOP as snapshop,
+		ssp.ACCESS_ID as access_id,
+		ssp.THREAT_LEVEL as damage_class,
+		swc.SPONSER_CASE_NUM as case_id,
+		ssp.RECTIFY_TERM as rectify_term,
+		ssp.CLOSE_TERM as close_term,
+		ssp.rid as event_id,
+		CONCAT(CONCAT(CONCAT(CONCAT(ssp.THREAT_TYPE1,'_'),ssp.THREAT_TYPE2),'_',ssp.THREAT_TYPE3),'_',ssp.THREAT_TYPE4) as security_type 
+from smms_web_case as swc 
+left JOIN
+		
+		smms_pending_event as ssp 
+on 
+swc.rid=ssp.WEB_CASE_RID where ssp.RECTIFY_STATE='000' and RECORDSTATE='0' and swc.RID=#{CASE_RID}
+</select>
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_WEB_CASE_IP  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_WEB_CASE_IP  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_WEB_CASE_IP (
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="MODIFIEDTIME != null ">MODIFIEDTIME,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE,</if>
+            <if test="RID != null ">RID,</if>
+            <if test="CASE_RID != null ">CASE_RID,</if>
+            <if test="ACCESS_IP != null ">ACCESS_IP</if>)
+	   values (
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="MODIFIEDTIME != null ">#{MODIFIEDTIME},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE},</if>
+           <if test="RID != null ">#{RID},</if>
+           <if test="CASE_RID != null ">#{CASE_RID},</if>
+           <if test="ACCESS_IP != null ">#{ACCESS_IP}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_WEB_CASE_IP   
+		<set>
+				    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		    <if test="CASE_RID!=null"> CASE_RID=#{CASE_RID},</if> 
+		    <if test="ACCESS_IP!=null"> ACCESS_IP=#{ACCESS_IP},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+<update id="updateState" parameterType="hashmap" > 
+	update SMMS_WEB_CASE_IP  set RECORDSTATE='1' where CASE_RID=#{CASE_RID} and ACCESS_IP=#{ACCESS_IP} and RECORDSTATE='0'
+</update> 
+</mapper>

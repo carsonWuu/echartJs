@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SModule"> 
+<sql id="smoduleColumns">RID,MODULEID,MODULENAME,SYSTEMPK,URL,PARENTID,ORDERID,ICON,CREATORID,MODIFIERID,MODULEDESC,TABLEMODELID,SHOWRECORDCOUNT</sql> 
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="smoduleColumns"/> from s_module 
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from s_module 
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from s_module where RID = #{RID}
+</delete> 
+<delete id="deleteDataByCondition" parameterType="hashmap" > 
+	delete from s_module 
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+</delete> 
+
+<delete id="deleteDataByModlid" parameterType="String" > 
+	delete from s_module where MODULEID = #{MODULEID}
+</delete>
+
+<select id="SelectTablemodleByModuleId" parameterType="hashmap" resultType="hashmap"> 
+	select TABLEMODELID from s_module where MODULEID = #{MODULEID}  
+</select>
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="smoduleColumns"/> from s_module where RID = #{RID}  
+</select> 
+
+<select id="viewDetailCondition" parameterType="String" resultType="hashmap"> 
+	select <include refid="smoduleColumns"/> from s_module 
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+</select> 
+
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+	select <include refid="smoduleColumns"/> from s_module where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+ insert into S_MODULE (
+	    	 RID
+		    ,MODULEID
+		    ,MODULENAME
+		    ,MODULEDESC
+		    ,SYSTEMPK
+		    ,URL
+		    ,PARENTID
+		    ,ORDERID
+		    ,ICON
+		    ,CREATTIME
+		    ,CREATORID
+		    ,MODIFIEDTIME
+		    ,MODIFIERID
+		    ,RECORDSTATE
+		    ,TABLEMODELID
+		    ,SHOWRECORDCOUNT
+		    ,MODULESTATE
+	    )
+	    values(
+            #{RID}
+		    ,#{MODULEID}
+		    ,#{MODULENAME}
+		    ,#{MODULEDESC}
+		    ,#{SYSTEMPK}
+		    ,#{URL}
+		    ,#{PARENTID}
+		    ,#{ORDERID}
+		    ,#{ICON}
+		    ,#{CREATTIME}
+		    ,#{CREATORID}
+		    ,#{MODIFIEDTIME}
+		    ,#{MODIFIERID}
+		    ,#{RECORDSTATE}
+		    ,#{TABLEMODELID}
+		    ,#{SHOWRECORDCOUNT}
+		    ,#{MODULESTATE}
+	    )
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update s_module 
+   		<set>  
+			  <if test="MODULEID != null ">MODULEID = #{MODULEID},</if>
+			  <if test="MODULENAME != null ">MODULENAME = #{MODULENAME},</if>
+			  <if test="MODULEDESC != null ">MODULEDESC = #{MODULEDESC},</if>
+			  <if test="SYSTEMPK != null ">SYSTEMPK = #{SYSTEMPK},</if>
+			  <if test="URL != null ">URL = #{URL},</if>
+			  <if test="PARENTID != null ">PARENTID = #{PARENTID},</if>
+			  <if test="ORDERID != null ">ORDERID = #{ORDERID},</if>
+			  <if test="ICON != null ">ICON = #{ICON},</if>
+			  <if test="MODIFIEDTIME != null ">MODIFIEDTIME = #{MODIFIEDTIME},</if>
+			  <if test="MODIFIERID != null ">MODIFIERID = #{MODIFIERID},</if>
+			  <if test="RECORDSTATE != null ">RECORDSTATE = #{RECORDSTATE},</if>
+			  <if test="SHOWRECORDCOUNT != null ">SHOWRECORDCOUNT = #{SHOWRECORDCOUNT},</if>
+			  <if test="TABLEMODELID != null ">TABLEMODELID=#{TABLEMODELID}</if>
+   		</set>
+	where RID=#{RID}
+</update> 
+
+<!--获得用户有权访问的所有模块-->
+<select id="getModuleListByUserId" parameterType="String" resultType="hashmap"> 
+
+select md.* from s_module md
+            where exists(
+                  select rr.MODULEID from s_roleuser ru , s_roleright rr, s_role sr
+                     where ru.USERID= #{CURR_USERID} and ru.ROLEID=rr.ROLEID and  rr.MODULEID = md.MODULEID AND ru.ROLEID=sr.ROLEID 
+             )
+            and md.MODULESTATE = '1'
+            order by md.PARENTID,md.ORDERID	
+	
+ <!--
+select distinct md.MODULEID,md.MODULENAME,md.ICON,md.URL,md.TABLEMODELID from s_module md, s_roleright rr,s_roleuser ru 
+            where 
+            	ru.USERID= #{CURR_USERID}
+            	and md.MODULESTATE = '1'
+                and  rr.MODULEID = md.MODULEID 
+                and ru.ROLEID=rr.ROLEID
+            order by md.PARENTID,md.ORDERID		
+     -->       		
+</select>
+
+<!--获得用户有权访问的子模块-->
+<select id="getSubModuleListByModuleId" parameterType="hashmap" resultType="hashmap"> 
+  select md.TABLEMODELID,md.URL,md.MODULEID,md.MODULENAME,ru.USERID from s_module md
+  left outer join s_roleright rr inner join  s_roleuser ru on  ru.USERID =  #{CURR_USERID} and ru.ROLEID = rr.ROLEID  on md.MODULEID = rr.MODULEID 
+  <where>
+    md.PARENTID=#{moduleId}  
+    and md.RECORDSTATE = '0'
+  </where>
+  order by md.ORDERID
+</select>   
+ 
+<update id="updateModuleId" parameterType="hashmap" > 
+	update s_module set
+	    <if test="MODULEID != null">PARENTID = #{MODULEID}</if> 
+	where PARENTID = #{PREMODULEID}
+</update>
+
+
+<!--获取选择模块的子模块-->
+<select id="getSubByParentId" parameterType="String" resultType="hashmap"> 
+	select <include refid="smoduleColumns"/> from s_module 
+		where PARENTID=#{MODULEID} and RECORDSTATE = '0'
+</select>
+</mapper>

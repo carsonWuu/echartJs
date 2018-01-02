@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="IdcInfo"> 
+<sql id="listColumns">
+	
+            RID,
+            IDC_ID,
+            IDC_NAME,
+            OFFICE_TEL,
+            EMAIL,
+            OFFICE_ADDRESS,
+            LINKMAN_EMAIL,
+            ABOUT,
+            WEBSITE,
+            REGCODE,
+            REGTYPE,
+            APPRORG,
+            REGAREACODE,
+            REGAREANAME,
+            REG_ADDR,
+            LEGAL_NAME,
+            LEGAL_SEX,
+            LEGAL_CERT_TYPE,
+            LEGAL_CERT_CODE,
+            LEGAL_PHONE,
+            LEGAL_OFFI_TEL,
+            LEGAL_MOBILE,
+            LEGAL_HOUH_REG_ADD,
+            LINKMAN,
+            LINKMOBILE,
+            OTHERLINKWAY,
+            WEBSERVICE_URL,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            LIABMAN,
+            LIABDEPT,
+            LIABORG,
+            RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            IDC_ID,
+            IDC_NAME,
+            OFFICE_TEL,
+            EMAIL,
+            OFFICE_ADDRESS,
+            LINKMAN_EMAIL,
+            ABOUT,
+            WEBSITE,
+            REGCODE,
+            REGTYPE,
+            APPRORG,
+            REGAREACODE,
+            REGAREANAME,
+            REG_ADDR,
+            LEGAL_NAME,
+            LEGAL_SEX,
+            LEGAL_CERT_TYPE,
+            LEGAL_CERT_CODE,
+            LEGAL_PHONE,
+            LEGAL_OFFI_TEL,
+            LEGAL_MOBILE,
+            LEGAL_HOUH_REG_ADD,
+            LINKMAN,
+            LINKMOBILE,
+            OTHERLINKWAY,
+            WEBSERVICE_URL,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            LIABMAN,
+            LIABDEPT,
+            LIABORG,
+            RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from SMMS_IDC_INFO 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+<select id="idcAndRoomList" parameterType="hashmap" resultType="hashmap">
+	select idc.IDC_ID,idc.IDC_NAME,room.ROOM_IDX,room.ROOM_NAME 
+    FROM SMMS_IDC_INFO idc, SMMS_ROOM_INFO room
+    WHERE idc.IDC_ID=room.ACCESS_ID
+    and idc.RECORDSTATE='0' and room.RECORDSTATE='0'
+    ORDER BY idc.IDC_ID,ROOM_IDX
+</select>
+<select id="selectUrlAndRid" parameterType="hashmap" resultType="hashmap">
+	select WEBSERVICE_URL as url,RID as rid FROM SMMS_IDC_INFO where RECORDSTATE ='0'
+</select>
+<select id="selectUrlOneRid" parameterType="String" resultType="String">
+	select WEBSERVICE_URL as url FROM SMMS_IDC_INFO where RECORDSTATE ='0' and RID = #{rid}
+</select>
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_IDC_INFO 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+<!--校验IDC_ID-->
+<select id="checkIdcId" parameterType="hashmap" resultType="hashmap">
+	SELECT  IDC_ID FROM smms_idc_info WHERE IDC_ID = #{IDC_ID}
+</select>
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_IDC_INFO  where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/> from SMMS_IDC_INFO idc where idc.RID = #{RID}
+	 
+</select> 
+<select id="getIdcInfoByIdcId" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from SMMS_IDC_INFO  where IDC_ID = #{IDC_ID} 
+</select>
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_IDC_INFO  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_IDC_INFO  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_IDC_INFO (
+            <if test="RID != null ">RID,</if>
+            <if test="IDC_ID != null ">IDC_ID,</if>
+            <if test="IDC_NAME != null ">IDC_NAME,</if>
+            <if test="OFFICE_TEL != null ">OFFICE_TEL,</if>
+            <if test="EMAIL != null ">EMAIL,</if>
+            <if test="OFFICE_ADDRESS != null ">OFFICE_ADDRESS,</if>
+            <if test="LINKMAN_EMAIL != null ">LINKMAN_EMAIL,</if>
+            <if test="ABOUT != null ">ABOUT,</if>
+            <if test="WEBSITE != null ">WEBSITE,</if>
+            <if test="REGCODE != null ">REGCODE,</if>
+            <if test="REGTYPE != null ">REGTYPE,</if>
+            <if test="APPRORG != null ">APPRORG,</if>
+            <if test="REGAREACODE != null ">REGAREACODE,</if>
+            <if test="REGAREANAME != null ">REGAREANAME,</if>
+            <if test="REG_ADDR != null ">REG_ADDR,</if>
+            <if test="LEGAL_NAME != null ">LEGAL_NAME,</if>
+            <if test="LEGAL_SEX != null ">LEGAL_SEX,</if>
+            <if test="LEGAL_CERT_TYPE != null ">LEGAL_CERT_TYPE,</if>
+            <if test="LEGAL_CERT_CODE != null ">LEGAL_CERT_CODE,</if>
+            <if test="LEGAL_PHONE != null ">LEGAL_PHONE,</if>
+            <if test="LEGAL_OFFI_TEL != null ">LEGAL_OFFI_TEL,</if>
+            <if test="LEGAL_MOBILE != null ">LEGAL_MOBILE,</if>
+            <if test="LEGAL_HOUH_REG_ADD != null ">LEGAL_HOUH_REG_ADD,</if>
+            <if test="LINKMAN != null ">LINKMAN,</if>
+            <if test="LINKMOBILE != null ">LINKMOBILE,</if>
+            <if test="OTHERLINKWAY != null ">OTHERLINKWAY,</if>
+            <if test="WEBSERVICE_URL != null ">WEBSERVICE_URL,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="CREATORID != null ">CREATORID,</if>
+            <if test="MODIFIEDTIME != null ">MODIFIEDTIME,</if>
+            <if test="MODIFIERID != null ">MODIFIERID,</if>
+            <if test="LIABMAN != null ">LIABMAN,</if>
+            <if test="LIABDEPT != null ">LIABDEPT,</if>
+            <if test="LIABORG != null ">LIABORG,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="IDC_ID != null ">#{IDC_ID},</if>
+           <if test="IDC_NAME != null ">#{IDC_NAME},</if>
+           <if test="OFFICE_TEL != null ">#{OFFICE_TEL},</if>
+           <if test="EMAIL != null ">#{EMAIL},</if>
+           <if test="OFFICE_ADDRESS != null ">#{OFFICE_ADDRESS},</if>
+           <if test="LINKMAN_EMAIL != null ">#{LINKMAN_EMAIL},</if>
+           <if test="ABOUT != null ">#{ABOUT},</if>
+           <if test="WEBSITE != null ">#{WEBSITE},</if>
+           <if test="REGCODE != null ">#{REGCODE},</if>
+           <if test="REGTYPE != null ">#{REGTYPE},</if>
+           <if test="APPRORG != null ">#{APPRORG},</if>
+           <if test="REGAREACODE != null ">#{REGAREACODE},</if>
+           <if test="REGAREANAME != null ">#{REGAREANAME},</if>
+           <if test="REG_ADDR != null ">#{REG_ADDR},</if>
+           <if test="LEGAL_NAME != null ">#{LEGAL_NAME},</if>
+           <if test="LEGAL_SEX != null ">#{LEGAL_SEX},</if>
+           <if test="LEGAL_CERT_TYPE != null ">#{LEGAL_CERT_TYPE},</if>
+           <if test="LEGAL_CERT_CODE != null ">#{LEGAL_CERT_CODE},</if>
+           <if test="LEGAL_PHONE != null ">#{LEGAL_PHONE},</if>
+           <if test="LEGAL_OFFI_TEL != null ">#{LEGAL_OFFI_TEL},</if>
+           <if test="LEGAL_MOBILE != null ">#{LEGAL_MOBILE},</if>
+           <if test="LEGAL_HOUH_REG_ADD != null ">#{LEGAL_HOUH_REG_ADD},</if>
+           <if test="LINKMAN != null ">#{LINKMAN},</if>
+           <if test="LINKMOBILE != null ">#{LINKMOBILE},</if>
+           <if test="OTHERLINKWAY != null ">#{OTHERLINKWAY},</if>
+           <if test="WEBSERVICE_URL != null ">#{WEBSERVICE_URL},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="CREATORID != null ">#{CREATORID},</if>
+           <if test="MODIFIEDTIME != null ">#{MODIFIEDTIME},</if>
+           <if test="MODIFIERID != null ">#{MODIFIERID},</if>
+           <if test="LIABMAN != null ">#{LIABMAN},</if>
+           <if test="LIABDEPT != null ">#{LIABDEPT},</if>
+           <if test="LIABORG != null ">#{LIABORG},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_IDC_INFO   
+		<set>
+				    <if test="IDC_ID!=null"> IDC_ID=#{IDC_ID},</if> 
+		    <if test="IDC_NAME!=null"> IDC_NAME=#{IDC_NAME},</if> 
+		    <if test="OFFICE_TEL!=null"> OFFICE_TEL=#{OFFICE_TEL},</if> 
+		    <if test="EMAIL!=null"> EMAIL=#{EMAIL},</if> 
+		    <if test="OFFICE_ADDRESS!=null"> OFFICE_ADDRESS=#{OFFICE_ADDRESS},</if> 
+		    <if test="LINKMAN_EMAIL!=null"> LINKMAN_EMAIL=#{LINKMAN_EMAIL},</if> 
+		    <if test="ABOUT!=null"> ABOUT=#{ABOUT},</if> 
+		    <if test="WEBSITE!=null"> WEBSITE=#{WEBSITE},</if> 
+		    <if test="REGCODE!=null"> REGCODE=#{REGCODE},</if> 
+		    <if test="REGTYPE!=null"> REGTYPE=#{REGTYPE},</if> 
+		    <if test="APPRORG!=null"> APPRORG=#{APPRORG},</if> 
+		    <if test="REGAREACODE!=null"> REGAREACODE=#{REGAREACODE},</if> 
+		    <if test="REGAREANAME!=null"> REGAREANAME=#{REGAREANAME},</if> 
+		    <if test="REG_ADDR!=null"> REG_ADDR=#{REG_ADDR},</if> 
+		    <if test="LEGAL_NAME!=null"> LEGAL_NAME=#{LEGAL_NAME},</if> 
+		    <if test="LEGAL_SEX!=null"> LEGAL_SEX=#{LEGAL_SEX},</if> 
+		    <if test="LEGAL_CERT_TYPE!=null"> LEGAL_CERT_TYPE=#{LEGAL_CERT_TYPE},</if> 
+		    <if test="LEGAL_CERT_CODE!=null"> LEGAL_CERT_CODE=#{LEGAL_CERT_CODE},</if> 
+		    <if test="LEGAL_PHONE!=null"> LEGAL_PHONE=#{LEGAL_PHONE},</if> 
+		    <if test="LEGAL_OFFI_TEL!=null"> LEGAL_OFFI_TEL=#{LEGAL_OFFI_TEL},</if> 
+		    <if test="LEGAL_MOBILE!=null"> LEGAL_MOBILE=#{LEGAL_MOBILE},</if> 
+		    <if test="LEGAL_HOUH_REG_ADD!=null"> LEGAL_HOUH_REG_ADD=#{LEGAL_HOUH_REG_ADD},</if> 
+		    <if test="LINKMAN!=null"> LINKMAN=#{LINKMAN},</if> 
+		    <if test="LINKMOBILE!=null"> LINKMOBILE=#{LINKMOBILE},</if> 
+		    <if test="OTHERLINKWAY!=null"> OTHERLINKWAY=#{OTHERLINKWAY},</if>
+		    <if test="WEBSERVICE_URL!=null"> WEBSERVICE_URL=#{WEBSERVICE_URL},</if>
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="LIABMAN!=null"> LIABMAN=#{LIABMAN},</if> 
+		    <if test="LIABDEPT!=null"> LIABDEPT=#{LIABDEPT},</if> 
+		    <if test="LIABORG!=null"> LIABORG=#{LIABORG},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

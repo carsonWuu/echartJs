@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SRiskWarnScheme"> 
+<sql id="listColumns">
+	
+      RID,
+      SCHEMEID,
+      SCHEMENAME,
+      SCHEMETYPE,
+      SCHEMEDESC,
+      SCHEMESTATE,
+      MSGTEMP,
+      FIRESCENE,
+      FIREPERIOD,
+      ISFEEDBACK,
+      WARNTERM,
+      RWLEVEL,
+      CREATTIME,
+      CREATORID,
+      MODIFIEDTIME,
+      MODIFIERID,
+      RECORDSTATE,
+      SCHEMEPARAMSQLID,
+      FIREBASETIME,
+      INCEPTORGID,
+      INCEPTDEPTID,
+      INCEPTPOST,
+      INCEPTUSERID,
+      NEEDMSN,
+      FEEDBACKPOST
+</sql>
+<sql id="detailColumns">
+	
+      RID,
+      SCHEMEID,
+      SCHEMENAME,
+      SCHEMETYPE,
+      SCHEMEDESC,
+      SCHEMESTATE,
+      MSGTEMP,
+      FIRESCENE,
+      FIREPERIOD,
+      ISFEEDBACK,
+      WARNTERM,
+      RWLEVEL,
+      CREATTIME,
+      CREATORID,
+      MODIFIEDTIME,
+      MODIFIERID,
+      RECORDSTATE，
+      SCHEMEPARAMSQLID,
+      FIREBASETIME,
+      INCEPTORGID,
+      INCEPTDEPTID,
+      INCEPTPOST,
+      INCEPTUSERID,
+      NEEDMSN,
+      FEEDBACKPOST
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select distinct srws.*,so.ORGANSHORTFORM as TRANS_INCEPTORGID,sd.DEPSHORTFORM as TRANS_INCEPTDEPTID,
+	       sp.POSTNAME as TRANS_INCEPTPOST,su.USERNAME as TRANS_INCEPTUSERID,sp.POSTNAME as TRANS_FEEDBACKPOST
+	from S_RISKWARNSCHEME srws
+	left outer join S_ORG so
+	    on so.ORGID = srws.INCEPTORGID
+	left outer join S_DEPT sd
+	    on sd.DEPTID = srws.INCEPTDEPTID
+	left outer join S_POST sp
+	    on sp.POSTID = srws.INCEPTPOST
+	left outer join S_POST sp2
+		on sp.POSTID = srws.FEEDBACKPOST
+	left outer join S_USER su
+	    on su.USERID = srws.INCEPTUSERID
+	    
+	<where>
+		srws.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+		order by srws.SCHEMESTATE
+        <if test="order!=null and order!='' ">   
+             ,${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(distinct srws.RID) NUM
+	from S_RISKWARNSCHEME srws
+	left outer join S_ORG so
+	    on so.ORGID = srws.INCEPTORGID
+	left outer join S_DEPT sd
+	    on sd.DEPTID = srws.INCEPTDEPTID
+	left outer join S_POST sp
+	    on sp.POSTID = srws.INCEPTPOST
+	left outer join S_POST sp2
+		on sp.POSTID = srws.FEEDBACKPOST
+	left outer join S_USER su
+	    on su.USERID = srws.INCEPTUSERID
+	<where>
+		srws.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_RISKWARNSCHEME where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select srws.*,so.ORGANSHORTFORM as TRANS_INCEPTORGID,sd.DEPSHORTFORM as TRANS_INCEPTDEPTID,
+	       sp.POSTNAME as TRANS_INCEPTPOST,su.USERNAME as TRANS_INCEPTUSERID,sp2.POSTNAME as TRANS_FEEDBACKPOST
+	from S_RISKWARNSCHEME srws
+	left outer join S_ORG so
+	    on so.ORGID = srws.INCEPTORGID
+	left outer join S_DEPT sd
+	    on sd.DEPTID = srws.INCEPTDEPTID
+	left outer join S_POST sp
+	    on sp.POSTID = srws.INCEPTPOST
+	left outer join S_POST sp2
+		on sp2.POSTID = srws.FEEDBACKPOST
+	left outer join S_USER su
+	    on su.USERID = srws.INCEPTUSERID
+	where srws.RID = #{RID}
+	
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_RISKWARNSCHEME set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+   select srws.*,so.ORGANSHORTFORM as TRANS_INCEPTORGID,sd.DEPSHORTFORM as TRANS_INCEPTDEPTID,
+	       sp.POSTNAME as TRANS_INCEPTPOST,su.USERNAME as TRANS_INCEPTUSERID,sp2.POSTNAME as TRANS_FEEDBACKPOST
+	from S_RISKWARNSCHEME srws
+	left outer join S_ORG so
+	    on so.ORGID = srws.INCEPTORGID
+	left outer join S_DEPT sd
+	    on sd.DEPTID = srws.INCEPTDEPTID
+	left outer join S_POST sp
+	    on sp.POSTID = srws.INCEPTPOST
+	left outer join S_POST sp2
+		on sp2.POSTID = srws.FEEDBACKPOST
+	left outer join S_USER su
+	    on su.USERID = srws.INCEPTUSERID
+	where srws.RID = #{RID}
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_RISKWARNSCHEME(
+      RID,
+      SCHEMEID,
+      SCHEMENAME,
+      SCHEMETYPE,
+      SCHEMEDESC,
+      SCHEMESTATE,
+      MSGTEMP,
+      FIRESCENE,
+      FIREPERIOD,
+      ISFEEDBACK,
+      WARNTERM,
+      RWLEVEL,
+      CREATTIME,
+      CREATORID,
+      MODIFIEDTIME,
+      MODIFIERID,
+      RECORDSTATE,
+      SCHEMEPARAMSQLID,
+      FIREBASETIME,
+      INCEPTORGID,
+      INCEPTDEPTID,
+      INCEPTPOST,
+      INCEPTUSERID,
+      NEEDMSN,
+      FEEDBACKPOST)
+	   values (
+      #{RID},
+      #{SCHEMEID},
+      #{SCHEMENAME},
+      #{SCHEMETYPE},
+      #{SCHEMEDESC},
+      #{SCHEMESTATE},
+      #{MSGTEMP},
+      #{FIRESCENE},
+      #{FIREPERIOD},
+      #{ISFEEDBACK},
+      #{WARNTERM},
+      #{RWLEVEL},
+      #{CREATTIME},
+      #{CREATORID},
+      #{MODIFIEDTIME},
+      #{MODIFIERID},
+      #{RECORDSTATE},
+      #{SCHEMEPARAMSQLID},
+      #{FIREBASETIME},
+      #{INCEPTORGID},
+      #{INCEPTDEPTID},
+      #{INCEPTPOST},
+      #{INCEPTUSERID},
+      #{NEEDMSN},
+      #{FEEDBACKPOST})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_RISKWARNSCHEME  
+		<set>
+		    <if test="SCHEMEID!=null"> SCHEMEID=#{SCHEMEID},</if> 
+    <if test="SCHEMENAME!=null"> SCHEMENAME=#{SCHEMENAME},</if> 
+    <if test="SCHEMETYPE!=null"> SCHEMETYPE=#{SCHEMETYPE},</if> 
+    <if test="SCHEMEDESC!=null"> SCHEMEDESC=#{SCHEMEDESC},</if> 
+    <if test="SCHEMESTATE!=null"> SCHEMESTATE=#{SCHEMESTATE},</if> 
+    <if test="MSGTEMP!=null"> MSGTEMP=#{MSGTEMP},</if> 
+    <if test="FIRESCENE!=null"> FIRESCENE=#{FIRESCENE},</if> 
+    <if test="FIREPERIOD!=null"> FIREPERIOD=#{FIREPERIOD},</if> 
+    <if test="ISFEEDBACK!=null"> ISFEEDBACK=#{ISFEEDBACK},</if> 
+    <if test="FEEDBACKROLE!=null"> FEEDBACKROLE=#{FEEDBACKROLE},</if> 
+    <if test="WARNTERM!=null"> WARNTERM=#{WARNTERM},</if> 
+    <if test="RWLEVEL!=null"> RWLEVEL=#{RWLEVEL},</if>  
+    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+    <if test="SCHEMEPARAMSQLID!=null"> SCHEMEPARAMSQLID=#{SCHEMEPARAMSQLID},</if> 
+    <if test="FIREBASETIME!=null"> FIREBASETIME=#{FIREBASETIME},</if> 
+    <if test="INCEPTORGID!=null"> INCEPTORGID=#{INCEPTORGID},</if> 
+    <if test="INCEPTDEPTID!=null"> INCEPTDEPTID=#{INCEPTDEPTID},</if> 
+    <if test="INCEPTPOST!=null"> INCEPTPOST=#{INCEPTPOST},</if> 
+    <if test="INCEPTUSERID!=null"> INCEPTUSERID=#{INCEPTUSERID},</if> 
+    <if test="NEEDMSN!=null"> NEEDMSN=#{NEEDMSN},</if>
+    <if test="FEEDBACKPOST!=null"> FEEDBACKPOST=#{FEEDBACKPOST},</if> 
+
+		</set>
+	where RID=#{RID}
+</update> 
+
+<!-- 根据触发场景获取风险预警方案数据 -->
+<select id="getRiskWarnSchemeData" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_RISKWARNSCHEME
+	where FIRESCENE = #{FIRESCENE} and SCHEMESTATE = '0' and RECORDSTATE = '0'
+</select> 
+
+<!-- 根据流程实例ID获取项目特审流程结束后的数据  -->
+<select id="getCaseNodeDataByFlowInstanceId" parameterType="hashmap" resultType="hashmap"> 
+	select su.USERNAME as INCEPTUSERNAME,ccn.FINALTRANSACTOR as INCEPTUSERID,
+		   ccnt.NODETYPENAME,ccn.CASECODE,ccn.NODECODE 
+	from CRD_CASENODE ccn
+	left outer join WF_FLOWINSTANCE wfi
+		on wfi.BIZRID = ccn.RID
+	left outer join S_USER su
+		on su.USERID = ccn.FINALTRANSACTOR
+	left outer join CRD_CASENODETYPE ccnt
+		on ccnt.NODETYPECODE = ccn.NODETYPECODE
+	where ccn.RECORDSTATE = '0' and wfi.RECORDSTATE = '0' and wfi.FLOWINSTANCEID = #{FLOWINSTANCEID}
+</select> 
+
+</mapper>

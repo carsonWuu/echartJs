@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SModuleOpperation"> 
+<sql id="sModuleOpperationColumns">RID,MODULEID,OPID,OPDESC,ORDERID,OPSCRIPT</sql> 
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="sModuleOpperationColumns"/> from s_moduleopperation 
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from s_moduleopperation 
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from s_moduleopperation where RID = #{RID}
+</delete> 
+
+<select id="selectOpIDByModuleID" parameterType="hashmap" resultType="hashmap"> 
+	select OPID from s_moduleopperation where MODULEID = #{MODULEID}  
+</select> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select * from s_moduleopperation where RID = #{RID}  
+</select> 
+
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+	select * from s_moduleopperation where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" > 
+	insert into s_moduleopperation(
+		RID,
+		MODULEID,
+		OPID,
+		OPDESC,
+		CREATTIME,
+		CREATORID,
+		MODIFIEDTIME,
+	   	MODIFIERID,
+	   	RECORDSTATE,
+	   	ORDERID,		
+		OPSCRIPT
+		)values (
+		#{RID},
+		#{MODULEID},
+		#{OPID},
+		#{OPDESC},
+  		#{CREATTIME},
+  		#{CREATORID},
+  		#{MODIFIEDTIME},
+  		#{MODIFIERID},
+  		#{RECORDSTATE},	
+  		#{ORDERID},	
+		#{OPSCRIPT}
+		)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update s_moduleopperation
+   		<set>  
+			  <if test="MODULEID != null ">MODULEID=#{MODULEID},</if>
+			  <if test="OPID != null ">OPID=#{OPID},</if>
+			  <if test="OPDESC != null ">OPDESC=#{OPDESC},</if> 
+			  <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+			  <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+			  <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 			  		     
+              <if test="ORDERID != null ">ORDERID = #{ORDERID},</if>   
+			  <if test="OPSCRIPT != null ">OPSCRIPT=#{OPSCRIPT},</if>
+   		</set>
+   	where RID=#{RID}
+</update> 
+
+<select id="getOpListByUserId" parameterType="hashmap" resultType="hashmap">   
+	select mo.OPID,mo.OPDESC,mo.OPSCRIPT,mo.CONFIRMMSG from S_MODULEOPPERATION mo
+	<where>
+	    mo.MODULEID = #{moduleId} and exists (
+	    select 1 from S_ROLERIGHT rr,S_ROLEUSER ru 
+	    	where 
+	    	    ru.USERID=#{CURR_USERID} 
+	    		and ru.ROLEID = rr.ROLEID   
+	    		and  rr.OPID = mo.OPID 
+	    		and rr.MODULEID = mo.MODULEID)
+	</where>    
+	    order by mo.ORDERID	    
+</select> 
+
+<update id="updateModuleOpperation" parameterType="hashmap" > 
+	update S_MODULEOPPERATION set
+	    <if test="MODULEID != null">MODULEID = #{MODULEID}</if> 
+	where MODULEID = #{PREMODULEID}
+</update>
+
+<delete id="deleteDataByModlid" parameterType="String" > 
+	delete from s_moduleopperation where MODULEID = #{MODULEID}
+</delete> 
+
+</mapper>

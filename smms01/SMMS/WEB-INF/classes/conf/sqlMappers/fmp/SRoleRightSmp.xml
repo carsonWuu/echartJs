@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SRoleRight"> 
+<sql id="sRoleRightColumns">RID,ROLEID,MODULEID,OPID,CREATORID,CREATTIME</sql> 
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="sRoleRightColumns"/> from S_ROLERIGHT 
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from S_ROLERIGHT 
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_ROLERIGHT where RID = #{RID}
+</delete> 
+
+<delete id="deleteDataByROLEID" parameterType="hashmap" > 
+	delete from S_ROLERIGHT where ROLEID = #{ROLEID}
+</delete> 
+
+<delete id="deleteDataByModlid" parameterType="String" > 
+	delete from S_ROLERIGHT where MODULEID = #{MODULEID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_ROLERIGHT where RID = #{RID}  
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" > 
+		insert into S_ROLERIGHT (
+    	 RID
+	    ,ROLEID
+	    ,MODULEID
+	    ,OPID
+	    ,CREATORID
+	    ,CREATTIME
+    )
+    values(
+         #{RID}
+	    ,#{ROLEID}
+	    ,#{MODULEID}
+	    ,#{OPID}
+	    ,#{CREATORID}
+	    ,#{CREATTIME}
+    )
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_ROLERIGHT set   
+        	ROLEID = #{ROLEID},	       	
+        	MODULEID = #{MODULEID},	       
+        	OPID = #{OPID},	       		       
+        	CREATORID = #{CREATORID},	       
+        	CREATTIME = #{CREATTIME},	              
+    where RID =#{RID}
+</update> 
+
+</mapper>

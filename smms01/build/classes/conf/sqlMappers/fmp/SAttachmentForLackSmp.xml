@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SAttachmentForLack"> 
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select cpa.ATTACHMENTTYPE as RID,cci.RID as RECORDRID,cci.FILECODE,cci.CASECODE,cpa.ATTACHMENTTYPE as ARCHIVETYPE
+	from CRD_PRODUCT_ATT cpa
+	left outer join CRD_CASEPRODUCT ccp
+		on ccp.PRODUCTCODE = cpa.PRODUCTCODE and ccp.RECORDSTATE = '0'
+	left outer join CRD_CASEINFO cci
+		on cci.CASECODE = ccp.CASECODE and cci.RECORDSTATE = '0'
+	<where>
+		not exists(select 1 from s_attachment sam
+				   where (sam.TABLEID = 'CrdCaseInfo' or sam.TABLEID = 'CrdCaseConsulting')
+				   and sam.RECORDRID = cci.RID and cpa.ATTACHMENTTYPE = sam.ARCHIVETYPE)
+		<if test="whereCondition!=null and whereCondition!='' ">   
+         ${whereCondition} 
+		</if>			
+	</where>
+	<if test="order!=null and order!='' ">   
+         order by ${order}
+	</if>				
+</select>
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM
+	from CRD_PRODUCT_ATT cpa
+	left outer join CRD_CASEPRODUCT ccp
+		on ccp.PRODUCTCODE = cpa.PRODUCTCODE and ccp.RECORDSTATE = '0'
+	left outer join CRD_CASEINFO cci
+		on cci.CASECODE = ccp.CASECODE and cci.RECORDSTATE = '0'
+	<where>
+		not exists(select 1 from s_attachment sam
+				   where (sam.TABLEID = 'CrdCaseInfo' or sam.TABLEID = 'CrdCaseConsulting')
+				   and sam.RECORDRID = cci.RID and cpa.ATTACHMENTTYPE = sam.ARCHIVETYPE)
+		<if test="whereCondition!=null and whereCondition!='' ">   
+         ${whereCondition} 
+		</if>	
+	</where>
+</select> 
+</mapper>

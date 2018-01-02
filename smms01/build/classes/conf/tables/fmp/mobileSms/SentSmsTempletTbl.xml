@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SentSmsTemplet" desc="短信模板" tblName="S_SMSTEMPLET" pageSize="10" uniteTableModelId="" listURL="/fmp/FrameCommonBiz/DoList?tableModelId=SentSmsTemplet" sqlMapNamespace="SSmsTemplet">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="SMSTEMPCODE" colName="SMSTEMPCODE" desc="模板名称" dataType="VARCHAR2" length="20"  required="F" isSearch="T" create="LVAU" fuzzy="T" webType="pop" webTypeExt="openMulPop('SSmsTemplet','',getSmsTempletMessage)" dblClick="viewSmsTempBySmsTempCode($(this).attr('truevalue'));" />
+		<TableField id="SMSTEMPNAME" colName="SMSTEMPNAME" desc="模板名称" dataType="VARCHAR2" length="30"  required="T" isSearch="T" isEncrypted="F" create="LVAU" hidden="LVAU" fuzzy="T"/>
+		<TableField id="TEMPPARAMSQLID" colName="TEMPPARAMSQLID" desc="模板参数SQL" dataType="VARCHAR" length="100"  listGroupName="" colSpan="2" webType="textarea" webTypeExt="" create="LVUA" hidden="LVAU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="TELEPHONE" colName="TELEPHONE" desc="手机号码1" dataType="VARCHAR2" length="20"  colSpan="2" required="" isSearch="F" create="LVAU"  webType="pop" webTypeExt="openTelePhonePop()"  />
+		<TableField id="TELEPHONE2" colName="TELEPHONE2" desc="手机号码2" dataType="VARCHAR2" length="100"  colSpan="2" required="F" isSearch="F" create="LVAU"  webType="textarea" />
+		<TableField id="MSGTEMP" colName="MSGTEMP" desc="短信内容" dataType="VARCHAR" length="250"  listGroupName="" colSpan="2" webType="textarea" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="WARMPROMPT" colName="WARMPROMPT" desc="温馨提示" dataType="VARCHAR2" length="100"  required="F" isSearch="F" create="LVAU" readOnly="AU" colSpan="2" webType="hyperlink" defValue="移动和联通的短信长度都是500个中文字符，如果您的内容超过了此长度，一条短信分拆成两条或两条以上的短信来发送"/>						
+		<TableField id="FIRESCENE" colName="FIRESCENE" desc="触发场景" dataType="VARCHAR" length="4"  listGroupName="" dicType="S_CFCJ" webType="select" webTypeExt="" create="LVUA" hidden="LVAU" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="FIREBASETIME" colName="FIREBASETIME" desc="触发基础时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="date" create="LVUA" hidden="LVAU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="FIREPERIOD" colName="FIREPERIOD" desc="触发周期" dataType="VARCHAR" length="2"  listGroupName="" dicType="S_CFZQ" webType="select" webTypeExt="" create="LVUA" hidden="LVAU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="VUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="date" create="LVUA" hidden="VUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="date" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  listGroupName="" webType="select" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

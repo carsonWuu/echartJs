@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+ 
+    <package name="fmp.SDept" namespace="/fmp/SDeptBiz" extends="fmp.FrameCommonBiz">   
+ 
+         
+        <action  name="SDeptAdd" class="com.zstar.fmp.system.org.action.AddSDeptAction">
+            <result name="success">/WEB-INF/jsp/fmp/system/org/SDeptAdd.jsp</result>
+        </action> 
+        
+        <action  name="SDeptView" class="com.zstar.fmp.system.org.action.ViewSDeptAction">
+            <result name="success">/WEB-INF/jsp/fmp/system/org/SDeptView.jsp</result>
+        </action>
+           
+        <action  name="CheckInfo" class="com.zstar.fmp.system.org.action.CheckSDeptVOAction"/>
+        
+        <action  name="SDeptFliterList" class="com.zstar.fmp.system.org.action.SDeptFliterListSDeptAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/CommonList.jsp</result>
+        </action> 
+        
+        <action  name="SetState" class="com.zstar.fmp.system.org.action.SetStateAction">
+        </action>
+        
+        <!--新增部门时，获取所属机构的所属地区 -->
+        <action  name="getDistNoMsg" class="com.zstar.fmp.system.org.action.GetDistNoMsgAction">
+        </action>
+           
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.fmp.system.module.action.{1}SModuleAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+            <param name="tableModelId">SDept</param>
+        </action>    
+        
+		<!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.fmp.system.org.action.SaveSDeptAction">
+        </action>   
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.fmp.system.org.action.DeleteSDeptAction">
+        </action>                         
+    </package>    
+</struts>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SmmsRoomIprange" desc="IDC机房网段信息" recordNum="T" tblName="SMMS_ROOM_IPRANGE" pageSize="10" uniteTableModelId="" listURL="/SMMS/SmmsRoomIprangeBiz/DoList?tableModelId=SmmsRoomIprange" sqlMapNamespace="SmmsRoomIprange">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		
+		<TableField id="BEGIN_IP" colName="BEGIN_IP" desc="起始IP" dataType="VARCHAR2" length="15" cssClass="" listGroupName="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="END_IP" colName="END_IP" desc="结束IP" dataType="VARCHAR2" length="15" cssClass="" listGroupName="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		
+		
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="ACCESS_ID" colName="ACCESS_ID" desc="接入商识别码" dataType="VARCHAR" length="10" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="ROOM_IDX" colName="ROOM_IDX" desc="机房序号" dataType="VARCHAR" length="3" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

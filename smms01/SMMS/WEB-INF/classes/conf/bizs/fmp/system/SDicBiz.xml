@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="fmp.SDicBiz" namespace="/fmp/SDicBiz" extends="fmp.FrameCommonBiz">        
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.fmp.system.dic.action.{1}SDicAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+        </action>    
+        
+		<!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.fmp.system.dic.action.SaveSDicAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>   
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.fmp.system.dic.action.DeleteSDicAction">
+
+        </action>    
+        
+ 		<!--根据字典类型获取逗号分割的字典数据-->
+        <action  name="GetDicDataByType" class="com.zstar.fmp.system.dic.action.GetDicByTypeAction">
+        </action>   
+ 	
+        <action  name="GetDicTypeDesc" class="com.zstar.fmp.system.dic.action.GetDicTypeDescAction">
+        </action>
+                                    
+    </package>
+</struts>
+ 

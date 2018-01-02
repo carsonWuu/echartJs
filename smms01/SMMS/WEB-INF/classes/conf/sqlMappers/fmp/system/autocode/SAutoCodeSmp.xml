@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SAutoCode"> 
+<sql id="listColumns">
+	
+  RID,
+  CODETYPE,
+  CODEDESC,
+  CODERULE,
+  CURRNUM,
+  NUMLENGTH,
+  ORGID,
+  NUMRESETRULE,
+  NUMRESETVALUE,
+  RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+  RID,
+  CODETYPE,
+  CODEDESC,
+  CODERULE,
+  CURRNUM,
+  NUMLENGTH,
+  ORGID,
+  NUMRESETRULE,
+  NUMRESETVALUE,
+  RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+
+	select sorg.ORGANSHORTFORM as TRANS_ORGID, sac.* from S_AUTOCODE sac
+	left outer join S_ORG sorg
+	on sac.ORGID = sorg.ORGID
+	<where>
+		sac.RECORDSTATE='0'  
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from S_AUTOCODE sac 
+	<where>
+		sac.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_AUTOCODE where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+    select sorg.ORGANSHORTFORM as TRANS_ORGID, sac.* from S_AUTOCODE sac
+	left outer join S_ORG sorg
+	on sac.ORGID = sorg.ORGID
+	where  sac.RID = #{RID}  
+</select> 
+
+<select id="autoCodeSelectedlist_ByCODETYPE" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from S_AUTOCODE where CODETYPE = #{CODETYPE} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_AUTOCODE set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+    select sorg.ORGANSHORTFORM as TRANS_ORGID, sac.* from S_AUTOCODE sac
+	left outer join S_ORG sorg
+	on sac.ORGID = sorg.ORGID
+	where  sac.RID = #{RID}  	
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_AUTOCODE(
+  RID,
+  CODETYPE,
+  CODEDESC,
+  CODERULE,
+  CURRNUM,
+  NUMLENGTH,
+  ORGID,
+  NUMRESETRULE,
+  NUMRESETVALUE,
+  RECORDSTATE)
+	   values (
+  #{RID},
+  #{CODETYPE},
+  #{CODEDESC},
+  #{CODERULE},
+  #{CURRNUM},
+  #{NUMLENGTH},
+  #{ORGID},
+  #{NUMRESETRULE},
+  #{NUMRESETVALUE},
+  #{RECORDSTATE})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_AUTOCODE  set 
+  RID=#{RID},
+  CODETYPE=#{CODETYPE},
+  CODEDESC=#{CODEDESC},
+  CODERULE=#{CODERULE},
+  CURRNUM=#{CURRNUM},
+  NUMLENGTH=#{NUMLENGTH},
+  ORGID=#{ORGID},
+  RECORDSTATE=#{RECORDSTATE},
+   NUMRESETRULE=#{NUMRESETRULE},
+    NUMRESETVALUE=#{NUMRESETVALUE}
+	where RID=#{RID}
+</update> 
+
+<select id="getCodeRule" parameterType="hashmap" resultType="hashmap"> 
+	   select * from S_AUTOCODE 
+	   where RECORDSTATE ='0' and CODETYPE = #{CODETYPE} and (ORGID ='[ALL]' or ORGID =#{ORGID})
+</select>
+
+<select id="isOnly" parameterType="hashmap" resultType="hashmap"> 
+	   select * from S_AUTOCODE where CODETYPE = #{CODETYPE} and ORGID =#{ORGID}
+</select>
+
+
+<select id="selectOrgIdByCodeType" parameterType="hashmap" resultType="hashmap"> 
+	  select org.ORGID from S_ORG org where not exists 
+      (select atc.ORGID from s_autocode atc where atc.ORGID = org.ORGID and atc.CODETYPE=#{CODETYPE})
+</select>
+
+<!-- 根据编码类型删除已经删除的机构所对应的自动编码 -->
+<delete id="deleteAutoCodeData" parameterType="hashmap"> 
+	  delete from S_AUTOCODE
+	  where CODETYPE = #{CODETYPE} and not exists 
+      	(select 1 from S_ORG where S_ORG.ORGID = S_AUTOCODE.ORGID)
+</delete>
+
+<!-- 根据编码类型和机构的记录状态为‘1’更新所对应的自动编码的记录状态为‘1’ -->
+<update id="updateAutoCodeData" parameterType="hashmap" > 
+	update S_AUTOCODE atc
+	set atc.RECORDSTATE = '1'
+	where atc.CODETYPE = #{CODETYPE} and exists 
+      (select org.ORGID from S_ORG org where atc.ORGID = org.ORGID and org.RECORDSTATE = '1')
+</update> 
+
+<!-- 获取自动编码表的所有编码类型 -->
+<select id="selectAllCodeType" parameterType="hashmap" resultType="hashmap"> 
+	  select CODETYPE from S_AUTOCODE
+	  where ORGID != '[ALL]'
+	  group by CODETYPE
+</select>
+
+<!-- 根据编码类型获取自动编码数据-->
+<select id="selectCodeTypeAllRid" parameterType="hashmap" resultType="hashmap"> 
+	  select * from S_AUTOCODE
+	  where ORGID != '[ALL]' and CODETYPE = #{CODETYPE}
+</select>
+   
+<update id="getCodeUpdate" parameterType="hashmap" > 
+	update S_AUTOCODE <set> 
+             <if test="CURRNUM!=null"> CURRNUM=#{CURRNUM},</if>
+	         <if test="NUMRESETVALUE!=null">  NUMRESETVALUE=#{NUMRESETVALUE},</if>
+	</set>
+	where CODETYPE = #{CODETYPE} and (ORGID = '[ALL]' or ORGID =#{ORGID}) and RECORDSTATE='0' and CURRNUM=#{CURRNUM} -1  
+</update> 
+
+
+</mapper>

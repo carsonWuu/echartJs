@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SOperationLog"> 
+<sql id="sOperationLogColumns">RID,OPERATIONTYPE,TABLEMODELID,TABLENAME,RECORDRID,OPERATIONDESC,OPERATIONTIME,USERID,USERNNAME,ORGID,DEPTID</sql> 
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select sorg.ORGANSHORTFORM as TRANS_ORGID, sol.* from S_OPERATIONLOG sol
+	left outer join S_ORG sorg
+	on sorg.ORGID =sol.ORGID
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select>
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from S_OPERATIONLOG sol
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+</select> 
+
+
+<select id="getOperationLogById" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_OPERATIONLOG where RID = #{RID} 
+</select> 
+
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_OPERATIONLOG where RID = #{RID}
+</delete> 
+
+<delete id="deleteUpdate" parameterType="hashmap" > 
+	delete from S_OPERATIONLOG where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select sorg.ORGANSHORTFORM as TRANS_ORGID, sol.* from S_OPERATIONLOG sol
+	left outer join S_ORG sorg
+	on sorg.ORGID =sol.ORGID
+     where sol.RID = #{RID}  
+</select>
+ 
+<select id="viewDetailCondition" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_OPERATIONLOG sol
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+</select> 
+
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+	select sorg.ORGANSHORTFORM as TRANS_ORGID, sol.* from S_OPERATIONLOG sol
+	left outer join S_ORG sorg
+	on sorg.ORGID =sol.ORGID
+	 where sol.RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" > 
+	insert into S_OPERATIONLOG (
+    	 RID
+	    ,OPERATIONTYPE
+	    ,TABLEMODELID
+	    ,TABLENAME
+	    ,RECORDRID
+	    ,OPERATIONDESC
+	    ,OPERATIONTIME
+	    ,USERID
+	    ,USERNNAME
+	    ,ORGID
+	    ,DEPTID
+    )
+    values(
+         #{RID}
+	    ,#{OPERATIONTYPE}
+	    ,#{TABLEMODELID}
+	    ,#{TABLENAME}
+	    ,#{RECORDRID}
+	    ,#{OPERATIONDESC}
+	    ,#{OPERATIONTIME}
+	    ,#{USERID}
+	    ,#{USERNNAME}
+	    ,#{ORGID}
+	    ,#{DEPTID}
+    )
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+   	update S_OPERATIONLOG  <set>
+    	<if test="OPERATIONTYPE != null ">OPERATIONTYPE = #{OPERATIONTYPE},</if>    
+    	<if test="TABLEMODELID != null ">TABLEMODELID = #{TABLEMODELID},</if>         
+    	<if test="TABLENAME != null ">TABLENAME = #{TABLENAME},</if>   
+    	<if test="RECORDRID != null ">RECORDRID = #{RECORDRID},</if>   
+    	<if test="OPERATIONDESC != null ">OPERATIONDESC = #{OPERATIONDESC},</if>   
+    	<if test="OPERATIONTime != null ">OPERATIONTIME = #{OPERATIONTIME},</if>   
+    	<if test="USERID != null ">USERID = #{USERID},</if>   
+    	<if test="USERNNAME != null ">USERNNAME = #{USERNNAME},</if>
+    	<if test="DEPTID != null ">DEPTID = #{DEPTID},</if>   
+   	</set>
+  where RID =#{RID}
+</update> 
+
+
+</mapper>

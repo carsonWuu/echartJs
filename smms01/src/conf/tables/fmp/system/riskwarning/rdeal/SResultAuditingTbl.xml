@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SResultAuditing" desc="风险审核"  tblName="S_ResultAuditing" pageSize="10"  listURL="/fmp/FrameCommonBiz/DoList?tableModelId=SResultAuditing" sqlMapNamespace="SRiskDeal">
+	<Fields>
+		<TableField id="MSGID" colName="MSGID" desc="消息编号" dataType="VARCHAR" length="20"  webType="text" webTypeExt="" autoCode="CRD_XXBM" readOnly="LVUA" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" tableAlias="mfb"/>
+		<TableField id="SCHEMEID" colName="SCHEMEID" desc="方案编号" dataType="VARCHAR" length="10"  webType="text" webTypeExt="" create="LVUA" readOnly="LVUA" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="T" isPK="F" tableAlias="mfb"/>		
+		<TableField id="MSGSTATE" colName="MSGSTATE" desc="消息状态" dataType="CHAR" length="1"  dicType="S_XXZT" webType="select" webTypeExt="" create="LVUA" hidden="LVUA" readOnly="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="rw"/>
+	    <TableField id="MSGCONTENT" colName="MSGCONTENT" desc="消息内容" dataType="VARCHAR" length="250"  webType="textarea" webTypeExt="" colSpan="2" readOnly="LVUA" create="LVUA" hidden="VUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" tableAlias="rw"/>
+		<TableField id="RWLEVEL" colName="RWLEVEL" desc="风险级别" dataType="CHAR" length="1"  dicType="S_FXJB" webType="select" webTypeExt="" create="LVUA" readOnly="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" tableAlias="rw"/>
+		<TableField id="RWBIZTYPE" colName="RWBIZTYPE" desc="预警业务类型" dataType="VARCHAR" length="3"  dicType="S_YJYWLX" webType="select" webTypeExt="" readOnly="LVUA" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="rw"/>
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" readOnly="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" tableAlias="mfb"/>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" readOnly="LVUA" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="T"  tableAlias="mfb"/>
+		
+		<TableField id="RESULTDESC" colName="RESULTDESC" desc="风险处理说明" dataType="VARCHAR2" length="255"  webType="textarea" webTypeExt="" colSpan="2" create="LVUA" readOnly="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="mfb"/>
+		<TableField id="RESULTTYPE" colName="RESULTTYPE" desc="风险处理结果" dataType="CHAR" length="2"  dicType="S_FXCLJG" webType="select" webTypeExt="" create="LVUA" readOnly="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="mfb"/>
+		<TableField id="OWNER" colName="OWNER" desc="风险处理人" dataType="VARCHAR" length="10"  webType="pop" webTypeExt="" create="LVUA" readOnly="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="mfb"/>
+		<TableField id="SPI_MIND" colName="SPI_MIND" desc="审核人意见" dataType="VARCHAR2" length="255"  webType="textarea" webTypeExt="" colSpan="2" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="mfb"/>
+		<TableField id="SUPERINTENDRESULT" colName="SUPERINTENDRESULT" desc="风险审核结果" dataType="CHAR" length="2"  dicType="S_FXSHJG" webType="select" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" tableAlias="mfb"/>			
+		<TableField id="SUPERINTEND" colName="SUPERINTEND" desc="审核人" dataType="VARCHAR" length="10"  webType="pop" webTypeExt=""  create="LVUA" groupEnd="F" hidden="A" readOnly="LVUA" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="mfb"/>
+			
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

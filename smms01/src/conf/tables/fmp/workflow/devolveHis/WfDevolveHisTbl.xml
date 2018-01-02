@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="WfDevolveHis" desc="流程转办" tblName="WF_DEVOLVEHIS" pageSize="10" uniteTableModelId="" listURL="" sqlMapNamespace="WfDevolveHis">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="FLOWINSTANCEID" colName="FLOWINSTANCEID" desc="流程实例ID" dataType="VARCHAR" length="20"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="FLOWTEMPNAME" colName="FLOWTEMPNAME" desc="流程名称" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F"  readOnly="A"  isSearch="T" fuzzy="T" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="BIZDESC" colName="BIZDESC" desc="业务描述" dataType="VARCHAR" length="200"  listGroupName="" webType="textarea" webTypeExt="" colSpan="2" create="LVUA" readOnly="A" hidden="LAU" groupEnd="F" isSearch="F" fuzzy="T" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="FLOWSTARTER" colName="FLOWSTARTER" desc="创建人" dataType="VARCHAR" length="10"  webType="text" webTypeExt="" create="LVUA" defValue ="" readOnly="A" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+	    <TableField id="FLOWCREATTIME" colName="FLOWCREATTIME" desc="创建时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="date" create="LVUA" groupEnd="F"   readOnly="A" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="NODEID" colName="NODEID" desc="流程节点ID" dataType="VARCHAR" length="20"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="NODENAME" colName="NODENAME" desc="当前节点" dataType="VARCHAR" length="30"  listGroupName="" webType="text" webTypeExt="" create="LVUA" readOnly="A" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="NODECREATTIME" colName="NODECREATTIME" desc="开始时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="date" create="LVUA" groupEnd="F"   readOnly="A" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="DEVOLVEMAN" colName="DEVOLVEMAN" desc="转办人" dataType="VARCHAR" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="A" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F" />
+		<TableField id="ASSIGNEE" colName="ASSIGNEE" desc="受托人" dataType="VARCHAR" length="10"  listGroupName="" webType="pop" webTypeExt="openUserPop()" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="DEVOLVETIME" colName="DEVOLVETIME" desc="转办时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="date" create="LVUA" groupEnd="F" hidden="A"  isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="DEVOLVEREMARK" colName="DEVOLVEREMARK" desc="转办留言" dataType="VARCHAR" length="200"   colSpan="2" listGroupName="" webType="textarea" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+        <TableField id="BIZRID" colName="BIZRID" desc="业务记录主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="TBLID" colName="TBLID" desc="表模型ID" dataType="VARCHAR" length="30"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="BIZTYPEID" colName="BIZTYPEID" desc="审批业务类型ID" dataType="VARCHAR" length="3"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>		
+        <TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text"  tableAlias="user1" />
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text" tableAlias="user1" />
+		<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text" webTypeExt="time" />
+		<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text"  />
+		<TableField id="LIABMAN" colName="LIABMAN" desc="责任人" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text" />
+		<TableField id="LIABDEPT" colName="LIABDEPT" desc="责任部门" dataType="VARCHAR2" length="20"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text"/>
+		<TableField id="LIABORG" colName="LIABORG" desc="责任机构" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="VLAU"  webType="text"  />
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  required="F" isSearch="F" create="VU" hidden="VLAU"  webType="text" />
+			
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

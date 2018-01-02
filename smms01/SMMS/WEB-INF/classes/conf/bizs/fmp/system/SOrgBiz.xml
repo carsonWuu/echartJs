@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="fmp.SOrg" namespace="/fmp/SOrgBiz" extends="fmp.FrameCommonBiz">
+        <action  name="GetOrgTreeXML" class="com.zstar.fmp.system.org.action.GetOrgTreeXMLAction">
+            <result name="success">/WEB-INF/jsp/fmp/system/org/orgTreeList.jsp</result>
+        </action>  
+        
+        <action  name="OpenOrgTree">
+        	    <result name="success">/WEB-INF/jsp/fmp/system/org/OrgTreeFrameset.jsp</result>
+        </action> 
+       
+        <action  name="CurrentOrgTree">
+        	    <result name="success">/WEB-INF/jsp/fmp/system/org/CurrentUserOrgTreeFrameset.jsp</result>
+        </action> 
+        
+        <action  name="CurrentOrgTreeXML" class="com.zstar.fmp.system.org.action.GetCurrentUserOrgTreeXMLAction">
+               <result name="success">/WEB-INF/jsp/fmp/system/org/CurrentUserOrgTreeList.jsp</result>
+        </action> 
+         
+        <action  name="CurrentOrgTreeView" class="com.zstar.fmp.system.org.action.ViewSOrgAction">
+        	    <result name="success">/WEB-INF/jsp/fmp/system/org/CurrentUserOrgView.jsp</result>
+        </action> 
+        
+        <action  name="TreeOrgAdd" class="com.zstar.fmp.system.org.action.AddSOrgAction">
+            <result name="success">/WEB-INF/jsp/fmp/system/org/OrgAdd.jsp</result>
+        </action> 
+        
+        <action  name="TreeOrgView" class="com.zstar.fmp.system.org.action.ViewSOrgAction">
+            <result name="success">/WEB-INF/jsp/fmp/system/org/OrgView.jsp</result>
+        </action> 
+        <!--in the action class will pointer the return message to id which is msg in the struts.xml -->
+        <action  name="CheckInfo" class="com.zstar.fmp.system.org.action.CheckOrgVOAction">
+        </action> 
+        
+        <action  name="SOrgFliterList" class="com.zstar.fmp.system.org.action.SOrgFliterListSOrgAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/CommonList.jsp</result>
+        </action>
+        
+        <!--验证机构码是否唯一-->
+        <action  name="isExistOrgId" class="com.zstar.fmp.system.org.action.ValidateOrgIdAction" > 
+        </action>
+        
+        <action  name="SetState" class="com.zstar.fmp.system.org.action.SetStateAction">
+        </action>
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.fmp.system.org.action.{1}SOrgAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+            <param name="tableModelId">SOrg</param>
+        </action>    
+        
+		<!--新增和修改的保存操作-->
+        <action  name="*Save" class="com.zstar.fmp.system.org.action.SaveSOrgAction">
+        </action>      
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.fmp.system.org.action.DeleteSOrgAction">
+        </action>                         
+    </package>    
+</struts>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsRptRecord"> 
+<sql id="listColumns">
+	
+            rtr.RID,
+            rtr.IDC_ID,
+            rtr.ROOM_IDX,
+            rtr.LOG_FLAG,
+            rtr.STAT_YEAR,
+            rtr.STAT_MONTH,
+            rtr.STAT_DATE,
+            rtr.LOG_COUNT,
+            rtr.MODIFIEDTIME,
+            rtr.RECORDSTATE,
+            ssr.ROOM_NAME
+            sii.IDC_NAME
+</sql>
+<sql id="detailColumns">
+	
+            rtr.RID,
+            rtr.IDC_ID,
+            rtr.ROOM_IDX,
+            rtr.LOG_FLAG,
+            rtr.STAT_YEAR,
+            rtr.STAT_MONTH,
+            rtr.STAT_DATE,
+            rtr.LOG_COUNT,
+            rtr.MODIFIEDTIME,
+            rtr.RECORDSTATE,
+            ssr.ROOM_NAME
+            sii.IDC_NAME
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+		select rtr.RID,
+	            rtr.IDC_ID,
+	            rtr.ROOM_IDX,
+	            rtr.LOG_FLAG,
+	            rtr.STAT_YEAR,
+	            rtr.STAT_MONTH,
+	            rtr.STAT_DATE,
+	            SUM(rtr.LOG_COUNT) as LOG_COUNT,
+	            rtr.MODIFIEDTIME,
+	            rtr.RECORDSTATE,
+	    sii.IDC_NAME as TRANS_IDC_ID,ssr.ROOM_NAME as TRANS_ROOM_IDX
+		from SMMS_RPT_RECORD rtr
+	    left join SMMS_ROOM_INFO as ssr
+	    on rtr.ROOM_IDX = ssr.ROOM_IDX and  rtr.IDC_ID = ssr.ACCESS_ID
+	    left join smms_idc_info as sii
+	    on rtr.IDC_ID = sii.IDC_ID
+		<where>
+			rtr.RECORDSTATE='0'
+			
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	   </where>
+        <if test="groupFlg=='day' ">   
+             GROUP BY rtr.STAT_DATE,rtr.IDC_ID,rtr.ROOM_IDX
+        </if>		   
+        <if test="groupFlg=='month' ">   
+             GROUP BY rtr.STAT_YEAR,rtr.STAT_MONTH,rtr.IDC_ID,rtr.ROOM_IDX
+        </if>		   
+        <if test="groupFlg=='year' ">   
+             GROUP BY rtr.STAT_YEAR,rtr.IDC_ID,rtr.ROOM_IDX
+        </if>			   
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from 
+	 (select count(*) NUM  from SMMS_RPT_RECORD rtr
+	    left join SMMS_ROOM_INFO as ssr
+	    on rtr.ROOM_IDX = ssr.ROOM_IDX and  rtr.IDC_ID = ssr.ACCESS_ID
+	    left join smms_idc_info as sii
+	    on rtr.IDC_ID = sii.IDC_ID
+	<where>
+		rtr.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+	<if test="groupFlg=='day' ">   
+             GROUP BY rtr.STAT_DATE,rtr.IDC_ID,rtr.ROOM_IDX
+    </if>		   
+        <if test="groupFlg=='month' ">   
+             GROUP BY rtr.STAT_YEAR,rtr.STAT_MONTH,rtr.IDC_ID,rtr.ROOM_IDX
+        </if>		   
+        <if test="groupFlg=='year' ">   
+             GROUP BY rtr.STAT_YEAR,rtr.IDC_ID,rtr.ROOM_IDX
+        </if> )sss	
+</select> 
+<select id="selectExist" parameterType="hashmap" resultType="hashmap"> 
+	select LOG_COUNT from smms_rpt_record
+		 where IDC_ID=#{ACCESS_ID} 
+		 	and ROOM_IDX=#{ROOM_IDX} 
+		 	and LOG_FLAG=#{LOG_FLAG}
+		 	and STAT_YEAR=#{STAT_YEAR}
+	        and STAT_MONTH=#{STAT_MONTH}
+	        and	STAT_DATE=#{STAT_DATE}	
+</select> 
+
+<update id="updatLogCount" parameterType="hashmap" > 
+	update SMMS_RPT_RECORD set LOG_COUNT=#{LOG_COUNT},MODIFIEDTIME=#{MODIFIEDTIME}
+    where IDC_ID=#{ACCESS_ID} 
+    and ROOM_IDX=#{ROOM_IDX} 
+    and LOG_FLAG=#{LOG_FLAG} 
+    and STAT_YEAR=#{STAT_YEAR}
+	and STAT_MONTH=#{STAT_MONTH}
+	and	STAT_DATE=#{STAT_DATE}
+</update> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_RPT_RECORD rtr where rtr.RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from SMMS_RPT_RECORD rtr where rtr.RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_RPT_RECORD rtr set RECORDSTATE=#{RECORDSTATE} where rtr.RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_RPT_RECORD rtr where rtr.RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_RPT_RECORD (
+            
+            <if test="ACCESS_ID != null ">IDC_ID,</if>
+            <if test="ROOM_IDX != null ">ROOM_IDX,</if>
+            <if test="LOG_FLAG != null ">LOG_FLAG,</if>
+            <if test="STAT_YEAR != null ">STAT_YEAR,</if>
+            <if test="STAT_MONTH != null ">STAT_MONTH,</if>
+            <if test="STAT_DATE != null ">STAT_DATE,</if>
+            <if test="LOG_COUNT != null ">LOG_COUNT,</if>
+            <if test="MODIFIEDTIME != null ">MODIFIEDTIME,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE,</if>
+            <if test="RID != null ">RID</if>)
+	   values ( 
+           <if test="ACCESS_ID != null ">#{ACCESS_ID},</if>
+           <if test="ROOM_IDX != null ">#{ROOM_IDX},</if>
+           <if test="LOG_FLAG != null ">#{LOG_FLAG},</if>
+           <if test="STAT_YEAR != null ">#{STAT_YEAR},</if>
+           <if test="STAT_MONTH != null ">#{STAT_MONTH},</if>
+           <if test="STAT_DATE != null ">#{STAT_DATE},</if>
+           <if test="LOG_COUNT != null ">#{LOG_COUNT},</if>
+           <if test="MODIFIEDTIME != null ">#{MODIFIEDTIME},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE},</if>
+           <if test="RID != null ">#{RID}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_RPT_RECORD 
+		<set>
+				    <if test="RID!=null"> RID=#{RID},</if> 
+		    <if test="IDC_ID!=null"> IDC_ID=#{IDC_ID},</if> 
+		    <if test="ROOM_IDX!=null"> ROOM_IDX=#{ROOM_IDX},</if> 
+		    <if test="LOG_FLAG!=null"> LOG_FLAG=#{LOG_FLAG},</if> 
+		    <if test="STAT_YEAR!=null"> STAT_YEAR=#{STAT_YEAR},</if> 
+		    <if test="STAT_MONTH!=null"> STAT_MONTH=#{STAT_MONTH},</if> 
+		    <if test="STAT_DATE!=null"> STAT_DATE=#{STAT_DATE},</if> 
+		    <if test="LOG_COUNT!=null"> LOG_COUNT=#{LOG_COUNT},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SPost" desc="职位" tblName="S_POST" pageSize="20" listURL="" sqlMapNamespace="SPost" >
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T" tableAlias="post"/>
+		<TableField id="POSTID" colName="POSTID" desc="职位码" dataType="VARCHAR" length="10"  webType="text" webTypeExt="" create="LVUA" hidden="A" readOnly="U" autoCode="S_POST" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="T" isPK="F" tableAlias="post"/>
+		<TableField id="POSTNAME" colName="POSTNAME" desc="职位名称" dataType="VARCHAR2" length="40"  webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="T" fuzzy="T" orderInList="F" required="T" isPK="F" tableAlias="post"/>
+		<TableField id="POSTDESC" colName="POSTDESC" desc="职位描述" dataType="VARCHAR2" length="100"  webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="post"/>
+		<TableField id="ORGID" colName="ORGID" desc="所属机构" dataType="VARCHAR" length="10"  required="T" isSearch="T" create="LAVU" defValue=""  webType="pop" webTypeExt="openSinOrgPop('SOrg','ORGID','ORGID','ORGNAME')" dblClick="viewSOrgByOrgId($(this).attr('truevalue'));"  tableAlias="post"/>
+		
+		<TableField id="ORDERNO" colName="ORDERNO" desc="排序字段" dataType="INTEGER" length="10"  webType="text" webTypeExt="number" create="LVUA" hidden="L" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="post"/>
+		<TableField id="MEMO" colName="MEMO" desc="备注" dataType="VARCHAR2" length="60"  webType="textarea" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="post"/>
+		<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR" length="10"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="post"/>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="post"/>
+		<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR" length="10"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="post"/>
+		<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20"  create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="post"/>
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="post"/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

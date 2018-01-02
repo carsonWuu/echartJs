@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://smms.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://smms.com" xmlns:intf="http://smms.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://smms.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="wscall">
+    <complexType>
+     <sequence>
+      <element name="tokenid" type="xsd:string"/>
+      <element name="rpc_code" type="xsd:string"/>
+      <element name="rpc_json" type="xsd:string"/>
+      <element name="rpc_byte" type="xsd:base64Binary"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="wscallResponse">
+    <complexType>
+     <sequence>
+      <element name="wscallReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="wscallResponse">
+
+      <wsdl:part element="impl:wscallResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="wscallRequest">
+
+      <wsdl:part element="impl:wscall" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WsRpci">
+
+      <wsdl:operation name="wscall">
+
+         <wsdl:input message="impl:wscallRequest" name="wscallRequest"/>
+
+         <wsdl:output message="impl:wscallResponse" name="wscallResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WsRpciSoapBinding" type="impl:WsRpci">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="wscall">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="wscallRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="wscallResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WsRpciService">
+
+      <wsdl:port binding="impl:WsRpciSoapBinding" name="WsRpci">
+
+         <wsdlsoap:address location="http://localhost:8080/EL_STUDY/services/WsRpci"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

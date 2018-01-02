@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+ 
+    <package name="fmp.BuildRight" namespace="/fmp/BuildRightBiz" extends="default">
+    	   
+		<!--进入生成 权限页面-->
+        <action  name="BuildRight" class="com.zstar.fmp.system.roleright.BuildRight">
+            <result name="success">/WEB-INF/jsp/fmp/system/roleRight/BuildRight.jsp</result>
+        </action>    
+        
+	  
+    </package>    
+</struts>

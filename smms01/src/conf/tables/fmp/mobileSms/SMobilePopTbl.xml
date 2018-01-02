@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<TableModel id="SMobilePop" desc="客户联系电话" tblName="CRD_CUSTBASE" pageSize="10" listURL="/fmp/FrameCommonBiz/DoList?tableModelId=CrdCustBase">
+		<Fields>
+			<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+			<TableField id="CUSTCODE" colName="CUSTCODE" desc="客户编号" dataType="VARCHAR2" length="20"  required="T" isSearch="F" create="LVAU" hidden="LVAU" fuzzy="T" />
+			<TableField id="CUSTNAME" colName="CUSTNAME" desc="客户名称" dataType="VARCHAR2" length="50"  required="T" isSearch="T" isEncrypted="F" create="LVAU"  fuzzy="T" order="DESC" />
+			<TableField id="TELEPHONE" colName="TELEPHONE" desc="电话" dataType="VARCHAR2" length="20"  required="F" isSearch="T" create="LVAU"  webType="text" />
+		</Fields>
+		<SubTableModels>			
+		</SubTableModels>
+	</TableModel>

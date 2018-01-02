@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsWebOpenApp"> 
+<sql id="listColumns">
+	
+            a.RID,
+            a.EVENT_RID,
+            a.ACCESS_ID,
+            a.RECTIFY_MEASURE,
+            a.RECTIFY_RESULT,
+            a.RESTORE_REASON,
+            a.APP_USERID,
+            a.APP_TIME,
+            a.APP_OPINION,
+            a.APP_RESULT,
+            a.ISSUE_STATE,
+            a.SEND_TIME,
+            a.CREATTIME,
+            a.RECORDSTATE,
+            b.IDC_ID,
+            b.IDC_NAME
+</sql>
+<sql id="detailColumns">
+	
+            a.RID,
+            a.EVENT_RID,
+            a.ACCESS_ID,
+            a.RECTIFY_MEASURE,
+            a.RECTIFY_RESULT,
+            a.RESTORE_REASON,
+            a.APP_USERID,
+            a.APP_TIME,
+            a.APP_OPINION,
+            a.APP_RESULT,
+            a.ISSUE_STATE,
+            a.SEND_TIME,
+            a.CREATTIME,
+            a.RECORDSTATE,
+            b.IDC_ID,
+             b.IDC_NAME
+</sql>
+<sql id="relationList">
+            swo_app.EVENT_RID,
+            swo_app.ACCESS_ID,
+            swo_app.RECTIFY_MEASURE,
+            swo_app.RECTIFY_RESULT,
+            swo_app.RESTORE_REASON,
+            swo_app.APP_USERID,
+            swo_app.APP_TIME,
+            swo_app.APP_OPINION,
+            swo_app.APP_RESULT,
+            swo_app.ISSUE_STATE,
+            swo_app.SEND_TIME,
+            swo_app.CREATTIME,
+            swo_app.RECORDSTATE,
+            sii.RID
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/>,b.IDC_NAME as TRANS_IDC_ID from SMMS_WEB_OPEN_APP a LEFT JOIN smms_idc_info b ON a.ACCESS_ID = b.IDC_ID 
+	<where>
+		a.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id ="sendList" parameterType="hashmap" resultType="hashmap">
+SELECT * FROM 
+smms_web_open_app swo_app WHERE swo_app.ISSUE_STATE ='0' AND (APP_RESULT = '1' OR APP_RESULT ='9') 
+order by ACCESS_ID ASC
+</select>
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_WEB_OPEN_APP a LEFT JOIN smms_idc_info b ON a.ACCESS_ID = b.IDC_ID
+	<where>
+		a.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_WEB_OPEN_APP  where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>,b.IDC_NAME as TRANS_IDC_ID  from SMMS_WEB_OPEN_APP  a LEFT JOIN smms_idc_info b ON a.ACCESS_ID = b.IDC_ID  where a.RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_WEB_OPEN_APP  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+<update id="issueStateUpdate" parameterType="hashmap">
+UPDATE smms_web_open_app SET 
+	SEND_TIME =#{SEND_TIME},
+	APP_OPINION =#{APP_OPINION},
+	ISSUE_STATE =#{ISSUE_STATE},
+	APP_RESULT =#{APP_RESULT} 
+WHERE EVENT_RID =#{EVENT_RID}
+</update>
+ <update id="eventUpdate" parameterType="hashmap">
+ 	UPDATE smms_web_open_app SET RECORDSTATE = 1 WHERE EVENT_RID = #{EVENT_RID}
+ </update>	
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_WEB_OPEN_APP  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_WEB_OPEN_APP (
+            <if test="RID != null ">RID,</if>
+            <if test="EVENT_RID != null ">EVENT_RID,</if>
+            <if test="ACCESS_ID != null ">ACCESS_ID,</if>
+            <if test="RECTIFY_MEASURE != null ">RECTIFY_MEASURE,</if>
+            <if test="RECTIFY_RESULT != null ">RECTIFY_RESULT,</if>
+            <if test="RESTORE_REASON != null ">RESTORE_REASON,</if>
+            <if test="APP_USERID != null ">APP_USERID,</if>
+            <if test="APP_TIME != null ">APP_TIME,</if>
+            <if test="APP_OPINION != null ">APP_OPINION,</if>
+            <if test="APP_RESULT != null ">APP_RESULT,</if>
+            <if test="ISSUE_STATE != null ">ISSUE_STATE,</if>
+            <if test="SEND_TIME != null ">SEND_TIME,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="EVENT_RID != null ">#{EVENT_RID},</if>
+           <if test="ACCESS_ID != null ">#{ACCESS_ID},</if>
+           <if test="RECTIFY_MEASURE != null ">#{RECTIFY_MEASURE},</if>
+           <if test="RECTIFY_RESULT != null ">#{RECTIFY_RESULT},</if>
+           <if test="RESTORE_REASON != null ">#{RESTORE_REASON},</if>
+           <if test="APP_USERID != null ">#{APP_USERID},</if>
+           <if test="APP_TIME != null ">#{APP_TIME},</if>
+           <if test="APP_OPINION != null ">#{APP_OPINION},</if>
+           <if test="APP_RESULT != null ">#{APP_RESULT},</if>
+           <if test="ISSUE_STATE != null ">#{ISSUE_STATE},</if>
+           <if test="SEND_TIME != null ">#{SEND_TIME},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_WEB_OPEN_APP   
+		<set>
+				    <if test="EVENT_RID!=null"> EVENT_RID=#{EVENT_RID},</if> 
+		    <if test="ACCESS_ID!=null"> ACCESS_ID=#{ACCESS_ID},</if> 
+		    <if test="RECTIFY_MEASURE!=null"> RECTIFY_MEASURE=#{RECTIFY_MEASURE},</if> 
+		    <if test="RECTIFY_RESULT!=null"> RECTIFY_RESULT=#{RECTIFY_RESULT},</if> 
+		    <if test="RESTORE_REASON!=null"> RESTORE_REASON=#{RESTORE_REASON},</if> 
+		    <if test="APP_USERID!=null"> APP_USERID=#{APP_USERID},</if> 
+		    <if test="APP_TIME!=null"> APP_TIME=#{APP_TIME},</if> 
+		    <if test="APP_OPINION!=null"> APP_OPINION=#{APP_OPINION},</if> 
+		    <if test="APP_RESULT!=null"> APP_RESULT=#{APP_RESULT},</if> 
+		    <if test="ISSUE_STATE!=null"> ISSUE_STATE=#{ISSUE_STATE},</if> 
+		    <if test="SEND_TIME!=null"> SEND_TIME=#{SEND_TIME},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

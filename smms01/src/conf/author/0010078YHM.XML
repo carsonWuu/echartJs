@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<tree id="0"> 
+  <item text="资源管理" id="s_md_zygl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="客户管理" id="crd_md_khgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="客户跟进与投诉管理" id="crd_md_khgjytsgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/resource/cust/cusComplain/CrdCusComplainBiz/DoList?tableModelId=CrdCusComplain&amp;moduleId=crd_md_khgjytsgl</userdata>
+      </item>
+    </item>
+  </item>
+  <item text="项目管理" id="s_md_ajgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="项目进度监控" id="crd_md_ajjdjk" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/credit/caseManage/caseMonitor/CrdCaseMonitorBiz/DoList?tableModelId=CrdCaseMonitor&amp;moduleId=crd_md_ajjdjk</userdata>
+    </item>
+    <item text="项目抵押物信息" id="crd_md_ajdywxx" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="房贷抵押物信息" id="crd_md_fddywxx" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?moduleId=crd_md_fddywxx&amp;tableModelId=CrdGrtHouse</userdata>
+      </item>
+      <item text="车贷抵押物信息" id="crd_md_cddywxx" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?moduleId=crd_md_cddywxx&amp;tableModelId=CrdGrtCar</userdata>
+      </item>
+    </item>
+  </item>
+  <item text="财务管理" id="s_md_cwgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="收款单管理" id="crd_md_skdgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="前端费用收款单" id="crd_md_qdfyskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:1&amp;moduleId=crd_md_qdfyskd</userdata>
+      </item>
+      <item text="前端付款退费收款单 " id="crd_md_qdfktfskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:6&amp;moduleId=crd_md_qdfktfskd</userdata>
+      </item>
+      <item text="前端佣金收款单" id="crd_md_qdyjskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:14&amp;moduleId=crd_md_qdyjskd</userdata>
+      </item>
+      <item text="后端佣金收款单" id="crd_md_hdyjskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:15&amp;moduleId=crd_md_hdyjskd</userdata>
+      </item>
+      <item text="往来佣金收款单" id="crd_md_wlyjskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:16&amp;moduleId=crd_md_wlyjskd</userdata>
+      </item>
+      <item text="前端佣金退费收款单" id="crd_md_qdyjtfskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:17&amp;moduleId=crd_md_qdyjtfskd</userdata>
+      </item>
+      <item text="后端佣金退费收款单" id="crd_md_hdyjtfskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:18&amp;moduleId=crd_md_hdyjtfskd</userdata>
+      </item>
+      <item text="往来佣金退费收款单" id="crd_md_wlyjtfskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:19&amp;moduleId=crd_md_wlyjtfskd</userdata>
+      </item>
+      <item text="银行付费收款单" id="crd_md_yhffskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:26&amp;moduleId=crd_md_yhffskd</userdata>
+      </item>
+      <item text="押金费用收款单" id="crd_md_yjfyskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:29&amp;moduleId=crd_md_yjfyskd</userdata>
+      </item>
+      <item text="快贷资金回款单" id="crd_md_kdzjhkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:34&amp;moduleId=crd_md_kdzjhkd</userdata>
+      </item>
+      <item text="赎楼费用收款单" id="crd_md_dlfyskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:37&amp;moduleId=crd_md_dlfyskd</userdata>
+      </item>
+    </item>
+    <item text="付款单管理" id="crd_md_fkdgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="前端费用付款单" id="crd_md_qdfyfkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:3&amp;moduleId=crd_md_qdfyfkd</userdata>
+      </item>
+      <item text="前端收款退费付款单" id="crd_md_qdsktffkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:5&amp;moduleId=crd_md_qdsktffkd</userdata>
+      </item>
+      <item text="前端佣金付款单" id="crd_md_qdyjfkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:11&amp;moduleId=crd_md_qdyjfkd</userdata>
+      </item>
+      <item text="后端佣金付款单" id="crd_md_hdyjfkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:12&amp;moduleId=crd_md_hdyjfkd</userdata>
+      </item>
+      <item text="往来佣金付款单" id="crd_md_wlyjfkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:13&amp;moduleId=crd_md_wlyjfkd</userdata>
+      </item>
+      <item text="前端佣金收款退费付款单" id="crd_md_qdyjsktffkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:23&amp;moduleId=crd_md_qdyjsktffkd</userdata>
+      </item>
+      <item text="后端佣金收款退费付款单" id="crd_md_hdyjsktffkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:24&amp;moduleId=crd_md_hdyjsktffkd</userdata>
+      </item>
+      <item text="往来佣金收款退费付款单" id="crd_wlyjsktffkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:25&amp;moduleId=crd_wlyjsktffkd</userdata>
+      </item>
+      <item text="银行退费付款单" id="crd_yhtffkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:28&amp;moduleId=crd_yhtffkd</userdata>
+      </item>
+      <item text="押金费用退款单" id="crd_md_yjfytkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:31&amp;moduleId=crd_md_yjfytkd</userdata>
+      </item>
+      <item text="快贷资金付款单" id="crd_md_kdzjfkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:33&amp;moduleId=crd_md_kdzjfkd</userdata>
+      </item>
+      <item text="快贷资金退款付款单" id="crd_md_kdzjtffkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:36&amp;moduleId=crd_md_kdzjtffkd</userdata>
+      </item>
+      <item text="赎楼费用付款单" id="crd_md_dlfyfkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:39&amp;moduleId=crd_md_dlfyfkd</userdata>
+      </item>
+    </item>
+    <item text="收入确认" id="crd_md_srqr" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="收入收费项目" id="crd_md_srsfxm" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/finance/bill/incomeConfirm/FinIncomeConfirmBiz/DoList?keyLimit=KINDID:10&amp;moduleId=crd_md_srsfxm&amp;tableModelId=FinIncomeConfirm</userdata>
+      </item>
+      <item text="收入代收项目" id="crd_md_srdsxm" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/finance/bill/incomeConfirm/FinIncomeConfirmBiz/DoList?keyLimit=KINDID:20&amp;moduleId=crd_md_srdsxm&amp;tableModelId=FinIncomeAgentConfirm</userdata>
+      </item>
+    </item>
+    <item text="成本确认" id="crd_md_cbqr" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinCostConfirm&amp;moduleId=crd_md_cbqr</userdata>
+    </item>
+    <item text="前端费用处理" id="crd_md_qdfycl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="前端费用收款单" id="crd_md_qdfyskd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:1&amp;moduleId=crd_md_qdfyskd_001</userdata>
+      </item>
+      <item text="前端费用付款单" id="crd_md_qdfyfkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:3&amp;moduleId=crd_md_qdfyfkd_001</userdata>
+      </item>
+      <item text="前端付款退费收款单 " id="crd_md_qdfktfskd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:6&amp;moduleId=crd_md_qdfktfskd_001</userdata>
+      </item>
+      <item text="前端收款退费付款单" id="crd_md_qdsktffkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:5&amp;moduleId=crd_md_qdsktffkd_001</userdata>
+      </item>
+      <item text="银行付费收款单" id="crd_md_yhffskd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:26&amp;moduleId=crd_md_yhffskd_001</userdata>
+      </item>
+      <item text="银行退费付款单" id="crd_yhtffkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:28&amp;moduleId=crd_yhtffkd_001</userdata>
+      </item>
+    </item>
+    <item text="押金监管款处理" id="crd_md_yjcl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="费用收款单" id="crd_md_yjfyskd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;FreezeCondition= and (KINDID='29' or KINDID='37') &amp;moduleId=crd_md_yjfyskd_001</userdata>
+      </item>
+      <item text="费用退款单" id="crd_md_yjfytkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;&amp;FreezeCondition= and (KINDID='31' or KINDID='39') &amp;moduleId=crd_md_yjfytkd_001</userdata>
+      </item>
+    </item>
+    <item text="监管款处理" id="crd_md_jgkcl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="赎楼费用收款单" id="crd_md_dlfyskd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:37&amp;moduleId=crd_md_dlfyskd_001</userdata>
+      </item>
+      <item text="赎楼费用付款单" id="crd_md_dlfyfkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:39&amp;moduleId=crd_md_dlfyfkd_001</userdata>
+      </item>
+    </item>
+    <item text="佣金款项处理" id="crd_md_yjkxcl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="支佣确认单管理" id="crd_md_zyqrdgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinCommConfirm&amp;moduleId=crd_md_zyqrdgl</userdata>
+      </item>
+      <item text="前端佣金收款单" id="crd_md_qdyjskd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:14&amp;moduleId=crd_md_qdyjskd_001</userdata>
+      </item>
+      <item text="后端佣金收款单" id="crd_md_hdyjskd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:15&amp;moduleId=crd_md_hdyjskd_001</userdata>
+      </item>
+      <item text="往来佣金收款单" id="crd_md_wlyjskd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:16&amp;moduleId=crd_md_wlyjskd_001</userdata>
+      </item>
+      <item text="前端佣金付款单" id="crd_md_qdyjfkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:11&amp;moduleId=crd_md_qdyjfkd_001</userdata>
+      </item>
+      <item text="后端佣金付款单" id="crd_md_hdyjfkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:12&amp;moduleId=crd_md_hdyjfkd_001</userdata>
+      </item>
+      <item text="往来佣金付款单" id="crd_md_wlyjfkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:13&amp;moduleId=crd_md_wlyjfkd_001</userdata>
+      </item>
+      <item text="前端佣金退费收款单" id="crd_md_qdyjtfskd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:17&amp;moduleId=crd_md_qdyjtfskd_001</userdata>
+      </item>
+      <item text="后端佣金退费收款单" id="crd_md_hdyjtfskd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:18&amp;moduleId=crd_md_hdyjtfskd_001</userdata>
+      </item>
+      <item text="前端佣金收款退费付款单" id="crd_md_qdyjsktffkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:23&amp;moduleId=crd_md_qdyjsktffkd_001</userdata>
+      </item>
+      <item text="后端佣金收款退费付款单" id="crd_md_hdyjsktffkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:24&amp;moduleId=crd_md_hdyjsktffkd_001</userdata>
+      </item>
+      <item text="往来佣金收款退费付款单" id="crd_wlyjsktffkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:25&amp;moduleId=crd_wlyjsktffkd_001</userdata>
+      </item>
+    </item>
+    <item text="资金业务处理" id="crd_md_zjywcl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="快贷资金付款单" id="crd_md_kdzjfkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:33&amp;moduleId=crd_md_kdzjfkd_001</userdata>
+      </item>
+      <item text="快贷资金回款单" id="crd_md_kdzjhkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:34&amp;moduleId=crd_md_kdzjhkd_001</userdata>
+      </item>
+      <item text="快贷资金退款付款单" id="crd_md_kdzjtffkd_001" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:36&amp;moduleId=crd_md_kdzjtffkd_001</userdata>
+      </item>
+    </item>
+  </item>
+  <item text="风控管理" id="s_md_fkgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="客户信用管理" id="crd_md_khxygl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="个人客户信用管理" id="crd_md_grkhxygl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdIndiCustRiskCredit&amp;moduleId=crd_md_grkhxygl</userdata>
+      </item>
+      <item text="公司客户信用管理" id="crd_md_gskhxygl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdCorpCustRiskCredit&amp;moduleId=crd_md_gskhxygl</userdata>
+      </item>
+    </item>
+  </item>
+  <item text="提醒与预警" id="s_md_txyyj" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="消息处理审核" id="s_md_xxclsh" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=SRiskWarnMsg&amp;freezeCondition = and (mfb.RESULTTYPE =10 or mfb.RESULTTYPE=29)and rw.MSGSTATE=0 and rr.READERID='${CURR_USERID}'&amp;moduleId=s_md_xxclsh</userdata>
+    </item>
+  </item>
+</tree>

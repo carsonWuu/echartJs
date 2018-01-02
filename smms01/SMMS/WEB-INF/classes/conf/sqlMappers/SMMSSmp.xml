@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappers>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsRpcLog/SmmsRpcLogSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/IdcInfo/IdcInfoSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsRoomIprange/SmmsRoomIprangeSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsRoomInfo/SmmsRoomInfoSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/WebCase/WebCaseSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsPendingEvent/SmmsPendingEventSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsWebCaseIp/SmmsWebCaseIpSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsWebOpenApp/SmmsWebOpenAppSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/PendingEventForClose/PendingEventForCloseSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/acLog/SmmsCrcMapting/SmmsCrcMaptingSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/acLog/SmmsAcLogin/SmmsAcLoginSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/acLog/SmmsAcUrl/SmmsAcUrlSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/acLog/SmmsAcUrlKey/SmmsAcUrlKeySmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/acLog/SmmsAcBbs/SmmsAcBbsSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/acLog/SmmsAcBbsKey/SmmsAcBbsKeySmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/acLog/SmmsAcMail/SmmsAcMailSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/acLog/SmmsAcMailKey/SmmsAcMailKeySmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/acLog/SmmsAcAppVpn/SmmsAcAppVpnSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/acLog/SmmsAcApp/SmmsAcAppSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsKeyword/SmmsKeywordSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/afLog/SmmsAfLog/SmmsAfLogSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsPendingEvent_GTSXTJ/PendingEvent_GTSXTJSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsPendingEvent_aqsj/PendingEvent_aqsjSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsPendingEvent_vpn/PendingEvent_vpnSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsPendingEvent_keyword/PendingEvent_keySmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsRoomIprange_idcInfo/SmmsRoomIprange_idcSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/STAT/SmmsRptRecord/SmmsRptRecordSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsPendingRzjz/SmmsPending_rzjzSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/afLog/SmmsAfLogTwo/SmmsAfLogTwoSmp.xml"/>
+	<mapper resource="conf/sqlMappers/SMMS/BaseData/SmmsPendingEvent_Wba/SmmsPendingEvent_WbaSmp.xml"/>
+</mappers>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+ 
+    <package name="fmp.system.autocode.SAutoCodeBiz" namespace="/fmp/system/autocode/SAutoCodeBiz" extends="fmp-default">    
+        <!--验证编码规则唯一性-->
+        <action  name="isOnly" class="com.zstar.fmp.system.autocode.action.IsOnlyAutoCodeAction">
+        </action> 
+        
+        <!--添加所有机构自动编码-->
+        <action  name="add_allOrgAutoCode" class="com.zstar.fmp.system.autocode.action.AddAllOrgAutoCodeAction">
+        </action>
+        
+        <!-- 智能维护（机构自动编码）-->
+        <action  name="IntelligentMaintenance" class="com.zstar.fmp.system.autocode.action.IntelligentMaintenanceAction">
+        </action>
+           
+    </package>    
+</struts>

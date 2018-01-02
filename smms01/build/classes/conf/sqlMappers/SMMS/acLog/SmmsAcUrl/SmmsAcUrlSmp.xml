@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsAcUrl"> 
+<sql id="listColumns">
+	
+            ssu.RID,
+            ssu.USERNAME,
+            ssu.GROUPNAME,
+            ssu.IP,
+            ssu.SERV_CRC,
+            ssu.APP_CRC,
+            ssu.LOG_TIME,
+            ssu.HOST,
+            ssu.TITLE,
+            ssu.URL,
+            ssu.CREATTIME,
+            ssu.CONTENTPATH,
+            ssu.RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+            ssu.RID,
+            ssu.USERNAME,
+            ssu.GROUPNAME,
+            ssu.IP,
+            ssu.SERV_CRC,
+            ssu.APP_CRC,
+            ssu.LOG_TIME,
+            ssu.HOST,
+            ssu.TITLE,
+            ssu.URL,
+            ssu.CREATTIME,
+            ssu.CONTENTPATH,
+            ssu.RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+ 
+	select 
+	ssu.Rid as CONTENTPATH,
+	case WHEN 
+		ssu.CONTENTPATH is not null and ssu.CONTENTPATH!='' 
+	then 
+		'详情' 
+	else 
+		'无' 
+	end  as TRANS_CONTENTPATH,	<include refid="listColumns"/>,
+	ssc.CRC_VALUE as TRANS_SERV_CRC, ssm.CRC_VALUE as TRANS_APP_CRC
+         from SMMS_AC_URL as ssu
+		left  JOIN smms_crc_mapting as ssc
+    		on ssu.APP_CRC =ssc.crc_key and (ssc.CRC_TYPE='t' or ssc.CRC_TYPE='a' or ssc.CRC_TYPE='r')
+		left join smms_crc_mapting as ssm
+		on  ssu.SERV_CRC =ssm.crc_key and (ssm.CRC_TYPE='t' or ssm.CRC_TYPE='a' or ssm.CRC_TYPE='r')
+
+	<where>
+		ssu.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_AC_URL as ssu
+	   left  JOIN smms_crc_mapting as ssc
+    		on ssu.APP_CRC =ssc.crc_key and (ssc.CRC_TYPE='t' or ssc.CRC_TYPE='a' or ssc.CRC_TYPE='r')
+		left join smms_crc_mapting as ssm
+		on  ssu.SERV_CRC =ssm.crc_key and (ssm.CRC_TYPE='t' or ssm.CRC_TYPE='a' or ssm.CRC_TYPE='r')
+	<where>
+		ssu.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_AC_URL  where RID = #{RID}
+</delete> 
+<delete id="deleteAll"> 
+	delete from SMMS_AC_URL
+</delete> 
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>,ssc.CRC_VALUE as TRANS_SERV_CRC, ssm.CRC_VALUE as TRANS_APP_CRC
+	  from SMMS_AC_URL as ssu left  JOIN smms_crc_mapting as ssc
+    		on ssu.APP_CRC =ssc.crc_key and (ssc.CRC_TYPE='t' or ssc.CRC_TYPE='a' or ssc.CRC_TYPE='r')
+		left join smms_crc_mapting as ssm
+		on  ssu.SERV_CRC =ssm.crc_key and (ssm.CRC_TYPE='t' or ssm.CRC_TYPE='a' or ssm.CRC_TYPE='r')
+		 where ssu.RID = #{RID} and ssu.RECORDSTATE='0'
+</select> 
+<select id="selectContentPathByRid" parameterType="hashmap" resultType="hashmap"> 
+	select  CONTENTPATH	from SMMS_AC_URL as ssu where ssu.RID = #{RID} 
+</select> 
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_AC_URL  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_AC_URL  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_AC_URL (
+            <if test="RID != null ">RID,</if>
+            <if test="USERNAME != null ">USERNAME,</if>
+            <if test="GROUPNAME != null ">GROUPNAME,</if>
+            <if test="IP != null ">IP,</if>
+            <if test="SERV_CRC != null ">SERV_CRC,</if>
+            <if test="APP_CRC != null ">APP_CRC,</if>
+            <if test="LOG_TIME != null ">LOG_TIME,</if>
+            <if test="HOST != null ">HOST,</if>
+            <if test="TITLE != null ">TITLE,</if>
+            <if test="URL != null ">URL,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            
+            <if test="CONTENTPATH != null ">CONTENTPATH,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="USERNAME != null ">#{USERNAME},</if>
+           <if test="GROUPNAME != null ">#{GROUPNAME},</if>
+           <if test="IP != null ">#{IP},</if>
+           <if test="SERV_CRC != null ">#{SERV_CRC},</if>
+           <if test="APP_CRC != null ">#{APP_CRC},</if>
+           <if test="LOG_TIME != null ">#{LOG_TIME},</if>
+           <if test="HOST != null ">#{HOST},</if>
+           <if test="TITLE != null ">#{TITLE},</if>
+           <if test="URL != null ">#{URL},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="CONTENTPATH != null ">#{CONTENTPATH},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_AC_URL   
+		<set>
+			 <if test="USERNAME!=null"> USERNAME=#{USERNAME},</if> 
+		    <if test="GROUPNAME!=null"> GROUPNAME=#{GROUPNAME},</if> 
+		    <if test="IP!=null"> IP=#{IP},</if> 
+		    <if test="SERV_CRC!=null"> SERV_CRC=#{SERV_CRC},</if> 
+		    <if test="APP_CRC!=null"> APP_CRC=#{APP_CRC},</if> 
+		    <if test="LOG_TIME!=null"> LOG_TIME=#{LOG_TIME},</if> 
+		    <if test="HOST!=null"> HOST=#{HOST},</if> 
+		    <if test="TITLE!=null"> TITLE=#{TITLE},</if> 
+		    <if test="URL!=null"> URL=#{URL},</if> 
+		    <if test="CONTENTPATH!=null"> CONTENTPATH=#{CONTENTPATH},</if>
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

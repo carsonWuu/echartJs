@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SArea" desc="a1001 地区" tblName="S_AREA" pageSize="10" listURL="/fmp/FrameCommonBiz/DoList?tableModelId=BArea" sqlMapNamespace="BArea">
+	<Fields>
+		<TableField id="AREANAME" colName="AREANAME" desc="地区" dataType="VARCHAR2" length="50"  webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="T" isPK="F"/>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+		<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR2" length="10"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+		<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+		<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR2" length="10"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR2" length="40"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T"/>
+		<TableField id="AREACODE" colName="AREACODE" desc="地区编码" dataType="VARCHAR2" length="6"  webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="T" fuzzy="F"  required="T" isPK="F" order="ASC" orderInList="T" />
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

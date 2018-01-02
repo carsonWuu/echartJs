@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="fmp.freereport.wabacus" namespace="/fmp/freereport/wabacus" extends="fmp-default">        
+		<!--重定向到报表-->
+		<action name="WabacusRedirect" class="com.zstar.fmp.freeReport.webacus.action.WabacusRedirectAction">
+			<result name="success" type="redirect">
+            	${rootPath}/wabacus/ShowReport.wx?${parameters}
+			</result>
+		</action>
+	</package>
+</struts>

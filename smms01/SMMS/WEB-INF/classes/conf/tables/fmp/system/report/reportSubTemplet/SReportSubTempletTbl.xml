@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SReportSubTemplet" desc="报表子模板" tblName="S_REPORTSUBTEMPLET" pageSize="10" uniteTableModelId="" listURL="/fmp/system/report/reportSubTemplet/SReportSubTempletBiz/DoList?tableModelId=SReportSubTemplet" sqlMapNamespace="SReportSubTemplet">
+	<Fields>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LUVA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="REPORTTEMPLETID" colName="REPORTTEMPLETID" desc="报表模板编号" dataType="VARCHAR" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LUV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="SERIALNUM" colName="SERIALNUM" desc="序号" dataType="INTEGER" length="10"  listGroupName="" webType="text" webTypeExt="number" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="SUBTEMPLETNAME" colName="SUBTEMPLETNAME" desc="子模板名称" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="FILEPATH" colName="FILEPATH" desc="子模板文件路径" dataType="VARCHAR" length="250"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="DATAOBJTYPE" colName="DATAOBJTYPE" desc="子模板数据对象类型" dataType="INTEGER" length="10"  listGroupName="" webType="select" webTypeExt="" dicType="S_ZMBSJDXLX" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="DATAOBJNAME" colName="DATAOBJNAME" desc="子模板数据对象名" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

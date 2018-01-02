@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsRoomIprange"> 
+<sql id="listColumns">
+	
+            RID,
+            CREATTIME,
+            
+            BEGIN_IP,
+            END_IP,
+            MODIFIEDTIME,
+          
+           
+            RECORDSTATE,
+            ACCESS_ID,
+            ROOM_IDX
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            CREATTIME,
+            
+            BEGIN_IP,
+            END_IP,
+            MODIFIEDTIME,
+           
+            RECORDSTATE,
+            ACCESS_ID,
+            ROOM_IDX
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from SMMS_ROOM_IPRANGE 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+<select id="selectAccesIdByIp" resultType="hashmap" parameterType="hashmap"> 
+select ACCESS_ID, ROOM_IDX from smms_room_iprange as ssr
+where
+substring_index(#{IP},'.',3) = substring_index(ssr.BEGIN_IP,'.',3)
+and cast(substring_index(#{IP},'.',-1) as signed integer )
+&gt;=
+cast(substring_index(ssr.BEGIN_IP,'.',-1) as signed integer )
+and
+cast(substring_index(#{IP},'.',-1) as signed integer )
+&lt;=
+cast(substring_index(ssr.END_IP,'.',-1) as signed integer ) and RECORDSTATE='0'
+</select>
+
+<select id="selectAccesIdByDstIp" resultType="hashmap" parameterType="hashmap"> 
+select ACCESS_ID, ROOM_IDX from smms_room_iprange as ssr
+where
+substring_index(#{DST_IP},'.',3) = substring_index(ssr.BEGIN_IP,'.',3)
+and cast(substring_index(#{DES_IP},'.',-1) as signed integer )
+&gt;=
+cast(substring_index(ssr.BEGIN_IP,'.',-1) as signed integer )
+and
+cast(substring_index(#{DST_IP},'.',-1) as signed integer )
+&lt;=
+cast(substring_index(ssr.END_IP,'.',-1) as signed integer ) and RECORDSTATE='0'
+</select>
+
+<select id="selectAccesIdByDesIp" resultType="hashmap" parameterType="hashmap"> 
+select ACCESS_ID, ROOM_IDX from smms_room_iprange as ssr
+where
+substring_index(#{DES_IP},'.',3) = substring_index(ssr.BEGIN_IP,'.',3)
+and cast(substring_index(#{DES_IP},'.',-1) as signed integer )
+&gt;=
+cast(substring_index(ssr.BEGIN_IP,'.',-1) as signed integer )
+and
+cast(substring_index(#{DES_IP},'.',-1) as signed integer )
+&lt;=
+cast(substring_index(ssr.END_IP,'.',-1) as signed integer ) and RECORDSTATE='0'
+</select>
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_ROOM_IPRANGE 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_ROOM_IPRANGE  where RID = #{RID}
+</delete> 
+<update id="updateRecordstate" parameterType="hashmap">
+ 	update SMMS_ROOM_IPRANGE set RECORDSTATE='1' where ACCESS_ID =#{ACCESS_ID} and ROOM_IDX=#{ROOM_IDX} And BEGIN_IP=#{BEGIN_IP} and END_IP=#{END_IP}
+</update>
+
+
+<select id="findRoomIprangeInfo" parameterType="hashmap" resultType="hashmap">
+ 	select 
+ 		BEGIN_IP as begin_ip,
+        END_IP as end_ip
+ 	from SMMS_ROOM_IPRANGE   where RECORDSTATE='0' and ACCESS_ID =#{ACCESS_ID} and ROOM_IDX=#{ROOM_IDX}
+</select>
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from SMMS_ROOM_IPRANGE  where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_ROOM_IPRANGE  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_ROOM_IPRANGE  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap">
+	insert into SMMS_ROOM_IPRANGE (
+            <if test="RID != null ">RID,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="CREATORID != null ">CREATORID,</if>
+            <if test="BEGIN_IP != null ">BEGIN_IP,</if>
+            <if test="END_IP != null ">END_IP,</if>
+            <if test="MODIFIEDTIME != null ">MODIFIEDTIME,</if>
+            <if test="MODIFIERID != null ">MODIFIERID,</if>
+            <if test="LIABMAN != null ">LIABMAN,</if>
+            <if test="LIABDEPT != null ">LIABDEPT,</if>
+            <if test="LIABORG != null ">LIABORG,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE,</if>
+            <if test="ACCESS_ID != null ">ACCESS_ID,</if>
+            <if test="ROOM_IDX != null ">ROOM_IDX</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="CREATORID != null ">#{CREATORID},</if>
+           <if test="BEGIN_IP != null ">#{BEGIN_IP},</if>
+           <if test="END_IP != null ">#{END_IP},</if>
+           <if test="MODIFIEDTIME != null ">#{MODIFIEDTIME},</if>
+           <if test="MODIFIERID != null ">#{MODIFIERID},</if>
+           <if test="LIABMAN != null ">#{LIABMAN},</if>
+           <if test="LIABDEPT != null ">#{LIABDEPT},</if>
+           <if test="LIABORG != null ">#{LIABORG},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE},</if>
+           <if test="ACCESS_ID != null ">#{ACCESS_ID},</if>
+           <if test="ROOM_IDX != null ">#{ROOM_IDX}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_ROOM_IPRANGE   
+		<set>
+				    <if test="BEGIN_IP!=null"> BEGIN_IP=#{BEGIN_IP},</if> 
+		    <if test="END_IP!=null"> END_IP=#{END_IP},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="LIABMAN!=null"> LIABMAN=#{LIABMAN},</if> 
+		    <if test="LIABDEPT!=null"> LIABDEPT=#{LIABDEPT},</if> 
+		    <if test="LIABORG!=null"> LIABORG=#{LIABORG},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		    <if test="ACCESS_ID!=null"> ACCESS_ID=#{ACCESS_ID},</if> 
+		    <if test="ROOM_IDX!=null"> ROOM_IDX=#{ROOM_IDX},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

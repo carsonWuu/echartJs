@@ -1,0 +1,299 @@
+﻿  .luara-left {
+        position: relative;
+        padding: 0;
+        overflow: hidden;
+    }
+
+        .luara-left ul {
+            position: relative;
+            padding: inherit;
+            margin: 0;
+        }
+         .luara-left ul li {
+         float: left;
+         padding: inherit;
+         margin: inherit;
+         list-style: none;
+     }
+
+ .luara-left ul li img {
+         width: inherit;
+         height: inherit;
+     }
+
+    li {
+        list-style: none;
+    }
+
+    .slides {
+    }
+
+        .slides ol {
+            position: relative;
+            width: 80px;
+            height: 20px;
+            top: -30px;
+            left: 50%;
+        }
+
+     .slides ol li {
+         float: left;
+         width: 10px;
+         height: 10px;
+         margin: 5px;
+         background: #fff;
+     }
+
+     .slides ol li.seleted {
+         background: #1AA4CA;
+     }
+    /*login浮块*/
+    .wrap-scroll {
+        position: relative;
+    }
+
+    .login-wrap {
+        position: absolute;
+        top: 12%;
+        right: 10%;
+        width: 330px;
+        height: 280px;
+    }
+
+    .login-bg {
+        position: fixed;
+        top: 180px;
+        width: 330px;
+        height: 280px;
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+        background: #000;
+        z-index: 1;
+    }
+
+        .login-intro p {
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .login-intro h3 {
+            height: 55px;
+            line-height: 55px;
+            font-size: 45px;
+        }
+
+        .login-intro a.apply {
+            height: 37px;
+            line-height: 37px;
+            display: inline-block;
+            width: 240px;
+            background: #edad00;
+            border-radius: 2px;
+            font-size: 16px;
+            color: #fff;
+            text-align: center;
+            margin-top: 20px;
+        }
+    /*about-us  partner*/
+    .aboutus {
+        height: 460px;
+        width: 100%;
+        padding: 30px 0;
+    }
+
+    .partner {
+        width: 100%;
+        padding: 60px 0 20px 0;
+        background: #F0F0F0;
+    }
+
+    .aboutus-head, .partner-head {
+        width: 700px;
+        height: 100px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+        .aboutus-head h3, .partner-head h3 {
+            font-size: 36px;
+            font-weight: normal;
+        }
+
+        .aboutus-head h4, .partner-head h4 {
+            font-size: 28px;
+            font-weight: normal;
+        }
+
+        .aboutus-head p {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #818181;
+        }
+
+    .aboutus-prop, .partner-logo {
+        width: 1150px;
+        margin: 30px auto;
+    }
+
+        .aboutus-prop .img-prop {
+            float: left;
+            width: 24.5%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .aboutus-prop p {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #818181;
+        }
+
+        .partner-logo img {
+            float: left;
+            margin-right: 20px;
+            margin-top: 10px;
+        }
+      
+
+        /*登陆框框*/
+          .login-intro {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 180px;
+        z-index: 10;
+        color: #fff;
+    }
+
+        .login-intro p {
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .login-intro h3 {
+            height: 55px;
+            line-height: 55px;
+            font-size: 45px;
+        }
+
+        .login-intro a.apply {
+            height: 37px;
+            line-height: 37px;
+            display: inline-block;
+            width: 240px;
+            background: #edad00;
+            border-radius: 2px;
+            font-size: 16px;
+            color: #fff;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+    .cen_li {
+        position: relative;
+    }
+
+        .cen_li input {
+            width: 230px;
+            height: 30px;
+            margin-bottom: 15px;
+            padding-left:8px;
+        }
+       .cen_li input:focus {
+       box-shadow:0 1px 1px rgba(0,0,0,0.075) inset,0 0 4px rgba(10,133,230,0.6);
+
+       }
+    .apply_dialog ul, .login-intro ul {
+        width: 270px;
+        margin: 15px auto;
+    }
+
+    .req_sign {
+        position: absolute;
+        top: 8px;
+        left: -18px;
+        color: red;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    a.apply_sub {
+        height: 37px;
+        line-height: 37px;
+        display: inline-block;
+        width: 360px;
+        background: #edad00;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #fff;
+        text-align: center;
+    }
+
+   
+            /*无交互弹窗*/
+    .dialog_login {
+        position: fixed;
+        display: none;
+        top: 25%;
+        left: 30%;
+        width: 490px;
+        height: 300px;
+        background: #fff;
+        z-index: 800;
+    }
+
+        .dialog_login .title {
+            height: 35px;
+            line-height: 35px;
+            padding-left: 10px;
+            text-align: left;
+            letter-spacing: 8px;
+            color: #524545;
+            background: #ccc;
+        }
+
+        .dialog_login p.big {
+            height: 140px;
+            line-height: 140px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .dialog_login p.desc {
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .dialog_login a {
+            display: inline-block;
+            height: 37px;
+            line-height: 37px;
+            width: 150px;
+            background: #edad00;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+            text-align: center;
+        }
+        .big img {
+        width:32px;
+        position:absolute;
+        left:145px;
+        top:30%; 
+        }
+        /*错误信息*/
+         .dialog_error {
+        display: none;
+        font-size: 14px;
+        line-height: 1.5;
+        color: red;
+        /*text-align: center;*/
+        margin-top: 2px;
+    }

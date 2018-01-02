@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="fmp.author.customModule.SCustomModuleBiz" namespace="/fmp/author/customModule/SCustomModuleBiz" extends="fmp.FrameCommonBiz">        
+		
+		<action  name="CustomMenu">
+            <result name="success">/WEB-INF/jsp/fmp/author/customModule/customMenu.jsp</result>
+        </action> 
+        
+        <action  name="GetModuleTree" class="com.zstar.fmp.author.customModule.action.GetModuleTreeAction">
+            <result name="success">/WEB-INF/jsp/fmp/author/customModule/customTreeList.jsp</result>
+        </action>    
+        
+        <action  name="GetCustomModuleTree" class="com.zstar.fmp.author.customModule.action.GetCustomModuleTreeAction">
+            <result name="success">/WEB-INF/jsp/fmp/author/customModule/customModuleTreeList.jsp</result>
+        </action>  
+
+        <!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.fmp.author.customModule.action.SaveSCustomModuleAction">
+        </action> 
+        
+        <!--删除操作-->
+        <action  name="Delete" class="com.zstar.fmp.author.customModule.action.DeleteSCustomModuleAction">
+        </action>              
+    </package>
+</struts>

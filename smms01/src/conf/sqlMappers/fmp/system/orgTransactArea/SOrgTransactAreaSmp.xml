@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SOrgTransactArea"> 
+<sql id="listColumns">
+	
+            RID,
+            ORGID,
+            AREAID,
+            AREANAME,
+            AREASTATE,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            ORGID,
+            AREAID,
+            AREANAME,
+            AREASTATE,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from S_ORGTRANSACTAREA
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from S_ORGTRANSACTAREA
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_ORGTRANSACTAREA where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from S_ORGTRANSACTAREA where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_ORGTRANSACTAREA set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from S_ORGTRANSACTAREA where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_ORGTRANSACTAREA(
+            RID,
+            ORGID,
+            AREAID,
+            AREANAME,
+            AREASTATE,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE)
+	   values (
+            #{RID},
+            #{ORGID},
+            #{AREAID},
+            #{AREANAME},
+            #{AREASTATE},
+            #{CREATTIME},
+            #{CREATORID},
+            #{MODIFIEDTIME},
+            #{MODIFIERID},
+            #{RECORDSTATE})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_ORGTRANSACTAREA  
+		<set>
+				    <if test="ORGID!=null"> ORGID=#{ORGID},</if> 
+		    <if test="AREAID!=null"> AREAID=#{AREAID},</if> 
+		    <if test="AREANAME!=null"> AREANAME=#{AREANAME},</if> 
+		    <if test="AREASTATE!=null"> AREASTATE=#{AREASTATE},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+<select id="getAreaByORGID" parameterType="hashmap" resultType="hashmap">  
+	select *  from S_ORGTRANSACTAREA where ORGID = #{ORGID} and AREASTATE = '0' and RECORDSTATE='0' 
+</select>  
+
+</mapper>

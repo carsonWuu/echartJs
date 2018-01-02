@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SJobLog" desc="定时任务运行日志" tblName="S_JOBLOG" pageSize="20" uniteTableModelId="" listURL="" sqlMapNamespace="SJobLog">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="JOBCODE" colName="JOBCODE" desc="任务编号" dataType="VARCHAR" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="VUA" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="JOBNAME" colName="JOBNAME" desc="任务名称" dataType="VARCHAR" length="30"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="VUA" groupEnd="F" isSearch="T" fuzzy="T" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="BEGINTIME" colName="BEGINTIME" desc="开始时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="datetime" create="LVUA" hidden="VUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="ENDTIME" colName="ENDTIME" desc="结束时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="datetime" create="LVUA" hidden="VUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="ERRTYPE" colName="ERRTYPE" desc="错误类型" dataType="VARCHAR" length="3"  listGroupName="" dicType="S_CWLX" webType="select" webTypeExt="" create="LVUA" hidden="VUA" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="EXECUTERESULT" colName="EXECUTERESULT" desc="执行结果" dataType="CHAR" length="1"  listGroupName="" dicType="S_ZXJG" webType="select" webTypeExt="" create="LVUA" hidden="VUA" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="EXECUTEDESC" colName="EXECUTEDESC" desc="执行信息描述" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="VUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

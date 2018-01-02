@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="MmAccountInfo" desc="短信平台信息" tblName="S_MMACCOUNTINFO" pageSize="10" uniteTableModelId="" listURL="/fmp/mobileSms/MmAccountInfoBiz/GetMmAccountInfo?tableModelId=MmAccountInfo">
+	<Fields>
+<!--		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="SERIALNUMBER" colName="SERIALNUMBER" desc="系列号" dataType="VARCHAR" length="20"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="PASSWORD" colName="PASSWORD" desc="密码" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="MKEY" colName="MKEY" desc="KEY" dataType="VARCHAR" length="20"  listGroupName="" webType="text" webTypeExt="number" create="LVUA" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+-->
+		<TableField id="ACCOUNTBALANCE" colName="ACCOUNTBALANCE" desc="账号余额（元）" dataType="DECIMAL" length="18"  listGroupName="" webType="text" webTypeExt="money" min="0" max="999999999999" create="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="UNITPRICE" colName="UNITPRICE" desc="发送单价（元）" dataType="DECIMAL" length="18"  listGroupName="" webType="text" webTypeExt="money" min="0" max="999999999999" create="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="SMSNUMBER" colName="SMSNUMBER" desc="剩余条数" dataType="INTEGER" length="20"  listGroupName="" webType="text" webTypeExt="number" create="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

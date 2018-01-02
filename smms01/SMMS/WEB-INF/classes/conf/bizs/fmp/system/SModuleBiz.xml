@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+ 
+    <package name="fmp.SModuleBiz" namespace="/fmp/SModuleBiz" extends="fmp.FrameCommonBiz">   
+        <action  name="BuildMenuXML" class="com.zstar.fmp.core.menu.action.BuildMenuXMLAction">
+        </action>   
+        
+        <action  name="GetModuleOpperationXML" class="com.zstar.fmp.core.menu.action.GetModuleOpperationXMLAction">
+            <result name="success">/WEB-INF/jsp/fmp/system/module/treeList.jsp</result>
+        </action>   
+        <action  name="SModleTreeFramesets">
+            <result name="success">/WEB-INF/jsp/fmp/system/module/treeFrameset.jsp</result>
+        </action> 
+        
+        <action  name="TreeModuleAdd" class="com.zstar.fmp.system.module.action.AddSModuleAction">
+            <result>/WEB-INF/jsp/fmp/system/module/ModuleAdd.jsp</result>
+        </action> 
+        
+        <action  name="TreeModuleUpdate"  class="com.zstar.fmp.system.module.action.UpdateSModuleAction">
+            <result>/WEB-INF/jsp/fmp/system/module/ModuleUpdate.jsp</result>
+        </action>
+         
+        <action  name="CheckModuleVO"  class="com.zstar.fmp.system.module.action.CheckVOAction">
+            <result>/WEB-INF/jsp/fmp/system/module/ModuleUpdate.jsp</result>
+        </action>  
+               
+        <action  name="CheckSModuleParentID"  class="com.zstar.fmp.system.module.action.CheckSModuleParentAction">
+            <result>/WEB-INF/jsp/fmp/system/module/ModuleUpdate.jsp</result>
+        </action>  
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.fmp.system.module.action.{1}SModuleAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+        </action>    
+        
+		<!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.fmp.system.module.action.SaveSModuleAction">
+        </action>   
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.fmp.system.module.action.DeleteSModuleAction">
+        </action>                         
+    </package>    
+</struts>

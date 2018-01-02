@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SSmsTemplet"> 
+<sql id="listColumns">
+	
+            RID,
+            TEMPPARAMSQLID,
+            MSGTEMP,
+            FIRESCENE,
+            FIREBASETIME,
+            FIREPERIOD,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE,
+            SMSTEMPCODE,
+            SMSTEMPNAME,
+            SMSTEMPSTATE,
+            INCEPTORGID,
+      		INCEPTDEPTID,
+     		INCEPTPOST,
+      		INCEPTUSERID
+            
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            TEMPPARAMSQLID,
+            MSGTEMP,
+            FIRESCENE,
+            FIREBASETIME,
+            FIREPERIOD,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE,
+            SMSTEMPCODE,
+            SMSTEMPNAME,
+            SMSTEMPSTATE,
+            INCEPTORGID,
+      		INCEPTDEPTID,
+     		INCEPTPOST,
+      		INCEPTUSERID
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select sst.*,so.ORGANSHORTFORM as TRANS_INCEPTORGID,
+		   sd.DEPSHORTFORM as TRANS_INCEPTDEPTID,
+	       sp.POSTNAME as TRANS_INCEPTPOST,
+	       su.USERNAME as TRANS_INCEPTUSERID
+	from S_SMSTEMPLET sst
+	left outer join S_ORG so
+	    on so.ORGID = sst.INCEPTORGID
+	left outer join S_DEPT sd
+	    on sd.DEPTID = sst.INCEPTDEPTID
+	left outer join S_POST sp
+	    on sp.POSTID = sst.INCEPTPOST
+	left outer join S_USER su
+	    on su.USERID = sst.INCEPTUSERID
+	<where>
+		sst.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from S_SMSTEMPLET sst
+	left outer join S_ORG so
+	    on so.ORGID = sst.INCEPTORGID
+	left outer join S_DEPT sd
+	    on sd.DEPTID = sst.INCEPTDEPTID
+	left outer join S_POST sp
+	    on sp.POSTID = sst.INCEPTPOST
+	left outer join S_USER su
+	    on su.USERID = sst.INCEPTUSERID
+	<where>
+		sst.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_SMSTEMPLET where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select sst.*,so.ORGANSHORTFORM as TRANS_INCEPTORGID,
+		   sd.DEPSHORTFORM as TRANS_INCEPTDEPTID,
+	       sp.POSTNAME as TRANS_INCEPTPOST,
+	       su.USERNAME as TRANS_INCEPTUSERID
+	from S_SMSTEMPLET sst
+	left outer join S_ORG so
+	    on so.ORGID = sst.INCEPTORGID
+	left outer join S_DEPT sd
+	    on sd.DEPTID = sst.INCEPTDEPTID
+	left outer join S_POST sp
+	    on sp.POSTID = sst.INCEPTPOST
+	left outer join S_USER su
+	    on su.USERID = sst.INCEPTUSERID
+	where sst.RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_SMSTEMPLET set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+    select sst.*,so.ORGANSHORTFORM as TRANS_INCEPTORGID,
+		   sd.DEPSHORTFORM as TRANS_INCEPTDEPTID,
+	       sp.POSTNAME as TRANS_INCEPTPOST,
+	       su.USERNAME as TRANS_INCEPTUSERID
+	from S_SMSTEMPLET sst
+	left outer join S_ORG so
+	    on so.ORGID = sst.INCEPTORGID
+	left outer join S_DEPT sd
+	    on sd.DEPTID = sst.INCEPTDEPTID
+	left outer join S_POST sp
+	    on sp.POSTID = sst.INCEPTPOST
+	left outer join S_USER su
+	    on su.USERID = sst.INCEPTUSERID
+	where sst.RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_SMSTEMPLET(
+            RID,
+            TEMPPARAMSQLID,
+            MSGTEMP,
+            FIRESCENE,
+            FIREBASETIME,
+            FIREPERIOD,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE,
+            SMSTEMPCODE,
+            SMSTEMPNAME,
+            SMSTEMPSTATE,
+            INCEPTORGID,
+      		INCEPTDEPTID,
+     		INCEPTPOST,
+      		INCEPTUSERID)
+	   values (
+            #{RID},
+            #{TEMPPARAMSQLID},
+            #{MSGTEMP},
+            #{FIRESCENE},
+            #{FIREBASETIME},
+            #{FIREPERIOD},
+            #{CREATTIME},
+            #{CREATORID},
+            #{MODIFIEDTIME},
+            #{MODIFIERID},
+            #{RECORDSTATE},
+            #{SMSTEMPCODE},
+            #{SMSTEMPNAME},
+            #{SMSTEMPSTATE},
+            #{INCEPTORGID},
+      		#{INCEPTDEPTID},
+     		#{INCEPTPOST},
+      		#{INCEPTUSERID})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_SMSTEMPLET  
+		<set>
+				    <if test="TEMPPARAMSQLID!=null"> TEMPPARAMSQLID=#{TEMPPARAMSQLID},</if> 
+		    <if test="MSGTEMP!=null"> MSGTEMP=#{MSGTEMP},</if> 
+		    <if test="FIRESCENE!=null"> FIRESCENE=#{FIRESCENE},</if> 
+		    <if test="FIREBASETIME!=null"> FIREBASETIME=#{FIREBASETIME},</if>
+		    <if test="SMSTEMPCODE!=null"> SMSTEMPCODE=#{SMSTEMPCODE},</if> 
+		    <if test="SMSTEMPNAME!=null"> SMSTEMPNAME=#{SMSTEMPNAME},</if> 
+		    <if test="FIREPERIOD!=null"> FIREPERIOD=#{FIREPERIOD},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if>
+		    <if test="SMSTEMPSTATE!=null"> SMSTEMPSTATE=#{SMSTEMPSTATE},</if>
+		    <if test="INCEPTORGID!=null"> INCEPTORGID=#{INCEPTORGID},</if>
+		    <if test="INCEPTDEPTID!=null"> INCEPTDEPTID=#{INCEPTDEPTID},</if>
+		    <if test="INCEPTPOST!=null"> INCEPTPOST=#{INCEPTPOST},</if>
+		    <if test="INCEPTUSERID!=null"> INCEPTUSERID=#{INCEPTUSERID},</if>
+
+		</set>
+	where RID=#{RID}
+</update> 
+
+<!-- 根据触发场景获取短信模板 -->
+<select id="getSSmsTempletData" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_SMSTEMPLET
+	where FIRESCENE = #{FIRESCENE} and SMSTEMPSTATE = '0' and RECORDSTATE = '0'
+	
+</select> 
+
+<select id="getSSmsTempletByCode" parameterType="String" resultType="hashmap"> 
+	select * from S_SMSTEMPLET
+	where SMSTEMPCODE = #{SMSTEMPCODE}  and RECORDSTATE ='0'
+</select> 
+
+</mapper>

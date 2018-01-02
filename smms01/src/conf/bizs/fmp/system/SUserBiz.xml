@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+ 
+    <package name="fmp.SUser" namespace="/fmp/SUser" extends="default">
+    	   
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.fmp.system.user.action.{1}UserAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+        </action>    
+        
+		<!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.fmp.system.user.action.SaveUserAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>   
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.fmp.system.user.action.DeleteUserAction">
+
+        </action>
+        
+        <!--显示职位操作-->        
+         <action  name="SetPost" class="com.zstar.fmp.system.user.action.UserSetPostAction">
+            <result>/WEB-INF/jsp/fmp/user/PostUser.jsp</result>
+        </action>
+        <!--保存职位用户操作-->        
+         <action  name="SavePostUser" class="com.zstar.fmp.system.user.action.SavePostUserAction">
+            <result>/WEB-INF/jsp/fmp/user/PostUser.jsp</result>
+        </action>  
+        <!--保存岗位用户操作-->
+        <action  name="SaveRoleUser" class="com.zstar.fmp.system.user.action.SaveRoleUserAction" > 
+		</action>
+		<!--显示岗位操作-->
+        <action  name="SetRole" class="com.zstar.fmp.system.user.action.UserSetRoleAction">
+            <result>/WEB-INF/jsp/fmp/user/RoleUser.jsp</result>
+        </action>
+        
+        <!--显示部门操作-->
+        <action  name="SetDepts" class="com.zstar.fmp.system.user.action.UserSetDeptsAction">
+            <result>/WEB-INF/jsp/fmp/user/DeptUser.jsp</result>
+        </action>
+        <!--保存部门用户操作-->
+        <action  name="SaveDeptUser" class="com.zstar.fmp.system.user.action.SaveDeptUserAction" > 
+		</action>
+        
+        
+        
+        
+        <!--显示修改密码界面-->
+        <action  name="SetPasswordUI">
+        	 <result>/WEB-INF/jsp/fmp/user/SetPassword.jsp</result>
+        </action>
+        
+         <!--保存密码修改-->
+        <action  name="SavePassword" class="com.zstar.fmp.system.user.action.SavePassword" > 
+        </action>
+        
+        <!--验证登录账号是否唯一-->
+        <action  name="isExistLoginCode" class="com.zstar.fmp.system.user.action.ValidateLoginCodeAction" > 
+        </action>
+        
+        <!--验证身份证号码是否唯一-->
+        <action  name="isExistIdCardNo" class="com.zstar.fmp.system.user.action.ValidateIdCardNoAction" > 
+        </action>
+        
+        <action  name="InvocakeAction" class="com.zstar.fmp.system.user.action.InvocakeAction">
+        	    <result name="success">/WEB-INF/jsp/fmp/system/importExcel/importExcel.jsp</result>
+        </action>  
+         <!--导入EXCEL文件数据操作-->
+        <action  name="importExcel" class="com.zstar.fmp.core.frame.action.ImportExcelAction">
+        </action> 
+        
+        <!--设置或取消抵押权人-->
+        <action  name="setOrCancleHypothec" class="com.zstar.fmp.system.user.action.SetOrCancleHypothecAction">
+        </action> 
+	</package>    
+</struts>

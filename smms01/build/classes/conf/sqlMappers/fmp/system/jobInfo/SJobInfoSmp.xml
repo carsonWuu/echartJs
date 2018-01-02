@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SJobInfo"> 
+<sql id="listColumns">
+	
+            RID,
+            JOBCODE,
+            JOBNAME,
+            JOBDESC,
+            EXECUTETIME,
+            EXECUTECYCLE,
+            JOBSTATE,
+            EXECUTESTATE,
+            TIMEEXPRESSION,
+            JOBCLASS,
+            JOBREPELENT,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            JOBCODE,
+            JOBNAME,
+            JOBDESC,
+            EXECUTETIME,
+            EXECUTECYCLE,
+            JOBSTATE,
+            EXECUTESTATE,
+            TIMEEXPRESSION,
+            JOBCLASS,
+            JOBREPELENT,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from S_JOBINFO
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+		order by JOBSTATE
+        <if test="order!=null and order!='' ">   
+             ,${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from S_JOBINFO
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_JOBINFO where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>,JOBREPELENTNAME as TRANS_JOBREPELENT from S_JOBINFO where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_JOBINFO set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/>,JOBREPELENTNAME as TRANS_JOBREPELENT from S_JOBINFO where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_JOBINFO(
+            RID,
+            JOBCODE,
+            JOBNAME,
+            JOBDESC,
+            EXECUTETIME,
+            EXECUTECYCLE,
+            JOBSTATE,
+            EXECUTESTATE,
+            TIMEEXPRESSION,
+            JOBCLASS,
+            JOBREPELENT,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE,
+            JOBREPELENTNAME)
+	   values (
+            #{RID},
+            #{JOBCODE},
+            #{JOBNAME},
+            #{JOBDESC},
+            #{EXECUTETIME},
+            #{EXECUTECYCLE},
+            #{JOBSTATE},
+            #{EXECUTESTATE},
+            #{TIMEEXPRESSION},
+            #{JOBCLASS},
+            #{JOBREPELENT},
+            #{CREATTIME},
+            #{CREATORID},
+            #{MODIFIEDTIME},
+            #{MODIFIERID},
+            #{RECORDSTATE},
+            #{JOBREPELENTNAME})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_JOBINFO  
+		<set>
+		    <if test="JOBCODE!=null"> JOBCODE=#{JOBCODE},</if> 
+		    <if test="JOBNAME!=null"> JOBNAME=#{JOBNAME},</if> 
+		    <if test="JOBDESC!=null"> JOBDESC=#{JOBDESC},</if> 
+		    <if test="EXECUTETIME!=null"> EXECUTETIME=#{EXECUTETIME},</if> 
+		    <if test="EXECUTECYCLE!=null"> EXECUTECYCLE=#{EXECUTECYCLE},</if> 
+		    <if test="JOBSTATE!=null"> JOBSTATE=#{JOBSTATE},</if> 
+		    <if test="EXECUTESTATE!=null"> EXECUTESTATE=#{EXECUTESTATE},</if> 
+		    <if test="TIMEEXPRESSION!=null"> TIMEEXPRESSION=#{TIMEEXPRESSION},</if> 
+		    <if test="JOBCLASS!=null"> JOBCLASS=#{JOBCLASS},</if> 
+		    <if test="JOBREPELENT!=null"> JOBREPELENT=#{JOBREPELENT},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		    <if test="JOBREPELENTNAME!=null"> JOBREPELENTNAME=#{JOBREPELENTNAME},</if>
+		</set>
+	where RID=#{RID}
+</update> 
+
+<update id="updateExecuteStateMsg" parameterType="hashmap"> 
+      update S_JOBINFO 
+      set EXECUTESTATE=#{EXECUTESTATE}
+      where JOBCODE=#{JOBCODE} 
+</update> 
+
+<select id="selectJobMsg" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_JOBINFO 
+	where JOBCODE=#{JOBCODE} and RECORDSTATE='0'
+</select> 
+
+</mapper>

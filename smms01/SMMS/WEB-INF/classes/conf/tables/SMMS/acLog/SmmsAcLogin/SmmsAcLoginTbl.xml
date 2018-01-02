@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SmmsAcLogin" desc="上下线日志" recordNum="T" tblName="SMMS_AC_LOGIN" pageSize="20" uniteTableModelId="" listURL="/SMMS/SmmsAcLoginBiz/DoList?tableModelId=SmmsAcLogin" sqlMapNamespace="SmmsAcLogin">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="T" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="log"/>
+		<TableField id="USERNAME" colName="USERNAME" desc="用户名" dataType="VARCHAR" length="128" cssClass="" listGroupName="" create="LV" groupEnd="F" isSearch="T" fuzzy="T" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="log"/>
+		<TableField id="GROUPNAME" colName="GROUPNAME" desc="组名" dataType="VARCHAR" length="1664" cssClass="" listGroupName="" create="LV" groupEnd="F" isSearch="T" fuzzy="T" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="log"/>
+		<TableField id="IP" colName="IP" desc="IP" dataType="VARCHAR" length="50" cssClass="" listGroupName="" create="LV" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="T" tableAlias="log"/>
+		<TableField id="SERV_CRC" colName="SERV_CRC" desc="应用大类" dataType="VARCHAR" length="15" cssClass="" listGroupName="" create="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="log"/>
+		<TableField id="APP_CRC" colName="APP_CRC" desc="应用小类" dataType="VARCHAR" length="15" cssClass="" listGroupName="" create="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="log"/>
+		<TableField id="LOG_TIME" colName="LOG_TIME" desc="日志时间" dataType="CHAR" length="20" cssClass="" listGroupName="" webType="text" webTypeExt="date" create="LV" groupEnd="F" isSearch="T" fuzzy="F" orderInList="T" order="DESC" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="T" tableAlias="log"/>
+		<TableField id="MAC" colName="MAC" desc="MAC地址" dataType="VARCHAR" length="50" cssClass="" listGroupName="" create="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="log"/>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20" cssClass="" listGroupName="" webType="text" webTypeExt="date" create="LV" hidden="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="log"/>
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1" cssClass="" listGroupName="" create="LV" hidden="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="log"/>
+		<TableField id="CONTENTPATH" colName="CONTENTPATH" desc="日志举证" dataType="VARCHAR" length="30" dblClick="viewContentPath($(this).attr('truevalue'));" cssClass="" listGroupName="" create="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias="log"/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

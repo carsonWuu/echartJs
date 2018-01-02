@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+ 
+    <package name="fmp.FrameCommonBiz" namespace="/fmp/FrameCommonBiz" extends="fmp-default">   
+		<!--进入操作界面List View Add Update -->
+		 <action  name="DoPopList" class="com.zstar.fmp.core.frame.action.CommonListAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/CommonPopList.jsp</result>
+        </action>  
+        <action  name="Do*" class="com.zstar.fmp.core.frame.action.Common{1}Action">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+       
+        </action>  
+        
+	    <action  name="DoPrintView" class="com.zstar.fmp.core.frame.action.CommonPrintViewAction">
+		    <result>/WEB-INF/jsp/fmp/frame/common/CommonPrintView.jsp</result>
+		</action>    
+		
+	    <action  name="PrintView" class="com.zstar.fmp.core.frame.action.PrintViewAction">
+		    <result>/WEB-INF/jsp/fmp/frame/common/PrintView.jsp</result>
+		</action>  		
+		        
+        <action  name="ViewMainDetail" class="com.zstar.fmp.core.frame.action.CommonViewAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/partialJsp/ViewMainDetail.jsp</result>
+        </action>          
+        
+		<!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.fmp.core.frame.action.CommonSaveAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>   
+        
+		<!--保存联合主从表信息-->
+        <action  name="SaveUniteSubTableList" class="com.zstar.fmp.core.frame.action.CommonSaveUniteSubTableAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>        
+        </action>   
+                         
+		<!--保存可修改的列表信息-->
+        <action  name="SaveDataList" class="com.zstar.fmp.core.frame.action.CommonSaveDataListAction">
+        </action>   
+                 
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.fmp.core.frame.action.CommonDeleteAction">
+        </action>  
+        
+		<!--ajax交互数据合法性验证类-->
+        <action  name="ValidCheck" class="com.zstar.fmp.core.frame.action.CommonValidCheckAction">
+        </action>        
+        
+        
+		<!--在updatelist场景中插入一条空记录-->
+        <action  name="AddToList" class="com.zstar.fmp.core.frame.action.CommonAddToListAction">
+        </action>  
+        
+		<!--获取DataList的json脚本-->
+        <action  name="GetJsonDataList" class="com.zstar.fmp.core.frame.action.GetJsonDataListAction">
+        </action>                
+        
+		<!--获取DataList的json脚本-->
+        <action  name="GetJsonDataMap" class="com.zstar.fmp.core.frame.action.GetJsonDataMapAction">
+        </action>            
+        
+        <action  name="DoEdit" class="com.zstar.fmp.core.frame.action.CommonEditAction">
+            <result name="add">/WEB-INF/jsp/fmp/frame/common/CommonAdd.jsp</result>
+        	<result name="update">/WEB-INF/jsp/fmp/frame/common/CommonUpdate.jsp</result>
+        	<result name="view">/WEB-INF/jsp/fmp/frame/common/CommonView.jsp</result>
+        </action>  
+                   
+    </package>    
+</struts>

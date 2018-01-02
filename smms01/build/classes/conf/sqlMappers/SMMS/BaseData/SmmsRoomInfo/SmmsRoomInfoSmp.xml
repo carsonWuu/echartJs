@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsRoomInfo"> 
+<sql id="listColumns">
+	
+            ssr.RID,
+            ssr.ACCESS_ID,
+            ssr.ROOM_NAME,
+            ssr.ROOM_IDX,
+            ssr.ROOM_ADDRESS,
+            ssr.ROOM_PROPERTY,
+            ssr.ROOM_MANAGER,
+            ssr.MANAGER_TEL,
+            ssr.MANAGER_MOBILE,
+            ssr.CREATTIME,
+         
+            ssr.MODIFIEDTIME,
+            
+            ssr.RECORDSTATE,
+            sii.IDC_ID,
+            sii.IDC_NAME
+</sql>
+<sql id="detailColumns">
+	
+            ssr.RID,
+            ssr.ACCESS_ID,
+            ssr.ROOM_NAME,
+            ssr.ROOM_IDX,
+            ssr.ROOM_ADDRESS,
+            ssr.ROOM_PROPERTY,
+            ssr.ROOM_MANAGER,
+            ssr.MANAGER_TEL,
+            ssr.MANAGER_MOBILE,
+            ssr.CREATTIME,
+           
+            ssr.MODIFIEDTIME,
+           
+            ssr.RECORDSTATE,
+            sii.IDC_ID,
+            sii.IDC_NAME
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/>, sii.IDC_NAME as TRANS_IDC_ID 
+	from 
+	SMMS_ROOM_INFO as ssr 
+	left JOIN smms_idc_info as sii on ssr.ACCESS_ID=sii.IDC_ID
+	<where>
+		ssr.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+ <update id="updateRecordstate" parameterType="hashmap">
+ 	update smms_room_info set RECORDSTATE='1' where ACCESS_ID =#{ACCESS_ID} and ROOM_IDX=#{ROOM_IDX}
+ </update>
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_ROOM_INFO as ssr left JOIN smms_idc_info as sii on ssr.ACCESS_ID=sii.IDC_ID
+	<where>
+		ssr.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+<select id="CountByAccessId" parameterType="hashmap" resultType="String">
+	select count(*) from SMMS_ROOM_INFO where ACCESS_ID = #{ACCESS_ID} and RECORDSTATE='0'
+</select>
+<select id="findRoomInfo" parameterType="hashmap" resultType="hashmap">
+	select  ssr.ACCESS_ID as access_id,
+            ssr.ROOM_NAME as machine_room_name,
+            ssr.ROOM_IDX as machine_room_idx,
+            ssr.ROOM_ADDRESS as machine_room_place,
+            ssr.ROOM_PROPERTY as machine_room_property,
+            ssr.ROOM_MANAGER as room_manager,
+            ssr.MANAGER_TEL as room_manager_tel,
+            ssr.MANAGER_MOBILE as room_manager_mobile
+       from SMMS_ROOM_INFO as ssr where RECORDSTATE='0' and ACCESS_ID = #{ACCESS_ID} and ROOM_IDX=#{ROOM_IDX}  
+</select>
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_ROOM_INFO  as ssr where ssr.RID = #{RID}
+</delete> 
+ <select id="selectRoomNameAndRoomIdx" resultType="hashmap" parameterType="hashmap">
+SELECT ssi.ROOM_NAME as ROOM_NAME,ssi.ROOM_IDX as ROOM_IDX FROM 
+		smms_room_info as ssi 
+ where RECORDSTATE='0' and ssi.ACCESS_ID=#{ACCESS_ID} and ROOM_IDX=#{ROOM_IDX}
+</select>
+ <select id="selectRoomInfo" resultType="hashmap" parameterType="hashmap">
+SELECT
+	ssr.rid as ssrRid,
+	ssr.ROOM_NAME as room_name,
+	ssr.ROOM_IDX as room_idx,
+	ssr.ROOM_ADDRESS as room_address FROM 
+		smms_web_case as swc 
+		left join smms_room_info as ssr 
+		on ssr.ACCESS_ID=swc.ACCESS_ID
+ where swc.WEBSITE_URL=#{website_url}
+</select>
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>, sii.IDC_NAME as TRANS_IDC_ID from SMMS_ROOM_INFO  as ssr left JOIN smms_idc_info as sii on ssr.ACCESS_ID=sii.IDC_ID where ssr.RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_ROOM_INFO  set RECORDSTATE=#{RECORDSTATE} as ssr where ssr.RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_ROOM_INFO  as ssr where ssr.RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_ROOM_INFO (
+            <if test="RID != null ">RID,</if>
+            <if test="ACCESS_ID != null ">ACCESS_ID,</if>
+            <if test="ROOM_NAME != null ">ROOM_NAME,</if>
+            <if test="ROOM_IDX != null ">ROOM_IDX,</if>
+            <if test="ROOM_ADDRESS != null ">ROOM_ADDRESS,</if>
+            <if test="ROOM_PROPERTY != null ">ROOM_PROPERTY,</if>
+            <if test="ROOM_MANAGER != null ">ROOM_MANAGER,</if>
+            <if test="MANAGER_TEL != null ">MANAGER_TEL,</if>
+            <if test="MANAGER_MOBILE != null ">MANAGER_MOBILE,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="CREATORID != null ">CREATORID,</if>
+            <if test="MODIFIEDTIME != null ">MODIFIEDTIME,</if>
+            <if test="MODIFIERID != null ">MODIFIERID,</if>
+            <if test="LIABMAN != null ">LIABMAN,</if>
+            <if test="LIABDEPT != null ">LIABDEPT,</if>
+            <if test="LIABORG != null ">LIABORG,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="ACCESS_ID != null ">#{ACCESS_ID},</if>
+           <if test="ROOM_NAME != null ">#{ROOM_NAME},</if>
+           <if test="ROOM_IDX != null ">#{ROOM_IDX},</if>
+           <if test="ROOM_ADDRESS != null ">#{ROOM_ADDRESS},</if>
+           <if test="ROOM_PROPERTY != null ">#{ROOM_PROPERTY},</if>
+           <if test="ROOM_MANAGER != null ">#{ROOM_MANAGER},</if>
+           <if test="MANAGER_TEL != null ">#{MANAGER_TEL},</if>
+           <if test="MANAGER_MOBILE != null ">#{MANAGER_MOBILE},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="CREATORID != null ">#{CREATORID},</if>
+           <if test="MODIFIEDTIME != null ">#{MODIFIEDTIME},</if>
+           <if test="MODIFIERID != null ">#{MODIFIERID},</if>
+           <if test="LIABMAN != null ">#{LIABMAN},</if>
+           <if test="LIABDEPT != null ">#{LIABDEPT},</if>
+           <if test="LIABORG != null ">#{LIABORG},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_ROOM_INFO   
+		<set>
+				    <if test="ACCESS_ID!=null"> ACCESS_ID=#{ACCESS_ID},</if> 
+		    <if test="ROOM_NAME!=null"> ROOM_NAME=#{ROOM_NAME},</if> 
+		    <if test="ROOM_IDX!=null"> ROOM_IDX=#{ROOM_IDX},</if> 
+		    <if test="ROOM_ADDRESS!=null"> ROOM_ADDRESS=#{ROOM_ADDRESS},</if> 
+		    <if test="ROOM_PROPERTY!=null"> ROOM_PROPERTY=#{ROOM_PROPERTY},</if> 
+		    <if test="ROOM_MANAGER!=null"> ROOM_MANAGER=#{ROOM_MANAGER},</if> 
+		    <if test="MANAGER_TEL!=null"> MANAGER_TEL=#{MANAGER_TEL},</if> 
+		    <if test="MANAGER_MOBILE!=null"> MANAGER_MOBILE=#{MANAGER_MOBILE},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="LIABMAN!=null"> LIABMAN=#{LIABMAN},</if> 
+		    <if test="LIABDEPT!=null"> LIABDEPT=#{LIABDEPT},</if> 
+		    <if test="LIABORG!=null"> LIABORG=#{LIABORG},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

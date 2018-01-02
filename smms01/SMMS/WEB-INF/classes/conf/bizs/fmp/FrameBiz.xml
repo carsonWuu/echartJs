@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="base" namespace="/fmp/base" extends="default">
+        <action  name="ShowLogin" >
+            <result >/WEB-INF/jsp/fmp/frame/login.jsp</result>
+        </action>	
+        <action  name="Login" class="com.zstar.fmp.author.action.LoginAction">
+            <result>/WEB-INF/jsp/fmp/frame/redToMainFrame.jsp</result>
+        </action>   
+        
+        <action  name="MainFrame" >
+            <result>/WEB-INF/jsp/fmp/frame/mainframe.jsp</result>
+        </action> 
+                
+        <action  name="Logout" class="com.zstar.fmp.author.action.LogoutAction">
+        </action>   
+        
+        <!-- 验证码页面-->
+        <action  name="ValidCodeImage">
+        	<result>/WEB-INF/jsp/fmp/frame/validCodeImage.jsp</result>
+        </action>  
+         
+        <!-- 验证解屏页面-->
+        <action  name="ValidLockPage" class="com.zstar.fmp.author.action.LockUserAction">
+        	<result>/WEB-INF/jsp/fmp/frame/validlock.jsp</result>
+        </action> 
+
+         <!-- 验证解屏Action-->
+        <action  name="ValidLock" class="com.zstar.fmp.author.action.UnLockUserAction">
+        </action>              
+    </package>  
+     	
+    <package name="fmp.FrameBiz" namespace="/fmp/FrameBiz" extends="fmp-default">
+        <action  name="ModuleBuliding"  >
+            <result>/WEB-INF/jsp/fmp/frame/result/building.jsp</result>
+        </action>          
+        <action  name="GetModuleDesc"  class="com.zstar.fmp.system.module.action.GetModuleDescAction">
+            <result>/WEB-INF/jsp/fmp/frame/result/moduledesc.jsp</result>
+        </action>                
+        <action  name="SearchCondition" class="com.zstar.fmp.core.frame.action.SearchCondiAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/SearchCondition.jsp</result>
+        </action>
+        
+        <action  name="SearchOpperation" class="com.zstar.fmp.core.frame.action.SearchOpperationAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/SearchOpperation.jsp</result>
+        </action>   
+                
+        <action  name="SearchDataList" class="com.zstar.fmp.core.frame.action.SearchDataListAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/partialJsp/DataList.jsp</result>
+            <result name="printview">/WEB-INF/jsp/fmp/frame/common/partialJsp/PrintDataDetail.jsp</result>
+        </action>  
+        
+        <action  name="ShowIChart" class="com.zstar.fmp.ichart.action.ShowDataListChartAction">
+            <result>/WEB-INF/jsp/fmp/ichart/ShowChart.jsp</result>
+        </action>    
+       
+        <action  name="ShowSChart" class="com.zstar.fmp.sChart.action.ShowsChartAction">
+            <result>/WEB-INF/jsp/fmp/sChart/ShowChart.jsp</result>
+        </action>  
+        
+        <action  name="ShowEChart" class="com.zstar.fmp.eChart.action.ShoweChartAction">
+            <result>/WEB-INF/jsp/fmp/eChart/ShowChart.jsp</result>
+        </action>     
+ 
+                
+        <action  name="FrameChart">
+            <result>/WEB-INF/jsp/fmp/ichart/ShowFrameChart.jsp</result>
+        </action>  
+
+        <action  name="StatePicDataList" class="com.zstar.fmp.core.frame.action.SearchDataListAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/partialJsp/StatePicDataList.jsp</result>
+        </action>  
+        
+        <!-- 字符串转码Action -->
+        <action  name="printListData" class="com.zstar.fmp.print.SearchParamStrTranscodingAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/partialJsp/printListData.jsp</result>
+        </action>  
+        <!-- 浏览器打印预览 -->
+        <action  name="printListDataIframe" class="com.zstar.fmp.print.PrintListDataIframeAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/partialJsp/printListDataIframe.jsp</result>
+        </action>  
+        
+        <action  name="ShowMainFrame">
+            <result>/WEB-INF/jsp/fmp/frame/mainframe.jsp</result>
+        </action>  
+        
+        <action  name="GetMenuXML" class="com.zstar.fmp.author.action.GetMenuXmlAction">
+            <result>/WEB-INF/jsp/fmp/frame/result/empty.jsp</result>
+        </action>  
+        <!--导出excel操作--> 
+        <action  name="ToExcel" class="com.zstar.fmp.core.frame.action.ExportExcelAction">
+        </action> 
+        <!--导出excel报表操作--> 
+        <action  name="ToExcelReport" class="com.zstar.fmp.report.action.ExportExcelReportAction">
+        </action>     
+        
+        <action  name="ToText" class="com.zstar.fmp.core.frame.action.ExportTxtAction">
+        </action>         
+           
+                  
+        <!--弹出形窗口的载体窗口--> 
+        <action  name="OpenWindow">
+        	<result>/WEB-INF/jsp/fmp/frame/result/openwindow.jsp</result>
+        </action> 
+
+        <!--导入excel新数据操作-->
+        <action  name="InvokeImportExcelNewData">
+        	<result>/WEB-INF/jsp/fmp/system/importExcel/importExcelNewData.jsp</result>
+        </action>
+        <action  name="ToImportExcelNewData" class="com.zstar.fmp.core.frame.action.ImportExcelNewDataAction">
+        </action>
+         
+         <!--获取提示信息-->
+        <action  name="GetMessage" class="com.zstar.fmp.core.frame.action.GetMsgAction">
+        </action> 
+        
+        <!--弹出版本信息窗口--> 
+        <action  name="ShowVersion">
+        	<result>/WEB-INF/jsp/fmp/frame/result/versionInfo.jsp</result>
+        </action>               
+        
+    </package>
+</struts>

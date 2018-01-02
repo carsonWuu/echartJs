@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SmmsCrcMapting" desc="CRC映射关系表" recordNum="T" tblName="SMMS_CRC_MAPTING" pageSize="20" uniteTableModelId="" listURL="/SMMS/SmmsCrcMaptingBiz/DoList?tableModelId=SmmsCrcMapting" sqlMapNamespace="SmmsCrcMapting">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="CRC_TYPE" colName="CRC_TYPE" desc="CRC类型" dataType="CHAR" length="1" cssClass="" listGroupName="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="CRC_KEY" colName="CRC_KEY" desc="CRC键" dataType="VARCHAR" length="15" cssClass="" listGroupName="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="CRC_VALUE" colName="CRC_VALUE" desc="CRC值" dataType="VARCHAR" length="50" cssClass="" listGroupName="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR" length="10" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR" length="10" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="LIABMAN" colName="LIABMAN" desc="责任人" dataType="VARCHAR" length="10" cssClass="" listGroupName="" create="LVUA" hidden="UA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="LIABDEPT" colName="LIABDEPT" desc="责任部门" dataType="VARCHAR" length="20" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="LIABORG" colName="LIABORG" desc="责任机构" dataType="VARCHAR" length="10" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+ 
+    <package name="fmp.SRoleRightBiz" namespace="/fmp/SRoleRightBiz" extends="default">  
+    
+       <action  name="RoleRightFrameset">
+            <result>/WEB-INF/jsp/fmp/system/roleRight/RoleRightTreeFrameset.jsp</result>
+        </action>
+        <action  name="ViewRoleList" class="com.zstar.fmp.system.roleright.ListRoleRight">
+            <result name="success">/WEB-INF/jsp/fmp/system/roleRight/SRoleRightList.jsp</result>
+        </action>  
+        
+        <action  name="RoleRightGetModuleXML" class="com.zstar.fmp.system.roleright.RoleRightGetModuleOpperationAction">
+            <result name="success">/WEB-INF/jsp/fmp/system/roleRight/roleRightModuleTree.jsp</result>
+        </action>  
+        <!--获取岗位权限的模块id集合-->
+        <action  name="GetRoleRightModules" class="com.zstar.fmp.system.roleright.GetRoleRightModulesAction">
+        </action>   
+             
+        <action  name="RoleRightAdd" class="com.zstar.fmp.system.roleright.RoleRightAddAction"> 
+        </action>                         
+    </package>    
+</struts>

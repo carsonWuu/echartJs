@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SSysParams"> 
+<sql id="listColumns">
+            RID,
+            SYS1,
+            SYS2,
+            SYS3,
+            SYS4,
+            SYS5,
+            SYS6,
+            SYS7,
+            SYS8,
+            SYS9,
+            SYS10,
+            SYS11,
+            SYS12,
+            SYS13,
+            BIZ1,
+            BIZ2,
+            BIZ3,
+            BIZ4,
+            BIZ5,
+            BIZ6,
+            CUSTQUOTAWARN,
+            WARNDAYS,
+            GRACEPERIOD,
+            RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            SYS1,
+            SYS2,
+            SYS3,
+            SYS4,
+            SYS5,
+            SYS6,
+            SYS7,
+            SYS8,
+            SYS9,
+            SYS10,
+            SYS11,
+            SYS12,
+            SYS13,
+            BIZ1,
+            BIZ2,
+            BIZ3,
+            BIZ4,
+            BIZ5,
+            BIZ6,
+            CUSTQUOTAWARN,
+            WARNDAYS,
+            GRACEPERIOD,
+            RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select sp.*, post.POSTNAME as TRANS_SYS9
+		from S_SYSPARAMS sp
+			left join S_POST post
+				on sp.SYS9=post.POSTID
+	<where>
+		sp.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from S_SYSPARAMS
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_SYSPARAMS where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select sp.*, post.POSTNAME as TRANS_SYS9
+		from S_SYSPARAMS sp
+			left join S_POST post
+				on sp.SYS9=post.POSTID
+		where sp.RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_SYSPARAMS set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+	select sp.*, post.POSTNAME as TRANS_SYS9,su.USERNAME as TRANS_SYS10
+	from S_SYSPARAMS sp
+	left outer join S_POST post
+		on sp.SYS9=post.POSTID
+	left outer join S_USER su
+		on su.USERID = sp.SYS10
+	where sp.RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_SYSPARAMS(
+            RID,
+            SYS1,
+            SYS2,
+            SYS3,
+            SYS4,
+            SYS5,
+            SYS6,
+            SYS7,
+            SYS8,
+            SYS9,
+            SYS10,
+            SYS11,
+            SYS12,
+            SYS13,
+            BIZ1,
+            BIZ2,
+            BIZ3,
+            BIZ4,
+            BIZ5,
+            BIZ6,
+            BASERATE,
+            CUSTQUOTAWARN,
+            WARNDAYS,
+            GRACEPERIOD,
+            RECORDSTATE)
+	   values (
+            #{RID},
+            #{SYS1},
+            #{SYS2},
+            #{SYS3},
+            #{SYS4},
+            #{SYS5},
+            #{SYS6},
+            #{SYS7},
+            #{SYS8},
+            #{SYS9},
+            #{SYS10},
+            #{SYS11},
+            #{SYS12},
+            #{SYS13},
+            #{BIZ1},
+            #{BIZ2},
+            #{BIZ3},
+            #{BIZ4},
+            #{BIZ5},
+            #{BIZ6},
+            #{BASERATE},
+            #{CUSTQUOTAWARN},
+            #{WARNDAYS},
+            #{GRACEPERIOD},
+            #{RECORDSTATE})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_SYSPARAMS  
+		<set>
+		    <if test="SYS1!=null"> SYS1=#{SYS1},</if> 
+		    <if test="SYS2!=null"> SYS2=#{SYS2},</if> 
+		    <if test="SYS3!=null"> SYS3=#{SYS3},</if> 
+		    <if test="SYS4!=null"> SYS4=#{SYS4},</if> 
+		    <if test="SYS5!=null"> SYS5=#{SYS5},</if> 
+		    <if test="SYS6!=null"> SYS6=#{SYS6},</if> 
+		    <if test="SYS7!=null"> SYS7=#{SYS7},</if> 
+		    <if test="SYS8!=null"> SYS8=#{SYS8},</if>
+		    <if test="SYS9!=null"> SYS9=#{SYS9},</if>
+		    <if test="SYS10!=null"> SYS10=#{SYS10},</if>
+		    <if test="SYS11!=null"> SYS11=#{SYS11},</if>
+		    <if test="SYS12!=null"> SYS12=#{SYS12},</if>
+		    <if test="SYS13!=null"> SYS13=#{SYS13},</if>
+		    <if test="BIZ1!=null"> BIZ1=#{BIZ1},</if> 
+		    <if test="BIZ2!=null"> BIZ2=#{BIZ2},</if> 
+		    <if test="BIZ3!=null"> BIZ3=#{BIZ3},</if> 
+		    <if test="BIZ4!=null"> BIZ4=#{BIZ4},</if> 
+		    <if test="BIZ5!=null"> BIZ5=#{BIZ5},</if> 
+		    <if test="BIZ6!=null"> BIZ6=#{BIZ6},</if> 
+		    <if test="GRACEPERIOD!=null"> GRACEPERIOD=#{GRACEPERIOD},</if> 
+		    <if test="BASERATE!=null"> BASERATE=#{BASERATE},</if> 
+		    <if test="CUSTQUOTAWARN!=null"> CUSTQUOTAWARN=#{CUSTQUOTAWARN},</if>
+		    <if test="WARNDAYS!=null"> WARNDAYS=#{WARNDAYS},</if>
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

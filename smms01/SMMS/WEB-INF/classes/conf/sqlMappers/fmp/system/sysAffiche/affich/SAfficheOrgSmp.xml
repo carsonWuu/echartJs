@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SAfficheOrg"> 
+<sql id="saffciheOrgColumns">RID,AFFICHEID,ORGID,CREATORID,CREATTIME</sql> 
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="saffciheOrgColumns"/> from S_AFFICHEREADER   
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from S_AFFICHEREADER   
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+</select> 
+
+
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_AFFICHEREADER   where RID = #{RID}
+</delete> 
+
+
+<delete id="deleteDataByAFFICHEID" parameterType="hashmap" > 
+	delete from S_AFFICHEREADER   where AFFICHEID = #{AFFICHEID}
+</delete> 
+
+
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_AFFICHEREADER   where RID = #{RID}  
+</select> 
+
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+	select * from S_AFFICHEREADER   where RID = #{RID} 
+</select>
+
+
+<insert id="insertSave" parameterType="hashmap" > 
+   insert into S_AFFICHEREADER   (
+	    	 RID
+		    ,AFFICHEID
+		    ,ORGID
+		    ,CREATORID
+		    ,CREATTIME
+		    
+		)
+	    values(
+	         #{RID}
+		    ,#{AFFICHEID}
+		    ,#{ORGID}
+		    ,#{CREATORID}
+		    ,#{CREATTIME}
+	    )
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_AFFICHEREADER    set
+	    	AFFICHEID = #{AFFICHEID},
+	    	ORGID = #{ORGID},
+	    	CREATORID = #{CREATORID},
+	    	CREATTIME = #{CREATTIME},
+	where RID =#{RID}
+</update> 
+
+</mapper>

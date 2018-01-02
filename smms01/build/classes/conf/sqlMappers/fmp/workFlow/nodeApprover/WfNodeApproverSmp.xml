@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="WfNodeApprover"> 
+<sql id="listColumns">	
+            FLOWINSTANCEID,
+            NODEID,
+            APPROVER,
+            APPROVEFLAG 
+</sql>
+<sql id="detailColumns">
+            FLOWINSTANCEID,
+            NODEID,
+            APPROVER,
+            APPROVEFLAG
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from WF_NODEAPPROVER
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+
+
+<delete id="deleteData" parameterType="hashmap"  > 
+	delete from WF_NODEAPPROVER where FLOWINSTANCEID = #{FLOWINSTANCEID}
+</delete> 
+
+<select id="getNodeApprover" parameterType="hashmap" resultType="hashmap"> 
+	select na.*,u.USERNAME from WF_NODEAPPROVER na
+		LEFT OUTER JOIN s_user u
+			on na.APPROVER = u.USERID
+	where na.FLOWINSTANCEID = #{FLOWINSTANCEID} and na.NODEID=#{CURRNODEID}
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into WF_NODEAPPROVER(
+            FLOWINSTANCEID,
+            NODEID,
+            APPROVER,
+            APPROVEFLAG)
+	values (
+            #{FLOWINSTANCEID},
+            #{NODEID},
+            #{APPROVER},
+            #{APPROVEFLAG}
+            )
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update WF_NODEAPPROVER  
+		<set>
+			<if test="NODEID!=null"> NODEID=#{NODEID},</if> 
+		    <if test="APPROVER!=null"> APPROVER=#{APPROVER},</if> 
+		    <if test="APPROVEFLAG!=null"> APPROVEFLAG=#{APPROVEFLAG},</if> 
+		</set>
+	where FLOWINSTANCEID=#{FLOWINSTANCEID}
+</update> 
+
+<!--根据流程实例Id更新结束节点-->
+<update id="updateEndNodeId" parameterType="hashmap" > 
+	update WF_NODEAPPROVER  
+		<set>
+			<if test="NODEID!=null"> NODEID=#{NODEID},</if>  
+		</set>
+	where FLOWINSTANCEID=#{FLOWINSTANCEID} and NODEID='999'
+</update> 
+
+
+<!--流程转办更新审批人,将转办人更新为受托人-->
+<update id="updateApprover" parameterType="hashmap" > 
+	update WF_NODEAPPROVER  
+		<set>
+		    <if test="ASSIGNEE!=null"> APPROVER=#{ASSIGNEE}</if> 
+		</set>
+	where FLOWINSTANCEID=#{FLOWINSTANCEID} and NODEID=#{NODEID} and APPROVER = #{DEVOLVEMAN}
+</update> 
+
+
+
+<!--流程转办判查询已经存在的审批人-->
+<select id="existApprovers" parameterType="hashmap" resultType="hashmap"> 
+	select na.*,u.USERNAME from WF_NODEAPPROVER na
+	left outer join S_USER u
+		on u.USERID = na.APPROVER
+	where  na.FLOWINSTANCEID=#{FLOWINSTANCEID} and na.NODEID=#{NODEID}
+</select>
+
+</mapper>

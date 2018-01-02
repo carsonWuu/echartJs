@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SSysParams" desc="系统参数设置" tblName="S_SYSPARAMS" pageSize="10" uniteTableModelId="" listURL="" sqlMapNamespace="SSysParams">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F" tableAlias="sp"/>
+		<TableField id="SYS11" colName="SYS11" desc="短信功能" dataType="CHAR" length="1"  listGroupName="" webType="select" dicType="S_DXGN" webTypeExt="" create="LU" group="短信发送平台" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F" tableAlias="sp"/>
+		<TableField id="SYS1" colName="SYS1" desc="序列号" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="" create="LU" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="T" isRangeSearch="F" tableAlias="sp"/>
+		<TableField id="SYS2" colName="SYS2" desc="KEY" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F" tableAlias="sp"/>
+		<TableField id="SYS3" colName="SYS3" desc="密码" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F" tableAlias="sp"/>
+		<TableField id="SYS4" colName="SYS4" desc="签名" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F" tableAlias="sp"/>
+		<TableField id="SYS8" colName="SYS8" desc="余额过低提醒额度" dataType="VARCHAR" length="18"  listGroupName="" webType="text" webTypeExt="money" min="0" max="999999999999" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F" tableAlias="sp"/>
+		<TableField id="SYS9" colName="SYS9" desc="接收提醒职位" dataType="VARCHAR" length="10"  webType="pop" webTypeExt="openSinPop('SPost','SYS9','POSTID','POSTNAME')" dblClick="viewSPostByPostId($(this).attr('truevalue'));" listGroupName="" create="LU" groupEnd="T" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F" tableAlias="sp"/>
+    	
+		<TableField id="SYS5" colName="SYS5" desc="报表根路径" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="" create="LU" group="系统路径设置" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F" tableAlias="sp"/>
+		<!--TableField id="SYS6" colName="SYS6" desc="系统运行日志路径" dataType="VARCHAR" length="300"  listGroupName="" webType="text" webTypeExt="" create="LU" groupEnd="T" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F" tableAlias="sp"/-->
+		
+		<TableField id="SYS7" colName="SYS7" desc="上传附件限制大小(M)" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="decimal" group="系统附件" min="0" max="1047552.99" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F" tableAlias="sp"/>
+
+		<TableField id="SYS10" colName="SYS10" desc="检查任务人" dataType="VARCHAR" length="50"  listGroupName="" webType="pop" webTypeExt="openSinPop('SUser','SYS10','USERID','USERNAME')" dblClick="viewSUserByUserId($(this).attr('truevalue'));" group="贷后检查任务" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F" tableAlias="sp"/>
+		
+		<TableField id="SYS12" colName="SYS12" desc="设置不操作鼠标就锁定系统的时间(单位：分钟)" dataType="VARCHAR" length="50"  listGroupName="" webType="text" dicType="S_DXGN" webTypeExt="" create="LU" group="系统锁屏" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F" tableAlias="sp"/>		
+		<TableField id="SYS13" colName="SYS13" desc="最近统计日期" group="收支明细" dataType="VARCHAR" length="10"  listGroupName="" webType="date" webTypeExt="" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F" tableAlias="sp"/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

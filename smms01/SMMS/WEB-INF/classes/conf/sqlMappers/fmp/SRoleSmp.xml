@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SRole"> 
+<sql id="smoduleColumns">RID,ROLEID,ROLENAME,ORDERNO,MEMO,STATE,CREATORID, CREATTIME, MODIFIEDTIME, MODIFIERID,RECORDSTATE,ORGID</sql> 
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+    select rol.*,org.ORGANSHORTFORM as TRANS_ORGID 
+    from s_role rol left outer join s_org org 
+    on rol.ORGID=org.ORGID  
+	<where>
+		rol.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>
+       	
+	</where>
+		order by rol.STATE DESC
+        <if test="order!=null and order!='' ">   
+             ,${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from s_role rol  
+	<where>
+		 rol.RECORDSTATE='0' 
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+
+<select id="listDataPop" parameterType="hashmap" resultType="hashmap"> 
+    select rol.*,org.ORGANSHORTFORM as TRANS_ORGID 
+    from s_role rol left outer join s_org org 
+    on rol.ORGID=org.ORGID  
+	<where>
+		rol.RECORDSTATE='0' and rol.STATE='2'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>
+       	
+	</where>
+		order by rol.STATE DESC
+        <if test="order!=null and order!='' ">   
+             ,${order}
+        </if>				
+</select> 
+
+<select id="totalNumPop" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from s_role rol  
+	<where>
+		 rol.RECORDSTATE='0' and rol.STATE='2'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+
+
+<select id="sRoleData" parameterType="hashmap" resultType="hashmap"> 
+<!--    对登录的岗位进行岗位分配   -->
+    select * from s_role  rol
+	<where>
+		rol.RECORDSTATE='0' and rol.STATE='2' and (rol.ORGID=#{CURR_ORGID} or rol.ORGID='[ALL]')
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>
+       	
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+
+<select id="roleData" parameterType="hashmap" resultType="hashmap"> 
+<!--   对选择的岗位进行岗位分配   -->
+	select  * from S_ROLE role
+	left outer join S_ORG org
+    on role.ORGID=org.ORGID  
+	<where>
+		role.RECORDSTATE='0' and (role.ORGID=#{ORGID}  or role.ORGID='[ALL]')
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+ 
+
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update s_role set                     
+                        RECORDSTATE=#{RECORDSTATE}
+	where RID=#{RID}
+</update> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from s_role where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select 
+		rol.*,org.ORGANSHORTFORM as TRANS_ORGID 
+	from s_role rol 
+		left join s_org org on rol.ORGID=org.ORGID  
+	where rol.RID = #{RID}  
+</select> 
+ 
+
+
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+	select rol.*,org.ORGANSHORTFORM as TRANS_ORGID from s_role rol left join s_org org on rol.ORGID=org.ORGID  where rol.RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" > 
+	insert into s_role(RID,ROLEID,ROLENAME,ORDERNO,MEMO,STATE,CREATORID, CREATTIME, MODIFIEDTIME, MODIFIERID,RECORDSTATE,ORGID)values (#{RID},#{ROLEID},#{ROLENAME},#{ORDERNO},#{MEMO},#{STATE},#{CREATORID},#{CREATTIME},#{MODIFIEDTIME}, #{MODIFIERID},#{RECORDSTATE},#{ORGID})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update s_role 
+	<set> 
+	<if test="ROLEID!=null">ROLEID=#{ROLEID},</if>
+	<if test="ROLENAME!=null">ROLENAME=#{ROLENAME},</if>
+	<if test="ORDERNO!=null">ORDERNO=#{ORDERNO},</if>
+	<if test="MEMO!=null">MEMO=#{MEMO},</if>
+	<if test="STATE!=null">STATE=#{STATE}, </if>
+	<if test="MODIFIEDTIME!=null">MODIFIEDTIME = #{MODIFIEDTIME},</if>
+	<if test="MODIFIERID!=null">MODIFIERID = #{MODIFIERID},</if>
+	<if test="RECORDSTATE!=null">RECORDSTATE = #{RECORDSTATE},</if>
+	<if test="ORGID!=null">ORGID = #{ORGID}</if>
+	</set>
+	where RID=#{RID}
+</update> 
+
+<select id="filterData" parameterType="hashmap" resultType="hashmap"> 
+    select * from s_role rol
+	where  rol.RECORDSTATE = '0' and rol.STATE='2' AND rol.ORGID = #{ORGID}
+	    <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>
+			
+</select> 
+
+<!--  根据ROLEID获取数据  -->
+<select id="getRoleByRoleId" parameterType="hashmap" resultType="hashmap">
+	select * from S_ROLE where ROLEID = #{ROLEID} and RECORDSTATE = '0'
+</select> 
+
+</mapper>

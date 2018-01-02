@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<TableModel id="SAttachmentForNodeTra" desc="附件表" tblName="S_Attachment" pageSize="10" listURL="/fmp/SAttachmentBiz/DoList?tableModelId=SAttachment&amp;opMode=update&amp;moduleId=crd_md_fkdfjxx" sqlMapNamespace="SAttachment">
+		<Fields>
+			<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR2" length="40" required="F" isPK="T"  order="ASC"  dicType="" isSearch="F" create="VLAU" hidden="VLAU" webType="" webTypeExt=""  />
+			<TableField id="FILECODE_cx" colName="FILECODE" desc="项目编号" dataType="VARCHAR" length="20"  listGroupName="" webType="text" webTypeExt="" create="" groupEnd="F" isSearch="T" fuzzy="T"  forceNewRow="F"  tableAlias="cci" />
+			<TableField id="FILECODE" colName="FILECODE" desc="项目编号" dataType="VARCHAR" length="20"  webType="pop" webTypeExt="" dblClick="viewCaseByFileCode($(this).attr('truevalue'));" create="LVUA" hidden="AVU" groupEnd="F" isSearch="F" fuzzy="T" tableAlias="cci"/>
+			<TableField id="ARCHIVETYPE" colName="ARCHIVETYPE" desc="档案类型"  dataType="VARCHAR" length="3"  required="T" isSearch="T" create="LAVU" orderInList="T" inputInList="T"  webType="select" dicType="S_DALX" titleWidth="130px" tableAlias="sam"/>
+			<TableField id="ATTACHMENTID" colName="ATTACHMENTID" desc="附件编号" dataType="VARCHAR2" length="30"  required="F" isSearch="F" create="LAVU" hidden="LUA" readOnly="U" orderInList="T" webType="text" autoCode="CRD_FJBM" tableAlias="sam"/>
+			<TableField id="ATTACHMENTNAME" colName="ATTACHMENTNAME" desc="附件名称"  dataType="VARCHAR2" length="100"  required="F" isSearch="T" fuzzy="T" orderInList="T" create="LAVU"  inputInList="T" webType="text"  titleWidth="350px" tableAlias="sam"/>
+			<TableField id="CUSTID" colName="CUSTID" desc="申请人名称" dataType="VARCHAR" length="50"  webType="pop" webTypeExt="" dblClick="viewCustByCustCode($(this).attr('truevalue'));" create="L" isSearch="F" fuzzy="T"  tableAlias="cci"/>
+			<TableField id="CUSTNAME" colName="CUSTNAME" desc="申请人名称" dataType="VARCHAR" length="50"  webType="text" webTypeExt="" create="" isSearch="T" fuzzy="T"  tableAlias="cci"/>
+			<TableField id="CREATTIME" colName="CREATTIME" desc="上传时间" dataType="CHAR" length="20"  required="F" isSearch="T" create="LAVU" hidden="VA" webType="date" readOnly="AU" tableAlias="sam"/>
+			<TableField id="CREATORID" colName="CREATORID" desc="上传人" dataType="VARCHAR2" length="40"  required="F" isSearch="F" create="LAVU" hidden="VA" webType="pop" dblClick="viewSUserByUserId($(this).attr('truevalue'));" readOnly="AU" tableAlias="sam"/>
+			<TableField id="USERNAME" colName="USERNAME" desc="上传人" dataType="VARCHAR2" length="40"  required="F" isSearch="T" fuzzy="T" create="LAVU" hidden="LVAU" webType="text"  readOnly="" tableAlias="sus"/>
+			<TableField id="CASENAME" colName="CASENAME" desc="项目名称" dataType="VARCHAR" length="100"  webType="text" webTypeExt="" create="L"  isSearch="T" fuzzy="T" tableAlias="cci" />
+			<TableField id="CASESTATE" colName="CASESTATE" desc="项目状态" dataType="CHAR" length="2"  webType="select" dicType="CRD_AJZT" create="L" isSearch="T" tableAlias="cci"/>		
+			<TableField id="TABLEID" colName="TABLEID" desc="关联业务表模型ID" dataType="VARCHAR2" length="30"  required="F" isSearch="F" create="LAVU" hidden="VLAU" webType="text" tableAlias="sam"/>
+			<TableField id="RECORDRID" colName="RECORDRID" desc="关联业务主键" dataType="VARCHAR" length="40"  required="F" isSearch="F" create="LAVU" hidden="VLAU" webType="text" tableAlias="sam"/>
+			<TableField id="FILESIZE" colName="FILESIZE" desc="附件大小" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" readOnly="AU" webType="pop" tableAlias="sam"/>
+			<TableField id="FILEPATH" colName="FILEPATH" desc="附件存放路径" dataType="VARCHAR2" length="40"  required="F" isSearch="F" create="LAVU" hidden="L" webType="text" tableAlias="sam"/>
+			<TableField id="ATTACHMENTSTATE" colName="ATTACHMENTSTATE" desc="附件状态" dataType="CHAR" length="1"  listGroupName=""  isSearch="T"  dicType="S_FJZT" webType="select" webTypeExt="" defValue="" create="LVUA" hidden="A" tableAlias="sam" />
+			<TableField id="LIABDEPT" colName="LIABDEPT" desc="责任部门" dataType="VARCHAR2" length="20"  required="F" isSearch="F" create="LAVU" hidden="AV" webType="pop" dblClick="viewSDeptByDeptId($(this).attr('truevalue'));" fuzzy="T" readOnly="AU" tableAlias="sam"/>
+			<TableField id="DEPSHORTFORM" colName="DEPSHORTFORM" desc="责任部门" dataType="VARCHAR2" length="20"  required="F" isSearch="T" create="LAVU" hidden="LAV" webType="text"  fuzzy="T" readOnly="" tableAlias="sde"/>
+			<TableField id="LIABORG" colName="LIABORG" desc="责任机构" dataType="CHAR" length="10"  required="F" isSearch="F" create="LAVU" hidden="LAVU" webType="text" webTypeExt="text" tableAlias="sam"/>
+		    <TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20"  required="F" isSearch="F" create="LAVU" hidden="VLAU" webType="date" tableAlias="sam"/>
+			<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="VLAU" webType="text" tableAlias="sam"/>
+			<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  required="F" isSearch="F" create="LAVU" hidden="VLAU" webType="text" tableAlias="sam"/>		
+			<TableField id="ATTACHMENTREMARK" colName="ATTACHMENTREMARK" desc="附件备注" dataType="VARCHAR" length="50"  required="F" isSearch="F" create="LAVU" inputInList="T" webType="text" dicType=""  titleWidth="150px" tableAlias="sam"/>
+	  </Fields>
+	  <ListButtons>
+	  	<Button id="view_downloadAttachment" desc="打开附件" opScript="downloadAttachment()" cssClass="button"/>
+	  </ListButtons>
+	</TableModel>

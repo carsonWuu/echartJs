@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<TableModel id="SDic" desc="字典表" tblName="s_dic" pageSize="10" listURL="/fmp/SDicBiz/DoList">
+		<Fields>
+			<TableField id="RID" colName="RID" desc="记录主键" dataType="VARCHAR2" length="30" required="T" isPK="T"  order="ASC"  dicType=""  create="VLAU" hidden="LVAU"  webTypeExt=""  />
+			<TableField id="DATATYPE" colName="DATATYPE" desc="数据类型" dataType="VARCHAR2" length="30"  required="T" isSearch="T" create="LVAU" orderInList="T" order="DESC"  />
+			<TableField id="DATAKEY" colName="DATAKEY" desc="数据键" dataType="VARCHAR2" length="50"  required="T" isSearch="T" create="LVAU" fuzzy="T" orderInList="T"  />
+			<TableField id="DATAVALUE" colName="DATAVALUE" desc="数据值" dataType="VARCHAR2" length="100" required="T" isPK="T" isEncrypted="F"  create="LVAU" fuzzy="T" isSearch="T" orderInList="T" />
+			<!--
+			<TableField id="SUPERDIC" colName="SUPERDIC" desc="上级字典" dataType="VARCHAR2" length="50"  required="F" isSearch="F" create="LVAU" webType="select"  />
+			-->
+			<TableField id="DATATYPEDESC" colName="DATATYPEDESC" desc="数据类型描述" dataType="VARCHAR2" length="50"  required="T" fuzzy="T" isSearch="T" create="LVAU" webType="text"  />
+			<TableField id="ISPARENTDIC" colName="ISPARENTDIC" desc="是否分组标签" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LVAU" hidden="" webType="select" dicType="S_SF" />
+			<TableField id="LISTORDER" colName="LISTORDER" desc="排序" dataType="INTEGER" length="10"  required="F" isSearch="F" create="LVAU" hidden="" webType="text" order="DESC" orderInList="T" />
+			<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="VARCHAR2" length="20"  webType="text" webTypeExt="date" required="F" isSearch="F" create="LVAU" hidden="LVAU" />
+			<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LVAU" hidden="LVAU" webType="text" />
+			<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="VARCHAR2" length="20"  webType="text" webTypeExt="date" required="F" isSearch="F" create="LVAU" hidden="LVAU"  />
+			<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LVAU" hidden="LVAU" webType="text" />
+			<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="VARCHAR2" length="1"  required="F" isSearch="F" create="LVAU" hidden="LVAU" webType="text"  />
+		</Fields>		
+	</TableModel>

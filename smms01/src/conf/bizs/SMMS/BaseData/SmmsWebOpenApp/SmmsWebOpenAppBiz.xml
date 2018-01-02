@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="SMMS.BaseData.SmmsWebOpenApp.SmmsWebOpenAppBiz" namespace="/SMMS/SmmsWebOpenAppBiz" extends="SMMS-default">        
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.SMMS.BaseData.SmmsWebOpenApp.action.{1}SmmsWebOpenAppAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+        </action>    
+		<!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.SMMS.BaseData.SmmsWebOpenApp.action.SaveSmmsWebOpenAppAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>   
+		<!--保存可修改的列表信息-->
+        <action  name="SaveDataList" class="com.zstar.SMMS.BaseData.SmmsWebOpenApp.action.SaveSmmsWebOpenAppDataListAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>  
+		<!--保存联合主从表信息-->
+        <action  name="SaveUniteSubTableList" class="com.zstar.SMMS.BaseData.SmmsWebOpenApp.action.SaveSmmsWebOpenAppUniteSubTableAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>        
+        </action>
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.SMMS.BaseData.SmmsWebOpenApp.action.DeleteSmmsWebOpenAppAction">
+        </action>
+        <!--下发-->
+          <action  name="Sand" class="com.zstar.SMMS.BaseData.SmmsWebOpenApp.action.SandSmmsWebOpenAppAction">
+        </action> 
+          <!--全部下发-->
+          <action  name="SandAll" class="com.zstar.SMMS.BaseData.SmmsWebOpenApp.action.SandAllSmmsWebOpenAppAction">
+        </action>                      
+    </package>
+</struts>

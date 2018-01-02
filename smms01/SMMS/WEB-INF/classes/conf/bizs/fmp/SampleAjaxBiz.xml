@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    
+  <package name="fmp.CommonUpload" namespace="/upload/commonUpload" extends="fmp.FrameCommonBiz">  
+    
+    <action  name="uploadFile" class="com.zstar.fmp.core.ajax.OpenUploadFile">
+        <result name="success">/WEB-INF/jsp/fmp/ajaxSubmit/UploadCommon.jsp</result>
+    </action> 
+    
+    <!-- 判断文件名称和文件大小是否符合规范-->
+    <action name="checkFileName" class="com.zstar.fmp.core.ajax.CheckFileNameAction">  
+    </action>
+    
+    <action name="save" class="com.zstar.fmp.core.ajax.UploadFileAction">  
+    </action>
+  
+ </package>
+ 
+    <package name="fmp.Sample" namespace="/fmp/Sameple" extends="json-default">
+    <action name="addData">
+      <result>/WEB-INF/jsp/fmp/ajaxSubmit/FilesDemo.jsp</result>
+    </action>
+    <action name="AjaxSample" class="com.zstar.fmp.core.ajax.AjaxSubmit">
+      <result type="json"/>
+    </action>
+                     
+    </package>    
+</struts>

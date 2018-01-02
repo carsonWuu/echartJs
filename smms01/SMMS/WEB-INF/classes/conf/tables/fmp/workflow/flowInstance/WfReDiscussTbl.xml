@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="WfReDiscuss" desc="流程复议" tblName="wf_FlowInstance" pageSize="10" uniteTableModelId="" listURL="/fmp/FrameCommonBiz/DoList?tableModelId=WfReDiscuss" sqlMapNamespace="WfFlowInstance">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="FLOWINSTANCEID" colName="FLOWINSTANCEID" desc="流程实例ID" defValue="" dataType="VARCHAR" length="20"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="REDISCUSSREASON" colName="REDISCUSSREASON" desc="复议原因" dataType="VARCHAR" length="200"  listGroupName="" webType="textarea" colSpan="2" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+	    <TableField id="REDISCUSSREMARK" colName="REDISCUSSREMARK" desc="备注" dataType="VARCHAR" length="200"  listGroupName="" webType="textarea" colSpan="2" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+	    <TableField id="REDISCUSSMAN" colName="REDISCUSSMAN" desc="复议申请人" dataType="VARCHAR" length="10"  webType="pop" webTypeExt="" create="LVUA" defValue ="" readOnly="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+	    <TableField id="REDISCUSSTIME" colName="REDISCUSSTIME" desc="复议时间" dataType="CHAR" length="20"  required="F" isSearch="F" create="LAVU" readOnly="LVUA" hidden="" webType="date" />
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

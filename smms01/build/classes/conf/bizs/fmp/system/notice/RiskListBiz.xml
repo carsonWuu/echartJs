@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>    	
+    <package name="fmp.system.notice.RiskListBiz" namespace="/fmp/system/notice/RiskListBiz" extends="fmp.FrameCommonBiz">
+        <!--风险预警页面--> 
+        <action  name="WRiskList" class="com.zstar.fmp.system.notice.action.WRiskListAction">
+            <result>/WEB-INF/jsp/fmp/system/notice/wRiskList.jsp</result>
+        </action>   
+        
+        <!--消息提醒页面--> 
+        <action  name="MRiskList" class="com.zstar.fmp.system.notice.action.MRiskListAction">
+            <result>/WEB-INF/jsp/fmp/system/notice/mRiskList.jsp</result>
+        </action>       
+
+        <!-- Add actions here -->
+    </package>
+</struts>

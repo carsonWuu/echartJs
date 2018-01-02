@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="SMMS.acLog.SmmsAcBbsKey.SmmsAcBbsKeyBiz" namespace="/SMMS/SmmsAcBbsKeyBiz" extends="SMMS-default">        
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.SMMS.acLog.SmmsAcBbsKey.action.{1}SmmsAcBbsKeyAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+        </action>    
+		<!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.SMMS.acLog.SmmsAcBbsKey.action.SaveSmmsAcBbsKeyAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>   
+		<!--保存可修改的列表信息-->
+        <action  name="SaveDataList" class="com.zstar.SMMS.acLog.SmmsAcBbsKey.action.SaveSmmsAcBbsKeyDataListAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>  
+		<!--保存联合主从表信息-->
+        <action  name="SaveUniteSubTableList" class="com.zstar.SMMS.acLog.SmmsAcBbsKey.action.SaveSmmsAcBbsKeyUniteSubTableAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>        
+        </action>
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.SMMS.acLog.SmmsAcBbsKey.action.DeleteSmmsAcBbsKeyAction">
+        </action>                    
+    </package>
+</struts>

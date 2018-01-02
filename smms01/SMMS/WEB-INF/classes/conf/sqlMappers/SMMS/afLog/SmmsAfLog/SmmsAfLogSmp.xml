@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsAfLog"> 
+<sql id="listColumns">
+	
+            RID,
+            EVENT_ID,
+            EVENT_NAME,
+            EVENT_TYPE,
+            SUB_TYPE,
+            WRN_LEVEL,
+            BRANCH,
+            SRC_IP,
+            DST_IP,
+            START_TIME,
+            END_TIME,
+            EVENT_CONTENT,
+            SOLUTION,
+            EVENT_EVIDENCE,
+            CREATTIME,
+            RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            EVENT_ID,
+            EVENT_NAME,
+            EVENT_TYPE,
+            SUB_TYPE,
+            WRN_LEVEL,
+            BRANCH,
+            SRC_IP,
+            DST_IP,
+            START_TIME,
+            END_TIME,
+            EVENT_CONTENT,
+            SOLUTION,
+            EVENT_EVIDENCE,
+            CREATTIME,
+            RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select Rid as EVENT_EVIDENCE,
+	case WHEN 
+		EVENT_EVIDENCE is not null and EVENT_EVIDENCE!='' 
+	then 
+		'详情' 
+	else 
+		'无' 
+	end  as TRANS_EVENT_EVIDENCE,	<include refid="listColumns"/> ,case when src_ip is null or src_ip='' or src_ip ='0.0.0.0' then dst_ip ELSE src_ip end as IP from SMMS_AF_LOG 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+<select id="findSyslogDataValue" resultType="hashmap">
+    select DATAVALUE from s_dic where datatype='SMMS_FILE_CURR_LINE' and DATAKEY='syslog'
+</select>
+
+<select id="updateSyslogDataValue" parameterType="Long" resultType="hashmap">
+    update s_dic set DATAVALUE=#{resultFilePos} where datatype='SMMS_FILE_CURR_LINE' and DATAKEY='syslog'
+</select>
+
+<select id="findSyslogErrDataValue" resultType="hashmap">
+    select DATAVALUE from s_dic where datatype='SMMS_FILE_CURR_LINE' and DATAKEY='syslogerr'
+</select>
+
+<select id="updateSyslogErrDataValue" parameterType="int" resultType="hashmap">
+    update s_dic set DATAVALUE=#{resultCurrLine} where datatype='SMMS_FILE_CURR_LINE' and DATAKEY='syslogerr'
+</select>
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_AF_LOG 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_AF_LOG  where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/> ,case when src_ip is null or src_ip='' then dst_ip ELSE src_ip end as IP from SMMS_AF_LOG  where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_AF_LOG  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_AF_LOG  where RID = #{RID} 
+</select> 
+<select id="findEventEvidence" resultType="hashmap" parameterType="hashmap">
+    select EVENT_EVIDENCE from SMMS_AF_LOG where RID=#{RID}
+</select>
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_AF_LOG (
+            <if test="RID != null ">RID,</if>
+            <if test="ID != null ">EVENT_ID,</if>
+            <if test="NAME != null ">EVENT_NAME,</if>
+            <if test="TYPE != null ">EVENT_TYPE,</if>
+            <if test="SUB_TYPE != null ">SUB_TYPE,</if>
+            <if test="LEVEL != null ">WRN_LEVEL,</if>
+            <if test="BRANCH != null ">BRANCH,</if>
+            <if test="SRC_IP != null ">SRC_IP,</if>
+            <if test="DST_IP != null ">DST_IP,</if>
+            <if test="START_TIME != null ">START_TIME,</if>
+            <if test="END_TIME != null ">END_TIME,</if>
+            <if test="EVENT_CONTENT != null ">EVENT_CONTENT,</if>
+            <if test="SOLUTION != null ">SOLUTION,</if>
+            <if test="EVENT_EVIDENCE != null ">EVENT_EVIDENCE,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="ID != null ">#{ID},</if>
+           <if test="NAME != null ">#{NAME},</if>
+           <if test="TYPE != null ">#{TYPE},</if>
+           <if test="SUB_TYPE != null ">#{SUB_TYPE},</if>
+           <if test="LEVEL != null ">#{LEVEL},</if>
+           <if test="BRANCH != null ">#{BRANCH},</if>
+           <if test="SRC_IP != null ">#{SRC_IP},</if>
+           <if test="DST_IP != null ">#{DST_IP},</if>
+           <if test="START_TIME != null ">#{START_TIME},</if>
+           <if test="END_TIME != null ">#{END_TIME},</if>
+           <if test="EVENT_CONTENT != null ">#{EVENT_CONTENT},</if>
+           <if test="SOLUTION != null ">#{SOLUTION},</if>
+           <if test="EVENT_EVIDENCE != null ">#{EVENT_EVIDENCE},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_AF_LOG   
+		<set>
+				    <if test="EVENT_ID!=null"> EVENT_ID=#{EVENT_ID},</if> 
+		    <if test="EVENT_NAME!=null"> EVENT_NAME=#{EVENT_NAME},</if> 
+		    <if test="EVENT_TYPE!=null"> EVENT_TYPE=#{EVENT_TYPE},</if> 
+		    <if test="SUB_TYPE!=null"> SUB_TYPE=#{SUB_TYPE},</if> 
+		    <if test="WRN_LEVEL!=null"> WRN_LEVEL=#{WRN_LEVEL},</if> 
+		    <if test="BRANCH!=null"> BRANCH=#{BRANCH},</if> 
+		    <if test="SRC_IP!=null"> SRC_IP=#{SRC_IP},</if> 
+		    <if test="DST_IP!=null"> DST_IP=#{DST_IP},</if> 
+		    <if test="START_TIME!=null"> START_TIME=#{START_TIME},</if> 
+		    <if test="END_TIME!=null"> END_TIME=#{END_TIME},</if> 
+		    <if test="EVENT_CONTENT!=null"> EVENT_CONTENT=#{EVENT_CONTENT},</if> 
+		    <if test="SOLUTION!=null"> SOLUTION=#{SOLUTION},</if>
+		    <if test="EVENT_EVIDENCE!=null"> EVENT_EVIDENCE=#{EVENT_EVIDENCE},</if>
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

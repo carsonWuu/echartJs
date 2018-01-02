@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="WfMeetingApvHis" desc="会签节点审批历史" tblName="WF_MEETINGAPVHIS" pageSize="10" uniteTableModelId="" listURL="/fmp/FrameCommonBiz/DoList?tableModelId=WfMeetingApvHis" sqlMapNamespace="WfMeetingApvHis">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="FLOWINSTANCEID" colName="FLOWINSTANCEID" desc="流程实例ID" defValue="" dataType="VARCHAR" length="20"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="NODEID" colName="NODEID" desc="流程节点ID" dataType="VARCHAR" defValue="" length="20"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="FLOWTEMPID" colName="FLOWTEMPID" desc="模板ID" dataType="VARCHAR" defValue="" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" hidden="LVUA" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="APPROVER" colName="APPROVER" desc="审批人" dataType="VARCHAR" length="10"  webType="pop" webTypeExt="openApvPop(this)" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" titleWidth="200px" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+	
+		<TableField id="APPROVENOTION" colName="APPROVENOTION" desc="会签意见" dataType="VARCHAR" length="200"  listGroupName="" webType="textarea" webTypeExt="" create="LVUA" groupEnd="F" titleWidth="500px" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+	    <TableField id="APPROVERESULT" colName="APPROVERESULT" desc="会签结果" dataType="CHAR" length="1"  listGroupName="" webType="radio" dicType="S_HQJG" webTypeExt="3" create="LVUA" titleWidth="200px" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="APPROVERCONDI" colName="APPROVERCONDI" desc="会签审批人过滤条件" defValue="" dataType="VARCHAR" length="250"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" />		
+		</Fields>
+	<SubTableModels>
+	</SubTableModels>
+	<ListButtons>
+	  	<Button id="view_addDataInUpdateListMode" desc="新增" opScript="addDataInUpdateListMode()" cssClass="button"/>
+	  	<Button id="view_deleteDataInUpdateListMode" desc="删除" opScript="deleteDataInUpdateListMode()" cssClass="button"/>
+	  	<Button id="view_saveMettingApvDataList" desc="保存列表" opScript="saveMettingApvDataList()" cssClass="button"/>
+	</ListButtons>
+</tablemodel>

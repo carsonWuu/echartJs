@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SmmsWebCaseIp" desc="网站备案IP信息" recordNum="T" tblName="SMMS_WEB_CASE_IP" pageSize="10" uniteTableModelId="" listURL="/SMMS/SmmsWebCaseIpBiz/DoList?tableModelId=SmmsWebCaseIp" sqlMapNamespace="SmmsWebCaseIp">
+	<Fields>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20" cssClass="" listGroupName="" create="V" hidden="V" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20" cssClass="" listGroupName="" create="LV" hidden="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1" cssClass="" listGroupName="" create="V" hidden="V" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40" cssClass="" listGroupName="" create="LV" hidden="L" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="CASE_RID" colName="CASE_RID" desc="备案主键" dataType="VARCHAR" length="40" cssClass="" listGroupName="" create="LV" hidden="L" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="ACCESS_IP" colName="ACCESS_IP" desc="接入IP" dataType="VARCHAR2" length="15" cssClass="" listGroupName="" create="LV" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

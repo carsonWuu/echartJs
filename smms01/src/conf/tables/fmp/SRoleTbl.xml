@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<TableModel id="SRole" desc="岗位信息" tblName="s_role" pageSize="20" listURL="/fmp/FrameCommonBiz/DoList">
+		<Fields>
+			<TableField id="RID" colName="RID" desc="记录主键" dataType="VARCHAR2" length="40" required="F" isPK="T"  order="ASC"  dicType="" isSearch="F" create="VLAU" hidden="LVAU" webType="" webTypeExt=""   tableAlias="rol" />
+			<TableField id="ROLEID" colName="ROLEID" desc="岗位码" dataType="VARCHAR2" length="30"  required="F" isSearch="T" create="LVAU" hidden="A" readOnly="VU" fuzzy="T" order="ASC" orderInList="T" webType="text" autoCode="S_JSBM" tableAlias="rol" />
+			<TableField id="ROLENAME" colName="ROLENAME" desc="岗位名称" dataType="VARCHAR2" length="40" required="F" isSearch="T" isEncrypted="F"  create="LVAU"  order="DESC" orderInList="T" webType="text" fuzzy="T" tableAlias="rol" />
+			<TableField id="ORDERNO" colName="ORDERNO" desc="排序字段" dataType="INTEGER" length="10"  required="F" isSearch="F" create="LVAU" hidden="L" webType="text" webTypeExt="number" tableAlias="rol"  />
+			<TableField id="ORGID" colName="ORGID" desc="所属机构" dataType="VARCHAR2" length="10"  required="T" isSearch="T" defValue="" create="LAVU" webType="pop" webTypeExt="openSinOrgPop('SOrg','ORGID','ORGID','ORGNAME')" dblClick="viewSOrgByOrgId($(this).attr('truevalue'));" tableAlias="rol" />
+			<TableField id="MEMO" colName="MEMO" desc="备注" dataType="VARCHAR2" length="60"  required="F" isSearch="F" create="LVAU"  webType="textarea"  tableAlias="rol" />
+			<TableField id="STATE" colName="STATE" desc="状态" dataType="VARCHAR2" length="1"  required="F" isSearch="T" create="LVAU" hidden="A" webType="select" dicType="S_QYZT" defValue="2"  tableAlias="rol" />
+			<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LVAU" hidden="LVAU"  webType="text"  tableAlias="rol" />
+			<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"  required="F" isSearch="F" create="LAVU" hidden="LVAU"  webType="text" webTypeExt="time"  tableAlias="rol" />
+			<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20"  required="F" isSearch="F" create="LAVU" hidden="LVAU"  webType="text" webTypeExt="time"  tableAlias="rol" />
+			<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="LVAU"  webType="text"   tableAlias="rol" />
+			<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  required="F" isSearch="F" create="LAVU" hidden="LVAU"  webType="text"  tableAlias="rol" />
+		</Fields>
+	</TableModel>

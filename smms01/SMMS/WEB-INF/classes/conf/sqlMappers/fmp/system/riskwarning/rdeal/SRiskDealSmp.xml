@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SRiskDeal"> 
+<sql id="listColumns">
+	
+      rw.INCEPTUSERID,
+      rw.MSGSTATE,
+      rw.CREATTIME,
+      rw.RECORDSTATE,
+      rw.RID,
+      rw.MSGID,
+      rw.SCHEMEID,
+      rw.MSGCONTENT,
+      rw.MSGBEGINDATE,
+      rw.MSGENDDATE,
+      rw.RWLEVEL,
+      rw.RWBIZTYPE,
+      rw.RWBIZRID,
+      rw.INCEPTORGID,
+      rw.INCEPTDEPTID,
+
+      mfb.RESULTTYPE,
+      mfb.RESULTDESC,
+      mfb.OWNER,
+      mfb.SPI_MIND,
+      mfb.SUPERINTEND,
+      mfb.SUPERINTENDRESULT
+           
+</sql>
+<sql id="detailColumns">
+	
+      rw.INCEPTUSERID,
+      rw.MSGSTATE,
+      rw.CREATTIME,
+      rw.RECORDSTATE,
+      rw.RID,
+      rw.MSGID,
+      rw.SCHEMEID,
+      rw.MSGCONTENT,
+      rw.MSGBEGINDATE,
+      rw.MSGENDDATE,
+      rw.RWLEVEL,
+      rw.RWBIZTYPE,
+      rw.RWBIZRID,
+      rw.INCEPTORGID,
+      rw.INCEPTDEPTID,
+
+      mfb.RESULTTYPE,
+      mfb.RESULTDESC,
+      mfb.OWNER,
+      mfb.SPI_MIND,
+      mfb.SUPERINTEND,
+      mfb.SUPERINTENDRESULT      
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from S_MSGFEEDBACK mfb
+	left outer join S_RISKWARNMSG rw on (mfb.MSGID = rw.MSGID)
+	<where>
+		rw.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from  S_MSGFEEDBACK mfb
+	left outer join S_RISKWARNMSG rw on (mfb.MSGID = rw.MSGID)
+	<where>
+		rw.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select u1.USERNAME as TRANS_OWNER,  
+		   u2.USERNAME as TRANS_SUPERINTEND,      
+	<include refid="detailColumns"/>   from S_MSGFEEDBACK mfb
+	left outer join s_user u1
+	on u1.USERID = mfb.OWNER
+	left outer join s_user u2
+	on u2.USERID = mfb.SUPERINTEND
+	,S_RISKWARNMSG rw
+	where mfb.MSGID = rw.MSGID and rw.RID = #{RID} 
+
+		 	       
+</select> 
+
+
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+	select u1.USERNAME as TRANS_OWNER,  
+		   u2.USERNAME as TRANS_SUPERINTEND,      
+	<include refid="detailColumns"/>   from S_MSGFEEDBACK mfb
+	left outer join s_user u1
+	on u1.USERID = mfb.OWNER
+	left outer join s_user u2
+	on u2.USERID = mfb.SUPERINTEND
+	,S_RISKWARNMSG rw
+	where mfb.MSGID = rw.MSGID and rw.RID = #{RID} 
+
+	
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_MSGFEEDBACK(
+      RID,
+      MSGID,
+      SCHEMEID,
+      RESULTTYPE,
+      RESULTDESC,
+      OWNER,
+      SPI_MIND,
+      SUPERINTEND,
+      CREATTIME,
+      CREATORID,
+      MODIFIEDTIME,
+      MODIFIERID,
+      SUPERINTENDRESULT,
+      RECORDSTATE)
+	   values (
+      #{RID},
+      #{MSGID},
+      #{SCHEMEID},
+      #{RESULTTYPE},
+      #{RESULTDESC},
+      #{OWNER},
+      #{SPI_MIND},
+      #{SUPERINTEND},
+      #{CREATTIME},
+      #{CREATORID},
+      #{MODIFIEDTIME},
+      #{MODIFIERID},
+      #{SUPERINTENDRESULT},
+      #{RECORDSTATE})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_MSGFEEDBACK  
+		<set>
+		    <if test="MSGID!=null"> MSGID=#{MSGID},</if> 
+    <if test="SCHEMEID!=null"> SCHEMEID=#{SCHEMEID},</if> 
+    <if test="RESULTTYPE!=null"> RESULTTYPE=#{RESULTTYPE},</if> 
+    <if test="RESULTDESC!=null"> RESULTDESC=#{RESULTDESC},</if> 
+    <if test="OWNER!=null"> OWNER=#{OWNER},</if> 
+    <if test="SPI_MIND!=null"> SPI_MIND=#{SPI_MIND},</if> 
+    <if test="SUPERINTEND!=null"> SUPERINTEND=#{SUPERINTEND},</if> 
+    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+    <if test="SUPERINTENDRESULT!=null"> SUPERINTENDRESULT=#{SUPERINTENDRESULT},</if> 
+    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+
+<select id="getSuperintendByRid" parameterType="hashmap" resultType="string"> 
+	   select SUPERINTEND from S_MSGFEEDBACK where RID = #{RID}
+</select>
+
+<select id="getOwnerByRid" parameterType="hashmap" resultType="string"> 
+	   select OWNER from S_MSGFEEDBACK where RID = #{RID}
+</select>
+
+</mapper>

@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="PendingEvent_aqsj"> 
+<sql id="listColumns">
+	
+            spea.RID,
+            spea.EVENT_SOURCE,
+            spea.CLIENTNAME,
+            spea.REPORT_CITY,
+            spea.REPORT_TIME,
+            spea.OCCUR_TIME,
+            spea.EVENT_TYPE1,
+            spea.EVENT_TYPE2,
+            spea.THREAT_LEVEL,
+            spea.THREAT_NAME,
+            spea.THREAT_TYPE1,
+            spea.THREAT_TYPE2,
+            spea.THREAT_TYPE3,
+            spea.THREAT_TYPE4,
+            spea.ATTACK_IP,
+            spea.CC_DOMAIN,
+            spea.CC_URL,
+            spea.IP,
+            spea.DOMAIN,
+            spea.URL,
+            spea.UNIT_INDUSTY,
+            spea.UNIT_NAME,
+            spea.ACCESS_ID,
+            spea.ROOM_NAME,
+            spea.ROOM_IDX,
+            spea.SYS_RECTIFY_SUGGEST,
+            spea.FINAL_RECTIFY_SUGGEST,
+            spea.IS_FORCE_CLOSE,
+            spea.IS_WHITE_LIST,
+            spea.FORCE_CLOSE_DESCE,
+            spea.RECTIFY_TERM,
+            spea.CLOSE_TERM,
+            spea.SEND_TIME,
+            spea.SEND_TIMESTAMP,
+            spea.RECTIFY_STATE,
+            spea.RECTIFY_MEASURE,
+            spea.FEEDBACK_TIME,
+            spea.FEEDBACK_TIMESTAMP,
+            spea.WEB_CASE_RID,
+            spea.MEMO,
+            spea.LOG_TABLENAME,
+            spea.LOG_RID,
+            spea.CREATTIME,
+            spea.MODIFIEDTIME,
+            spea.RECORDSTATE,
+            sii.IDC_ID,
+            sii.IDC_NAME,
+            sal.EVENT_CONTENT,
+            sal.SOLUTION
+</sql>
+<sql id="detailColumns">
+	
+            spea.RID,
+            spea.EVENT_SOURCE,
+            spea.CLIENTNAME,
+            spea.REPORT_CITY,
+            spea.REPORT_TIME,
+            spea.OCCUR_TIME,
+            spea.EVENT_TYPE1,
+            spea.EVENT_TYPE2,
+            spea.THREAT_LEVEL,
+            spea.THREAT_NAME,
+            spea.THREAT_TYPE1,
+            spea.THREAT_TYPE2,
+            spea.THREAT_TYPE3,
+            spea.THREAT_TYPE4,
+            spea.ATTACK_IP,
+            spea.CC_DOMAIN,
+            spea.CC_URL,
+            spea.IP,
+            spea.DOMAIN,
+            spea.URL,
+            spea.UNIT_INDUSTY,
+            spea.UNIT_NAME,
+            spea.ACCESS_ID,
+            spea.ROOM_NAME,
+            spea.ROOM_IDX,
+            spea.SYS_RECTIFY_SUGGEST,
+            spea.FINAL_RECTIFY_SUGGEST,
+            spea.IS_FORCE_CLOSE,
+            spea.IS_WHITE_LIST,
+            spea.FORCE_CLOSE_DESCE,
+            spea.RECTIFY_TERM,
+            spea.CLOSE_TERM,
+            spea.SEND_TIME,
+            spea.SEND_TIMESTAMP,
+            spea.RECTIFY_STATE,
+            spea.RECTIFY_MEASURE,
+            spea.FEEDBACK_TIME,
+            spea.FEEDBACK_TIMESTAMP,
+            spea.WEB_CASE_RID,
+            spea.MEMO,
+            spea.SNAPSHOP,
+            spea.LOG_TABLENAME,
+            spea.LOG_RID,
+            spea.CREATTIME,
+            spea.MODIFIEDTIME,
+            spea.RECORDSTATE,
+            sii.IDC_ID,
+            sii.IDC_NAME,
+            sal.EVENT_CONTENT,
+            sal.SOLUTION
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select sal.SRC_IP,sal.DST_IP,sal.EVENT_CONTENT,sii.IDC_NAME as TRANS_IDC_ID,ssw.WEBSITE_NAME as TRANS_WEB_CASE_RID,
+    spea.Rid as SNAPSHOP,
+	case WHEN 
+		spea.SNAPSHOP is not null and spea.SNAPSHOP!='' 
+	then 
+		'详情' 
+	else 
+		'无' 
+	end  as TRANS_SNAPSHOP,	
+	case when src_ip is null or src_ip='' or src_ip ='0.0.0.0' then dst_ip ELSE src_ip end as IP,<include refid="listColumns"/> from SMMS_PENDING_EVENT as spea
+	left join smms_idc_info as sii
+    	on spea.ACCESS_ID=sii.IDC_ID
+    left join 
+    	SMMS_WEB_CASE as ssw
+    	on spea.WEB_CASE_RID=ssw.RID
+    left join SMMS_AF_LOG as sal
+    	on spea.LOG_RID=sal.RID
+	<where>
+		spea.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_PENDING_EVENT as spea 
+	left join smms_idc_info as sii
+    on spea.ACCESS_ID=sii.IDC_ID 
+    left join SMMS_AF_LOG as sal
+    on spea.LOG_RID=sal.RID
+	<where>
+		spea.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_PENDING_EVENT  where spea.RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>,sii.IDC_NAME AS TRANS_IDC_ID,ssw.WEBSITE_NAME as TRANS_WEB_CASE_RID  from SMMS_PENDING_EVENT  as spea
+	left join smms_idc_info as sii
+    on spea.ACCESS_ID=sii.IDC_ID
+    left join 
+    SMMS_WEB_CASE as ssw
+    on spea.WEB_CASE_RID=ssw.RID
+    left join SMMS_AF_LOG as sal
+    on spea.LOG_RID=sal.RID
+    where spea.RECORDSTATE='0' and spea.RID = #{RID}  
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_PENDING_EVENT  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_PENDING_EVENT  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_PENDING_EVENT (
+            <if test="RID != null ">RID,</if>
+            <if test="EVENT_SOURCE != null ">EVENT_SOURCE,</if>
+            <if test="CLIENTNAME != null ">CLIENTNAME,</if>
+            <if test="REPORT_CITY != null ">REPORT_CITY,</if>
+            <if test="REPORT_TIME != null ">REPORT_TIME,</if>
+            <if test="OCCUR_TIME != null ">OCCUR_TIME,</if>
+            <if test="EVENT_TYPE1 != null ">EVENT_TYPE1,</if>
+            <if test="EVENT_TYPE2 != null ">EVENT_TYPE2,</if>
+            <if test="THREAT_LEVEL != null ">THREAT_LEVEL,</if>
+            <if test="THREAT_NAME != null ">THREAT_NAME,</if>
+            <if test="THREAT_TYPE1 != null ">THREAT_TYPE1,</if>
+            <if test="THREAT_TYPE2 != null ">THREAT_TYPE2,</if>
+            <if test="THREAT_TYPE3 != null ">THREAT_TYPE3,</if>
+            <if test="THREAT_TYPE4 != null ">THREAT_TYPE4,</if>
+            <if test="ATTACK_IP != null ">ATTACK_IP,</if>
+            <if test="CC_DOMAIN != null ">CC_DOMAIN,</if>
+            <if test="CC_URL != null ">CC_URL,</if>
+            <if test="IP != null ">IP,</if>
+            <if test="DOMAIN != null ">DOMAIN,</if>
+            <if test="URL != null ">URL,</if>
+            <if test="UNIT_INDUSTY != null ">UNIT_INDUSTY,</if>
+            <if test="UNIT_NAME != null ">UNIT_NAME,</if>
+            <if test="ACCESS_ID != null ">ACCESS_ID,</if>
+            <if test="ROOM_NAME != null ">ROOM_NAME,</if>
+            <if test="ROOM_IDX != null ">ROOM_IDX,</if>
+            <if test="SYS_RECTIFY_SUGGEST != null ">SYS_RECTIFY_SUGGEST,</if>
+            <if test="FINAL_RECTIFY_SUGGEST != null ">FINAL_RECTIFY_SUGGEST,</if>
+            <if test="IS_FORCE_CLOSE != null ">IS_FORCE_CLOSE,</if>
+            <if test="IS_WHITE_LIST != null ">IS_WHITE_LIST,</if>
+            <if test="FORCE_CLOSE_DESCE != null ">FORCE_CLOSE_DESCE,</if>
+            <if test="RECTIFY_TERM != null ">RECTIFY_TERM,</if>
+            <if test="CLOSE_TERM != null ">CLOSE_TERM,</if>
+            <if test="SEND_TIME != null ">SEND_TIME,</if>
+            <if test="SEND_TIMESTAMP != null ">SEND_TIMESTAMP,</if>
+            <if test="RECTIFY_STATE != null ">RECTIFY_STATE,</if>
+            <if test="RECTIFY_MEASURE != null ">RECTIFY_MEASURE,</if>
+            <if test="FEEDBACK_TIME != null ">FEEDBACK_TIME,</if>
+            <if test="FEEDBACK_TIMESTAMP != null ">FEEDBACK_TIMESTAMP,</if>
+            <if test="WEB_CASE_RID != null ">WEB_CASE_RID,</if>
+            <if test="MEMO != null ">MEMO,</if>
+            <if test="SNAPSHOP != null ">SNAPSHOP,</if>
+            <if test="LOG_TABLENAME != null ">LOG_TABLENAME,</if>
+            <if test="LOG_RID != null ">LOG_RID,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="MODIFIEDTIME != null ">MODIFIEDTIME,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="EVENT_SOURCE != null ">#{EVENT_SOURCE},</if>
+           <if test="CLIENTNAME != null ">#{CLIENTNAME},</if>
+           <if test="REPORT_CITY != null ">#{REPORT_CITY},</if>
+           <if test="REPORT_TIME != null ">#{REPORT_TIME},</if>
+           <if test="OCCUR_TIME != null ">#{OCCUR_TIME},</if>
+           <if test="EVENT_TYPE1 != null ">#{EVENT_TYPE1},</if>
+           <if test="EVENT_TYPE2 != null ">#{EVENT_TYPE2},</if>
+           <if test="THREAT_LEVEL != null ">#{THREAT_LEVEL},</if>
+           <if test="THREAT_NAME != null ">#{THREAT_NAME},</if>
+           <if test="THREAT_TYPE1 != null ">#{THREAT_TYPE1},</if>
+           <if test="THREAT_TYPE2 != null ">#{THREAT_TYPE2},</if>
+           <if test="THREAT_TYPE3 != null ">#{THREAT_TYPE3},</if>
+           <if test="THREAT_TYPE4 != null ">#{THREAT_TYPE4},</if>
+           <if test="ATTACK_IP != null ">#{ATTACK_IP},</if>
+           <if test="CC_DOMAIN != null ">#{CC_DOMAIN},</if>
+           <if test="CC_URL != null ">#{CC_URL},</if>
+           <if test="IP != null ">#{IP},</if>
+           <if test="DOMAIN != null ">#{DOMAIN},</if>
+           <if test="URL != null ">#{URL},</if>
+           <if test="UNIT_INDUSTY != null ">#{UNIT_INDUSTY},</if>
+           <if test="UNIT_NAME != null ">#{UNIT_NAME},</if>
+           <if test="ACCESS_ID != null ">#{ACCESS_ID},</if>
+           <if test="ROOM_NAME != null ">#{ROOM_NAME},</if>
+           <if test="ROOM_IDX != null ">#{ROOM_IDX},</if>
+           <if test="SYS_RECTIFY_SUGGEST != null ">#{SYS_RECTIFY_SUGGEST},</if>
+           <if test="FINAL_RECTIFY_SUGGEST != null ">#{FINAL_RECTIFY_SUGGEST},</if>
+           <if test="IS_FORCE_CLOSE != null ">#{IS_FORCE_CLOSE},</if>
+           <if test="IS_WHITE_LIST != null ">#{IS_WHITE_LIST},</if>
+           <if test="FORCE_CLOSE_DESCE != null ">#{FORCE_CLOSE_DESCE},</if>
+           <if test="RECTIFY_TERM != null ">#{RECTIFY_TERM},</if>
+           <if test="CLOSE_TERM != null ">#{CLOSE_TERM},</if>
+           <if test="SEND_TIME != null ">#{SEND_TIME},</if>
+           <if test="SEND_TIMESTAMP != null ">#{SEND_TIMESTAMP},</if>
+           <if test="RECTIFY_STATE != null ">#{RECTIFY_STATE},</if>
+           <if test="RECTIFY_MEASURE != null ">#{RECTIFY_MEASURE},</if>
+           <if test="FEEDBACK_TIME != null ">#{FEEDBACK_TIME},</if>
+           <if test="FEEDBACK_TIMESTAMP != null ">#{FEEDBACK_TIMESTAMP},</if>
+           <if test="WEB_CASE_RID != null ">#{WEB_CASE_RID},</if>
+           <if test="MEMO != null ">#{MEMO},</if>
+           <if test="SNAPSHOP != null ">#{SNAPSHOP},</if>
+           <if test="LOG_TABLENAME != null ">#{LOG_TABLENAME},</if>
+           <if test="LOG_RID != null ">#{LOG_RID},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="MODIFIEDTIME != null ">#{MODIFIEDTIME},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_PENDING_EVENT   
+		<set>
+				    <if test="EVENT_SOURCE!=null"> EVENT_SOURCE=#{EVENT_SOURCE},</if> 
+		    <if test="CLIENTNAME!=null"> CLIENTNAME=#{CLIENTNAME},</if> 
+		    <if test="REPORT_CITY!=null"> REPORT_CITY=#{REPORT_CITY},</if> 
+		    <if test="REPORT_TIME!=null"> REPORT_TIME=#{REPORT_TIME},</if> 
+		    <if test="OCCUR_TIME!=null"> OCCUR_TIME=#{OCCUR_TIME},</if> 
+		    <if test="EVENT_TYPE1!=null"> EVENT_TYPE1=#{EVENT_TYPE1},</if> 
+		    <if test="EVENT_TYPE2!=null"> EVENT_TYPE2=#{EVENT_TYPE2},</if> 
+		    <if test="THREAT_LEVEL!=null"> THREAT_LEVEL=#{THREAT_LEVEL},</if> 
+		    <if test="THREAT_NAME!=null"> THREAT_NAME=#{THREAT_NAME},</if> 
+		    <if test="THREAT_TYPE1!=null"> THREAT_TYPE1=#{THREAT_TYPE1},</if> 
+		    <if test="THREAT_TYPE2!=null"> THREAT_TYPE2=#{THREAT_TYPE2},</if> 
+		    <if test="THREAT_TYPE3!=null"> THREAT_TYPE3=#{THREAT_TYPE3},</if> 
+		    <if test="THREAT_TYPE4!=null"> THREAT_TYPE4=#{THREAT_TYPE4},</if> 
+		    <if test="ATTACK_IP!=null"> ATTACK_IP=#{ATTACK_IP},</if> 
+		    <if test="CC_DOMAIN!=null"> CC_DOMAIN=#{CC_DOMAIN},</if> 
+		    <if test="CC_URL!=null"> CC_URL=#{CC_URL},</if> 
+		    <if test="IP!=null"> IP=#{IP},</if> 
+		    <if test="DOMAIN!=null"> DOMAIN=#{DOMAIN},</if> 
+		    <if test="URL!=null"> URL=#{URL},</if> 
+		    <if test="UNIT_INDUSTY!=null"> UNIT_INDUSTY=#{UNIT_INDUSTY},</if> 
+		    <if test="UNIT_NAME!=null"> UNIT_NAME=#{UNIT_NAME},</if> 
+		    <if test="ACCESS_ID!=null"> ACCESS_ID=#{ACCESS_ID},</if> 
+		    <if test="ROOM_NAME!=null"> ROOM_NAME=#{ROOM_NAME},</if> 
+		    <if test="ROOM_IDX!=null"> ROOM_IDX=#{ROOM_IDX},</if> 
+		    <if test="SYS_RECTIFY_SUGGEST!=null"> SYS_RECTIFY_SUGGEST=#{SYS_RECTIFY_SUGGEST},</if> 
+		    <if test="FINAL_RECTIFY_SUGGEST!=null"> FINAL_RECTIFY_SUGGEST=#{FINAL_RECTIFY_SUGGEST},</if> 
+		    <if test="IS_FORCE_CLOSE!=null"> IS_FORCE_CLOSE=#{IS_FORCE_CLOSE},</if> 
+		    <if test="IS_WHITE_LIST!=null"> IS_WHITE_LIST=#{IS_WHITE_LIST},</if> 
+		    <if test="FORCE_CLOSE_DESCE!=null"> FORCE_CLOSE_DESCE=#{FORCE_CLOSE_DESCE},</if> 
+		    <if test="RECTIFY_TERM!=null"> RECTIFY_TERM=#{RECTIFY_TERM},</if> 
+		    <if test="CLOSE_TERM!=null"> CLOSE_TERM=#{CLOSE_TERM},</if> 
+		    <if test="SEND_TIME!=null"> SEND_TIME=#{SEND_TIME},</if> 
+		    <if test="SEND_TIMESTAMP!=null"> SEND_TIMESTAMP=#{SEND_TIMESTAMP},</if> 
+		    <if test="RECTIFY_STATE!=null"> RECTIFY_STATE=#{RECTIFY_STATE},</if> 
+		    <if test="RECTIFY_MEASURE!=null"> RECTIFY_MEASURE=#{RECTIFY_MEASURE},</if> 
+		    <if test="FEEDBACK_TIME!=null"> FEEDBACK_TIME=#{FEEDBACK_TIME},</if> 
+		    <if test="FEEDBACK_TIMESTAMP!=null"> FEEDBACK_TIMESTAMP=#{FEEDBACK_TIMESTAMP},</if> 
+		    <if test="WEB_CASE_RID!=null"> WEB_CASE_RID=#{WEB_CASE_RID},</if> 
+		    <if test="MEMO!=null"> MEMO=#{MEMO},</if> 
+		    <if test="SNAPSHOP!=null"> SNAPSHOP=#{SNAPSHOP},</if> 
+		    <if test="LOG_TABLENAME!=null"> LOG_TABLENAME=#{LOG_TABLENAME},</if> 
+		    <if test="LOG_RID!=null"> LOG_RID=#{LOG_RID},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

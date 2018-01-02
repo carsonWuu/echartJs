@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TableModel id="SRoleUserPop" desc="岗位用户pop" tblName="s_role" pageSize="10"  listURL="" sqlMapNamespace="SRoleUser">
+	<Fields>
+		<TableField id="USERID" colName="USERID" desc="用户码" dataType="VARCHAR2" length="10"  required="T" isSearch="T" create="LAVU" hidden="LAVU" readOnly="VU"  webType="text" fuzzy="T" order="ASC" orderInList="T" autoCode="CRD_YHM" tableAlias="ru" />
+		<TableField id="USERNAME" colName="USERNAME" desc="姓名" dataType="VARCHAR2" length="20" required="T" isSearch="T" fuzzy="T" isPK="T" isEncrypted="F"  create="LAVU" webType="text" orderInList="T" tableAlias="u" />
+		<TableField id="NICKNAME" colName="NICKNAME" desc="呢称" dataType="VARCHAR2" length="40"  required="F" isSearch="F" create="LAVU" hidden="L" webType="text"  tableAlias="user1" />
+		<TableField id="IDCARDNO" colName="IDCARDNO" desc="身份证号码" dataType="VARCHAR2" length="20"  required="F" isSearch="F" create="AVU"  webType="text" webTypeExt="idcard"  tableAlias="u" />
+		<TableField id="TELNUM" colName="TELNUM" desc="联系电话" dataType="VARCHAR2" length="20"  required="F" isSearch="F" create="LAVU"  webType="text" tableAlias="u" />
+		<TableField id="STATE" colName="STATE" desc="状态" dataType="CHAR" length="1"  required="F" isSearch="T" create="LAVU"  webType="select" dicType="TML_COMISION" defValue=""  tableAlias="u" />
+		<TableField id="ORGID" colName="ORGID" desc="所属机构" dataType="VARCHAR2" length="20"  required="T" isSearch="T" create="LAVU"   webType="pop" webTypeExt="openSinPop('SOrg','ORGID','ORGID','ORGNAME')" orderInList="T" tableAlias="u"/>
+		<TableField id="DEPTID" colName="DEPTID" desc="所属部门" dataType="VARCHAR2" length="20"  required="T" isSearch="T" create="LAVU"   webType="pop" webTypeExt="openSinPop('SDept','DEPTID','DEPTID','DEPTNAME')"  orderInList="T" tableAlias="u" />
+		<TableField id="ROLEID" colName="ROLEID" desc="所属岗位" dataType="VARCHAR2" length="20"  required="" isSearch="F" create="LAVU"  hidden="VAU"  webType="pop" webTypeExt="openSinPop('SRole','ROLEID','ROLEID','ROLENAME')"  orderInList="T" tableAlias="ru" />
+  </Fields>
+</TableModel>

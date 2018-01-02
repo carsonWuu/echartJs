@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SMobileSms" desc="手机短消息" tblName="S_MOBILESMS" pageSize="10" uniteTableModelId="" listURL="/fmp/FrameCommonBiz/DoList?tableModelId=SMobileSms" sqlMapNamespace="SMobileSms">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="SMSCONTENT" colName="SMSCONTENT" desc="短消息内容" dataType="VARCHAR" length="200"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="MOBILENUM" colName="MOBILENUM" desc="手机号码" dataType="VARCHAR" length="11"  listGroupName="" webType="text" webTypeExt="mobilephone" create="LVUA" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="SENDSTATE" colName="SENDSTATE" desc="发送状态" dataType="CHAR" length="1"  listGroupName="" dicType="S_FSZT" webType="select" webTypeExt="" create="LVUA" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="SENDTIME" colName="SENDTIME" desc="发送时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="date" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="date" create="LVUA" hidden="LVAU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

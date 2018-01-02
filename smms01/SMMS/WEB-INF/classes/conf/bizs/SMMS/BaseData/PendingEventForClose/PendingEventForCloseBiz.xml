@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="SMMS.BaseData.PendingEventForClose.PendingEventForCloseBiz" namespace="/SMMS/PendingEventForCloseBiz" extends="SMMS-default">        
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.SMMS.BaseData.PendingEventForClose.action.{1}PendingEventForCloseAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+        </action>    
+		<!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.SMMS.BaseData.PendingEventForClose.action.SavePendingEventForCloseAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>   
+		<!--保存可修改的列表信息-->
+        <action  name="SaveDataList" class="com.zstar.SMMS.BaseData.PendingEventForClose.action.SavePendingEventForCloseDataListAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>  
+		<!--保存联合主从表信息-->
+        <action  name="SaveUniteSubTableList" class="com.zstar.SMMS.BaseData.PendingEventForClose.action.SavePendingEventForCloseUniteSubTableAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>        
+        </action>
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.SMMS.BaseData.PendingEventForClose.action.DeletePendingEventForCloseAction">
+        </action>    
+         
+        <!--删除表单操作-->
+        <action  name="DeleteList" class="com.zstar.SMMS.BaseData.PendingEventForClose.action.DeleteList">
+        </action>              
+    </package>
+</struts>

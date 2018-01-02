@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SDic"> 
+<sql id="sdicColumns">
+	RID,
+	DATAKEY,
+	DATAVALUE,
+	DATATYPE,
+	SUPERDIC,
+	DATATYPEDESC,
+	LISTORDER,
+	ISPARENTDIC,
+	RECORDSTATE
+</sql> 
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="sdicColumns"/> from S_DIC 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select>
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM,max(DATAKEY) DATAKEY from S_DIC
+	<where>
+		RECORDSTATE='0'	
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_DIC where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_DIC where RID = #{RID}  
+</select> 
+
+<!--根据数据类型动态生成上级字典下拉框选项-->
+<select id="getDicByType" parameterType="hashmap" resultType="hashmap"> 
+	select DATAKEY,DATAVALUE,ISPARENTDIC from S_DIC where DATATYPE=#{DATATYPE} and RECORDSTATE='0'	
+	order by LISTORDER
+</select> 
+
+<!--根据数据类型获取数据类型描述-->
+<select id="dataTypeDescDetail" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_DIC where DATATYPE=#{DATATYPE} and DATATYPEDESC is not null and RECORDSTATE='0'	
+	order by LISTORDER
+</select> 
+
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+	select * from s_dic where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" > 
+	insert into S_DIC (
+			RID
+			,DATAKEY
+			,DATAVALUE
+			,DATATYPE
+			,SUPERDIC
+			,DATATYPEDESC
+			,ISPARENTDIC
+		    ,CREATTIME
+		    ,CREATORID
+		    ,MODIFIEDTIME
+		    ,MODIFIERID
+		    ,LISTORDER		
+		,RECORDSTATE
+		)values (
+			#{RID}
+			,#{DATAKEY}
+			,#{DATAVALUE}
+			,#{DATATYPE}
+			,#{SUPERDIC}
+			,#{DATATYPEDESC}
+			,#{ISPARENTDIC}
+		    ,#{CREATTIME}
+		    ,#{CREATORID}
+		    ,#{MODIFIEDTIME}
+		    ,#{MODIFIERID}	
+		    ,#{LISTORDER}		
+			,#{RECORDSTATE}
+		)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update s_dic 
+	<set>
+		<if test="DATAKEY!=null">DATAKEY=#{DATAKEY}, </if>
+		<if test="DATATYPE!=null">DATATYPE=#{DATATYPE}, </if>
+		<if test="DATAVALUE!=null">DATAVALUE=#{DATAVALUE},</if>
+		<if test="SUPERDIC!=null">SUPERDIC=#{SUPERDIC},</if>			
+		<if test="DATATYPEDESC!=null">DATATYPEDESC=#{DATATYPEDESC},</if>
+		<if test="ISPARENTDIC!=null">ISPARENTDIC=#{ISPARENTDIC},</if>
+		<if test="MODIFIEDTIME != null ">MODIFIEDTIME = #{MODIFIEDTIME},</if>
+		<if test="LISTORDER != null ">LISTORDER = #{LISTORDER},</if>	
+		<if test="MODIFIERID != null ">MODIFIERID = #{MODIFIERID},</if>		
+	</set>
+	where RID=#{RID}
+</update> 
+
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_DIC set                     
+                        RECORDSTATE=#{RECORDSTATE}
+	where RID=#{RID}
+</update> 
+
+<select id="checkDataType" parameterType="hashmap" resultType="String"> 
+	select count(*) ct from S_DIC where DATATYPE=#{DATATYPE} and RECORDSTATE='0'  
+</select> 
+
+<!--根据数据值和数据类型获取数据键-->
+<select id="getDataKey" parameterType="hashmap" resultType="string">
+	select DATAKEY from S_DIC where DATAVALUE = #{DATAVALUE} and DATATYPE = #{DATATYPE} and RECORDSTATE = '0'
+</select>
+
+<!-- 根据数据类型和数据键判断是否有无数据  -->
+<select id="isDataKeyData" parameterType="String" resultType="String"> 
+	select count(*) as ct 
+	from S_DIC
+	where DATATYPE = #{DATATYPE} and DATAKEY = #{DATAKEY} and RECORDSTATE = '0'
+</select>
+
+</mapper>

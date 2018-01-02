@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="WfFlowInstance"> 
+<sql id="listColumns">
+	
+            RID,
+            FLOWINSTANCEID,
+            FLOWTEMPID,
+            BIZTYPEID,
+            BIZRID,
+            TBLID,
+            STARTER,
+            STARTORGID,
+            STARTDEPTID,
+            BIZORGID,
+            CURRNODEID,
+            CREATTIME,
+            CREATORID,
+            RECORDSTATE,
+            MODIFIEDTIME,
+            MODIFIERID,
+            APPROVESTATE,
+            LIABMAN,
+            LIABDEPT,
+            BIZDESC,
+            LASTAPPROVETIME,
+            LIABORG
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            FLOWINSTANCEID,
+            FLOWTEMPID,
+            BIZTYPEID,
+            BIZRID,
+            TBLID,
+            STARTER,
+            STARTORGID,
+            STARTDEPTID,
+            BIZORGID,
+            CURRNODEID,
+            CREATTIME,
+            CREATORID,
+            RECORDSTATE,
+            MODIFIEDTIME,
+            MODIFIERID,
+            APPROVESTATE,
+            LIABMAN,
+            LIABDEPT,
+            BIZDESC,
+            LASTAPPROVETIME,
+            LIABORG
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select 	u.USERNAME AS TRANS_STARTER,
+			fi.* 
+	from WF_FLOWINSTANCE fi 
+	LEFT OUTER JOIN s_user u
+		on fi.STARTER = u.USERID
+	<where>
+		fi.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from WF_FLOWINSTANCE fi
+	LEFT OUTER JOIN s_user u
+			on fi.STARTER = u.USERID
+	<where>
+		fi.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from WF_FLOWINSTANCE where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from WF_FLOWINSTANCE where RID = #{RID} 
+</select> 
+
+
+
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update WF_FLOWINSTANCE set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from WF_FLOWINSTANCE where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into WF_FLOWINSTANCE(
+            RID,
+            FLOWINSTANCEID,
+            FLOWTEMPID,
+            BIZTYPEID,
+            BIZRID,
+            TBLID,
+            STARTER,
+            STARTORGID,
+            STARTDEPTID,
+            BIZORGID,
+            CURRNODEID,
+            CREATTIME,
+            CREATORID,
+            RECORDSTATE,
+            MODIFIEDTIME,
+            MODIFIERID,
+            APPROVESTATE,
+            LIABMAN,
+            LIABDEPT,
+            BIZDESC,
+            LASTAPPROVETIME,
+            LIABORG)
+	   values (
+            #{RID},
+            #{FLOWINSTANCEID},
+            #{FLOWTEMPID},
+            #{BIZTYPEID},
+            #{BIZRID},
+            #{TBLID},
+            #{STARTER},
+            #{STARTORGID},
+            #{STARTDEPTID},
+            #{BIZORGID},
+            #{CURRNODEID},
+            #{CREATTIME},
+            #{CREATORID},
+            #{RECORDSTATE},
+            #{MODIFIEDTIME},
+            #{MODIFIERID},
+            #{APPROVESTATE},
+            #{LIABMAN},
+            #{LIABDEPT},
+            #{BIZDESC},
+            #{LASTAPPROVETIME},
+            #{LIABORG})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update WF_FLOWINSTANCE  
+		<set>
+			<if test="FLOWINSTANCEID!=null"> FLOWINSTANCEID=#{FLOWINSTANCEID},</if> 
+		    <if test="FLOWTEMPID!=null"> FLOWTEMPID=#{FLOWTEMPID},</if> 
+		    <if test="BIZTYPEID!=null"> BIZTYPEID=#{BIZTYPEID},</if> 
+		    <if test="BIZRID!=null"> BIZRID=#{BIZRID},</if> 
+		    <if test="TBLID!=null"> TBLID=#{TBLID},</if> 
+		    <if test="STARTER!=null"> STARTER=#{STARTER},</if> 
+		    <if test="STARTORGID!=null"> STARTORGID=#{STARTORGID},</if> 
+		    <if test="STARTDEPTID!=null"> STARTDEPTID=#{STARTDEPTID},</if> 
+		    <if test="BIZORGID!=null"> BIZORGID=#{BIZORGID},</if> 
+		    <if test="CURRNODEID!=null"> CURRNODEID=#{CURRNODEID},</if> 
+		    <if test="CREATTIME!=null"> CREATTIME=#{CREATTIME},</if> 
+		    <if test="CREATORID!=null"> CREATORID=#{CREATORID},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="APPROVESTATE!=null"> APPROVESTATE=#{APPROVESTATE},</if> 
+		    <if test="LIABMAN!=null"> LIABMAN=#{LIABMAN},</if> 
+		    <if test="LIABDEPT!=null"> LIABDEPT=#{LIABDEPT},</if> 
+		    <if test="LIABORG!=null"> LIABORG=#{LIABORG},</if> 
+		    <if test="REDISCUSSREASON!=null"> REDISCUSSREASON=#{REDISCUSSREASON},</if> 
+		    <if test="REDISCUSSREMARK!=null"> REDISCUSSREMARK=#{REDISCUSSREMARK},</if> 
+		    <if test="REDISCUSSMAN!=null"> REDISCUSSMAN=#{REDISCUSSMAN},</if> 
+            <if test="BIZDESC!=null"> BIZDESC=#{BIZDESC},</if> 
+            <if test="LASTAPPROVETIME!=null"> LASTAPPROVETIME=#{LASTAPPROVETIME},</if> 
+		    <if test="REDISCUSSTIME!=null"> REDISCUSSTIME=#{REDISCUSSTIME},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+<update id="updateNodeAndState" parameterType="hashmap" > 
+	update WF_FLOWINSTANCE  
+		<set>
+		    <if test="APPROVESTATE!=null"> APPROVESTATE=#{APPROVESTATE},</if> 
+		    <if test="CURRNODEID!=null"> CURRNODEID=#{CURRNODEID},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if>  
+		    <if test="APPROVERSET!=null"> APPROVERSET=#{APPROVERSET},</if> 
+		    <if test="LASTAPPROVETIME!=null"> LASTAPPROVETIME=#{LASTAPPROVETIME},</if> 
+		</set>
+	where FLOWINSTANCEID=#{FLOWINSTANCEID}
+</update> 
+
+<!--根据业务信息更新流程审批状态-->
+<update id="updateStateByBizInfo" parameterType="hashmap" > 
+	update WF_FLOWINSTANCE  
+		<set>
+		    <if test="APPROVESTATE!=null"> APPROVESTATE=#{APPROVESTATE},</if> 
+		</set>
+	where BIZRID=#{BIZRID} and TBLID=#{TBLID}
+</update> 
+
+<update id="deleteUpdateByFIId" parameterType="hashmap" > 
+	update WF_FLOWINSTANCE 
+		<set>
+			<if test="RECORDSTATE!=null">RECORDSTATE=#{RECORDSTATE},</if>
+		    <if test="APPROVESTATE!=null"> APPROVESTATE=#{APPROVESTATE},</if> 
+		</set>
+	where FLOWINSTANCEID=#{FLOWINSTANCEID}
+</update> 
+
+
+<!--流转下一节点ID-->
+<select id="getNextNodeId" parameterType="String" resultType="hashmap"> 
+        select nl.* from wf_FlowInstance fi
+		left outer join wf_NodeLink nl
+		on nl.FROMNODE = fi.CURRNODEID and nl.FLOWTEMPID = fi.FLOWTEMPID
+		where fi.FLOWINSTANCEID =#{FLOWINSTANCEID}
+</select> 
+
+<select id="getDateDetail" parameterType="String" resultType="hashmap"> 
+      select * from WF_FLOWINSTANCE where FLOWINSTANCEID = #{FLOWINSTANCEID} 
+</select> 
+
+<select id="getFlowInstanceDetail" parameterType="String" resultType="hashmap"> 
+      select * from WF_FLOWINSTANCE where FLOWINSTANCEID = #{FLOWINSTANCEID} 
+</select> 
+
+<select id="getFlowInstanceid" parameterType="hashmap" resultType="String"> 
+	select FLOWINSTANCEID  from WF_FLOWINSTANCE where FLOWTEMPID = #{FLOWTEMPID} and BIZRID = #{BIZRID} and TBLID = #{TBLID}
+</select>
+
+
+
+<select id="getFlowInstanceByCase" parameterType="hashmap" resultType="hashmap"> 
+	select u.USERNAME AS TRANS_REDISCUSSMAN,
+	    u1.USERNAME AS FLOWSTARTER,
+	    fi.CREATTIME AS FLOWCREATTIME,
+		fi.*,
+		fn.*,
+		ft.FLOWTEMPNAME,
+		fah.CREATTIME AS NODECREATTIME  
+	from WF_FLOWINSTANCE fi
+	left outer join S_USER u
+		on u.USERID = fi.REDISCUSSMAN
+	left outer join S_USER u1
+		on u1.USERID = fi.STARTER
+	left outer join wf_FlowNode fn
+		on fi.FLOWTEMPID = fn.FLOWTEMPID and fi.CURRNODEID = fn.NODEID
+	left outer join wf_FlowTemplet ft
+		on ft.FLOWTEMPID = fi.FLOWTEMPID and ft.RECORDSTATE = '0'
+	left outer join wf_FlowApvHis fah
+		on fi.FLOWINSTANCEID = fah.FLOWINSTANCEID and fi.CURRNODEID = fah.NODEID and fah.STATE='1'
+	<where>
+		fi.BIZTYPEID = #{BIZTYPEID} 
+		and fi.BIZRID = #{BIZRID}
+	    ${freezeCondition}
+	</where>
+</select>  
+
+<delete id="deleteFlowInstancData" parameterType="hashmap" > 
+	delete from WF_FLOWINSTANCE where FLOWINSTANCEID = #{FLOWINSTANCEID}
+</delete> 
+
+
+<select id="getFlowInstanceByBizrid" parameterType="hashmap" resultType="hashmap"> 
+  select * from wf_FlowInstance
+  where BIZRID = #{RID} and BIZTYPEID = #{BIZTYPEID} 
+  and (APPROVESTATE ='100' or APPROVESTATE = '700' or APPROVESTATE = '701' or APPROVESTATE='800' or APPROVESTATE='900')
+</select>
+
+<select id="getFlowInstanceInfo" parameterType="hashmap" resultType="hashmap"> 
+  select * from wf_FlowInstance
+  where BIZRID = #{RID} and BIZTYPEID = #{BIZTYPEID} 
+</select>
+
+
+<!--更新被打回流流程的数据-->
+<update id="updateOldInstance" parameterType="hashmap" > 
+	update WF_FLOWINSTANCE  
+		<set>
+		    <if test="BIZDESC!=null"> BIZDESC=#{BIZDESC},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="STARTORGID!=null"> STARTORGID=#{STARTORGID},</if> 
+		    <if test="STARTDEPTID!=null"> STARTDEPTID=#{STARTDEPTID},</if> 
+		</set>
+	where FLOWINSTANCEID=#{FLOWINSTANCEID}
+</update> 
+
+
+</mapper>

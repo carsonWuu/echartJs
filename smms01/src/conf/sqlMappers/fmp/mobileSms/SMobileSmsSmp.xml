@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SMobileSms"> 
+<sql id="listColumns">
+	
+            RID,
+            SMSCONTENT,
+            MOBILENUM,
+            SENDSTATE,
+            SENDTIME,
+            CREATTIME
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            SMSCONTENT,
+            MOBILENUM,
+            SENDSTATE,
+            SENDTIME,
+            CREATTIME
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from S_MOBILESMS
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from S_MOBILESMS
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_MOBILESMS where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from S_MOBILESMS where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_MOBILESMS set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from S_MOBILESMS where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_MOBILESMS(
+            RID,
+            SMSCONTENT,
+            MOBILENUM,
+            SENDSTATE,
+            SENDTIME,
+            CREATTIME)
+	   values (
+            #{RID},
+            #{SMSCONTENT},
+            #{MOBILENUM},
+            #{SENDSTATE},
+            #{SENDTIME},
+            #{CREATTIME})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_MOBILESMS  
+	 	<set>
+				    <if test="SMSCONTENT!=null"> SMSCONTENT=#{SMSCONTENT},</if> 
+		    <if test="MOBILENUM!=null"> MOBILENUM=#{MOBILENUM},</if> 
+		    <if test="SENDSTATE!=null"> SENDSTATE=#{SENDSTATE},</if> 
+		    <if test="SENDTIME!=null"> SENDTIME=#{SENDTIME},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+<!-- 根据RID，更改短信发送状态-->
+<update id="updateSendStateByRID" parameterType="hashmap">
+	update S_MOBILESMS
+	<set>
+		<if test="SENDSTATE!=null"> SENDSTATE=#{SENDSTATE},</if>
+		<if test="SENDTIME!=null"> SENDTIME=#{SENDTIME},</if>
+	</set>
+	where RID in
+	<foreach collection="list" item="ids" open="(" separator="," close=")">
+		#{ids}
+	</foreach>
+</update>
+
+<!-- 根据SENTSTATE，更改短信发送状态-->
+<update id="updateSendStateByOldSendState" parameterType="hashmap">
+	update S_MOBILESMS
+	<set>
+		<if test="SENDSTATE!=null"> SENDSTATE=#{SENDSTATE},</if>
+		<if test="SENDTIME!=null"> SENDTIME=#{SENDTIME},</if>
+	</set>
+	<where>
+		SENDSTATE=#{SENDSTATE_OLD}
+	</where>
+</update>
+
+</mapper>
