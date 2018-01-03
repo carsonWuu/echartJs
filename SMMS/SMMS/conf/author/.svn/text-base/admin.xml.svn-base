@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<tree id="0"> 
+  <item text="日常处理" id="s_md_rccl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="待办事项" id="s_md_dbsx" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="已办事项" id="s_md_ybsx" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="办结事项" id="s_md_bjsx" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="用户密码" id="s_md_yhmm" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="修改密码" id="s_md_xgmm" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/SUser/SetPasswordUI?moduleId=s_md_xgmm</userdata>
+      </item>
+    </item>
+    <item text="首页" id="s_md_fhzy" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/system/notice/NoticeBiz/ShowNotice?moduleId=s_md_fhzy&amp;tableModelId=Notice</userdata>
+    </item>
+    <item text="消息反馈登记" id="s_md_xxfkdj" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=SMsgFeedback&amp;moduleId=s_md_xxfkdj</userdata>
+    </item>
+    <item text="我的快捷菜单" id="s_md_custommodule" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+  </item>
+  <item text="资源管理" id="s_md_zygl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="往来单位管理" id="crd_md_wldwgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="银行" id="crd_md_wldwgl_yh" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList.action?tableModelId=CrdBankInfo&amp;moduleId=crd_md_wldwgl_yh</userdata>
+      </item>
+      <item text="终端" id="crd_md_wldwgl_zd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/resource/terminal/TerminalInfoBiz/DoList.action?tableModelId=CrdTerminalInfo&amp;moduleId=crd_md_wldwgl_zd</userdata>
+      </item>
+      <item text="房产局" id="crd_md_wldwgl_fcj" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/resource/relatedcorp/CrdRelatedCorpBiz/DoList.action?keyLimit=RELTYPE:2&amp;tableModelId=CrdRelatedCorpInfoFcj&amp;moduleId=crd_md_wldwgl_fcj</userdata>
+      </item>
+      <item text="评估公司" id="crd_md_wldwgl_pggs" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/resource/relatedcorp/CrdRelatedCorpBiz/DoList.action?keyLimit=RELTYPE:3&amp;tableModelId=CrdRelatedCorpInfoPggs&amp;moduleId=crd_md_wldwgl_pggs</userdata>
+      </item>
+      <item text="公证处" id="crd_md_wldwgl_gzc" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/resource/relatedcorp/CrdRelatedCorpBiz/DoList.action?keyLimit=RELTYPE:4&amp;tableModelId=CrdRelatedCorpInfoGzc&amp;moduleId=crd_md_wldwgl_gzc</userdata>
+      </item>
+      <item text="保险公司" id="crd_md_wldwgl_bxgs" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/resource/relatedcorp/CrdRelatedCorpBiz/DoList.action?keyLimit=RELTYPE:5&amp;tableModelId=CrdRelatedCorpInfoBxgs&amp;moduleId=crd_md_wldwgl_bxgs</userdata>
+      </item>
+      <item text="车管所" id="crd_md_wldwgl_cgs" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/resource/relatedcorp/CrdRelatedCorpBiz/DoList.action?keyLimit=RELTYPE:6&amp;tableModelId=CrdRelatedCorpInfoCgs&amp;moduleId=crd_md_wldwgl_cgs</userdata>
+      </item>
+      <item text="担保公司" id="crd_md_wldwgl_dbgs" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/resource/relatedcorp/CrdRelatedCorpBiz/DoList.action?keyLimit=RELTYPE:7&amp;tableModelId=CrdRelatedCorpInfoDbgs&amp;moduleId=crd_md_wldwgl_dbgs</userdata>
+      </item>
+    </item>
+    <item text="客户管理" id="crd_md_khgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="客户信息管理" id="crd_md_khxxgl" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+        <item text="个人客户信息" id="crd_md_khxxgl_grkhxx" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdCustBase_Indi&amp;moduleId=crd_md_khxxgl_grkhxx</userdata>
+        </item>
+        <item text="公司客户信息" id="crd_md_khxxgl_gskhxx" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdCustBase_Corp&amp;moduleId=crd_md_khxxgl_gskhxx</userdata>
+        </item>
+      </item>
+      <item text="客户大事记管理" id="crd_md_khdsjgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdCusMemorabilia&amp;moduleId=crd_md_khdsjgl</userdata>
+      </item>
+      <item text="客户纪念日管理" id="crd_md_khjnr" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdCusMemordate&amp;moduleId=crd_md_khjnr</userdata>
+      </item>
+      <item text="纪念日类型管理" id="crd_md_jnrlxgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdMemorDateType&amp;moduleId=crd_md_jnrlxgl</userdata>
+      </item>
+      <item text="客户回访跟进管理" id="crd_md_khhfgjgl" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+      </item>
+      <item text="客户跟进与投诉管理" id="crd_md_khgjytsgl" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+      </item>
+    </item>
+  </item>
+  <item text="案件管理" id="s_md_ajgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="案件开案" id="crd_md_ajka" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/credit/caseManage/caseInfo/CaseInfoBiz/DoList?freezeCondition= and CASESTATE ='00'&amp;moduleId=crd_md_ajka&amp;tableModelId=CrdCaseInfo</userdata>
+    </item>
+    <item text="案件办理" id="crd_md_ajbl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="我的待办案件" id="crd_md_wddbaj" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/caseManage/caseTransact/CrdCaseTransactBiz/DoList?tableModelId=CrdCaseTransact&amp;freezeCondition= and CASESTATE ='10'&amp;moduleId=crd_md_wddbaj</userdata>
+      </item>
+      <item text="我的已办案件" id="crd_md_wdybaj" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdCaseHasToDo&amp;moduleId=crd_md_wdybaj</userdata>
+      </item>
+    </item>
+    <item text="案件进度监控" id="crd_md_ajjdjk" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/credit/caseManage/caseMonitor/CrdCaseMonitorBiz/DoList?tableModelId=CrdCaseMonitor&amp;moduleId=crd_md_ajjdjk</userdata>
+    </item>
+    <item text="案件办理效率统计" id="crd_md_ajblxltj" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdCaseNodeDealEff&amp;moduleId=crd_md_ajblxltj</userdata>
+    </item>
+    <item text="案件台账" id="crd_md_ajtz" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="案件费用台账" id="crd_md_ajfytz" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdCaseFeeTz&amp;moduleId=crd_md_ajfytz</userdata>
+    </item>
+    <item text="案件抵押物信息" id="crd_md_ajdywxx" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="房贷抵押物信息" id="crd_md_fddywxx" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?moduleId=crd_md_fddywxx&amp;tableModelId=CrdGrtHouse</userdata>
+      </item>
+      <item text="车贷抵押物信息" id="crd_md_cddywxx" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?moduleId=crd_md_cddywxx&amp;tableModelId=CrdGrtCar</userdata>
+      </item>
+    </item>
+  </item>
+  <item text="财务管理" id="s_md_cwgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="收款单管理" id="crd_md_skdgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="前端费用收款单" id="crd_md_qdfyskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:1&amp;moduleId=crd_md_qdfyskd</userdata>
+      </item>
+      <item text="前端付款退费收款单 " id="crd_md_qdfktfskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:6&amp;moduleId=crd_md_qdfktfskd</userdata>
+      </item>
+      <item text="前端佣金收款单" id="crd_md_qdyjskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:14&amp;moduleId=crd_md_qdyjskd</userdata>
+      </item>
+      <item text="后端佣金收款单" id="crd_md_hdyjskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:15&amp;moduleId=crd_md_hdyjskd</userdata>
+      </item>
+      <item text="往来佣金收款单" id="crd_md_wlyjskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:16&amp;moduleId=crd_md_wlyjskd</userdata>
+      </item>
+      <item text="前端佣金退费收款单" id="crd_md_qdyjtfskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:17&amp;moduleId=crd_md_qdyjtfskd</userdata>
+      </item>
+      <item text="后端佣金退费收款单" id="crd_md_hdyjtfskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:18&amp;moduleId=crd_md_hdyjtfskd</userdata>
+      </item>
+      <item text="往来佣金退费收款单" id="crd_md_wlyjtfskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:19&amp;moduleId=crd_md_wlyjtfskd</userdata>
+      </item>
+      <item text="银行付费收款单" id="crd_md_yhffskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:26&amp;moduleId=crd_md_yhffskd</userdata>
+      </item>
+      <item text="押金费用收款单" id="crd_md_yjfyskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:29&amp;moduleId=crd_md_yjfyskd</userdata>
+      </item>
+      <item text="快贷资金回款单" id="crd_md_kdzjhkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:34&amp;moduleId=crd_md_kdzjhkd</userdata>
+      </item>
+      <item text="赎楼费用收款单" id="crd_md_dlfyskd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinReceBill&amp;keyLimit=KINDID:37&amp;moduleId=crd_md_dlfyskd</userdata>
+      </item>
+    </item>
+    <item text="付款单管理" id="crd_md_fkdgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="前端费用付款单" id="crd_md_qdfyfkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:3&amp;moduleId=crd_md_qdfyfkd</userdata>
+      </item>
+      <item text="前端收款退费付款单" id="crd_md_qdsktffkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:5&amp;moduleId=crd_md_qdsktffkd</userdata>
+      </item>
+      <item text="前端佣金付款单" id="crd_md_qdyjfkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:11&amp;moduleId=crd_md_qdyjfkd</userdata>
+      </item>
+      <item text="后端佣金付款单" id="crd_md_hdyjfkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:12&amp;moduleId=crd_md_hdyjfkd</userdata>
+      </item>
+      <item text="往来佣金付款单" id="crd_md_wlyjfkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:13&amp;moduleId=crd_md_wlyjfkd</userdata>
+      </item>
+      <item text="前端佣金收款退费付款单" id="crd_md_qdyjsktffkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:23&amp;moduleId=crd_md_qdyjsktffkd</userdata>
+      </item>
+      <item text="后端佣金收款退费付款单" id="crd_md_hdyjsktffkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:24&amp;moduleId=crd_md_hdyjsktffkd</userdata>
+      </item>
+      <item text="往来佣金收款退费付款单" id="crd_wlyjsktffkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:25&amp;moduleId=crd_wlyjsktffkd</userdata>
+      </item>
+      <item text="银行退费付款单" id="crd_yhtffkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:28&amp;moduleId=crd_yhtffkd</userdata>
+      </item>
+      <item text="押金费用退款单" id="crd_md_yjfytkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:31&amp;moduleId=crd_md_yjfytkd</userdata>
+      </item>
+      <item text="快贷资金付款单" id="crd_md_kdzjfkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:33&amp;moduleId=crd_md_kdzjfkd</userdata>
+      </item>
+      <item text="快贷资金退款付款单" id="crd_md_kdzjtffkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:36&amp;moduleId=crd_md_kdzjtffkd</userdata>
+      </item>
+      <item text="赎楼费用付款单" id="crd_md_dlfyfkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinPayBill&amp;keyLimit=KINDID:39&amp;moduleId=crd_md_dlfyfkd</userdata>
+      </item>
+    </item>
+    <item text="请款单管理" id="crd_md_qkdgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="代付请款单" id="crd_md_dfqkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?keyLimit=KINDID:1&amp;moduleId=crd_md_dfqkd&amp;tableModelId=FinFeeApplyBill</userdata>
+      </item>
+      <item text="佣金请款单" id="crd_md_rjqkdgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?keyLimit=KINDID:2&amp;moduleId=crd_md_rjqkdgl&amp;tableModelId=FinCommApplyBill</userdata>
+      </item>
+      <item text="资金请款单" id="crd_md_zjqkdgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?keyLimit=KINDID:3&amp;moduleId=crd_md_zjqkdgl&amp;tableModelId=FinFundApplyBill</userdata>
+      </item>
+      <item text="退费请款单" id="crd_md_tfqkdgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?keyLimit=KINDID:4&amp;moduleId=crd_md_tfqkdgl&amp;tableModelId=FinBackApplyBill</userdata>
+      </item>
+      <item text="赎楼费用请款单" id="crd_md_dlfyqkd" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?keyLimit=KINDID:5&amp;moduleId=crd_md_dlfyqkd&amp;tableModelId=FinHouseApplyBill</userdata>
+      </item>
+      <item text="押金请款单" id="crd_md_yjqkdgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?keyLimit=KINDID:6&amp;moduleId=crd_md_yjqkdgl&amp;tableModelId=FinGrtApplyBill</userdata>
+      </item>
+    </item>
+    <item text="收入确认" id="crd_md_srqr" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="收入收费项目" id="crd_md_srsfxm" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/finance/bill/incomeConfirm/FinIncomeConfirmBiz/DoList?moduleId=crd_md_srsfxm&amp;tableModelId=FinIncomeConfirm</userdata>
+      </item>
+      <item text="收入代收项目" id="crd_md_srdsxm" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/credit/finance/bill/incomeConfirm/FinIncomeConfirmBiz/DoList?moduleId=crd_md_srdsxm&amp;tableModelId=FinIncomeConfirms</userdata>
+      </item>
+    </item>
+    <item text="成本确认" id="crd_md_cbqr" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinCostConfirm&amp;moduleId=crd_md_cbqr</userdata>
+    </item>
+    <item text="案件结算查询" id="crd_md_ajjscx" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdCaseBalance&amp;moduleId=crd_md_ajjscx</userdata>
+    </item>
+    <item text="账务台账" id="crd_md_zwtz" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="保证金管理" id="crd_md_bzjgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="收支明细表" id="crd_md_szmx" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdCaseBalanceOfPayments&amp;moduleId=crd_md_szmx</userdata>
+    </item>
+    <item text="前端费用处理" id="crd_md_qdfycl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="前端费用查询" id="crd_md_qdfycx" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+      </item>
+    </item>
+    <item text="押金处理" id="crd_md_yjcl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="监管款处理" id="crd_md_jgkcl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="佣金款项处理" id="crd_md_yjkxcl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="支佣确认单管理" id="crd_md_zyqrdgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinCommConfirm&amp;moduleId=crd_md_zyqrdgl</userdata>
+      </item>
+    </item>
+    <item text="资金业务处理" id="crd_md_zjywcl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+  </item>
+  <item text="风控管理" id="s_md_fkgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="风控审批管理" id="crd_md_fkspgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="额度管理" id="crd_md_edgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="贷后管理" id="crd_md_dhgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="保后管理" id="crd_md_bhgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="客户信用管理" id="crd_md_khxygl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="风险分析" id="crd_md_fxfx" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="风控业务授权管理" id="crd_md_fkywsqgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+  </item>
+  <item text="营销管理" id="s_md_yxgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="业务查询" id="crd_md_ywcx" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="业绩统计" id="crd_md_yjtj" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="工作计划" id="crd_md_gzjh" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="工作督办" id="crd_md_gzdb" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="工作周志" id="crd_md_gzzz" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="我的工作周志" id="crd_md_myzz" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+        <item text=" 工作计划" id="crd_md_workplan" open="1" call="1" select="1" isLeafModule="true">
+          <userdata name="URL">/credit/marketing/workPlan/workPlanSum/CrdWorkPlanSumBiz/DoList?tableModelId=CrdWorkPlanSum&amp;moduleId=crd_md_workplan</userdata>
+        </item>
+      </item>
+      <item text="督导与审批" id="crd_md_ddsp" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+      </item>
+      <item text="报表分析" id="crd_md_bbfx" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+      </item>
+      <item text="总结设置" id="crd_md_zjsz" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=CrdWorkPlanSumRule&amp;moduleId=crd_md_zjsz</userdata>
+      </item>
+    </item>
+  </item>
+  <item text="影像管理" id="s_md_yigl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="文档查询" id="crd_md_wdcx" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?moduleId=crd_md_wdcx&amp;tableModelId=SArchive</userdata>
+    </item>
+  </item>
+  <item text="报表管理" id="s_md_bbgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="推荐业务量报表" id="crd_md_tjywlbb" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+    </item>
+    <item text="报表模板设置" id="crd_md_bbmbsz" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/system/report/reportTemplet/SReportTempletBiz/DoList?moduleId=crd_md_bbmbsz&amp;tableModelId=SReportTemplet</userdata>
+    </item>
+  </item>
+  <item text="提醒与预警" id="s_md_txyyj" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="信息提醒" id="crd_md_xxtx" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=SRiskWarnMsg&amp;freezeCondition = and rw.MSGSTATE=0 and (rw.RWLEVEL =1 or rw.RWLEVEL =2) and rr.READERID='${CURR_USERID}'&amp;moduleId=crd_md_xxtx</userdata>
+    </item>
+    <item text="风险预警" id="s_md_fxyjxx" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=SRiskWarnMsg&amp;freezeCondition = and rw.MSGSTATE=0 and rr.READERID='${CURR_USERID}'&amp;moduleId=s_md_fxyjxx</userdata>
+    </item>
+    <item text="消息处理审核" id="s_md_xxclsh" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=SRiskWarnMsg&amp;freezeCondition = and (mfb.RESULTTYPE =10 or mfb.RESULTTYPE=29)and rw.MSGSTATE=0 and rr.READERID='${CURR_USERID}'&amp;moduleId=s_md_xxclsh</userdata>
+    </item>
+  </item>
+  <item text="基础数据管理" id="s_md_jcsjgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="产品信息管理" id="crd_md_cpxxgl" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/credit/crdbase/product/CrdProductInfoBiz/DoList?tableModelId=CrdProductInfo&amp;moduleId=crd_md_cpxxgl</userdata>
+    </item>
+    <item text="机构产品信息管理" id="crd_md_jgcpxxgl" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/credit/crdbase/product/CrdOrgProductInfoBiz/DoList?moduleId=crd_md_jgcpxxgl&amp;tableModelId=CrdOrgProductInfo</userdata>
+    </item>
+    <item text="案件节点类型定义" id="crd_md_ajjdlxdy" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/credit/caseManage/caseNodeType/CrdCaseNodeTypeBiz/DoList?tableModelId=CrdCaseNodeType&amp;moduleId=crd_md_ajjdlxdy</userdata>
+    </item>
+    <item text="产品费用项目管理" id="s_md_cpfyxm" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=FinFeeItems&amp;moduleId=s_md_cpfyxm</userdata>
+    </item>
+  </item>
+  <item text="系统管理" id="s_md_xtgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="组织架构" id="crd_md_zjjg" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="机构管理" id="crd_md_zjjg_jggl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/SOrgBiz/OpenOrgTree?moduleId=crd_md_zjjg_jggl</userdata>
+      </item>
+      <item text="部门管理" id="crd_md_zjjg_bmgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/SOrgBiz/CurrentOrgTree?moduleId=crd_md_zjjg_bmgl</userdata>
+      </item>
+      <item text="岗位管理" id="crd_md_zjjg_gwgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList.action?tableModelId=SPost&amp;moduleId=crd_md_zjjg_gwgl</userdata>
+      </item>
+      <item text="已停用机构管理" id="crd_md_zjjg_ytyjggl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/SOrgBiz/SOrgFliterList.action?keyLimit=STATE:1&amp;tableModelId=SOrg&amp;moduleId=crd_md_zjjg_ytyjggl</userdata>
+      </item>
+      <item text="已停用部门管理" id="crd_md_zjjg_ytybmgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/SDeptBiz/SDeptFliterList.action?keyLimit=STATE:1&amp;tableModelId=SDept&amp;moduleId=crd_md_zjjg_ytybmgl</userdata>
+      </item>
+    </item>
+    <item text="系统模块功能设置" id="crd_md_xtmkgnsz" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="模块操作设置" id="crd_md_xtmkgnsz_mkczsz" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/SModuleBiz/SModleTreeFramesets?moduleId=crd_md_xtmkgnsz_mkczsz</userdata>
+      </item>
+    </item>
+    <item text="权限管理" id="crd_md_qxgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="系统角色管理" id="crd_md_qxgl_xtjsgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList.action?tableModelId=SRole&amp;moduleId=crd_md_qxgl_xtjsgl</userdata>
+      </item>
+      <item text="系统用户管理" id="crd_md_qxgl_xtyhgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/SUser/DoList.action?tableModelId=SUser&amp;moduleId=crd_md_qxgl_xtyhgl</userdata>
+      </item>
+      <item text="角色权限设置" id="crd_md_qxgl_jsqxsz" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/SRoleRightBiz/RoleRightFrameset?moduleId=crd_md_qxgl_jsqxsz</userdata>
+      </item>
+      <item text="生成权限" id="crd_md_qxgl_scqx" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/BuildRightBiz/BuildRight?moduleId=crd_md_qxgl_scqx</userdata>
+      </item>
+    </item>
+    <item text="系统参数管理" id="crd_md_xtcsgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="系统参数设置" id="crd_md_xtcsgl_xtcssz" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+      </item>
+      <item text="字典表设置" id="crd_md_zdbsz" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/SDicBiz/DoList.action?tableModelId=SDic&amp;moduleId=crd_md_zdbsz</userdata>
+      </item>
+      <item text="自动编码设置" id="crd_md_xtcsgl_zdbmsz" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=SAutoCode&amp;moduleId=crd_md_xtcsgl_zdbmsz</userdata>
+      </item>
+      <item text="工作日历定制" id="crd_md_gzrldz" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/SWorkCalenderBiz/ShowDate?moduleId=crd_md_gzrldz</userdata>
+      </item>
+    </item>
+    <item text="定时任务调度" id="s_md_dsrwdd" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/system/jobInfo/SJobInfoBiz/DoList?moduleId=s_md_dsrwdd&amp;tableModelId=SJobInfo</userdata>
+    </item>
+    <item text="日志管理" id="crd_md_rzgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="系统运行日志" id="crd_md_rzgl_xtyxrz" open="1" call="1" select="1" isLeafModule="false">
+        <userdata name="URL">-</userdata>
+      </item>
+      <item text="用户操作日志" id="crd_md_rzgl_yhczrz" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList.action?tableModelId=SOperationLog&amp;moduleId=crd_md_rzgl_yhczrz</userdata>
+      </item>
+    </item>
+    <item text="机构权限管理" id="crd_md_jgqxgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="机构用户管理" id="crd_md_jgqxgl_jgyhgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/SUser/DoList.action?tableModelId=SUser&amp;isOrgUser=true&amp;freezeCondition=and user1.ORGID='${CURR_ORGID}'&amp;moduleId=crd_md_jgqxgl_jgyhgl</userdata>
+      </item>
+      <item text="生成权限" id="crd_md_jgqxgl_scqx" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/BuildRightBiz/BuildRight?isOrgUser=true&amp;moduleId=crd_md_jgqxgl_scqx</userdata>
+      </item>
+    </item>
+    <item text="集团公告" id="crd_md_jtgg" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/system/sysAffiche/affich/SAfficheBiz/DoList?keyLimit=ISHEADQUARTERS:1&amp;tableModelId=SAffiche&amp;moduleId=crd_md_jtgg</userdata>
+    </item>
+    <item text="机构公告" id="crd_md_jggg" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/system/sysAffiche/affich/SAfficheBiz/DoList?keyLimit=ISHEADQUARTERS:2&amp;tableModelId=SAffiche&amp;moduleId=crd_md_jggg</userdata>
+    </item>
+    <item text="快捷菜单设置" id="s_md_kjcdsz" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/author/customModule/SCustomModuleBiz/CustomMenu?moduleId=s_md_kjcdsz&amp;tableModelId=SCustomModule</userdata>
+    </item>
+    <item text="模块范围" id="crd_md_mkfw" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/author/moduleDataRange/SModleDataRangeBiz/DoList?tableModelId=SModleDataRange&amp;moduleId=crd_md_mkfw</userdata>
+    </item>
+    <item text="预警与提醒" id="s_md_yjytx" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="风险预警方案" id="s_md_fxyjfa" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/FrameCommonBiz/DoList?tableModelId=SRiskWarnScheme&amp;moduleId=s_md_fxyjfa</userdata>
+      </item>
+    </item>
+  </item>
+</tree>

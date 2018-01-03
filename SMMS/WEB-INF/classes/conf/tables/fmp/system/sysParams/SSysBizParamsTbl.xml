@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SSysBizParams" desc="业务参数设置" tblName="S_SYSPARAMS" pageSize="10" uniteTableModelId="" listURL="" sqlMapNamespace="SSysParams">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="BIZ1" colName="BIZ1" desc="续贷提醒天数" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="number" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="BIZ2" colName="BIZ2" desc="还贷提醒天数" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="number" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="BIZ3" colName="BIZ3" desc="催收提醒天数" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="number" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="BIZ4" colName="BIZ4" desc="资信员岗位码" dataType="VARCHAR" length="50"  listGroupName="" webType="pop" webTypeExt="openSinPop('SRole','BIZ4','ROLEID','ROLEID')" dblClick="viewSRoleByRoleId($(this).attr('truevalue'));" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="BIZ5" colName="BIZ5" desc="财务审核是否可以自己审核自己" dataType="VARCHAR" length="50"  listGroupName="" dicType="S_SF" webType="select" webTypeExt="" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="BIZ6" colName="BIZ6" desc="资金放款期限（天）" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="number" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="GRACEPERIOD" colName="GRACEPERIOD" desc="还贷宽限期" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="number" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="BASERATE" colName="BASERATE" desc="基准利率" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="permillage" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="WARNDAYS" colName="WARNDAYS" desc="默认提醒天数" dataType="VARCHAR" length="50"  listGroupName="" webType="text" webTypeExt="number" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="ISENABLEDQUOTA" colName="ISENABLEDQUOTA" desc="是否启用客户额度" dataType="CHAR" length="1"  listGroupName="" dicType="S_SF" webType="select" webTypeExt="" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="CUSTQUOTAWARN" colName="CUSTQUOTAWARN" desc="客户额度预警百分比" dataType="VARCHAR" length="8"  listGroupName="" webType="text" webTypeExt="percent" create="LU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="T" forceNewRow="F" isRangeSearch="F"/>		
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

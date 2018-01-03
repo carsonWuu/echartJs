@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsAcMailKey"> 
+<sql id="listColumns">
+	
+            CASE_STATE,
+            RID,
+            USERNAME,
+            GROUPNAME,
+            IP,
+            SERV_CRC,
+            APP_CRC,
+            LOG_TIME,
+            CONTENT,
+            TITLE,
+            MAIL_FROM,
+            MAIL_TO,
+            KEYWORDS,
+            CREATTIME,
+            CONTENTPATH,
+            RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+            CASE_STATE,
+            RID,
+            USERNAME,
+            GROUPNAME,
+            IP,
+            SERV_CRC,
+            APP_CRC,
+            LOG_TIME,
+            CONTENT,
+            TITLE,
+            MAIL_FROM,
+            MAIL_TO,
+            KEYWORDS,
+            CREATTIME,
+            CONTENTPATH,
+            RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from SMMS_AC_MAIL_KEY 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_AC_MAIL_KEY 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_AC_MAIL_KEY  where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from SMMS_AC_MAIL_KEY  where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_AC_MAIL_KEY  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_AC_MAIL_KEY  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_AC_MAIL_KEY (
+            <if test="CASE_STATE != null ">CASE_STATE,</if>
+            <if test="RID != null ">RID,</if>
+            <if test="USERNAME != null ">USERNAME,</if>
+            <if test="GROUPNAME != null ">GROUPNAME,</if>
+            <if test="IP != null ">IP,</if>
+            <if test="SERV_CRC != null ">SERV_CRC,</if>
+            <if test="APP_CRC != null ">APP_CRC,</if>
+            <if test="LOG_TIME != null ">LOG_TIME,</if>
+            <if test="CONTENT != null ">CONTENT,</if>
+            <if test="TITLE != null ">TITLE,</if>
+            <if test="MAIL_FROM != null ">MAIL_FROM,</if>
+            <if test="MAIL_TO != null ">MAIL_TO,</if>
+            <if test="KEYWORDS != null ">KEYWORDS,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+           
+            <if test="CONTENTPATH != null ">CONTENTPATH,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="CASE_STATE != null ">#{CASE_STATE},</if>
+           <if test="RID != null ">#{RID},</if>
+           <if test="USERNAME != null ">#{USERNAME},</if>
+           <if test="GROUPNAME != null ">#{GROUPNAME},</if>
+           <if test="IP != null ">#{IP},</if>
+           <if test="SERV_CRC != null ">#{SERV_CRC},</if>
+           <if test="APP_CRC != null ">#{APP_CRC},</if>
+           <if test="LOG_TIME != null ">#{LOG_TIME},</if>
+           <if test="CONTENT != null ">#{CONTENT},</if>
+           <if test="TITLE != null ">#{TITLE},</if>
+           <if test="MAIL_FROM != null ">#{MAIL_FROM},</if>
+           <if test="MAIL_TO != null ">#{MAIL_TO},</if>
+           <if test="KEYWORDS != null ">#{KEYWORDS},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="CONTENTPATH != null ">#{CONTENTPATH},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_AC_MAIL_KEY   
+		<set>
+			<if test="CASE_STATE!=null"> CASE_STATE=#{CASE_STATE},</if> 
+		    <if test="USERNAME!=null"> USERNAME=#{USERNAME},</if> 
+		    <if test="GROUPNAME!=null"> GROUPNAME=#{GROUPNAME},</if> 
+		    <if test="IP!=null"> IP=#{IP},</if> 
+		    <if test="SERV_CRC!=null"> SERV_CRC=#{SERV_CRC},</if> 
+		    <if test="APP_CRC!=null"> APP_CRC=#{APP_CRC},</if> 
+		    <if test="LOG_TIME!=null"> LOG_TIME=#{LOG_TIME},</if> 
+		    <if test="CONTENT!=null"> CONTENT=#{CONTENT},</if> 
+		    <if test="TITLE!=null"> TITLE=#{TITLE},</if> 
+		    <if test="MAIL_FROM!=null"> MAIL_FROM=#{MAIL_FROM},</if> 
+		    <if test="MAIL_TO!=null"> MAIL_TO=#{MAIL_TO},</if> 
+		    <if test="KEYWORDS!=null"> KEYWORDS=#{KEYWORDS},</if> 
+		    <if test="CONTENTPATH!=null"> CONTENTPATH=#{CONTENTPATH},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

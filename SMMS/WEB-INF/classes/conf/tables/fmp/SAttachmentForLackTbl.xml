@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<TableModel id="SAttachmentForLack" desc="所缺附件" tblName="S_Attachment" pageSize="10" listURL="/fmp/SAttachmentBiz/DoList?tableModelId=SAttachmentForLack" sqlMapNamespace="SAttachmentForLack">
+		<Fields>
+			<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR2" length="40" required="F" isPK="T"  order="ASC" create="VLAU" hidden="VLAU" webType="text"/>
+			<TableField id="RECORDRID" colName="RECORDRID" desc="记录主键" dataType="VARCHAR2" length="40" required="F"  create="VLAU" hidden="VLAU" webType="text"/>
+			<TableField id="CASECODE" colName="CASECODE" desc="流水号" dataType="VARCHAR" length="20"  webType="text" webTypeExt="" create="LVAU"  tableAlias="cci" />
+			<TableField id="FILECODE" colName="FILECODE" desc="项目编号" dataType="VARCHAR" length="20"  webType="text" create="LVUA" hidden="AVU" tableAlias="cci"/>
+			<TableField id="ARCHIVETYPE" colName="ARCHIVETYPE" desc="档案类型"  dataType="VARCHAR" length="3"  required="T" isSearch="T" create="LAVU"   webType="select" dicType="S_DALX"  tableAlias="sam"/>
+			<TableField id="ATTACHMENTNAME" colName="ATTACHMENTNAME" desc="附件名称"  dataType="VARCHAR2" length="100"   create="LAVU"  inputInList="T" webType="text"  titleWidth="350px" tableAlias="sam"/>
+			<TableField id="ATTACHMENTREMARK" colName="ATTACHMENTREMARK" desc="附件备注" dataType="VARCHAR" length="50"  create="LAVU" inputInList="T" webType="text" titleWidth="150px" tableAlias="sam"/>
+	  </Fields>
+	</TableModel>

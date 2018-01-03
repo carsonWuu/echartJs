@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SRiskWarnMsg"> 
+<sql id="listColumns">
+	
+      rw.INCEPTUSERID,
+      rw.MSGSTATE,
+      rw.CREATTIME,
+      rw.RECORDSTATE,
+      rw.RID,
+      rw.MSGID,
+      rw.SCHEMEID,
+      rw.MSGCONTENT,
+      rw.MSGBEGINDATE,
+      rw.MSGENDDATE,
+      rw.RWLEVEL,
+      rw.RWBIZTYPE,
+      rw.RWBIZRID,
+      rw.INCEPTORGID,
+      rw.INCEPTDEPTID,
+      rw.ISFEEDBACK,
+      rw.INCEPTPOST,
+      rw.FEEDBACKPOST,      
+      rr.ISREAD
+</sql>
+<sql id="detailColumns">
+	
+      INCEPTUSERID,
+      MSGSTATE,
+      CREATTIME,
+      RECORDSTATE,
+      RID,
+      MSGID,
+      SCHEMEID,
+      MSGCONTENT,
+      MSGBEGINDATE,
+      MSGENDDATE,
+      RWLEVEL,
+      RWBIZTYPE,
+      RWBIZRID,
+      INCEPTORGID,
+      INCEPTDEPTID,
+      ISFEEDBACK,
+      INCEPTPOST,
+      FEEDBACKPOST
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select o.ORGANSHORTFORM as TRANS_ORGNAME,rw.*,rr.ISREAD,
+		   o.ORGANSHORTFORM as TRANS_INCEPTORGID,
+		   sd.DEPSHORTFORM as TRANS_INCEPTDEPTID,
+		   sp.POSTNAME as TRANS_INCEPTPOST,
+		   sp2.POSTNAME as TRANS_FEEDBACKPOST,
+		   su.USERNAME as TRANS_INCEPTUSERID
+	from S_RISKWARNMSG rw
+	left outer join S_MSGFEEDBACK mfb 
+		on (mfb.MSGID = rw.MSGID)
+	inner join S_RWREADLIST rr 
+		on (rr.MSGID = rw.MSGID)
+	left outer join S_ORG o
+		on o.ORGID = rw.INCEPTORGID
+	left outer join S_DEPT sd
+		on sd.DEPTID = rw.INCEPTDEPTID
+	left outer join S_POST sp
+		on sp.POSTID = rw.INCEPTPOST
+	left outer join S_POST sp2
+		on sp2.POSTID = rw.FEEDBACKPOST
+	left outer join S_USER su
+		on su.USERID = rw.INCEPTUSERID
+	<where>
+		rw.RECORDSTATE='0' and rr.READERID=#{CURR_USERID}
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM 
+	from S_RISKWARNMSG rw
+	left outer join S_MSGFEEDBACK mfb 
+		on (mfb.MSGID = rw.MSGID)
+	inner join S_RWREADLIST rr 
+		on (rr.MSGID = rw.MSGID)
+	left outer join S_ORG o
+		on o.ORGID = rw.INCEPTORGID
+	left outer join S_DEPT sd
+		on sd.DEPTID = rw.INCEPTDEPTID
+	left outer join S_POST sp
+		on sp.POSTID = rw.INCEPTPOST
+	left outer join S_POST sp2
+		on sp2.POSTID = rw.FEEDBACKPOST
+	left outer join S_USER su
+		on su.USERID = rw.INCEPTUSERID
+	<where>
+		rw.RECORDSTATE='0' and rr.READERID=#{CURR_USERID}
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_RISKWARNMSG where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select o.ORGANSHORTFORM as TRANS_ORGNAME,rw.*,
+		   o.ORGANSHORTFORM as TRANS_INCEPTORGID,
+		   sd.DEPSHORTFORM as TRANS_INCEPTDEPTID,
+		   sp.POSTNAME as TRANS_INCEPTPOST,
+		   sp2.POSTNAME as TRANS_FEEDBACKPOST,
+		   su.USERNAME as TRANS_INCEPTUSERID
+	from S_RISKWARNMSG rw
+	left outer join S_MSGFEEDBACK mfb 
+		on (mfb.MSGID = rw.MSGID)
+	inner join S_RWREADLIST rr 
+		on (rr.MSGID = rw.MSGID)
+	left outer join S_ORG o
+		on o.ORGID = rw.INCEPTORGID
+	left outer join S_DEPT sd
+		on sd.DEPTID = rw.INCEPTDEPTID
+	left outer join S_POST sp
+		on sp.POSTID = rw.INCEPTPOST
+	left outer join S_POST sp2
+		on sp2.POSTID = rw.FEEDBACKPOST
+	left outer join S_USER su
+		on su.USERID = rw.INCEPTUSERID
+	where rw.RID = #{RID} and rr.READERID=#{CURR_USERID}
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_RISKWARNMSG set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+    select o.ORGANSHORTFORM as TRANS_ORGNAME,rw.*,
+		   o.ORGANSHORTFORM as TRANS_INCEPTORGID,
+		   sd.DEPSHORTFORM as TRANS_INCEPTDEPTID,
+		   sp.POSTNAME as TRANS_INCEPTPOST,
+		   sp2.POSTNAME as TRANS_FEEDBACKPOST,
+		   su.USERNAME as TRANS_INCEPTUSERID
+	from S_RISKWARNMSG rw
+	left outer join S_MSGFEEDBACK mfb 
+		on (mfb.MSGID = rw.MSGID)
+	inner join S_RWREADLIST rr 
+		on (rr.MSGID = rw.MSGID)
+	left outer join S_ORG o
+		on o.ORGID = rw.INCEPTORGID
+	left outer join S_DEPT sd
+		on sd.DEPTID = rw.INCEPTDEPTID
+	left outer join S_POST sp
+		on sp.POSTID = rw.INCEPTPOST
+	left outer join S_POST sp2
+		on sp2.POSTID = rw.FEEDBACKPOST
+	left outer join S_USER su
+		on su.USERID = rw.INCEPTUSERID
+	where rw.RID = #{RID} 	and rr.READERID=#{CURR_USERID}
+</select> 
+
+
+
+<select id="SRMListData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from S_RISKWARNMSG rw,S_RWREADLIST rr
+	<where>
+		rr.MSGID = rw.MSGID and rr.READERID=#{CURR_USERID}   <!-- 根据读者进行过滤  -->
+		and rw.RECORDSTATE='0' and rw.RWLEVEL in(1,2)
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+    <if test="order!=null and order!='' ">   
+             order by rr.ISREAD desc,rw.MSGENDDATE desc
+    </if>	
+
+</select>
+
+<select id="SRMTotalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from S_RISKWARNMSG rw,S_RWREADLIST rr
+	<where>
+		rr.MSGID = rw.MSGID and rr.READERID=#{CURR_USERID}   <!-- 根据读者进行过滤  -->
+		and rw.RECORDSTATE='0' and rw.RWLEVEL in(1,2)
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+ 
+</select>
+
+
+
+<select id="SRWListData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from S_RISKWARNMSG rw,S_RWREADLIST rr 
+	<where>
+		rr.READERID=#{CURR_USERID}   <!-- 根据读者进行过滤  -->
+		and rr.MSGID = rw.MSGID
+		and rw.RECORDSTATE='0' and rw.RWLEVEL in(3,4,5)
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+     <if test="order!=null and order!='' ">   
+             order by rr.ISREAD desc,rw.MSGENDDATE desc
+    </if>	
+
+</select>
+
+<select id="SRWTotalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from S_RISKWARNMSG rw,S_RWREADLIST rr 
+	<where>
+		rr.READERID=#{CURR_USERID}   <!-- 根据读者进行过滤  -->
+		and rr.MSGID = rw.MSGID
+		and rw.RECORDSTATE='0' and rw.RWLEVEL in(3,4,5)
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+ 
+
+</select>
+
+
+
+
+
+<select id="IsBackListData" parameterType="hashmap" resultType="hashmap"> 
+	select MSGID,ISFEEDBACK from S_RISKWARNMSG   where RID=#{RID}  
+</select>
+
+
+
+
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_RISKWARNMSG(
+      INCEPTUSERID,
+      MSGSTATE,
+      CREATTIME,
+      RECORDSTATE,
+      RID,
+      MSGID,
+      SCHEMEID,
+      MSGCONTENT,
+      MSGBEGINDATE,
+      MSGENDDATE,
+      RWLEVEL,
+      RWBIZTYPE,
+      RWBIZRID,
+      INCEPTORGID,
+      INCEPTDEPTID,
+      ISFEEDBACK,
+      INCEPTPOST,
+      FEEDBACKPOST)
+	   values (
+      #{INCEPTUSERID},
+      #{MSGSTATE},
+      #{CREATTIME},
+      #{RECORDSTATE},
+      #{RID},
+      #{MSGID},
+      #{SCHEMEID},
+      #{MSGCONTENT},
+      #{MSGBEGINDATE},
+      #{MSGENDDATE},
+      #{RWLEVEL},
+      #{RWBIZTYPE},
+      #{RWBIZRID},
+      #{INCEPTORGID},
+      #{INCEPTDEPTID},
+      #{ISFEEDBACK},
+      #{INCEPTPOST},
+      #{FEEDBACKPOST})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_RISKWARNMSG  
+		<set>
+		    <if test="INCEPTUSERID!=null"> INCEPTUSERID=#{INCEPTUSERID},</if> 
+    <if test="MSGSTATE!=null"> MSGSTATE=#{MSGSTATE},</if> 
+    <if test="CREATTIME!=null"> CREATTIME=#{CREATTIME},</if> 
+    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+    <if test="MSGID!=null"> MSGID=#{MSGID},</if> 
+    <if test="SCHEMEID!=null"> SCHEMEID=#{SCHEMEID},</if> 
+    <if test="MSGCONTENT!=null"> MSGCONTENT=#{MSGCONTENT},</if> 
+    <if test="MSGBEGINDATE!=null"> MSGBEGINDATE=#{MSGBEGINDATE},</if> 
+    <if test="MSGENDDATE!=null"> MSGENDDATE=#{MSGENDDATE},</if> 
+    <if test="RWLEVEL!=null"> RWLEVEL=#{RWLEVEL},</if> 
+    <if test="RWBIZTYPE!=null"> RWBIZTYPE=#{RWBIZTYPE},</if> 
+    <if test="RWBIZRID!=null"> RWBIZRID=#{RWBIZRID},</if> 
+    <if test="INCEPTORGID!=null"> INCEPTORGID=#{INCEPTORGID},</if> 
+    <if test="INCEPTDEPTID!=null"> INCEPTDEPTID=#{INCEPTDEPTID},</if> 
+	<if test="ISFEEDBACK!=null"> ISFEEDBACK=#{ISFEEDBACK},</if>
+	<if test="INCEPTPOST!=null"> INCEPTPOST=#{INCEPTPOST},</if>
+	<if test="FEEDBACKPOST!=null"> FEEDBACKPOST=#{FEEDBACKPOST},</if>
+      
+		</set>
+	where RID=#{RID}
+</update> 
+
+<!--标记消息状态为已读(1-已读) -->
+<update id="updateIsRead" parameterType="hashmap" > 
+	update S_RWREADLIST srl
+	<set>
+		<if test="ISREAD!=null"> ISREAD=#{ISREAD}</if>		
+	</set>
+	where exists(select 1 from S_RISKWARNMSG srm
+				  where srm.MSGID = srl.MSGID and 
+				  		srm.RID = #{RID})
+		  and srl.READERID = #{CURR_USERID}
+</update>
+
+<insert id="insertRWReadList" parameterType="hashmap" >
+	insert into S_RWREADLIST(
+      MSGID,
+      SCHEMEID,
+      READERID,
+      ISREAD)
+	   values (
+      #{MSGID},
+      #{SCHEMEID},
+      #{READERID},
+      #{ISREAD})
+</insert> 
+
+<select id="getRiskWarnMsg" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_RISKWARNMSG
+	where RECORDSTATE='0' AND SCHEMEID = #{SCHEMEID}		
+</select> 
+</mapper>

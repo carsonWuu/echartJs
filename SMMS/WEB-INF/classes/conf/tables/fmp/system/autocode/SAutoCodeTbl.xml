@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SAutoCode" desc="系统自动编码表" tblName="S_AUTOCODE" pageSize="10" listURL="" sqlMapNamespace="SAutoCode">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T" tableAlias="sac" />
+		<TableField id="CODETYPE" colName="CODETYPE" desc="编码类型" dataType="VARCHAR2" length="20"  webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="T" fuzzy="T"  required="T" isPK="F" order="ASC" orderInList="T"  tableAlias="sac" />
+		<TableField id="CODEDESC" colName="CODEDESC" desc="编码描述" dataType="VARCHAR2" length="50"  webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="T" fuzzy="T" orderInList="F" required="T" isPK="F" tableAlias="sac" />		
+		<TableField id="CODERULE" colName="CODERULE" desc="编码规则" dataType="VARCHAR2" length="100"  webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="T" fuzzy="T" orderInList="F" required="T" isPK="F" tableAlias="sac" />
+		<TableField id="CURRNUM" colName="CURRNUM" desc="当前序号" dataType="INTEGER" length="10"  webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" tableAlias="sac" />
+		<TableField id="NUMLENGTH" colName="NUMLENGTH" desc="序号长度" dataType="INTEGER" length="10"  webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" tableAlias="sac" />
+		<TableField id="NUMRESETRULE" colName="NUMRESETRULE" desc="序号重置规则" dataType="VARCHAR2" length="50"  webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="sac" />
+		<TableField id="NUMRESETVALUE" colName="NUMRESETVALUE" desc="序号重置值" dataType="VARCHAR2" length="50"  webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="sac" />
+    	<TableField id="ORGID" colName="ORGID" desc="所属机构" dataType="VARCHAR2" length="10"   create="LVUA" groupEnd="F" isSearch="T" fuzzy="F"  required="F" webType="pop" webTypeExt="openSinOrgPop('SOrg','ORGID','ORGID','ORGNAME')" dblClick="viewSOrgByOrgId($(this).attr('truevalue'));" order="ASC" orderInList="T" tableAlias="sac" />
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" tableAlias="sac" />
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<tree id="0" >
+	<item text="日常处理1" id="magazines" im0="folderClosed.gif" im1="folderOpen.gif" im2="folderClosed.gif">
+		<item text="我的工作台1" id="mag_sp" im0="folderClosed.gif" im1="folderOpen.gif" im2="folderClosed.gif"></item>
+	</item>	
+	<item text="系统管理1" id="books" open="1" im0="tombs.gif" im1="tombs.gif" im2="iconSafe.gif" call="1" select="1">
+		<item text="组织架构" id="mystery" im0="folderClosed.gif" im1="folderOpen.gif" im2="folderClosed.gif">
+			<item text="机构管理" id="lb" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"/>
+			<item text="部门管理" id="lb_1" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"/>
+			<item text="岗位管理" id="ir" im0="book_titel.gif" im1="book_titel.gif" im2="book_titel.gif"></item>
+			<item text="员工管理" id="jp" im0="book_titel.gif" im1="book_titel.gif" im2="book_titel.gif"></item>
+		</item>
+		<item text="系统权限1" id="history" im0="folderClosed.gif" im1="folderOpen.gif" im2="folderClosed.gif">
+			<item text="菜单模块设置" id="jmf" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"></item>
+			<item text="系统角色设置" id="jd" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"></item>
+			<item text="菜单权限设置" id="ls" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"></item>
+			<item text="用户角色设置" id="rle" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"></item>
+		</item>
+		<item text="参数设置1" id="horror" open="1" im0="folderClosed.gif" im1="folderOpen.gif" im2="folderClosed.gif">
+			<item text="数据字典" id="sk" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"></item>
+			<item text="系统运行参数" id="mjd" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"></item>
+		</item>
+	</item>
+
+</tree> 

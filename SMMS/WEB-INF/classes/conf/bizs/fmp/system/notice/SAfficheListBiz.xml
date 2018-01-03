@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>    	
+    <package name="fmp.system.notice.SAfficheListBiz" namespace="/fmp/system/notice/SAfficheListBiz" extends="fmp.FrameCommonBiz">
+        <!--显示公告页面--> 
+        <action  name="SAfficheList" class="com.zstar.fmp.system.notice.action.SAfficheListAction">
+            <result>/WEB-INF/jsp/fmp/system/notice/saffichelist.jsp</result>
+        </action>          
+
+        <!-- Add actions here -->
+    </package>
+</struts>

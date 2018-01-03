@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="MmAccountInfo"> 
+<sql id="listColumns">
+	
+            MKEY,
+            SERIALNUMBER,
+            PASSWORD,
+            RID,
+            UNITPRICE,
+            ACCOUNTBALANCE
+</sql>
+<sql id="detailColumns">
+	
+            MKEY,
+            SERIALNUMBER,
+            PASSWORD,
+            RID,
+            UNITPRICE,
+            ACCOUNTBALANCE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from S_MMACCOUNTINFO
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from S_MMACCOUNTINFO
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_MMACCOUNTINFO where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from S_MMACCOUNTINFO where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_MMACCOUNTINFO set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from S_MMACCOUNTINFO where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_MMACCOUNTINFO(
+            MKEY,
+            SERIALNUMBER,
+            PASSWORD,
+            RID,
+            UNITPRICE,
+            ACCOUNTBALANCE)
+	   values (
+            #{MKEY},
+            #{SERIALNUMBER},
+            #{PASSWORD},
+            #{RID},
+            #{UNITPRICE},
+            #{ACCOUNTBALANCE})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_MMACCOUNTINFO  
+		<set>
+			<if test="SERIALNUMBER!=null"> SERIALNUMBER=#{SERIALNUMBER},</if> 
+		    <if test="MKEY!=null"> MKEY=#{MKEY},</if> 
+		    <if test="UNITPRICE!=null"> UNITPRICE=#{UNITPRICE},</if> 
+		    <if test="PASSWORD!=null"> PASSWORD=#{PASSWORD},</if> 
+		    <if test="ACCOUNTBALANCE!=null"> ACCOUNTBALANCE=#{ACCOUNTBALANCE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+<select id="getMmAccountInfo" parameterType="String" resultType="hashmap"> 
+	select * from S_MMACCOUNTINFO			
+</select> 
+
+</mapper>

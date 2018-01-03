@@ -1,0 +1,33 @@
+body {
+	margin: 0px;
+	font-size: 12px;
+	SCROLLBAR-HIGHLIGHT-COLOR: buttonface;
+	SCROLLBAR-SHADOW-COLOR: buttonface;
+	SCROLLBAR-3DLIGHT-COLOR: buttonhighlight;
+	SCROLLBAR-TRACK-COLOR: #eeeeee;
+	SCROLLBAR-DARKSHADOW-COLOR: buttonshadow;
+
+}
+td {
+	font-size: 12px;
+}
+a.menu {
+	color: #174573;
+	text-decoration: none;
+}
+a.menu:hover {
+}
+a.menutop {
+	color: #FFFFF0;
+	text-decoration: none;
+}
+a.menutop:hover {
+	color: #FFFFFF;
+
+}
+.MenuOn {
+	BACKGROUND-IMAGE: url(../img/menu_bg_on.gif); BACKGROUND-REPEAT: repeat-x;
+}
+.MenuOut {
+	BACKGROUND-IMAGE: url(none);
+}

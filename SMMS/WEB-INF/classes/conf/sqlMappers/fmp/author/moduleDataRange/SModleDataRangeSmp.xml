@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SModleDataRange"> 
+<sql id="listColumns">
+	
+      RID,
+      MODULEID,
+      ROLEID,
+      ORGFLDNAME,
+      ORGSET,
+      ORGNAMESET,
+      ORGEXTSET,
+      USERFLDNAME,
+      USERSET,
+      USERNAMESET,
+      DEPTFLDNAME,
+      DEPTSET,
+      DEPTNAMESET,
+      DEPTEXTSET,      
+      EXTCOND,
+      CREATTIME,
+      CREATORID,
+      USEREXTSET
+</sql>
+<sql id="detailColumns">
+	
+      RID,
+      MODULEID,
+      ROLEID,
+      ORGFLDNAME,
+      ORGSET,
+      ORGNAMESET,
+      ORGEXTSET,
+      USERFLDNAME,
+      USERSET,
+      USERNAMESET,
+      DEPTFLDNAME,
+      DEPTSET,
+      DEPTNAMESET,
+      DEPTEXTSET, 
+      EXTCOND,
+      CREATTIME,
+      CREATORID,
+      USEREXTSET
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from S_MODULEDATARANGE
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="int"> 
+	select count(*) num from S_MODULEDATARANGE
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<select id="orgFldNameDate" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_MODULEDATARANGE where MODULEID = #{MODULEID}
+</select>
+
+<select id="moduleIdList" parameterType="hashmap" resultType="hashmap"> 
+	select MODULEID from S_MODULEDATARANGE 
+</select>
+
+
+<select id="orgSetSelectDate" parameterType="hashmap" resultType="hashmap"> 
+    <!--根据岗位和moduleId查询相应的机构集合和机构字段名（返回列表，解决null问题）-->
+    select DISTINCT smr.* from S_ROLERIGHT sr 
+    left outer join S_MODULEDATARANGE smr
+    	on smr.ROLEID = sr.ROLEID and smr.MODULEID = sr.MODULEID
+    where smr.ROLEID=#{ROLEID} AND  smr.MODULEID=#{MODULEID}
+</select>
+
+
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_MODULEDATARANGE where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from S_MODULEDATARANGE where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_MODULEDATARANGE set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="hashmap" resultType="hashmap"> 
+      select 
+      <include refid="detailColumns"/>,
+      ORGNAMESET as TRANS_ORGSET,
+      DEPTNAMESET as TRANS_DEPTSET,
+      USERNAMESET as TRANS_USERSET 
+      from S_MODULEDATARANGE where RID = #{RID} 
+</select> 
+
+
+<select id="selectRid" parameterType="hashmap" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from S_MODULEDATARANGE where ROLEID = #{ROLEID} and MODULEID = #{MODULEID}
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_MODULEDATARANGE(
+      RID,
+      MODULEID,
+      ROLEID,
+      ORGFLDNAME,
+      ORGSET,
+      ORGNAMESET,
+      ORGEXTSET,
+      USERFLDNAME,
+      USERSET,
+      USERNAMESET,
+      DEPTFLDNAME,
+      DEPTSET,
+      DEPTNAMESET,
+      DEPTEXTSET,       
+      EXTCOND,
+      CREATTIME,
+      CREATORID,
+      USEREXTSET)
+	   values (
+      #{RID},
+      #{MODULEID},
+      #{ROLEID},
+      #{ORGFLDNAME},
+      #{ORGSET},
+      #{ORGNAMESET},
+      #{ORGEXTSET},
+      #{USERFLDNAME},
+      #{USERSET},
+      #{USERNAMESET},
+      #{DEPTFLDNAME},
+      #{DEPTSET},
+      #{DEPTNAMESET},
+      #{DEPTEXTSET},       
+      #{EXTCOND},
+      #{CREATTIME},
+      #{CREATORID},
+      #{USEREXTSET})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_MODULEDATARANGE  
+		<set>
+		    <if test="MODULEID!=null"> MODULEID=#{MODULEID},</if> 
+    <if test="ROLEID!=null"> ROLEID=#{ROLEID},</if> 
+    <if test="ORGFLDNAME!=null"> ORGFLDNAME=#{ORGFLDNAME},</if> 
+    <if test="ORGSET!=null"> ORGSET=#{ORGSET},</if> 
+    <if test="ORGNAMESET!=null"> ORGNAMESET=#{ORGNAMESET},</if> 
+    <if test="ORGEXTSET!=null"> ORGEXTSET=#{ORGEXTSET},</if> 
+    <if test="USERFLDNAME!=null"> USERFLDNAME=#{USERFLDNAME},</if> 
+    <if test="USERSET!=null"> USERSET=#{USERSET},</if> 
+     <if test="USERNAMESET!=null"> USERNAMESET=#{USERNAMESET},</if> 
+    <if test="DEPTFLDNAME!=null"> DEPTFLDNAME=#{DEPTFLDNAME},</if> 
+    <if test="DEPTSET!=null"> DEPTSET=#{DEPTSET},</if> 
+    <if test="DEPTNAMESET!=null"> DEPTNAMESET=#{DEPTNAMESET},</if> 
+    <if test="DEPTEXTSET!=null"> DEPTEXTSET=#{DEPTEXTSET},</if>      
+    <if test="EXTCOND!=null"> EXTCOND=#{EXTCOND},</if> 
+    <if test="CREATTIME!=null"> CREATTIME=#{CREATTIME},</if> 
+    <if test="CREATORID!=null"> CREATORID=#{CREATORID},</if> 
+    <if test="USEREXTSET!=null"> USEREXTSET=#{USEREXTSET},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+<!-- 根据ROLEID删除岗位数据范围（复制权限）-->
+<delete id="deleteDataRange" parameterType="hashmap" > 
+	delete from S_MODULEDATARANGE where ROLEID = #{ROLEID}
+</delete> 
+
+<!-- 根据COPYROLEID和ROLEID获取岗位数据范围（复制权限）-->
+<select id="getCopyModuleDataRange" parameterType="hashmap" resultType="hashmap"> 
+      select smdr.* from S_MODULEDATARANGE smdr
+      left outer join S_ROLERIGHT srr
+      	on srr.ROLEID = smdr.ROLEID
+      where srr.ROLEID = #{COPYROLEID} and exists(
+    		select crr.MODULEID from S_ROLERIGHT crr
+	        where crr.ROLEID = #{ROLEID} and srr.MODULEID = crr.MODULEID)
+	  group by smdr.ROLEID,smdr.MODULEID
+</select> 
+</mapper>

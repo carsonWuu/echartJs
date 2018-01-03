@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<include file="conf/bizs/SMMS/BaseData/SmmsRpcLog/SmmsRpcLogBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/IdcInfo/IdcInfoBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/SmmsRoomIprange/SmmsRoomIprangeBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/SmmsRoomInfo/SmmsRoomInfoBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/WebCase/WebCaseBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/SmmsPendingEvent/SmmsPendingEventBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/SmmsWebCaseIp/SmmsWebCaseIpBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/SmmsWebOpenApp/SmmsWebOpenAppBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/PendingEventForClose/PendingEventForCloseBiz.xml"/>
+	<include file="conf/bizs/SMMS/acLog/SmmsCrcMapting/SmmsCrcMaptingBiz.xml"/>
+	<include file="conf/bizs/SMMS/acLog/SmmsAcLogin/SmmsAcLoginBiz.xml"/>
+	<include file="conf/bizs/SMMS/acLog/SmmsAcUrl/SmmsAcUrlBiz.xml"/>
+	<include file="conf/bizs/SMMS/acLog/SmmsAcUrlKey/SmmsAcUrlKeyBiz.xml"/>
+	<include file="conf/bizs/SMMS/acLog/SmmsAcBbs/SmmsAcBbsBiz.xml"/>
+	<include file="conf/bizs/SMMS/acLog/SmmsAcBbsKey/SmmsAcBbsKeyBiz.xml"/>
+	<include file="conf/bizs/SMMS/acLog/SmmsAcMail/SmmsAcMailBiz.xml"/>
+	<include file="conf/bizs/SMMS/acLog/SmmsAcMailKey/SmmsAcMailKeyBiz.xml"/>
+	<include file="conf/bizs/SMMS/acLog/SmmsAcAppKey/SmmsAcAppVpnBiz.xml"/>
+	<include file="conf/bizs/SMMS/acLog/SmmsAcApp/SmmsAcAppBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/SmmsKeyword/SmmsKeywordBiz.xml"/>
+	<include file="conf/bizs/SMMS/afLog/SmmsAfLog/SmmsAfLogBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/SmmsPendingEvent_GTSXTJ/PendingEvent_GTSXTJBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/SmmsPendingEvent_aqsj/PendingEvent_aqsjBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/SmmsPendingEvent_vpn/PendingEvent_vpnBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/SmmsPendingEvent_keyword/PendingEvent_keyBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/SmmsRoomIprange_idcInfo/SmmsRoomIprange_idcBiz.xml"/>
+	<include file="conf/bizs/SMMS/STAT/SmmsRptRecord/SmmsRptRecordBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/SmmsPendingRzjz/SmmsPending_rzjzBiz.xml"/>
+	<include file="conf/bizs/SMMS/afLog/SmmsAfLogTwo/SmmsAfLogTwoBiz.xml"/>
+	<include file="conf/bizs/SMMS/BaseData/SmmsPendingEvent_Wba/SmmsPendingEvent_WbaBiz.xml"/>
+</struts>

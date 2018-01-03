@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SAffiche" desc="系统公告" tblName="S_AFFICHE" pageSize="20" uniteTableModelId="" listURL="/fmp/SAfficheBiz/DoList?tableModelId=SAffiche" sqlMapNamespace="SAffiche">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T"/>
+		<TableField id="AFFICHEID" colName="AFFICHEID" desc="公告编号" dataType="VARCHAR" length="15"  webType="text" webTypeExt="" create="LVUA" hidden="LUVA" readOnly="U" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="T" isPK="F" autoCode="S_GGBM"/>
+		<TableField id="AFFICHENAME" colName="AFFICHENAME" desc="公告名称" dataType="VARCHAR" length="50"  webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="T" fuzzy="T" orderInList="F" required="T" isPK="F"/>
+		<TableField id="KINDID" colName="KINDID" desc="公告类别" dataType="VARCHAR" length="3"  dicType="afficheKind" webType="select" webTypeExt="" create="LVUA" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="T" isPK="F"/>
+		<TableField id="ISHEADQUARTERS" colName="ISHEADQUARTERS" desc="是否是集团公告" dataType="CHAR" length="1"  dicType="FMP_ISHEADQUARTERS" webType="select" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F"/>
+		<TableField id="AFFICHECONTENT" colName="AFFICHECONTENT" desc="公告内容" dataType="VARCHAR" length="200"  colSpan="2" webType="textarea" webTypeExt="" create="LVUA" hidden="L" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F"/>
+		<TableField id="VALIDDATE" colName="VALIDDATE" desc="公告有效期至" dataType="CHAR" length="10"  webType="text" webTypeExt="date" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" forceNewRow="T"/>
+		<TableField id="AFFICHESTATE" colName="AFFICHESTATE" desc="公告状态" dataType="CHAR" length="1"  dicType="afficheState" webType="select" webTypeExt="" create="LVUA" groupEnd="F" isSearch="T" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"  webType="text" webTypeExt="time" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+		<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR" length="10"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+		<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20"  webType="text" webTypeExt="time" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+		<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR" length="10"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+		<TableField id="LIABDEPT" colName="LIABDEPT" desc="责任部门" dataType="VARCHAR" length="20"  webType="pop" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+		<TableField id="LIABORG" colName="LIABORG" desc="责任机构" dataType="VARCHAR" length="10"  webType="pop" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+	</Fields>
+	<SubTableModels>
+		<SubTableModel id="SAttachmentForTab" keyField="RECORDRID" mKeyField="RID" desc="公告附件管理"/>   
+	</SubTableModels>
+</tablemodel>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SPost"> 
+<sql id="listColumns">
+	
+      post.RID,
+      post.POSTID,
+      post.POSTNAME,
+      post.POSTDESC,
+      post.ORGID,
+      post.ORDERNO,
+      post.MEMO,
+      post.CREATORID,
+      post.CREATTIME,
+      post.MODIFIERID,
+      post.MODIFIEDTIME,
+      post.RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+      post.RID,
+      post.POSTID,
+      post.POSTNAME,
+      post.POSTDESC,
+      post.ORGID,
+      post.ORDERNO,
+      post.MEMO,
+      post.CREATORID,
+      post.CREATTIME,
+      post.MODIFIERID,
+      post.MODIFIEDTIME,
+      post.RECORDSTATE
+</sql>
+
+
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/>,org.ORGANSHORTFORM as TRANS_ORGID from S_POST post
+	left outer join S_ORG org
+	on post.ORGID = org.ORGID
+	<where>
+		post.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="orgData" parameterType="hashmap" resultType="hashmap"> 
+<!--   对选择的机构可以授权的职位进行过滤   -->
+	select <include refid="listColumns"/> from S_POST post
+	<where>
+		post.RECORDSTATE='0' and (post.ORGID=#{ORGID}  or post.ORGID='[ALL]')
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="sOrgData" parameterType="hashmap" resultType="hashmap"> 
+<!--  根据登录用户所在的机构可以授权的职位进行过滤  -->
+   select * from S_POST post 
+<where>
+		(post.ORGID=#{CURR_ORGID} or post.ORGID='[ALL]')
+		and post.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>	
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from S_POST post
+	<where>
+		post.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_POST where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+    select <include refid="detailColumns"/>,org.ORGANSHORTFORM as TRANS_ORGID from S_POST post
+	left outer join S_ORG org
+	on post.ORGID = org.ORGID
+	where post.RID = #{RID}
+
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_POST set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+    select <include refid="detailColumns"/>,org.ORGANSHORTFORM as TRANS_ORGID from S_POST post
+	left outer join S_ORG org
+	on post.ORGID = org.ORGID
+	where post.RID = #{RID}
+    
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_POST(
+      RID,
+      POSTID,
+      POSTNAME,
+      POSTDESC,
+      ORGID,
+      ORDERNO,
+      MEMO,
+      CREATORID,
+      CREATTIME,
+      MODIFIERID,
+      MODIFIEDTIME,
+      RECORDSTATE)
+	   values (
+      #{RID},
+      #{POSTID},
+      #{POSTNAME},
+      #{POSTDESC},
+      #{ORGID},
+      #{ORDERNO},
+      #{MEMO},
+      #{CREATORID},
+      #{CREATTIME},
+      #{MODIFIERID},
+      #{MODIFIEDTIME},
+      #{RECORDSTATE})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_POST  
+		<set>
+		    <if test="POSTID!=null"> POSTID=#{POSTID},</if> 
+    <if test="POSTNAME!=null"> POSTNAME=#{POSTNAME},</if> 
+    <if test="POSTDESC!=null"> POSTDESC=#{POSTDESC},</if> 
+    <if test="ORGID!=null"> ORGID=#{ORGID},</if> 
+    <if test="ORDERNO!=null"> ORDERNO=#{ORDERNO},</if> 
+    <if test="MEMO!=null"> MEMO=#{MEMO},</if> 
+    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+<!--  根据POSTID获取数据  -->
+<select id="getPostByPostId" parameterType="hashmap" resultType="hashmap">
+	select * from S_POST where POSTID = #{POSTID} and RECORDSTATE = '0'
+</select> 
+
+</mapper>

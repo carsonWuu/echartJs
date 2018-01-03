@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+ 
+    <package name="fmp.workflow.WorkFlowBiz" namespace="/fmp/workflow/WorkFlowBiz" extends="fmp.FrameCommonBiz">   
+		<!--进入工作流编辑界面 -->
+		 <action  name="ShowWorkFlowEditor" class="com.zstar.fmp.svgflowEditor.action.ShowWorkFlowEditorAction">
+            <result>/WEB-INF/jsp/fmp/workflow/flowFditorSVG.jsp</result>
+        </action>
+        <action  name="simulateSVGWorkFlow" class="com.zstar.fmp.svgflowEditor.action.ShowWorkFlowEditorAction">
+            <result>/WEB-INF/jsp/fmp/workflow/simulateSVGWorkFlow.jsp</result>
+        </action>
+        <!--流程模拟处理操作 -->
+		 <action  name="SimulateWorkFlowRun" class="com.zstar.fmp.workflow.flowEditor.action.SimulateWorkFlowRunAction">
+         </action>
+        
+        <action  name="ShowWorkFlowPropNodeWin" class="com.zstar.fmp.workflow.flowEditor.action.ShowWorkFlowPropNodeWinAction">
+            <result>/WEB-INF/jsp/fmp/workflow/propNodeWin.jsp</result>
+        </action>  
+        <action  name="ShowWorkFlowPropLineWin" class="com.zstar.fmp.workflow.flowEditor.action.ShowWorkFlowPropLineWinAction">
+        	<result>/WEB-INF/jsp/fmp/workflow/propLineWin.jsp</result>
+        </action>  
+        
+        <!--保存工作流-->
+        <action  name="SaveWorkFlow" class="com.zstar.fmp.workflow.flowEditor.action.SaveWorkFlowAction">
+        </action>   
+        
+        <!--启动工作流action类-->
+        <action  name="StartWorkFlow" class="com.zstar.fmp.workflow.flowEngine.action.StartWorkFlowAction">
+        </action>   
+        
+        <!--节点转办操作-->
+        <action  name="AddDevolveBiz" class="com.zstar.fmp.workflow.flowEngine.action.AddDevolveBizAction">
+      		<result>/WEB-INF/jsp/fmp/frame/common/CommonAdd.jsp</result>
+        </action>   
+        <action  name="DoDevolveBiz" class="com.zstar.fmp.workflow.flowEngine.action.DoDevolveBizAction">
+        </action>   
+         
+        <action  name="LoadWordReport" class="com.zstar.fmp.workflow.flowEngine.action.LoadWordReportAction">
+        </action>     
+                         
+       
+        <!--流程复制action类-->
+        <action  name="copyWorkFlowBiz" class="com.zstar.fmp.workflow.flowEngine.action.CopyWorkFlowBizAction">
+        </action>   
+        
+        <!--进入查看当前流程节点流转以及审批历史 -->
+		 <action  name="ViewWorkFlowAndApvHis">
+            <result>/WEB-INF/jsp/fmp/frame/common/CommonViewWorkFlowAndApvHis.jsp</result>
+        </action>                   
+    </package>    
+</struts>

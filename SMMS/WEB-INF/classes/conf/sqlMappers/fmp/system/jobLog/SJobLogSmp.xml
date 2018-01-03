@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SJobLog"> 
+<sql id="listColumns">
+	
+            RID,
+            JOBCODE,
+            JOBNAME,
+            BEGINTIME,
+            ENDTIME,
+            ERRTYPE,
+            EXECUTERESULT,
+            EXECUTEDESC
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            JOBCODE,
+            JOBNAME,
+            BEGINTIME,
+            ENDTIME,
+            ERRTYPE,
+            EXECUTERESULT,
+            EXECUTEDESC
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from S_JOBLOG
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from S_JOBLOG
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_JOBLOG where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from S_JOBLOG where RID = #{RID} 
+</select> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from S_JOBLOG where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_JOBLOG(
+            RID,
+            JOBCODE,
+            JOBNAME,
+            BEGINTIME,
+            ENDTIME,
+            ERRTYPE,
+            EXECUTERESULT,
+            EXECUTEDESC)
+	   values (
+            #{RID},
+            #{JOBCODE},
+            #{JOBNAME},
+            #{BEGINTIME},
+            #{ENDTIME},
+            #{ERRTYPE},
+            #{EXECUTERESULT},
+            #{EXECUTEDESC})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_JOBLOG  
+		<set>
+				    <if test="JOBCODE!=null"> JOBCODE=#{JOBCODE},</if> 
+		    <if test="JOBNAME!=null"> JOBNAME=#{JOBNAME},</if> 
+		    <if test="BEGINTIME!=null"> BEGINTIME=#{BEGINTIME},</if> 
+		    <if test="ENDTIME!=null"> ENDTIME=#{ENDTIME},</if> 
+		    <if test="ERRTYPE!=null"> ERRTYPE=#{ERRTYPE},</if> 
+		    <if test="EXECUTERESULT!=null"> EXECUTERESULT=#{EXECUTERESULT},</if> 
+		    <if test="EXECUTEDESC!=null"> EXECUTEDESC=#{EXECUTEDESC},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

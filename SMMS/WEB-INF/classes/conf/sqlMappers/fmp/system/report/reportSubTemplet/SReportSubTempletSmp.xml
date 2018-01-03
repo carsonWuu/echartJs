@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SReportSubTemplet"> 
+<sql id="listColumns">
+	
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE,
+            RID,
+            REPORTTEMPLETID,
+            SERIALNUM,
+            SUBTEMPLETNAME,
+            FILEPATH,
+            DATAOBJTYPE,
+            DATAOBJNAME
+</sql>
+<sql id="detailColumns">
+	
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE,
+            RID,
+            REPORTTEMPLETID,
+            SERIALNUM,
+            SUBTEMPLETNAME,
+            FILEPATH,
+            DATAOBJTYPE,
+            DATAOBJNAME
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from S_REPORTSUBTEMPLET
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from S_REPORTSUBTEMPLET
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_REPORTSUBTEMPLET where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from S_REPORTSUBTEMPLET where RID = #{RID} 
+</select> 
+
+
+<select id="viewDetailByReportSubTemplet" parameterType="hashmap" resultType="hashmap"> 
+	select 
+		rpst.*,rpt.REPORTTEMPLETTYPE
+	from S_REPORTSUBTEMPLET rpst
+		left outer join S_REPORTTEMPLET rpt
+			on rpst.REPORTTEMPLETID = rpt.REPORTTEMPLETID
+	where 
+		rpst.REPORTTEMPLETID = #{REPORTTEMPLETID} 
+		and rpst.RECORDSTATE='0' and rpt.RECORDSTATE='0'
+	order by rpst.SERIALNUM
+</select>
+
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_REPORTSUBTEMPLET set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from S_REPORTSUBTEMPLET where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_REPORTSUBTEMPLET(
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE,
+            RID,
+            REPORTTEMPLETID,
+            SERIALNUM,
+            SUBTEMPLETNAME,
+            FILEPATH,
+            DATAOBJTYPE,
+            DATAOBJNAME)
+	   values (
+            #{CREATTIME},
+            #{CREATORID},
+            #{MODIFIEDTIME},
+            #{MODIFIERID},
+            #{RECORDSTATE},
+            #{RID},
+            #{REPORTTEMPLETID},
+            #{SERIALNUM},
+            #{SUBTEMPLETNAME},
+            #{FILEPATH},
+            #{DATAOBJTYPE},
+            #{DATAOBJNAME})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_REPORTSUBTEMPLET  
+		<set>
+			<if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		    <if test="REPORTTEMPLETID!=null"> REPORTTEMPLETID=#{REPORTTEMPLETID},</if> 
+		    <if test="SERIALNUM!=null"> SERIALNUM=#{SERIALNUM},</if> 
+		    <if test="SUBTEMPLETNAME!=null"> SUBTEMPLETNAME=#{SUBTEMPLETNAME},</if> 
+		    <if test="FILEPATH!=null"> FILEPATH=#{FILEPATH},</if> 
+		    <if test="DATAOBJTYPE!=null"> DATAOBJTYPE=#{DATAOBJTYPE},</if> 
+		    <if test="DATAOBJNAME!=null"> DATAOBJNAME=#{DATAOBJNAME},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+
+<!--用于判断子模板数据对象名唯一性-->
+<select id="isExist" parameterType="hashmap" resultType="String"> 
+	select count(*) as ct 
+	from S_REPORTSUBTEMPLET
+	where  DATAOBJNAME=#{DATAOBJNAME} and REPORTTEMPLETID=#{REPORTTEMPLETID} and RECORDSTATE='0'
+</select>
+
+</mapper>

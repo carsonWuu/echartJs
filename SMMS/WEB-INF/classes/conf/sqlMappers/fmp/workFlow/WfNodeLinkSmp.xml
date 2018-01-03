@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="WfNodeLink"> 
+<sql id="listColumns">
+	
+  RID,
+  FLOWTEMPID,
+  LINKID,
+  FROMNODE,
+  TONODE,
+  ROUTECONDITION,
+  CREATTIME,
+  CREATORID
+  
+</sql>
+
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+
+	select <include refid="listColumns"/> from wf_NodeLink
+	<where>
+		 FLOWTEMPID=#{FLOWTEMPID}
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="getRoutecondition" parameterType="hashmap" resultType="hashmap"> 
+	select  * from wf_NodeLink where FLOWTEMPID=#{FLOWTEMPID} and FROMNODE =#{FROMNODE}
+</select>
+
+<select id="getNodeLinks" parameterType="hashmap" resultType="hashmap"> 
+	select  * from wf_NodeLink where FLOWTEMPID=#{FLOWTEMPID} and FROMNODE =#{FROMNODE}
+</select>
+
+<select id="getNodeLinksByFTID" parameterType="hashmap" resultType="hashmap"> 
+	select  * from wf_NodeLink where FLOWTEMPID=#{FLOWTEMPID} 
+</select>
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from wf_NodeLink where FLOWTEMPID = #{FLOWTEMPID}
+</delete> 
+
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into wf_NodeLink(
+		  RID,
+		  FLOWTEMPID,
+		  LINKID,
+		  FROMNODE,
+		  TONODE,
+		  ROUTECONDITION,
+		  CREATTIME,
+		  CREATORID)
+	   values (
+		  #{RID},
+		  #{FLOWTEMPID},
+		  #{LINKID},
+		  #{FROMNODE},
+		  #{TONODE},
+		  #{ROUTECONDITION},
+		  #{CREATTIME},
+		  #{CREATORID})
+</insert> 
+
+<!-- 用于检验路由条件是否成立的sql-->
+<select id="isPass" parameterType="hashmap" resultType="String"> 
+	select 1 from dual
+		<where>
+        <if test="routeCondition!=null and routeCondition!='' ">   
+             ${routeCondition}
+        </if>		
+	  </where>
+</select>
+
+</mapper>

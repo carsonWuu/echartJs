@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsAcAppKey"> 
+<sql id="listColumns">
+	
+            RID,
+            USERNAME,
+            GROUPNAME,
+            IP,
+            SERV_CRC,
+            APP_CRC,
+            LOG_TIME,
+            DES_IP,
+            DES_PORT,
+            KEYWORDS,
+            CASE_STATE,
+            CREATTIME,
+            RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            USERNAME,
+            GROUPNAME,
+            IP,
+            SERV_CRC,
+            APP_CRC,
+            LOG_TIME,
+            DES_IP,
+            DES_PORT,
+            KEYWORDS,
+            CASE_STATE,
+            CREATTIME,
+            RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from SMMS_AC_APP_KEY 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_AC_APP_KEY 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_AC_APP_KEY  where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from SMMS_AC_APP_KEY  where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_AC_APP_KEY  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_AC_APP_KEY  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_AC_APP_KEY (
+            <if test="RID != null ">RID,</if>
+            <if test="USERNAME != null ">USERNAME,</if>
+            <if test="GROUPNAME != null ">GROUPNAME,</if>
+            <if test="IP != null ">IP,</if>
+            <if test="SERV_CRC != null ">SERV_CRC,</if>
+            <if test="APP_CRC != null ">APP_CRC,</if>
+            <if test="LOG_TIME != null ">LOG_TIME,</if>
+            <if test="DES_IP != null ">DES_IP,</if>
+            <if test="DES_PORT != null ">DES_PORT,</if>
+            <if test="KEYWORDS != null ">KEYWORDS,</if>
+            <if test="CASE_STATE != null ">CASE_STATE,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="USERNAME != null ">#{USERNAME},</if>
+           <if test="GROUPNAME != null ">#{GROUPNAME},</if>
+           <if test="IP != null ">#{IP},</if>
+           <if test="SERV_CRC != null ">#{SERV_CRC},</if>
+           <if test="APP_CRC != null ">#{APP_CRC},</if>
+           <if test="LOG_TIME != null ">#{LOG_TIME},</if>
+           <if test="DES_IP != null ">#{DES_IP},</if>
+           <if test="DES_PORT != null ">#{DES_PORT},</if>
+           <if test="KEYWORDS != null ">#{KEYWORDS},</if>
+           <if test="CASE_STATE != null ">#{CASE_STATE},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_AC_APP_KEY   
+		<set>
+				    <if test="USERNAME!=null"> USERNAME=#{USERNAME},</if> 
+		    <if test="GROUPNAME!=null"> GROUPNAME=#{GROUPNAME},</if> 
+		    <if test="IP!=null"> IP=#{IP},</if> 
+		    <if test="SERV_CRC!=null"> SERV_CRC=#{SERV_CRC},</if> 
+		    <if test="APP_CRC!=null"> APP_CRC=#{APP_CRC},</if> 
+		    <if test="LOG_TIME!=null"> LOG_TIME=#{LOG_TIME},</if> 
+		    <if test="DES_IP!=null"> DES_IP=#{DES_IP},</if> 
+		    <if test="DES_PORT!=null"> DES_PORT=#{DES_PORT},</if> 
+		    <if test="KEYWORDS!=null"> KEYWORDS=#{KEYWORDS},</if> 
+		    <if test="CASE_STATE!=null"> CASE_STATE=#{CASE_STATE},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

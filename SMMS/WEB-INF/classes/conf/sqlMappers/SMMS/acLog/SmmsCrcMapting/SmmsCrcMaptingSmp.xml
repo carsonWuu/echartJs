@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsCrcMapting"> 
+<sql id="listColumns">
+	
+            RID,
+            CRC_TYPE,
+            CRC_KEY,
+            CRC_VALUE,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            LIABMAN,
+            LIABDEPT,
+            LIABORG,
+            RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            CRC_TYPE,
+            CRC_KEY,
+            CRC_VALUE,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            LIABMAN,
+            LIABDEPT,
+            LIABORG,
+            RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from SMMS_CRC_MAPTING 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_CRC_MAPTING 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_CRC_MAPTING  where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from SMMS_CRC_MAPTING  where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_CRC_MAPTING  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_CRC_MAPTING  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_CRC_MAPTING (
+            <if test="RID != null ">RID,</if>
+            <if test="CRC_TYPE != null ">CRC_TYPE,</if>
+            <if test="CRC_KEY != null ">CRC_KEY,</if>
+            <if test="CRC_VALUE != null ">CRC_VALUE,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="CREATORID != null ">CREATORID,</if>
+            <if test="MODIFIEDTIME != null ">MODIFIEDTIME,</if>
+            <if test="MODIFIERID != null ">MODIFIERID,</if>
+            <if test="LIABMAN != null ">LIABMAN,</if>
+            <if test="LIABDEPT != null ">LIABDEPT,</if>
+            <if test="LIABORG != null ">LIABORG,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="CRC_TYPE != null ">#{CRC_TYPE},</if>
+           <if test="CRC_KEY != null ">#{CRC_KEY},</if>
+           <if test="CRC_VALUE != null ">#{CRC_VALUE},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="CREATORID != null ">#{CREATORID},</if>
+           <if test="MODIFIEDTIME != null ">#{MODIFIEDTIME},</if>
+           <if test="MODIFIERID != null ">#{MODIFIERID},</if>
+           <if test="LIABMAN != null ">#{LIABMAN},</if>
+           <if test="LIABDEPT != null ">#{LIABDEPT},</if>
+           <if test="LIABORG != null ">#{LIABORG},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_CRC_MAPTING   
+		<set>
+				    <if test="CRC_TYPE!=null"> CRC_TYPE=#{CRC_TYPE},</if> 
+		    <if test="CRC_KEY!=null"> CRC_KEY=#{CRC_KEY},</if> 
+		    <if test="CRC_VALUE!=null"> CRC_VALUE=#{CRC_VALUE},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="LIABMAN!=null"> LIABMAN=#{LIABMAN},</if> 
+		    <if test="LIABDEPT!=null"> LIABDEPT=#{LIABDEPT},</if> 
+		    <if test="LIABORG!=null"> LIABORG=#{LIABORG},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

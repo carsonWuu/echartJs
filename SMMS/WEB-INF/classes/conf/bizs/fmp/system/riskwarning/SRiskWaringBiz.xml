@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+ 
+    <package name="fmp.system.riskwarning.SRiskWaringBiz" namespace="/fmp/system/riskwarning/SRiskWaringBiz" extends="fmp.FrameCommonBiz">    
+        <!--风险预警处理-->
+        <action  name="RiskDeal" class="com.zstar.fmp.system.riskwarning.action.SRiskDealAction">
+         <result>/WEB-INF/jsp/fmp/frame/common/CommonUpdate.jsp</result>
+        </action>  
+        
+        <!--触发风险预警消息-->
+        <action  name="TrigWarnMessage" class="com.zstar.fmp.system.riskwarning.action.TrigWarnMessageAction">
+        </action>
+        
+        <!--风险处理审核-->
+        <action  name="SResultAuditing" class="com.zstar.fmp.system.riskwarning.action.SResultAuditingAction">
+         <result>/WEB-INF/jsp/fmp/frame/common/CommonUpdate.jsp</result>
+        </action> 
+        
+        <action  name="Do*" class="com.zstar.fmp.core.frame.action.Common{1}Action">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+        </action>            
+        
+        <!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.fmp.core.frame.action.CommonSaveAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>     
+        
+        <!--是否已审核-->
+         <action  name="IsAuditing" class="com.zstar.fmp.system.riskwarning.action.IsAuditingAction">
+         </action> 
+         
+         <!--是否已处理-->
+         <action  name="IsDeal" class="com.zstar.fmp.system.riskwarning.action.IsDealAction">
+         </action>
+         
+          <!--是否已读--> 
+         <action  name="IsRead" class="com.zstar.fmp.system.riskwarning.action.IsReadMark">
+         </action>                 
+    </package>    
+</struts>

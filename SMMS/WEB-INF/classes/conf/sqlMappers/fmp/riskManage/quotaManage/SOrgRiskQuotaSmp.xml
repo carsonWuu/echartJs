@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SOrgRiskQuota"> 
+<sql id="listColumns">
+	
+            LOCATE,
+            ORGNAME,
+            ORGANSHORTFORM,
+            ENNAME,
+            ORDERNO,
+            DISTNO,
+            LAUNCHDATE,
+            ORGANLEVEL,
+            FINCODE,
+            CONTROL,
+            STATE,
+            LEGALPERSON,
+            FINANCENUMBER,
+            TAXNUMBER,
+            ORGANCHIEF,
+            TELNUM,
+            ADDRESS,
+            POSTCODE,
+            AREA_DEV_CATE_TYPE,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE,
+            ORGID,
+            SUPORGID,
+            RID,
+            TOTALQUOTA,
+            SINGLEQUOTA,
+            TOTALOCCUPYAMT
+</sql>
+<sql id="detailColumns">
+	
+            LOCATE,
+            ORGNAME,
+            ORGANSHORTFORM,
+            ENNAME,
+            ORDERNO,
+            DISTNO,
+            LAUNCHDATE,
+            ORGANLEVEL,
+            FINCODE,
+            CONTROL,
+            STATE,
+            LEGALPERSON,
+            FINANCENUMBER,
+            TAXNUMBER,
+            ORGANCHIEF,
+            TELNUM,
+            ADDRESS,
+            POSTCODE,
+            AREA_DEV_CATE_TYPE,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE,
+            ORGID,
+            SUPORGID,
+            RID,
+            TOTALQUOTA,
+            SINGLEQUOTA,
+            TOTALOCCUPYAMT
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select sorg1.*,sorg2.ORGANSHORTFORM as TRANS_SUPORGID
+	from S_ORG sorg1
+	left outer join S_ORG sorg2
+		on sorg2.ORGID = sorg1.SUPORGID
+	<where>
+		sorg1.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+		order by sorg1.STATE
+        <if test="order!=null and order!='' ">   
+             ,${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from S_ORG sorg1
+	left outer join S_ORG sorg2
+		on sorg2.ORGID = sorg1.SUPORGID
+	<where>
+		sorg1.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_ORG where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from S_ORG where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_ORG set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from S_ORG where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_ORG(
+            LOCATE,
+            ORGNAME,
+            ORGANSHORTFORM,
+            ENNAME,
+            ORDERNO,
+            DISTNO,
+            LAUNCHDATE,
+            ORGANLEVEL,
+            FINCODE,
+            CONTROL,
+            STATE,
+            LEGALPERSON,
+            FINANCENUMBER,
+            TAXNUMBER,
+            ORGANCHIEF,
+            TELNUM,
+            ADDRESS,
+            POSTCODE,
+            AREA_DEV_CATE_TYPE,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE,
+            ORGID,
+            SUPORGID,
+            RID,
+            TOTALQUOTA,
+            SINGLEQUOTA,
+            TOTALOCCUPYAMT)
+	   values (
+            #{LOCATE},
+            #{ORGNAME},
+            #{ORGANSHORTFORM},
+            #{ENNAME},
+            #{ORDERNO},
+            #{DISTNO},
+            #{LAUNCHDATE},
+            #{ORGANLEVEL},
+            #{FINCODE},
+            #{CONTROL},
+            #{STATE},
+            #{LEGALPERSON},
+            #{FINANCENUMBER},
+            #{TAXNUMBER},
+            #{ORGANCHIEF},
+            #{TELNUM},
+            #{ADDRESS},
+            #{POSTCODE},
+            #{AREA_DEV_CATE_TYPE},
+            #{CREATTIME},
+            #{CREATORID},
+            #{MODIFIEDTIME},
+            #{MODIFIERID},
+            #{RECORDSTATE},
+            #{ORGID},
+            #{SUPORGID},
+            #{RID},
+            #{TOTALQUOTA},
+            #{SINGLEQUOTA},
+            #{TOTALOCCUPYAMT})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_ORG  
+		<set>
+				    <if test="LOCATE!=null"> LOCATE=#{LOCATE},</if> 
+		    <if test="ORGNAME!=null"> ORGNAME=#{ORGNAME},</if> 
+		    <if test="ORGANSHORTFORM!=null"> ORGANSHORTFORM=#{ORGANSHORTFORM},</if> 
+		    <if test="ENNAME!=null"> ENNAME=#{ENNAME},</if> 
+		    <if test="ORDERNO!=null"> ORDERNO=#{ORDERNO},</if> 
+		    <if test="DISTNO!=null"> DISTNO=#{DISTNO},</if> 
+		    <if test="LAUNCHDATE!=null"> LAUNCHDATE=#{LAUNCHDATE},</if> 
+		    <if test="ORGANLEVEL!=null"> ORGANLEVEL=#{ORGANLEVEL},</if> 
+		    <if test="FINCODE!=null"> FINCODE=#{FINCODE},</if> 
+		    <if test="CONTROL!=null"> CONTROL=#{CONTROL},</if> 
+		    <if test="STATE!=null"> STATE=#{STATE},</if> 
+		    <if test="LEGALPERSON!=null"> LEGALPERSON=#{LEGALPERSON},</if> 
+		    <if test="FINANCENUMBER!=null"> FINANCENUMBER=#{FINANCENUMBER},</if> 
+		    <if test="TAXNUMBER!=null"> TAXNUMBER=#{TAXNUMBER},</if> 
+		    <if test="ORGANCHIEF!=null"> ORGANCHIEF=#{ORGANCHIEF},</if> 
+		    <if test="TELNUM!=null"> TELNUM=#{TELNUM},</if> 
+		    <if test="ADDRESS!=null"> ADDRESS=#{ADDRESS},</if> 
+		    <if test="POSTCODE!=null"> POSTCODE=#{POSTCODE},</if> 
+		    <if test="AREA_DEV_CATE_TYPE!=null"> AREA_DEV_CATE_TYPE=#{AREA_DEV_CATE_TYPE},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		    <if test="ORGID!=null"> ORGID=#{ORGID},</if> 
+		    <if test="SUPORGID!=null"> SUPORGID=#{SUPORGID},</if>
+		    <if test="TOTALQUOTA!=null"> TOTALQUOTA=#{TOTALQUOTA},</if> 
+		    <if test="SINGLEQUOTA!=null"> SINGLEQUOTA=#{SINGLEQUOTA},</if> 
+		    <if test="TOTALOCCUPYAMT!=null"> TOTALOCCUPYAMT=#{TOTALOCCUPYAMT},</if> 
+          
+		</set>
+	where RID=#{RID}
+</update>
+
+<update id="saveOrgQuotaInfo" parameterType="hashmap" > 
+	update S_ORG set
+		 TOTALQUOTA=#{TOTALQUOTA},
+		 SINGLEQUOTA=#{SINGLEQUOTA},
+		 TOTALOCCUPYAMT=#{TOTALOCCUPYAMT}
+	where ORGID=#{ORGID}
+</update>
+
+<select id="getOrgQuotaInfo" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_ORG
+	where RID = #{RID}
+</select> 
+
+<select id="getOrgProdQuotaInfo" parameterType="hashmap" resultType="hashmap"> 
+	select sopq.*
+	from S_ORG so
+	left outer join CRD_ORGPRODQUOTA sopq
+	on sopq.ORGID = so.ORGID
+	where so.RID = #{RID}
+</select>  
+
+</mapper>

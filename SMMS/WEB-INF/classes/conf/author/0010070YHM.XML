@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<tree id="0"> 
+  <item text="系统管理" id="s_md_xtgl" open="1" call="1" select="1" isLeafModule="false">
+    <userdata name="URL">-</userdata>
+    <item text="机构权限管理" id="crd_md_jgqxgl" open="1" call="1" select="1" isLeafModule="false">
+      <userdata name="URL">-</userdata>
+      <item text="机构用户管理" id="crd_md_jgqxgl_jgyhgl" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/SUser/DoList.action?tableModelId=SUser&amp;isOrgUser=true&amp;freezeCondition=and user1.ORGID='${CURR_ORGID}'&amp;moduleId=crd_md_jgqxgl_jgyhgl</userdata>
+      </item>
+      <item text="生成权限" id="crd_md_jgqxgl_scqx" open="1" call="1" select="1" isLeafModule="true">
+        <userdata name="URL">/fmp/BuildRightBiz/BuildRight?isOrgUser=true&amp;moduleId=crd_md_jgqxgl_scqx</userdata>
+      </item>
+    </item>
+    <item text="机构公告" id="crd_md_jggg" open="1" call="1" select="1" isLeafModule="true">
+      <userdata name="URL">/fmp/system/sysAffiche/affich/SAfficheBiz/DoList?keyLimit=ISHEADQUARTERS:2&amp;tableModelId=SAffiche&amp;moduleId=crd_md_jggg</userdata>
+    </item>
+  </item>
+</tree>

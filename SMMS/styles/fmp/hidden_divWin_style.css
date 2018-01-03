@@ -1,0 +1,50 @@
+BODY {
+FONT-SIZE: 12px;
+}
+H2 {
+PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: 12px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.bton {
+BORDER-RIGHT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BACKGROUND: #ddd; BORDER-LEFT: #ccc 1px solid; BORDER-BOTTOM: #ccc 1px solid
+}
+.cont {
+PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px
+}
+#main {
+MARGIN: 0px auto; WIDTH: 400px
+}
+#selectItem {
+BORDER-RIGHT: #000 1px solid; BORDER-TOP: #000 1px solid; MARGIN-TOP: 10px; Z-INDEX: 2; BACKGROUND: #fff; OVERFLOW: hidden; BORDER-LEFT: #000 1px solid; WIDTH: 400px; BORDER-BOTTOM: #000 1px solid; POSITION: absolute; TOP: 0px
+}
+
+#descContent {
+BORDER-RIGHT: #000 1px solid; BORDER-TOP: #000 1px solid; MARGIN-TOP: 10px; Z-INDEX: 2; BACKGROUND: #fff; OVERFLOW: hidden; BORDER-LEFT: #000 1px solid; WIDTH: 600px; BORDER-BOTTOM: #000 1px solid; POSITION: absolute; TOP: 0px
+}
+.tit {
+PADDING-LEFT: 10px; MARGIN: 1px; LINE-HEIGHT: 20px; HEIGHT: 20px
+}
+.bgc_ccc {
+BACKGROUND: #ccc
+}
+
+.pointer {
+CURSOR: pointer
+}
+.left {
+FLOAT: left
+}
+.right {
+FLOAT: right
+}
+.cls {
+CLEAR: both; FONT-SIZE: 0px; OVERFLOW: hidden; HEIGHT: 0px
+}
+#bg {
+DISPLAY: none; Z-INDEX: 1; BACKGROUND: #ccc; FILTER: alpha(opacity=70); LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; opacity: 0.2
+}
+.hidden {
+DISPLAY: none
+}
+.move {
+CURSOR: move
+}

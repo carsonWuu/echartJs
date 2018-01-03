@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<TableModel id="BuildRight"  pageSize="10" listURL="/fmp/BuildRightBiz/BuildRight">
+		<Fields>
+			<TableField id="BUILDRANGE" colName="BUILDRANGE" desc="生成范围" dataType="CHAR" length="1"  required="F" isSearch="F" create="LAVU" hidden="VLU"   webType="select" dicType="BUILDRANGE" />			
+			<TableField id="BUILDOBJ" colName="BUILDOBJ" desc="生成对象" dataType="VARCHAR2" length="20"  required="F" isSearch="F" create="LAVU" hidden="VLU"   webType="pop" webTypeExt="openPop()" />	
+		</Fields>
+	</TableModel>

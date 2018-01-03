@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TableModel id="SWorkCalender" desc="工作日历" tblName="S_WORKCALENDER"
+	pageSize="10" listURL="">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="记录主键" dataType="VARCHAR2"
+			length="32" required="F" isPK="T" 
+			order="ASC" dicType="" isSearch="T" create="VLAU" hidden="LVAU"
+			webType="" webTypeExt="" />
+		<TableField id="WORKDATE" colName="WORKDATE" desc="工作日期"
+			dataType="VARCHAR2" length="10" 
+			required="F" isSearch="T" create="LVAU" orderInList="T" />
+		<TableField id="DATETYPE" colName="DATETYPE" desc="日期类型"
+			dataType="VARCHAR2" length="40" required="F" 
+			create="LVAU" orderInList="T" />
+	</Fields>
+
+</TableModel>

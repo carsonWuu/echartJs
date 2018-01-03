@@ -1,0 +1,64 @@
+.table{
+  background-color:white;
+  margin:30px auto 0px auto;
+  font-family: 'Microsoft YaHei', 'Microsoft YaHei';
+  font-size: 14px;
+  width:720px;
+  }
+  .all{
+  border:1px solid #5C9CC0;
+  font-family: 'Microsoft YaHei', 'Microsoft YaHei';
+  width:800px;
+  margin:0px auto 0px auto;
+  }
+  .top{
+    background-color:#EE00EE;
+    color:white;
+    font-size: 16px;
+    height:42px;
+    line-height:42px;
+    padding-left:10px;
+  }
+  .content{
+    background-color:#96CDCD;
+    font-size: 16px;
+    height:42px;
+    line-height:42px;
+    padding-left:10px;
+  }
+  .bd1{
+    padding-top:20px;
+    padding-bottom:20px;
+    background-color:#EFF7FF;
+  }
+  .bd{
+     background-color:#EFF7FF;
+  }
+  .table_top{
+    margin:0px auto 0px auto;
+    font-size: 14px;
+  }
+  .td1{
+    width:145px;
+    text-align:center
+  }
+  .td2{
+    width:92px;
+    text-align:center
+  }
+  .td3{
+    width:112px;
+    text-align:center
+  }
+  .td4{
+    width:370px;
+  }
+  .setting{
+  padding-bottom:30px;
+  }
+  span{
+    color:blue;
+  }
+  .td5{
+    padding:10px 0px 10px 2px;
+  }

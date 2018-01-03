@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<TableModel id="SOperationLog" desc="系统模块信息" tblName="S_OPERATIONLOG" pageSize="20" listURL="/fmp/FrameCommonBiz/DoList?tableModelId=SOperationLog">
+		<Fields>
+			<TableField id="RID" colName="RID" desc="记录主键" dataType="VARCHAR2" length="40" required="F" isPK="T"  order="ASC"  dicType="" isSearch="F" create="VLAU" hidden="L" webType="" webTypeExt=""   tableAlias="sol" />
+			<TableField id="OPERATIONTYPE" colName="OPERATIONTYPE" desc="操作类型" dataType="VARCHAR2" length="1"  required="T" isSearch="T" create="LVAU" fuzzy="T" orderInList="T" hidden="A" webType="select" dicType="S_CZLX"  tableAlias="sol" />
+			<TableField id="TABLEMODELID" colName="TABLEMODELID" desc="操作表模型" dataType="VARCHAR2" length="200" required="F" isPK="T" isEncrypted="F"  create="LVAU"  orderInList="T" tableAlias="sol" />
+			<TableField id="TABLENAME" colName="TABLENAME" desc="对应物理表名" dataType="VARCHAR2" length="30"  required="T" isSearch="T" create="LVAU"  webType="" fuzzy="T" tableAlias="sol" />
+			<TableField id="RECORDRID" colName="RECORDRID" desc="记录主键" dataType="VARCHAR2" length="40"  required="T" isSearch="F" create="LVAU" hidden=""  webType="" tableAlias="sol" />
+			<TableField id="OPERATIONDESC" colName="OPERATIONDESC" desc="操作描述" dataType="VARCHAR2" length="200"  required="T" isSearch="T" create="LVAU"  webType="" fuzzy="T" tableAlias="sol" />
+			<TableField id="OPERATIONTIME" colName="OPERATIONTIME" desc="操作时间" dataType="VARCHAR2" length="20"  required="T" isSearch="T" create="LVAU"  webType="text" webTypeExt="date" order="DESC" orderInList="T" tableAlias="sol" />
+			<TableField id="USERID" colName="USERID" desc="操作员ID" dataType="VARCHAR2" length="10"  required="T" isSearch="F" create="LVAU" hidden="LV"  webType="" tableAlias="sol" />
+			<TableField id="USERNNAME" colName="USERNNAME" desc="操作员名称" dataType="VARCHAR2" length="20"  required="T" isSearch="T" create="LVAU"  webType="" fuzzy="T" tableAlias="sol" />
+			<TableField id="ORGID" colName="ORGID" desc="所属机构" dataType="VARCHAR2" length="10"  required="T" isSearch="T" create="LVAU"  webType="pop" webTypeExt="openSinPop('SOrg','ORGID','ORGID','ORGNAME')" dblClick="viewSOrgByOrgId($(this).attr('truevalue'));" order="ASC" orderInList="T" tableAlias="sol" />
+			<TableField id="DEPTID" colName="DEPTID" desc="所属部门" dataType="VARCHAR2" length="20"  required="T" isSearch="F" create="LVAU" hidden="LV" webType="" tableAlias="sol" />	
+		</Fields>
+	</TableModel>

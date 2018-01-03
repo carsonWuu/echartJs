@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>    	
+    <package name="fmp.system.notice.NoticeBiz" namespace="/fmp/system/notice/NoticeBiz" extends="fmp.FrameCommonBiz">
+        <!--显示主页页面--> 
+        <action  name="ShowNotice" class="com.zstar.fmp.system.notice.action.ShowNoticeAction">
+            <result>/WEB-INF/jsp/fmp/system/notice/notice.jsp</result>
+        </action>          
+
+        <!-- Add actions here -->
+        
+    </package>
+</struts>

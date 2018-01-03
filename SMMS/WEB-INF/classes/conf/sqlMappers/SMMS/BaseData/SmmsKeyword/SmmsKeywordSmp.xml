@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsKeyword"> 
+<sql id="listColumns">
+	
+            skw.RID,
+            skw.KEYWORD_TYPE,
+            skw.KEYWORD_LEVEL,
+            skw.KEYWORD,
+            skw.CREATORID,
+            skw.MODIFIEDTIME,
+            skw.MODIFIERID,
+            skw.LIABMAN,
+            skw.LIABDEPT,
+            skw.LIABORG,
+            skw.CREATTIME,
+            skw.RECORDSTATE,
+            sdept.DEPTNAME,
+            suser.USERNAME
+</sql>
+<sql id="detailColumns">
+	
+            skw.RID,
+            skw.KEYWORD_TYPE,
+            skw.KEYWORD_LEVEL,
+            skw.KEYWORD,
+            skw.CREATORID,
+            skw.MODIFIEDTIME,
+            skw.MODIFIERID,
+            skw.LIABMAN,
+            skw.LIABDEPT,
+            skw.LIABORG,
+            skw.CREATTIME,
+            skw.RECORDSTATE,
+            sdept.DEPTNAME,
+            suser.USERNAME
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/>,sdept.DEPTNAME as TRANS_LIABDEPT from SMMS_KEYWORD as skw
+	left join s_dept as sdept 
+	on skw.LIABDEPT = sdept.DEPTID
+	left join s_user as suser
+	on skw.CREATORID = suser.USERID
+	<where>
+		skw.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+<select id="selectKeywordLevel" parameterType="String" resultType="hashmap"> 
+  select max(KEYWORD_LEVEL) from SMMS_KEYWORD   where  #{keys} like CONCAT('%',KEYWORD,'%');   
+</select> 
+<select id="selectKeywordType" parameterType="String" resultType="hashmap"> 
+      select DISTINCT KEYWORD_TYPE 
+from SMMS_KEYWORD b where #{keys} like CONCAT('%',KEYWORD,'%');
+</select> 
+<select id="selectKeywordInfo" parameterType="String" resultType="hashmap"> 
+      select DISTINCT KEYWORD_TYPE,
+(select MIN(KEYWORD_LEVEL)   from SMMS_KEYWORD a where a.KEYWORD=b. KEYWORD )
+from SMMS_KEYWORD b where KEYWORD = #{keyWord}
+</select> 
+
+<select id="selectList" parameterType="hashmap" resultType="hashmap"> 
+	select KEYWORD from SMMS_KEYWORD 
+	<where>
+		RECORDSTATE='0'
+	</where>	
+</select> 
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_KEYWORD as skw
+	left join s_dept as sdept 
+	on skw.LIABDEPT = sdept.DEPTID
+	left join s_user as suser
+	on skw.CREATORID = suser.USERID
+	<where>
+		skw.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_KEYWORD as skw where skw.RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>,sdept.DEPTNAME as TRANS_LIABDEPT,
+	suser.USERNAME as TRANS_LIABMAN,
+	suser.USERNAME as TRANS_CREATORID
+	 from SMMS_KEYWORD as skw
+	left join s_dept as sdept 
+	on skw.LIABDEPT = sdept.DEPTID 
+	left join s_user as suser
+	on skw.CREATORID = suser.USERID
+	where skw.RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_KEYWORD  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_KEYWORD as skw left join s_dept as sdept 
+	on skw.LIABDEPT = sdept.DEPTID 
+	left join s_user as suser
+	on skw.CREATORID = suser.USERID
+	where skw.RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_KEYWORD (
+            <if test="RID != null ">RID,</if>
+            <if test="KEYWORD_TYPE != null ">KEYWORD_TYPE,</if>
+            <if test="KEYWORD_LEVEL != null ">KEYWORD_LEVEL,</if>
+            <if test="KEYWORD != null ">KEYWORD,</if>
+            <if test="CREATORID != null ">CREATORID,</if>
+            <if test="MODIFIEDTIME != null ">MODIFIEDTIME,</if>
+            <if test="MODIFIERID != null ">MODIFIERID,</if>
+            <if test="LIABMAN != null ">LIABMAN,</if>
+            <if test="LIABDEPT != null ">LIABDEPT,</if>
+            <if test="LIABORG != null ">LIABORG,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="KEYWORD_TYPE != null ">#{KEYWORD_TYPE},</if>
+           <if test="KEYWORD_LEVEL != null ">#{KEYWORD_LEVEL},</if>
+           <if test="KEYWORD != null ">#{KEYWORD},</if>
+           <if test="CREATORID != null ">#{CREATORID},</if>
+           <if test="MODIFIEDTIME != null ">#{MODIFIEDTIME},</if>
+           <if test="MODIFIERID != null ">#{MODIFIERID},</if>
+           <if test="LIABMAN != null ">#{LIABMAN},</if>
+           <if test="LIABDEPT != null ">#{LIABDEPT},</if>
+           <if test="LIABORG != null ">#{LIABORG},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_KEYWORD   
+		<set>
+				    <if test="KEYWORD_TYPE!=null"> KEYWORD_TYPE=#{KEYWORD_TYPE},</if> 
+		    <if test="KEYWORD_LEVEL!=null"> KEYWORD_LEVEL=#{KEYWORD_LEVEL},</if> 
+		    <if test="KEYWORD!=null"> KEYWORD=#{KEYWORD},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="LIABMAN!=null"> LIABMAN=#{LIABMAN},</if> 
+		    <if test="LIABDEPT!=null"> LIABDEPT=#{LIABDEPT},</if> 
+		    <if test="LIABORG!=null"> LIABORG=#{LIABORG},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>
