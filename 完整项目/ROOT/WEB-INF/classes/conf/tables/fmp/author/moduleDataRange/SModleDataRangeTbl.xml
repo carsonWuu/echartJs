@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SModleDataRange" desc="模块岗位数据范围设置" tblName="S_MODULEDATARANGE" pageSize="10" uniteTableModelId="" listURL="/fmp/SModleDataRangeBiz/DoList?tableModelId=SModleDataRange" sqlMapNamespace="SModleDataRange">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="T"/>
+		<TableField id="MODULEID" colName="MODULEID" desc="模块ID" dataType="VARCHAR" length="30"  webType="text" webTypeExt="" create="LVUA" hidden="ALVU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2"/>
+		<TableField id="ROLEID" colName="ROLEID" desc="岗位码" dataType="VARCHAR" length="10"  webType="text"  webTypeExt=""  create="LVUA" hidden="ALVU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2"/>
+		
+		<TableField id="ORGFLDNAME" colName="ORGFLDNAME" desc="机构字段名" dataType="VARCHAR" length="30"  webType="select" webTypeExt=""  dicType="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2"/>
+		<TableField id="ORGSET" colName="ORGSET" desc="机构集合" dataType="VARCHAR" length="250"  webType="pop"  webTypeExt="openModleDataRangeCheckPop('ORGSET','ORGNAMESET','SOrg','ORGID','ORGANSHORTFORM')"  create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2" />
+		<TableField id="ORGNAMESET" colName="ORGNAMESET" desc="机构字段集合" dataType="VARCHAR" length="250"  webType="text"  webTypeExt=""  create="LVUA" hidden="ALVU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2"/>
+		<TableField id="ORGEXTSET" colName="ORGEXTSET" desc="机构集合扩展" dataType="VARCHAR" length="10"  webType="checkbox" webTypeExt="3" dicType="S_ORGJHKZ" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2"/>
+		
+		<TableField id="USERFLDNAME" colName="USERFLDNAME" desc="用户字段名" dataType="VARCHAR" length="30"  webType="select" dicType="" webTypeExt="" create="ALVU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2"/>
+		<TableField id="USERSET" colName="USERSET" desc="用户集合" dataType="VARCHAR" length="250"  webType="pop" webTypeExt="openModleDataRangeCheckPop('USERSET','USERNAMESET','SUser','USERID','USERNAME')" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2" />
+		<TableField id="USEREXTSET" colName="USEREXTSET" desc="用户集合扩展" dataType="VARCHAR" length="10"  webType="checkbox" webTypeExt="" dicType="S_USERJHKZ" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2"/>
+		<TableField id="USERNAMESET" colName="USERNAMESET" desc="用户字段集合" dataType="VARCHAR" length="250"  webType="text" webTypeExt="" create="LVUA" hidden="ALVU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2" />
+		
+		<TableField id="DEPTFLDNAME" colName="DEPTFLDNAME" desc="部门字段名" dataType="VARCHAR" length="30"  webType="select" dicType="" webTypeExt="" create="ALVU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2"/>
+		<TableField id="DEPTSET" colName="DEPTSET" desc="部门集合" dataType="VARCHAR" length="250"  webType="pop" webTypeExt="openModleDataRangeCheckPop('DEPTSET','DEPTNAMESET','SDept','DEPTID','DEPTNAME')" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2" />
+		<TableField id="DEPTEXTSET" colName="DEPTEXTSET" desc="部门集合扩展" dataType="VARCHAR" length="10"  webType="checkbox" webTypeExt="" dicType="S_DEPTJHKZ" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2"/>
+		<TableField id="DEPTNAMESET" colName="DEPTNAMESET" desc="部门字段集合" dataType="VARCHAR" length="250"  webType="text" webTypeExt="" create="LVUA" hidden="ALVU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2" />
+		
+		<TableField id="EXTCOND" colName="EXTCOND" desc="扩展过滤条件(以and或or开头)" dataType="VARCHAR" length="250"  webType="textarea" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" colSpan="2"/>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"  webType="text" webTypeExt="time" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+		<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR" length="10"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+	    <TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"  webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F"/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

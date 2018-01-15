@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<TableModel id="SDept" desc="部门信息" tblName="S_DEPT" pageSize="20" listURL="/fmp/FrameCommonBiz/DoList?tableModelId=SDept">
+		<Fields>
+			<TableField id="DEPTNAME" colName="DEPTNAME" desc="部门名称" dataType="VARCHAR2" length="30"  required="T" isSearch="T" fuzzy="T" create="LAVU"  webType="text"  tableAlias="dept" />
+			<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR2" length="40" required="F" isPK="T"  order="ASC"  dicType="" isSearch="F" create="VLAU" hidden="VLAU" webType="" webTypeExt=""   tableAlias="dept" />
+			<TableField id="DEPTID" colName="DEPTID" desc="部门码" dataType="VARCHAR2" length="16"  required="F" isSearch="F" create="LAVU" hidden="A" readOnly="VUL"  webType="text" autoCode="S_DEPTID"  tableAlias="dept" />
+			<TableField id="ORGID" colName="ORGID" desc="所属机构" dataType="VARCHAR2" length="16"  required="T" isSearch="T" create="LAVU" readOnly="U" webType="pop" webTypeExt="openSinPop('SOrg','ORGID','ORGID','ORGNAME')" dblClick="viewSOrgByOrgId($(this).attr('truevalue'));" tableAlias="dept" />
+			<TableField id="SUPDEPTID" colName="SUPDEPTID" desc="上级部门" dataType="VARCHAR2" length="16"  required="F" isSearch="F" create="AVU"  webType="pop" webTypeExt="openSupDeptPop()" dblClick="viewSDeptByDeptId($(this).attr('truevalue'));"  tableAlias="dept" />	
+			<TableField id="DEPSHORTFORM" colName="DEPSHORTFORM" desc="部门简称" dataType="VARCHAR2" length="40"  required="T" isSearch="F" create="AVU"  webType="text"  tableAlias="dept" />
+			<TableField id="LEVELID" colName="LEVELID" desc="层级ID" dataType="INTEGER" length="20"  required="F" isSearch="F" create="LAVU" hidden="L" webType="text"  tableAlias="dept" />
+			<TableField id="ENNAME" colName="ENNAME" desc="英文名" dataType="VARCHAR2" length="40"  required="F" isSearch="F" create="LAVU" hidden="L" webType="text"  tableAlias="dept" />
+			<TableField id="ORDERNO" colName="ORDERNO" desc="序号" dataType="INTEGER" length="20"  required="F" isSearch="F" create="LAVU" hidden="L" webType="text"  tableAlias="dept" />
+			<TableField id="DISTNO" colName="DISTNO" desc="所属地区" dataType="INTEGER" length="20"  required="F" isSearch="F" create="LAVU" hidden="L" webType="area"  tableAlias="dept" />
+			<TableField id="LAUNCHDATE" colName="LAUNCHDATE" desc="开办日期" dataType="CHAR" length="10"  required="F" isSearch="F" create="LAVU" hidden="L" webType="text" webTypeExt="date" tableAlias="dept" />
+			<TableField id="STATE" colName="STATE" desc="状态" dataType="CHAR" length="1"  required="F" isSearch="F" create="LAVU" hidden="" webType="select" dicType="S_ZT" readOnly="UV" tableAlias="dept" />
+			<TableField id="DEPCHIEF" colName="DEPCHIEF" desc="部门负责人" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="" webType="pop" webTypeExt="openDepChiefPop()" dblClick="viewSUserByUserId($(this).attr('truevalue'));"  tableAlias="dept" />
+			<TableField id="TELNUM" colName="TELNUM" desc="联系电话" dataType="VARCHAR2" length="20"  required="F" isSearch="F" create="LAVU" hidden="L" webType="text" webTypeExt="mobilephone" tableAlias="dept" />
+			<TableField id="ADDRESS" colName="ADDRESS" desc="地址" dataType="VARCHAR2" length="200"  required="F" isSearch="F" create="LAVU" hidden="L" webType="text"  tableAlias="dept" />
+			<TableField id="POSTCODE" colName="POSTCODE" desc="邮编" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LAVU" hidden="L" webType="text"  tableAlias="dept" />		
+			<TableField id="MEMO" colName="MEMO" desc="备注" dataType="VARCHAR2" length="60"  required="F" isSearch="F" create="LAVU" hidden="L" webType="textarea"  tableAlias="dept" />
+			<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"   required="T" isSearch="F" create="LVAU" hidden="LAU" webType="text"  tableAlias="dept" />
+			<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR2" length="10"  required="T" isSearch="F" create="LVAU" hidden="LAU" webType="text"  tableAlias="dept" />
+		    <TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="CHAR" length="20"   required="T" isSearch="F" create="LVAU" hidden="LAU" webType="text"  tableAlias="dept" />
+			<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR2" length="10"  required="T" isSearch="F" create="LVAU" hidden="LAU"  webType="text"  tableAlias="dept" />
+		    <TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1"   required="T" isSearch="F" create="LVAU" hidden="LAUV"  tableAlias="dept" />
+			
+		</Fields>
+	</TableModel>

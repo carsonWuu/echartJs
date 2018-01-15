@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="SMMS.BaseData.SmmsEventMain.SmmsEventMainBiz" namespace="/SMMS/SmmsEventMainBiz" extends="SMMS-default">        
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.{1}SmmsEventMainAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+        </action>    
+		<!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.SaveSmmsEventMainAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>   
+		<!--保存可修改的列表信息-->
+        <action  name="SaveDataList" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.SaveSmmsEventMainDataListAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>  
+		<!--保存联合主从表信息-->
+        <action  name="SaveUniteSubTableList" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.SaveSmmsEventMainUniteSubTableAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>        
+        </action>
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.DeleteSmmsEventMainAction">
+        </action>   
+        <!--强制关停操作-->     
+         <action  name="forceClose" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.ForceCloseAction">
+        </action>  
+        <!--下发-->
+        <action  name="Sand" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.SandSmmsPendingEventAction">
+        </action>  
+        <!--全部下发    --> 
+        <action  name="SandAll" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.SandAllSmmsPendingEventAction">
+        </action>  
+        <!--强制关停全部操作-->     
+         <action  name="forceCloseAll" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.ForceCloseAllAction">
+        </action>
+          <!--关停录入-->     
+         <action  name="forceEntering">
+       		<result>/WEB-INF/jsp/SMMS/smmsPeddingEvent_force_close.jsp</result>
+        </action>  
+           <!--下发整改页面-->     
+         <action  name="smmsPeddingEvent_rectification">
+       		<result>/WEB-INF/jsp/SMMS/smmsPeddingEvent_rectification.jsp</result>
+        </action> 
+          <!--下发整改action-->     
+         <action  name="rectification" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.RectificationSmmsPendingEventAction">
+       	
+        </action> 
+        <!--移到白名单操作-->     
+         <action  name="whiteList" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.WhiteListAction">
+        </action> 
+        <!--移出白名单操作-->     
+         <action  name="updateBlackList" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.BlackListAction">
+        </action>     
+        
+        <!-- 录入URL-->     
+         <action  name="checkUrl" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.CheckUrlAction">
+        </action>  
+        <!-- 关停录入-->     
+         <action  name="qzgt" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.QzgtAction">
+        </action>                  
+        <!--删除表单操作-->
+        <action  name="DeleteList" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.DeleteList">
+        </action>  
+        <!--标记已整改操作-->
+        <action  name="signCorrect" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.SignCorrectAction">
+        </action>  
+        <!--更新明细记录数-->
+        <action  name="UpdateDetialCountAddOne" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.UpdateDetialCountAction">
+        </action>
+        <!--标记已关停操作-->
+        <action  name="signClose" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.SignCloseAction">
+        </action> 
+        <!--获取json数据-->
+        <action  name="getStatJson" class="com.zstar.SMMS.BaseData.SmmsEventMain.action.GetJsonAction">
+        </action> 
+    </package>
+</struts>

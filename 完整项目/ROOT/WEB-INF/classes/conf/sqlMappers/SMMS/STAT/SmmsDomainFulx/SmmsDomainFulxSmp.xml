@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsDomainFulx"> 
+<sql id="listColumns">
+	
+            flx.RID,
+            flx.IDC_ID,
+            flx.ROOM_IDX,
+            flx.DOMAIN,
+            flx.VISI_COUNT,
+            flx.TOTAL_FLUX,
+            flx.UP_FLUX,
+            flx.DOWN_FLUX,
+            flx.PERCENT,
+            flx.STAT_YEAR,
+            flx.STAT_MONTH,
+            flx.STAT_DATE,
+            flx.MODIFIEDTIME,
+            flx.RECORDSTATE,
+            flx.CREATTIME,
+            ssr.ROOM_NAME,
+            sii.IDC_NAME
+</sql>
+<sql id="detailColumns">
+	
+            flx.RID,
+            flx.IDC_ID,
+            flx.ROOM_IDX,
+            flx.DOMAIN,
+            flx.VISI_COUNT,
+            flx.TOTAL_FLUX,
+            flx.UP_FLUX,
+            flx.DOWN_FLUX,
+            flx.PERCENT,
+            flx.STAT_YEAR,
+            flx.STAT_MONTH,
+            flx.STAT_DATE,
+            flx.MODIFIEDTIME,
+            flx.CREATTIME,
+            flx.RECORDSTATE,
+            ssr.ROOM_NAME,
+            sii.IDC_NAME
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/>,sii.IDC_NAME as TRANS_IDC_ID,ssr.ROOM_NAME as TRANS_ROOM_IDX
+	from SMMS_DOMAIN_FULX flx
+	left join SMMS_ROOM_INFO as ssr
+	    on flx.ROOM_IDX = ssr.ROOM_IDX and  flx.IDC_ID = ssr.ACCESS_ID and ssr.RECORDSTATE='0'
+	    left join smms_idc_info as sii
+	    on flx.IDC_ID = sii.IDC_ID and ssr.RECORDSTATE='0'
+	<where>
+		flx.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_DOMAIN_FULX flx
+	<where>
+		flx.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_DOMAIN_FULX flx where flx.RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>,sii.IDC_NAME as TRANS_IDC_ID,ssr.ROOM_NAME as TRANS_ROOM_IDX  
+	from SMMS_DOMAIN_FULX flx 
+	left join SMMS_ROOM_INFO as ssr
+	    on flx.ROOM_IDX = ssr.ROOM_IDX and  flx.IDC_ID = ssr.ACCESS_ID and ssr.RECORDSTATE='0'
+	    left join smms_idc_info as sii
+	    on flx.IDC_ID = sii.IDC_ID and ssr.RECORDSTATE='0'
+	where flx.RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_DOMAIN_FULX flx set RECORDSTATE=#{RECORDSTATE} where flx.RID=#{RID}
+</update> 
+
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> 
+      from SMMS_DOMAIN_FULX flx
+      left join SMMS_ROOM_INFO as ssr
+	    on flx.ROOM_IDX = ssr.ROOM_IDX and  flx.IDC_ID = ssr.ACCESS_ID and ssr.RECORDSTATE='0'
+	    left join smms_idc_info as sii
+	    on flx.IDC_ID = sii.IDC_ID and ssr.RECORDSTATE='0'
+       where flx.RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_DOMAIN_FULX (
+            <if test="RID != null ">RID,</if>
+            <if test="IDC_ID != null ">IDC_ID,</if>
+            <if test="ROOM_IDX != null ">ROOM_IDX,</if>
+            <if test="DOMAIN != null ">DOMAIN,</if>
+            <if test="VISI_COUNT != null ">VISI_COUNT,</if>
+            <if test="TOTAL_FLUX != null ">TOTAL_FLUX,</if>
+            <if test="UP_FLUX != null ">UP_FLUX,</if>
+            <if test="DOWN_FLUX != null ">DOWN_FLUX,</if>
+            <if test="PERCENT != null ">PERCENT,</if>
+            <if test="STAT_YEAR != null ">STAT_YEAR,</if>
+            <if test="STAT_MONTH != null ">STAT_MONTH,</if>
+            <if test="STAT_DATE != null ">STAT_DATE,</if>
+            <if test="MODIFIEDTIME != null ">MODIFIEDTIME,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="IDC_ID != null ">#{IDC_ID},</if>
+           <if test="ROOM_IDX != null ">#{ROOM_IDX},</if>
+           <if test="DOMAIN != null ">#{DOMAIN},</if>
+           <if test="VISI_COUNT != null ">#{VISI_COUNT},</if>
+           <if test="TOTAL_FLUX != null ">#{TOTAL_FLUX},</if>
+           <if test="UP_FLUX != null ">#{UP_FLUX},</if>
+           <if test="DOWN_FLUX != null ">#{DOWN_FLUX},</if>
+           <if test="PERCENT != null ">#{PERCENT},</if>
+           <if test="STAT_YEAR != null ">#{STAT_YEAR},</if>
+           <if test="STAT_MONTH != null ">#{STAT_MONTH},</if>
+           <if test="STAT_DATE != null ">#{STAT_DATE},</if>
+           <if test="MODIFIEDTIME != null ">#{MODIFIEDTIME},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_DOMAIN_FULX   
+		<set>
+				    <if test="RID!=null"> RID=#{RID},</if> 
+		    <if test="IDC_ID!=null"> IDC_ID=#{IDC_ID},</if> 
+		    <if test="ROOM_IDX!=null"> ROOM_IDX=#{ROOM_IDX},</if> 
+		    <if test="DOMAIN!=null"> DOMAIN=#{DOMAIN},</if> 
+		    <if test="VISI_COUNT!=null"> VISI_COUNT=#{VISI_COUNT},</if> 
+		    <if test="TOTAL_FLUX!=null"> TOTAL_FLUX=#{TOTAL_FLUX},</if> 
+		    <if test="UP_FLUX!=null"> UP_FLUX=#{UP_FLUX},</if> 
+		    <if test="DOWN_FLUX!=null"> DOWN_FLUX=#{DOWN_FLUX},</if> 
+		    <if test="PERCENT!=null"> PERCENT=#{PERCENT},</if> 
+		    <if test="STAT_YEAR!=null"> STAT_YEAR=#{STAT_YEAR},</if> 
+		    <if test="STAT_MONTH!=null"> STAT_MONTH=#{STAT_MONTH},</if> 
+		    <if test="STAT_DATE!=null"> STAT_DATE=#{STAT_DATE},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="CREATTIME!=null"> CREATTIME=#{CREATTIME},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

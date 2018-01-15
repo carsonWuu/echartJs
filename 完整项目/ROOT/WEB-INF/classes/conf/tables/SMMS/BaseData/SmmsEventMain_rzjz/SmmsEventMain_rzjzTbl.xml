@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SmmsEventMain_rzjz" desc="事件举证主表" recordNum="T" tblName="SMMS_EVENT_MAIN" pageSize="10" uniteTableModelId="" listURL="/SMMS/SmmsEventMain_rzjzBiz/DoList?tableModelId=SmmsEventMain_rzjz" sqlMapNamespace="SmmsEventMain_rzjz">
+	<Fields>
+			<TableField id="SNAPSHOP" colName="SNAPSHOP" desc="事件举证" dataType="VARCHAR" length="255"  colSpan="2" webType="div"  listGroupName="" create="LV" hidden="" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SWorkCalender"> 
+<sql id="sworkcalenderColumns">RID,WORKDATE,DATETYPE,ORGID</sql> 
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="sworkcalenderColumns"/> from S_WORKCALENDER 
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select>
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_WORKCALENDER where WORKDATE= #{WORKDATE} and ORGID =#{ORGID}
+</delete> 
+
+<insert id="insertSave" parameterType="hashmap" > 
+	insert into S_WORKCALENDER(RID,WORKDATE,DATETYPE,ORGID)values (#{RID},#{WORKDATE},#{DATETYPE},#{ORGID})
+</insert> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_WORKCALENDER  where WORKDATE = #{WORKDATE}  and ORGID =#{ORGID}
+</select> 
+
+<select id="getWorktype" parameterType="hashmap" resultType="string"> 
+	select DATETYPE from S_WORKCALENDER  
+	where WORKDATE = #{WORKDATE}  and ORGID =#{ORGID}
+</select> 
+
+</mapper>

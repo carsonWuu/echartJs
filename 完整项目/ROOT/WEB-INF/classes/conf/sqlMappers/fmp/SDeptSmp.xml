@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SDept"> 
+<sql id="sdeptColumns">RID,DEPTID,ORGID,SUPDEPTID,DEPTNAME,DEPSHORTFORM,LevelID,ENNAME,ORDERNO,DISTNO,LAUNCHDATE,STATE,DEPCHIEF,TELNUM,ADDRESS,POSTCODE,MEMO,CREATTIME,CREATORID,MODIFIEDTIME,MODIFIERID,RECORDSTATE</sql> 
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select org.ORGANSHORTFORM as TRANS_ORGID, dept.* 
+	from S_DEPT dept
+	left outer join S_ORG org
+		on dept.ORGID = org.ORGID
+	<where>
+		dept.RECORDSTATE='0' 
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>			 	
+	</where>
+		order by dept.STATE
+        <if test="order!=null and order!='' ">   
+             ,dept.${order}
+        </if>				
+</select>
+
+<select id="getDeptTreeData" parameterType="hashmap" resultType="hashmap"> 
+	select org.ORGANSHORTFORM as TRANS_ORGID, dept.* from S_DEPT dept
+	left outer join S_ORG org
+	on dept.ORGID = org.ORGID and org.RECORDSTATE='0' and org.STATE='0' 	
+	<where>
+		dept.RECORDSTATE='0' and dept.STATE='0' 			 	
+	</where>
+		order by dept.DEPTID				
+</select>
+
+<select id="sDeptData" parameterType="hashmap" resultType="hashmap"> 
+<!-- 根据登录的用户进行部门过滤 -->
+	select org.ORGANSHORTFORM as TRANS_ORGID, dept.* from S_DEPT dept
+	left outer join S_ORG org
+	on dept.ORGID = org.ORGID
+	<where>
+		dept.RECORDSTATE='0' and dept.STATE='0' and (dept.ORGID=#{CURR_USERID}  or dept.ORGID='[ALL]')
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>			 	
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select>
+
+
+<select id="deptData" parameterType="hashmap" resultType="hashmap"> 
+<!-- 根据选择的用户进行部门过滤 -->
+	select org.ORGANSHORTFORM as TRANS_ORGID, dept.* from S_DEPT dept
+	left outer join S_ORG org
+	on dept.ORGID = org.ORGID
+	<where>
+		dept.RECORDSTATE='0' and dept.STATE = '0' and (dept.ORGID=#{ORGID}  or dept.ORGID='[ALL]')
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>					
+</select>
+
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from S_DEPT dept
+	left outer join S_ORG org
+	on dept.ORGID = org.ORGID
+	<where>
+		dept.RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+</select> 
+
+<!-- 根据部门码获取数据 -->
+<select id="getDeptById" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_DEPT where DEPTID = #{DEPTID} and RECORDSTATE = '0'
+</select> 
+
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_DEPT where RID = #{RID}
+</delete> 
+
+<delete id="deleteDataByDEPTID" parameterType="hashmap" > 
+	delete from S_DEPT where DEPTID= #{DEPTID}
+</delete> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_DEPT set  RECORDSTATE=#{RECORDSTATE}
+	where DEPTID= #{DEPTID}
+</update> 
+
+<update id="updatestate" parameterType="hashmap" > 
+	update S_DEPT set STATE=#{STATE}  
+	where DEPTID= #{DEPTID}
+</update>
+ 
+<select id="selectDeptName" parameterType="hashmap" resultType="hashmap"> 
+	select DEPTNAME from S_DEPT where DEPTID = #{DEPTID}  
+</select>
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select sd2.DEPSHORTFORM as TRANS_SUPDEPTID,
+			org.ORGANSHORTFORM as TRANS_ORGID,
+			su.USERNAME as TRANS_DEPCHIEF,sd1.*,
+			su2.USERNAME as TRANS_CREATORID,
+			su3.USERNAME as TRANS_MODIFIERID
+	from S_DEPT sd1
+	left outer join S_DEPT sd2 
+		on sd1.SUPDEPTID=sd2.DEPTID
+	left outer join S_ORG  org 
+		on sd1.ORGID=org.ORGID
+	left outer join S_USER su
+		on sd1.DEPCHIEF=su.USERID
+	left outer join S_USER su2
+		on su2.USERID = sd1.CREATORID
+	left outer join S_USER su3
+		on su3.USERID = sd1.MODIFIERID
+	where sd1.RID = #{RID}  
+</select>
+ 
+<select id="viewDetailByCondition" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_DEPT
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+</select> 
+
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+	select 
+	sd2.DEPSHORTFORM as TRANS_SUPDEPTID,
+	org.ORGANSHORTFORM as TRANS_ORGID,
+	su.USERNAME as TRANS_DEPCHIEF,
+	sd1.* from S_DEPT sd1
+	left outer join S_DEPT sd2 on sd1.SUPDEPTID=sd2.DEPTID
+	left outer join S_ORG  org on sd1.ORGID=org.ORGID
+	left outer join S_USER su  on sd1.DEPCHIEF=su.USERID
+	where sd1.DEPTID = #{DEPTID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" > 
+			insert into S_DEPT (
+	    	 RID
+		    ,DEPTID
+		    ,ORGID
+		    ,SUPDEPTID
+		    ,DEPTNAME
+		    ,DEPSHORTFORM
+		    ,LevelID
+		    ,ENNAME
+		    ,ORDERNO
+		    ,DISTNO
+		    ,LAUNCHDATE
+		    ,STATE
+		    ,DEPCHIEF
+		    ,TELNUM
+		    ,ADDRESS
+		    ,POSTCODE
+		    ,MEMO
+		    ,CREATTIME
+		    ,CREATORID
+		    ,MODIFIEDTIME
+		    ,MODIFIERID
+		    ,RECORDSTATE
+	    )
+	    values(
+             #{RID}
+		    ,#{DEPTID}
+		    ,#{ORGID}
+		    ,#{SUPDEPTID}
+		    ,#{DEPTNAME}
+		    ,#{DEPSHORTFORM}
+		    ,#{LevelID}
+		    ,#{ENNAME}
+		    ,#{ORDERNO}
+		    ,#{DISTNO}
+		    ,#{LAUNCHDATE}
+		    ,#{STATE}
+		    ,#{DEPCHIEF}
+		    ,#{TELNUM}
+		    ,#{ADDRESS}
+		    ,#{POSTCODE}
+		    ,#{MEMO}
+		    ,#{CREATTIME}
+		    ,#{CREATORID}
+		    ,#{MODIFIEDTIME}
+		    ,#{MODIFIERID}
+		    ,#{RECORDSTATE}
+	    )
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+   	update S_DEPT 
+   		<set>  
+		  <if test="DEPTID != null ">DEPTID = #{DEPTID},</if>
+          <if test="ORGID != null ">ORGID = #{ORGID},</if>
+	      <if test="SUPDEPTID != null ">SUPDEPTID = #{SUPDEPTID},</if>
+	      <if test="DEPTNAME != null ">DEPTNAME = #{DEPTNAME},</if>
+	      <if test="DEPSHORTFORM != null ">DEPSHORTFORM = #{DEPSHORTFORM},</if>
+	      <if test="ENNAME != null ">ENNAME = #{ENNAME},</if>
+	      <if test="ORDERNO != null ">ORDERNO = #{ORDERNO},</if>
+	      <if test="DISTNO != null ">DISTNO = #{DISTNO},</if>
+	      <if test="LAUNCHDATE != null ">LAUNCHDATE = #{LAUNCHDATE},</if>
+	      <if test="STATE != null ">STATE = #{STATE},</if>
+	      <if test="DEPCHIEF != null ">DEPCHIEF = #{DEPCHIEF},</if>
+	      <if test="TELNUM != null ">TELNUM = #{TELNUM},</if>	 
+	      <if test="ADDRESS != null ">ADDRESS = #{ADDRESS},</if>
+	      <if test="POSTCODE != null ">POSTCODE = #{POSTCODE},</if>
+	      <if test="MEMO != null ">MEMO = #{MEMO},</if>
+	      <if test="MODIFIEDTIME != null ">MODIFIEDTIME = #{MODIFIEDTIME},</if>
+	      <if test="MODIFIERID != null ">MODIFIERID = #{MODIFIERID},</if>
+	      <if test="RECORDSTATE != null ">RECORDSTATE = #{RECORDSTATE}</if>
+   		</set>
+  	where RID=#{RID}
+</update> 
+
+	<select id="lowerDeptIdList" parameterType="hashmap" resultType="hashmap"> 
+	<!-- 查询当前登录用户所在部门的下级机构 -->
+	select DEPTID,SUPDEPTID 
+	from s_dept
+	where SUPDEPTID =#{CURR_DEPTID}  and DEPTID != #{CURR_DEPTID} and RECORDSTATE='0'
+    </select>
+    <!-- 查询当前登录用户所在部门的上级机构 -->
+	<select id="superDeptIds" parameterType="String" resultType="hashmap"> 	 
+          select DEPTID,SUPDEPTID as DEPTID  
+          from s_dept 
+          where DEPTID = #{CURR_DEPTID} and RECORDSTATE='0'
+    </select>
+
+</mapper>

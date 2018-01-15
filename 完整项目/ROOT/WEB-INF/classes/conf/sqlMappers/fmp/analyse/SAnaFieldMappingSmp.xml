@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SAnaFieldMapping"> 
+<sql id="listColumns">
+	
+            FLD_ISPK,
+            FLD_ORDER,
+            FLD_DICTYPE,
+            FLD_ISSEARCH,
+            FLD_RANGESEARCH,
+            FLD_FUZZY,
+            FLD_ORDERINLIST,
+            CREATEIN_LIST,
+            CREATEIN_VIEW,
+            CREATEIN_ADD,
+            CREATEIN_UPDATE,
+            HIDDENIN_LIST,
+            HIDDENIN_VIEW,
+            HIDDENIN_ADD,
+            HIDDENIN_UPDATE,
+            READONLYIN_ADD,
+            READONLYIN_UPDATE,
+            INPUTEINLIST,
+            DEFAULTVALUE,
+            FLD_COLSPAN,
+            FLD_MIN,
+            FLD_MAX,
+            ENVPARAM,
+            GROUP_TITLE,
+            GROUP_END,
+            TABLE_ALIAS,
+            AUTOCODE,
+            FORCE_NEW_ROW,
+            ISSENSITIVE,
+            LISTGROUPNAME,
+            TOTALTEXT,
+            TITLEWIDTH,
+            DISPTYPE,
+            FORQUREY,
+            DBLCLICK,
+            SPLIT_COLUMN,
+            TIPS,
+            PREFIX,
+            POSTFIX,
+            SPLIT_COUNT,
+            SPLIT_INDEX,
+            RECORDSTATE,
+            RID,
+            MAINRID,
+            FLD_SEQUENCE,
+            FLD_ID,
+            FLD_NAME,
+            FLD_DESC,
+            FLD_DATATYPE,
+            FLD_WEBTYPEEXT,
+            FLD_CSSCLASS,
+            FLD_WETTYPE,
+            FLD_LENGTH,
+            FLD_REQUIRED
+</sql>
+<sql id="detailColumns">
+	
+            FLD_ISPK,
+            FLD_ORDER,
+            FLD_DICTYPE,
+            FLD_ISSEARCH,
+            FLD_RANGESEARCH,
+            FLD_FUZZY,
+            FLD_ORDERINLIST,
+            CREATEIN_LIST,
+            CREATEIN_VIEW,
+            CREATEIN_ADD,
+            CREATEIN_UPDATE,
+            HIDDENIN_LIST,
+            HIDDENIN_VIEW,
+            HIDDENIN_ADD,
+            HIDDENIN_UPDATE,
+            READONLYIN_ADD,
+            READONLYIN_UPDATE,
+            INPUTEINLIST,
+            DEFAULTVALUE,
+            FLD_COLSPAN,
+            FLD_MIN,
+            FLD_MAX,
+            ENVPARAM,
+            GROUP_TITLE,
+            GROUP_END,
+            TABLE_ALIAS,
+            AUTOCODE,
+            FORCE_NEW_ROW,
+            ISSENSITIVE,
+            LISTGROUPNAME,
+            TOTALTEXT,
+            TITLEWIDTH,
+            DISPTYPE,
+            FORQUREY,
+            DBLCLICK,
+            SPLIT_COLUMN,
+            TIPS,
+            PREFIX,
+            POSTFIX,
+            SPLIT_COUNT,
+            SPLIT_INDEX,
+            RECORDSTATE,
+            RID,
+            MAINRID,
+            FLD_SEQUENCE,
+            FLD_ID,
+            FLD_NAME,
+            FLD_DESC,
+            FLD_DATATYPE,
+            FLD_WEBTYPEEXT,
+            FLD_CSSCLASS,
+            FLD_WETTYPE,
+            FLD_LENGTH,
+            FLD_REQUIRED
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from S_ANA_FIELDMAPPING 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from S_ANA_FIELDMAPPING 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_ANA_FIELDMAPPING  where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from S_ANA_FIELDMAPPING  where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_ANA_FIELDMAPPING  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from S_ANA_FIELDMAPPING  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_ANA_FIELDMAPPING (
+            FLD_ISPK,
+            FLD_ORDER,
+            FLD_DICTYPE,
+            FLD_ISSEARCH,
+            FLD_RANGESEARCH,
+            FLD_FUZZY,
+            FLD_ORDERINLIST,
+            CREATEIN_LIST,
+            CREATEIN_VIEW,
+            CREATEIN_ADD,
+            CREATEIN_UPDATE,
+            HIDDENIN_LIST,
+            HIDDENIN_VIEW,
+            HIDDENIN_ADD,
+            HIDDENIN_UPDATE,
+            READONLYIN_ADD,
+            READONLYIN_UPDATE,
+            INPUTEINLIST,
+            DEFAULTVALUE,
+            FLD_COLSPAN,
+            FLD_MIN,
+            FLD_MAX,
+            ENVPARAM,
+            GROUP_TITLE,
+            GROUP_END,
+            TABLE_ALIAS,
+            AUTOCODE,
+            FORCE_NEW_ROW,
+            ISSENSITIVE,
+            LISTGROUPNAME,
+            TOTALTEXT,
+            TITLEWIDTH,
+            DISPTYPE,
+            FORQUREY,
+            DBLCLICK,
+            SPLIT_COLUMN,
+            TIPS,
+            PREFIX,
+            POSTFIX,
+            SPLIT_COUNT,
+            SPLIT_INDEX,
+            RECORDSTATE,
+            RID,
+            MAINRID,
+            FLD_SEQUENCE,
+            FLD_ID,
+            FLD_NAME,
+            FLD_DESC,
+            FLD_DATATYPE,
+            FLD_WEBTYPEEXT,
+            FLD_CSSCLASS,
+            FLD_WETTYPE,
+            FLD_LENGTH,
+            FLD_REQUIRED)
+	   values (
+            #{FLD_ISPK},
+            #{FLD_ORDER},
+            #{FLD_DICTYPE},
+            #{FLD_ISSEARCH},
+            #{FLD_RANGESEARCH},
+            #{FLD_FUZZY},
+            #{FLD_ORDERINLIST},
+            #{CREATEIN_LIST},
+            #{CREATEIN_VIEW},
+            #{CREATEIN_ADD},
+            #{CREATEIN_UPDATE},
+            #{HIDDENIN_LIST},
+            #{HIDDENIN_VIEW},
+            #{HIDDENIN_ADD},
+            #{HIDDENIN_UPDATE},
+            #{READONLYIN_ADD},
+            #{READONLYIN_UPDATE},
+            #{INPUTEINLIST},
+            #{DEFAULTVALUE},
+            #{FLD_COLSPAN}, 
+            #{FLD_MIN},
+            #{FLD_MAX},
+            #{ENVPARAM},
+            #{GROUP_TITLE},
+            #{GROUP_END},
+            #{TABLE_ALIAS},
+            #{AUTOCODE},
+            #{FORCE_NEW_ROW},
+            #{ISSENSITIVE},
+            #{LISTGROUPNAME},
+            #{TOTALTEXT},
+            #{TITLEWIDTH},
+            #{DISPTYPE},
+            #{FORQUREY},
+            #{DBLCLICK},
+            #{SPLIT_COLUMN},
+            #{TIPS},
+            #{PREFIX},
+            #{POSTFIX},
+            #{SPLIT_COUNT},
+            #{SPLIT_INDEX},
+            #{RECORDSTATE},
+            #{RID},
+            #{MAINRID},
+            #{FLD_SEQUENCE},
+            #{FLD_NAME},
+            #{FLD_NAME},
+            #{FLD_DESC},
+            #{FLD_DATATYPE},
+            #{FLD_WEBTYPEEXT},
+            #{FLD_CSSCLASS},
+            #{FLD_WETTYPE},
+            #{FLD_LENGTH},
+            #{FLD_REQUIRED})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_ANA_FIELDMAPPING   
+		<set>
+				    <if test="FLD_ISPK!=null"> FLD_ISPK=#{FLD_ISPK},</if> 
+		    <if test="FLD_ORDER!=null"> FLD_ORDER=#{FLD_ORDER},</if> 
+		    <if test="FLD_DICTYPE!=null"> FLD_DICTYPE=#{FLD_DICTYPE},</if> 
+		    <if test="FLD_ISSEARCH!=null"> FLD_ISSEARCH=#{FLD_ISSEARCH},</if> 
+		    <if test="FLD_RANGESEARCH!=null"> FLD_RANGESEARCH=#{FLD_RANGESEARCH},</if> 
+		    <if test="FLD_FUZZY!=null"> FLD_FUZZY=#{FLD_FUZZY},</if> 
+		    <if test="FLD_ORDERINLIST!=null"> FLD_ORDERINLIST=#{FLD_ORDERINLIST},</if> 
+		    <if test="CREATEIN_LIST!=null"> CREATEIN_LIST=#{CREATEIN_LIST},</if> 
+		    <if test="CREATEIN_VIEW!=null"> CREATEIN_VIEW=#{CREATEIN_VIEW},</if> 
+		    <if test="CREATEIN_ADD!=null"> CREATEIN_ADD=#{CREATEIN_ADD},</if> 
+		    <if test="CREATEIN_UPDATE!=null"> CREATEIN_UPDATE=#{CREATEIN_UPDATE},</if> 
+		    <if test="HIDDENIN_LIST!=null"> HIDDENIN_LIST=#{HIDDENIN_LIST},</if> 
+		    <if test="HIDDENIN_VIEW!=null"> HIDDENIN_VIEW=#{HIDDENIN_VIEW},</if> 
+		    <if test="HIDDENIN_ADD!=null"> HIDDENIN_ADD=#{HIDDENIN_ADD},</if> 
+		    <if test="HIDDENIN_UPDATE!=null"> HIDDENIN_UPDATE=#{HIDDENIN_UPDATE},</if> 
+		    <if test="READONLYIN_ADD!=null"> READONLYIN_ADD=#{READONLYIN_ADD},</if> 
+		    <if test="READONLYIN_UPDATE!=null"> READONLYIN_UPDATE=#{READONLYIN_UPDATE},</if> 
+		    <if test="INPUTEINLIST!=null"> INPUTEINLIST=#{INPUTEINLIST},</if> 
+		    <if test="DEFAULTVALUE!=null"> DEFAULTVALUE=#{DEFAULTVALUE},</if> 
+		    <if test="FLD_COLSPAN!=null"> FLD_COLSPAN=#{FLD_COLSPAN},</if> 
+		    <if test="FLD_MIN!=null"> FLD_MIN=#{FLD_MIN},</if> 
+		    <if test="FLD_MAX!=null"> FLD_MAX=#{FLD_MAX},</if> 
+		    <if test="ENVPARAM!=null"> ENVPARAM=#{ENVPARAM},</if> 
+		    <if test="GROUP_TITLE!=null"> GROUP_TITLE=#{GROUP_TITLE},</if> 
+		    <if test="GROUP_END!=null"> GROUP_END=#{GROUP_END},</if> 
+		    <if test="TABLE_ALIAS!=null"> TABLE_ALIAS=#{TABLE_ALIAS},</if> 
+		    <if test="AUTOCODE!=null"> AUTOCODE=#{AUTOCODE},</if> 
+		    <if test="FORCE_NEW_ROW!=null"> FORCE_NEW_ROW=#{FORCE_NEW_ROW},</if> 
+		    <if test="ISSENSITIVE!=null"> ISSENSITIVE=#{ISSENSITIVE},</if> 
+		    <if test="LISTGROUPNAME!=null"> LISTGROUPNAME=#{LISTGROUPNAME},</if> 
+		    <if test="TOTALTEXT!=null"> TOTALTEXT=#{TOTALTEXT},</if> 
+		    <if test="TITLEWIDTH!=null"> TITLEWIDTH=#{TITLEWIDTH},</if> 
+		    <if test="DISPTYPE!=null"> DISPTYPE=#{DISPTYPE},</if> 
+		    <if test="FORQUREY!=null"> FORQUREY=#{FORQUREY},</if> 
+		    <if test="DBLCLICK!=null"> DBLCLICK=#{DBLCLICK},</if> 
+		    <if test="SPLIT_COLUMN!=null"> SPLIT_COLUMN=#{SPLIT_COLUMN},</if> 
+		    <if test="TIPS!=null"> TIPS=#{TIPS},</if> 
+		    <if test="PREFIX!=null"> PREFIX=#{PREFIX},</if> 
+		    <if test="POSTFIX!=null"> POSTFIX=#{POSTFIX},</if> 
+		    <if test="SPLIT_COUNT!=null"> SPLIT_COUNT=#{SPLIT_COUNT},</if> 
+		    <if test="SPLIT_INDEX!=null"> SPLIT_INDEX=#{SPLIT_INDEX},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		    <if test="MAINRID!=null"> MAINRID=#{MAINRID},</if> 
+		    <if test="FLD_SEQUENCE!=null"> FLD_SEQUENCE=#{FLD_SEQUENCE},</if> 
+		    <if test="FLD_NAME!=null"> FLD_ID=#{FLD_NAME},</if> 
+		    <if test="FLD_NAME!=null"> FLD_NAME=#{FLD_NAME},</if> 
+		    <if test="FLD_DESC!=null"> FLD_DESC=#{FLD_DESC},</if> 
+		    <if test="FLD_DATATYPE!=null"> FLD_DATATYPE=#{FLD_DATATYPE},</if> 
+		    <if test="FLD_WEBTYPEEXT!=null"> FLD_WEBTYPEEXT=#{FLD_WEBTYPEEXT},</if>
+		    <if test="FLD_CSSCLASS!=null"> FLD_CSSCLASS=#{FLD_CSSCLASS},</if>
+		    <if test="FLD_WETTYPE!=null"> FLD_WETTYPE=#{FLD_WETTYPE},</if> 
+		    <if test="FLD_LENGTH!=null"> FLD_LENGTH=#{FLD_LENGTH},</if> 
+		    <if test="FLD_REQUIRED!=null"> FLD_REQUIRED=#{FLD_REQUIRED},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

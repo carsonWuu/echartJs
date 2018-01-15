@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="UserInfoWithPost"> 
+	
+	     
+   <select id="listData" parameterType="hashmap" resultType="hashmap">
+      select  u.RID,u.USERID,u.USERNAME,pu.POSTID,p.POSTNAME,org.ORGANSHORTFORM as TRANS_ORGID,ru.ROLEID,r.ROLENAME 
+        from S_USER u
+	  left outer join S_POSTUSER pu
+	    on (u.USERID=pu.USERID )
+      left outer join S_POST p
+	    on (p.POSTID = pu.POSTID )
+	  left outer join S_ORG org
+	    on (u.ORGID = org.ORGID AND u.ORGID = p.ORGID)
+	  left outer join S_ROLEUSER ru
+	  	on (ru.USERID = u.USERID)
+	  left outer join S_ROLE r
+	  	on (r.ROLEID = ru.ROLEID)  	
+		<where>
+		u.RECORDSTATE='0' and u.USERID != 'admin'
+	        <if test="whereCondition!=null and whereCondition!='' ">   
+	             ${whereCondition}
+	        </if>		
+		</where>          
+   </select>
+   
+    <select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+      select  count(*) NUM 
+        from S_USER u
+	  left outer join S_POSTUSER pu
+	    on (u.USERID=pu.USERID )
+      left outer join S_POST p
+	    on (p.POSTID = pu.POSTID )
+	  left outer join S_ORG org
+	    on (u.ORGID = org.ORGID AND u.ORGID = p.ORGID)
+	  left outer join S_ROLEUSER ru
+	  	on (ru.USERID = u.USERID)
+	  left outer join S_ROLE r
+	  	on (r.ROLEID = ru.ROLEID) 
+       <where>
+		u.RECORDSTATE='0'  and u.USERID != 'admin'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+    </select> 
+
+</mapper>

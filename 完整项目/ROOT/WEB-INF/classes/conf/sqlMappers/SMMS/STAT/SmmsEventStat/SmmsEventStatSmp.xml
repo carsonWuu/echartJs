@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsEventStat"> 
+<sql id="listColumns">
+	
+            RID,
+            IDC_ID,
+            IDC_NAME,
+            INVADE,
+            HACKER,
+            BLACK_PROFIT,
+            INSIDER_ATTACK,
+            OVER_WALL,
+            PROXY,
+            VPN,
+            DATAFLAG,
+            MODIFIEDTIME,
+            RECORDSTATE,
+            CREATTIME
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            IDC_ID,
+            IDC_NAME,
+            INVADE,
+            HACKER,
+            BLACK_PROFIT,
+            INSIDER_ATTACK,
+            OVER_WALL,
+            PROXY,
+            VPN,
+            DATAFLAG,
+            MODIFIEDTIME,
+            RECORDSTATE,
+            CREATTIME
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from SMMS_EVENT_STAT 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+<select id="selectData" parameterType="hashmap" resultType="hashmap"> 
+	select IDC_ID,
+            IDC_NAME,
+            INVADE,
+            HACKER,
+            BLACK_PROFIT,
+            INSIDER_ATTACK,
+            OVER_WALL,
+            PROXY,
+            VPN
+            from SMMS_EVENT_STAT 
+	<where>
+		RECORDSTATE='0' and DATAFLAG='1'
+	</where>		
+</select> 
+<select id="selectDataByDataFlagTwo" parameterType="hashmap" resultType="hashmap"> 
+	select IDC_ID,
+            IDC_NAME,
+            INVADE,
+            HACKER,
+            BLACK_PROFIT,
+            INSIDER_ATTACK,
+            OVER_WALL,
+            PROXY,
+            VPN
+            from SMMS_EVENT_STAT 
+	<where>
+		RECORDSTATE='0' and DATAFLAG='2'
+	</where>		
+</select>
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_EVENT_STAT 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_EVENT_STAT  where RID = #{RID}
+</delete> 
+
+<delete id="deleteTableData" parameterType="hashmap" > 
+	delete from SMMS_EVENT_STAT
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from SMMS_EVENT_STAT  where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_EVENT_STAT  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_EVENT_STAT  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_EVENT_STAT (
+            <if test="RID != null ">RID,</if>
+            <if test="IDC_ID != null ">IDC_ID,</if>
+            <if test="IDC_NAME != null ">IDC_NAME,</if>
+            <if test="INVADE != null ">INVADE,</if>
+            <if test="HACKER != null ">HACKER,</if>
+            <if test="BLACK_PROFIT != null ">BLACK_PROFIT,</if>
+            <if test="INSIDER_ATTACK != null ">INSIDER_ATTACK,</if>
+            <if test="OVER_WALL != null ">OVER_WALL,</if>
+            <if test="PROXY != null ">PROXY,</if>
+            <if test="VPN != null ">VPN,</if>
+            <if test="DATAFLAG != null ">DATAFLAG,</if>
+            <if test="MODIFIEDTIME != null ">MODIFIEDTIME,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE,</if>
+            <if test="CREATTIME != null ">CREATTIME</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="IDC_ID != null ">#{IDC_ID},</if>
+           <if test="IDC_NAME != null ">#{IDC_NAME},</if>
+           <if test="INVADE != null ">#{INVADE},</if>
+           <if test="HACKER != null ">#{HACKER},</if>
+           <if test="BLACK_PROFIT != null ">#{BLACK_PROFIT},</if>
+           <if test="INSIDER_ATTACK != null ">#{INSIDER_ATTACK},</if>
+           <if test="OVER_WALL != null ">#{OVER_WALL},</if>
+           <if test="PROXY != null ">#{PROXY},</if>
+           <if test="VPN != null ">#{VPN},</if>
+           <if test="DATAFLAG != null ">#{DATAFLAG},</if>
+           <if test="MODIFIEDTIME != null ">#{MODIFIEDTIME},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE},</if>
+           <if test="CREATTIME != null ">#{CREATTIME}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_EVENT_STAT   
+		<set>
+				    <if test="IDC_ID!=null"> IDC_ID=#{IDC_ID},</if> 
+		    <if test="IDC_NAME!=null"> IDC_NAME=#{IDC_NAME},</if> 
+		    <if test="INVADE!=null"> INVADE=#{INVADE},</if> 
+		    <if test="HACKER!=null"> HACKER=#{HACKER},</if> 
+		    <if test="BLACK_PROFIT!=null"> BLACK_PROFIT=#{BLACK_PROFIT},</if> 
+		    <if test="INSIDER_ATTACK!=null"> INSIDER_ATTACK=#{INSIDER_ATTACK},</if> 
+		    <if test="OVER_WALL!=null"> OVER_WALL=#{OVER_WALL},</if> 
+		    <if test="PROXY!=null"> PROXY=#{PROXY},</if> 
+		    <if test="VPN!=null"> VPN=#{VPN},</if> 
+		    <if test="DATAFLAG!=null"> DATAFLAG=#{DATAFLAG},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

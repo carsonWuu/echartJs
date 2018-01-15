@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+ 
+    <package name="fmp.SModuleOpperationBiz" namespace="/fmp/SModuleOpperationBiz" extends="fmp.FrameCommonBiz">
+    	
+    	<action  name="TreeModuleOpperationAdd" class="com.zstar.fmp.system.module.action.AddSOpperationAction">
+            <result>/WEB-INF/jsp/fmp/system/module/OpperationAdd.jsp</result>
+        </action>   
+        <action  name="TreeModuleOpperationView"  class="com.zstar.fmp.system.module.action.UpdateOpperationAction">
+            <result>/WEB-INF/jsp/fmp/system/module/OpperationUpdate.jsp</result>
+        </action>
+        <action  name="AddCommonOperationSave"  class="com.zstar.fmp.system.module.action.AddCommonOperationSaveAction">
+            
+        </action>   
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.fmp.system.module.action.{1}SOpperationAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+            <param name="tableModelId">SModuleOpperation</param>
+        </action>    
+        
+		<!--新增和修改的保存操作-->
+        <action  name="*Save" class="com.zstar.fmp.system.module.action.SaveSOpperationAction">
+        </action>      
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.fmp.system.module.action.DeleteSOpperationAction">
+        </action>                         
+    </package>    
+</struts>

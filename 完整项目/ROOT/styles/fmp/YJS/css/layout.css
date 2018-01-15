@@ -1,0 +1,448 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+li {
+    list-style: none;
+}
+body {
+    font-family: "microsoft yahei","微软雅黑";
+}
+/*遮罩层*/
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    z-index: 700;
+}
+
+/*弹出框验证提示*/
+.dialog_error {
+    display: none;
+    font-size: 14px;
+    line-height: 1.5;
+    color: red;
+    text-align: center;
+    margin-top: 2px;
+}
+/*弹出框验证提示*/
+.Logindialog_error {
+    display: none;
+    font-size: 14px;
+    line-height: 1.5;
+    color: red;
+    /*text-align: center;*/
+    margin-top: 2px;
+}
+
+.newtop {
+    height: 40px;
+    background: #29323e;
+    min-width: 1150px;
+}
+
+.clearfix {
+    _zoom: 1;
+}
+
+    .clearfix:after {
+        clear: both;
+        display: block;
+        visibility: hidden;
+        height: 0;
+        line-height: 0;
+        content: "";
+    }
+
+.box {
+    width: 1150px;
+    margin: 0 auto;
+}
+
+.fl {
+    float: left;
+}
+
+a, u {
+    text-decoration: none;
+    outline: medium none;
+    outline: none;
+}
+
+.fr {
+    float: right;
+}
+
+.h_rg span {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 15px;
+    color: #888B91;
+    font-size: 14px;
+    background: url(/Content/themes/base/images/home.png) no-repeat left;
+}
+
+.htoplf {
+    height: 40px;
+    line-height: 40px;
+    color: #888B91;
+    font-size: 14px;
+}
+
+    .htoplf .call_icon {
+        width: 20px;
+        height: 20px;
+        margin-top: 10px;
+    }
+
+    .htoplf p {
+        height: 40px;
+        line-height: 40px;
+        margin-right: 15px;
+    }
+
+.new-kfrx {
+}
+
+.htoplf .ph {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    /*background: #39404D;*/
+}
+
+    .htoplf .ph a {
+        color: #fff;
+    }
+
+.htoplf .ih {
+    display: inline-block;
+    height: 40px;
+    padding: 0 30px;
+}
+
+    .htoplf .ih img {
+        margin-top: 10px;
+        border: none;
+    }
+/*导航条*/
+.hWarpper {
+    width: 100%;
+    background: #fff;
+}
+
+.newnavh {
+    height: 100px;
+    z-index: 699;
+    position: relative;
+}
+
+.navLf {
+    padding: 15px 22px 15px 0;
+}
+
+.navRg {
+    padding: 22px 0 0 7px;
+    z-index: 699;
+}
+
+    .navRg a.active {
+        color: #F93F04;
+    }
+
+.navLf img.logo-img {
+    width: 410px;
+    height: 65px;
+}
+
+.navRg dd, .navRg dt {
+    float: left;
+    height: 45px;
+}
+    /*.navRg dt {
+    width: 15px;
+    background: url(/Content/themes/base/images/nav.gif) no-repeat center 14px;
+    font-size: 0px;
+}*/
+    .navRg dd.active {
+        width: 100px;
+        margin: 0 9px;
+        position: relative;
+        text-align: center;
+        /*background: url(https://image-www-9fbank-com.alikunlun.com/images/newindeximg/nav_sj.png) no-repeat 93px 19px;*/
+        display: inline;
+    }
+
+    .navRg dd a {
+        /*color: #545454;*/
+        font-size: 17px;
+        height: 42px;
+        line-height: 42px;
+        display: inline-block;
+    }
+
+/*bottom*/
+.footer {
+    background: #1f2b3c;
+    min-width: 1150px;
+    padding: 23px 0 20px;
+}
+
+.footlogo {
+    width: 230px;
+    height: 100px;
+    border-right: 1px solid #181F27;
+}
+
+.footer dl {
+    float: left;
+    display: inline;
+    width: 450px;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.footer dt {
+    color: #fff;
+    font-size: 16px;
+    margin-left: -5px;
+    margin-bottom: 25px;
+}
+
+.footer dd {
+    height: 30px;
+    line-height: 30px;
+    color: #a0a1a2;
+}
+
+    .footer dd a {
+        color: #a0a1a2;
+        font-size: 14px;
+    }
+
+.blank0 {
+    clear: both;
+    font-size: 0;
+    line-height: 0;
+    height: 0px;
+    overflow: hidden;
+}
+
+.contrac-num {
+    width: 360px;
+    border-right: 1px solid #181F27;
+    color: #fff;
+    font-size: 26px;
+    font-weight: bold;
+    height: 160px;
+    line-height: 160px;
+    text-align: center;
+}
+
+    .contrac-num span {
+        display: inline-block;
+        padding-left: 50px;
+        background: url(/Content/themes/base/images/call7.png) no-repeat left;
+    }
+
+.law-info {
+    min-height: 100px;
+    min-width: 1150px;
+    line-height: 100px;
+    text-align: center;
+    background: #1D2228;
+    color: #a0a1a2;
+}
+
+/*登陆弹框*/
+/*.login_dialog {
+        position: fixed;
+        display: none;
+        top: 25%;
+        left: 30%;
+        width: 490px;
+        height: 380px;
+        background: #fff;
+        z-index: 800;
+    }*/
+.login_dialog {
+    position: fixed;
+    display: none;
+    top: 25%;
+    left: 38%;
+    width: 400px;
+    height: 380px;
+    background: #fff;
+    z-index: 800;
+}
+
+.login_title {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    letter-spacing: 8px;
+    color: #fff;
+    background: #3A9AFC;
+}
+
+
+
+span.btnexit {
+    position: absolute;
+    display: inline-block;
+    top: 5px;
+    right: 5px;
+    width: 27px;
+    height: 27px;
+    background: url(/CUP_WEB/images/YJS/exit.png);
+    cursor: pointer;
+}
+
+
+.login_dialog ul, .login-intro ul {
+    width: 250px;
+    margin: 15px auto;
+}
+
+.ceng_li {
+    position: relative;
+    list-style: none;
+}
+
+    .ceng_li input {
+        width: 230px;
+        height: 30px;
+        margin-bottom: 15px;
+        padding-left: 8px;
+        /*color: #A9A9A9;*/
+    }
+
+
+
+/*a.login_sub {
+        height: 37px;
+        line-height: 37px;
+        display: inline-block;
+        width: 360px;
+        background: #edad00;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #fff;
+        text-align: center;
+    }*/
+a.login_sub {
+    height: 37px;
+    line-height: 37px;
+    display: inline-block;
+    width: 245px;
+    background: #edad00;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+}
+
+
+/*无交互弹窗*/
+.dialog_login {
+    position: fixed;
+    display: none;
+    top: 25%;
+    left: 30%;
+    width: 490px;
+    height: 300px;
+    background: #fff;
+    z-index: 800;
+}
+
+    .dialog_login .title {
+        height: 35px;
+        line-height: 35px;
+        padding-left: 10px;
+        text-align: left;
+        letter-spacing: 8px;
+        color: #524545;
+        background: #ccc;
+    }
+
+    .dialog_login p.big {
+        height: 140px;
+        line-height: 140px;
+        text-align: center;
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    .dialog_login p.desc {
+        height: 30px;
+        line-height: 30px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .dialog_login a {
+        display: inline-block;
+        height: 37px;
+        line-height: 37px;
+        width: 150px;
+        background: #edad00;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #fff;
+        text-align: center;
+    }
+
+.big img {
+    width: 32px;
+    position: absolute;
+    left: 145px;
+    top: 30%;
+}
+/*输入框提示语*/
+.placeh {
+    position: absolute;
+    display: block;
+    top: 8px;
+    left: 10px;
+    color: #A9A9A9;
+    font-size: 14px;
+}
+.cen_li {
+position:relative;
+}
+.cen_li input {
+    width: 230px;
+    height: 30px;
+    margin-bottom: 15px;
+    padding-left: 8px;
+}
+    /*弹出框登录*/
+#Loper_msg, #Loper_id {
+    text-align: right;
+    width: 240px;
+    height: 20px;
+    font-size: 14px;
+    line-height: 5px;
+    cursor: pointer;
+}
+
+.cen_li .LRsmsCodeLogin {
+    width: 120px;
+}
+
+.cen_li .Lcode-btn {
+    width: 105px;
+    cursor: pointer;
+}

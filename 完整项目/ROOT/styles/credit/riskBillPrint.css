@@ -1,0 +1,416 @@
+@CHARSET "UTF-8";
+
+body {
+	font-face: 宋体;
+	font-family: monospace;
+	font-size: 12px;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+.title_button img {
+	display: none;
+}
+
+.dynamic_button img {
+	display: none;
+}
+
+table#mainframe {
+	width: 952px;
+	padding: 0px;
+	border: 1px solid #999;
+}
+
+table#mainframe td.coltitle {
+	border: 1px solid #999;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	width: 20px;
+}
+
+table#mainframe td.title {
+	padding: 3px 0px;
+	border: 1px solid #999;
+	width: 930px;
+	page-break-after: avoid;
+}
+
+table#mainframe td.show {
+	border: 1px solid #999;
+	width: 930px;
+	height: 30px;
+	text-align: center;
+}
+
+table.itemTitle_table {
+	border: 1px solid #CCC;
+	width: 100%;
+	height: 20px;
+	font-weight: bold;
+	margin-top: 1em;
+}
+
+table.itemTitle_table_slave {
+	width: 100%;
+	height: 20px;
+	font-weight: bold;
+}
+
+table.itemData_table {
+	width: 100%;
+}
+
+td.itemShow {
+	height: 5px;
+	width: 100%;
+	border-left: 1px dashed #CCC;
+	border-right: 0px;
+	border-top: 1px dashed #CCC;
+	border-bottom: 1px dashed #CCC;
+	text-align: center;
+}
+
+td.dynamic_button {
+	display: none;
+}
+
+table#mainframe iframe {
+	border: 0px;
+	padding: 0px;
+	width: 925px;
+	height: 5px;
+	overflow: hidden;
+}
+
+table.title_table {
+	width: 100%;
+	border: 0px;
+	padding: 0px;
+	font-weight: bold;
+	text-indent: 10px;
+}
+
+table.data_table {
+	width: 100%;
+	height: 5px;
+	border: 0px;
+	padding: 0px;
+}
+
+td.title_button {
+	display: none;
+}
+
+table.solidBorderTd {
+	width: 100%;
+}
+
+table.solidBorderTd td {
+	border: 1px solid #CCC;
+}
+
+img.rb_attachment_img {
+	max-width: 95%;
+	height: auto;
+	margin: 5px auto;
+}
+
+td.rb_attachment_td {
+	width: 100%;
+	height: 10px;
+	text-align: center;
+	border: 1px solid #999;
+	padding: 5px 0px;
+}
+
+td.attachmentImage_title {
+	padding: 5px 0px;
+	text-indent: 2em;
+	font-weight: bold;
+	border: 1px solid #999;
+	width: 100%;
+}
+
+input.rb_attachment_btn {
+	display: none;
+}
+/*
+	-----主页浮动标题栏样式
+*/
+.rb_top_suspension {
+	width: 950px;
+	text-align: left;
+	height: 1px auto;
+}
+
+.rb_top_suspension_table {
+	width: 100%;
+}
+
+.rb_top_margin_div {
+	height: 5px;
+	display: block;
+}
+
+input.rb_button {
+	width: 72px;
+}
+
+.rb_top_org {
+	width: 30%;
+	vertical-align: top;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.rb_top_title {
+	width: 40%;
+	vertical-align: top;
+	font-weight: bold;
+	font-size: 15px;
+	text-align: center;
+}
+
+.rb_top_presentFlow {
+	width: 30%;
+	vertical-align: top;
+	text-align: right;
+}
+
+.rb_top_button {
+	display: none;
+}
+
+.rb_top_notice {
+	margin-top: 4px;
+	font-size: 12px;
+	height: 1px auto;
+	font-weight: normal;
+	text-align: center;
+	width: 100%;
+}
+
+.rb_top_importantNoticeItem {
+	color: red;
+	font-size: 14px;
+	border: black solid 1px;
+}
+
+.rb_top_defaultNoticeItem {
+	color: blue;
+}
+
+.rb_top_alertNoticeItem {
+	color: gary;
+}
+
+/*
+	-----以下是iframe页面样式--------
+*/
+table#mainPageTable {
+	border: 0px;
+	width: 100%;
+}
+
+table#mainPageTable td {
+	border: 1px solid #CCC;
+	vertical-align: middle;
+}
+
+table#mainPageTable div.noborder {
+	display: inline;
+}
+
+table#mainPageTable div.noborder table {
+	border: 0px;
+	display: inline;
+}
+
+table#mainPageTable div.noborder td {
+	border: 0px;
+}
+
+body.framePage span {
+	display: inline-block;
+	line-height: 2.2em;
+}
+
+body.framePage iframe.dynamic_iframe {
+	border: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 5px;
+	overflow: hidden;
+}
+
+body.framePage {
+	padding: 0px;
+	margin: 0px;
+}
+
+/*
+	-----以下是为tableModel配置的cssclass-----
+*/
+.rb_Date {
+	WIDTH: 70px
+}
+
+.rb_Width_S {
+	WIDTH: 50px
+}
+
+.rb_Width_M {
+	WIDTH: 100px
+}
+
+.rb_Width_L {
+	WIDTH: 150px
+}
+
+.rb_Width_XL {
+	WIDTH: 200px
+}
+
+.rb_Width_XXL {
+	WIDTH: 300px
+}
+
+.rb_Money_L_R {
+	WIDTH: 80px;
+	TEXT-ALIGN: right;
+}
+
+.rb_Money_M {
+	WIDTH: 67px;
+	TEXT-ALIGN: center;
+}
+
+.rb_Money_S {
+	WIDTH: 50px;
+	TEXT-ALIGN: center;
+}
+
+.rb_full_border {
+	border: 1px solid #CCC;
+	color: #000;
+}
+
+.rb_bottom_border {
+	border-bottom: 1px solid #000;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+}
+
+.rb_textarea {
+	width: 96%;
+	height: 52px;
+	overflow: hidden;
+	border: 1px solid #000;
+}
+
+.rb_textarea_fixed {
+	width: 350px;
+	height: 52px;
+	overflow: hidden;
+	border: 1px solid #000;
+}
+
+.div_fieldGroup {
+	display: inline;
+}
+
+.div_fieldGroupItem {
+	display: inline;
+}
+
+.d_field_term_input {
+	WIDTH: 30px;
+	color: #06C;
+	border-bottom: 1px solid #000;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	color:#373737;
+}
+
+.rb_text_center {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.rb_text_right {
+	text-align: right;
+	vertical-align: middle;
+}
+
+.rb_div_blue {
+	display: inline;
+	border-bottom: 1px solid #000;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+}
+
+div.pointer {
+	cursor: pointer;
+	margin-left: 10px;
+	margin-right: 10px;
+	display: inline;
+}
+
+.bgGrayPadding {
+	padding: 5px 0px;
+	background: #CCC;
+}
+
+.rb_table_checkbox table {
+	border: 0px;
+	display: inline;
+}
+
+.rb_table_checkbox td {
+	border: 0px;
+}
+
+div.div_redStar {
+	display: none;
+}
+
+/*
+	-----以下是打印专用样式-----
+*/
+.noPrint {
+	display: none;
+}
+
+tr#custButton_tr {
+	display: none;
+}
+
+body#riskBillPage {
+	padding: 0px;
+	margin: 0px;
+}
+
+.rb_printInput {
+	border-bottom: 1px solid;
+	display: inline;
+	margin-left: 1px;
+	margin-right: 1px;
+}
+
+.rb_div_printCust{
+	text-align: left;
+	width: 100%;
+	height: auto;
+}
+
+.rb_div_printCust span {
+	display: inline-block;
+	line-height: 2.2em;
+}

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsAcProxy"> 
+<sql id="listColumns">
+	
+            RID,
+            USERNAME,
+            GROUPNAME,
+            IP,
+            LOG_TIME,
+            TERMINAL_COUNT,
+            TERMINAL_INFO,
+            CREATTIME,
+            RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            USERNAME,
+            GROUPNAME,
+            IP,
+            LOG_TIME,
+            TERMINAL_COUNT,
+            TERMINAL_INFO,
+            CREATTIME,
+            RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from SMMS_AC_PROXY 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_AC_PROXY 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_AC_PROXY  where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from SMMS_AC_PROXY  where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_AC_PROXY  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_AC_PROXY  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_AC_PROXY (
+            <if test="RID != null ">RID,</if>
+            <if test="USERNAME != null ">USERNAME,</if>
+            <if test="GROUPNAME != null ">GROUPNAME,</if>
+            <if test="IP != null ">IP,</if>
+            <if test="LOG_TIME != null ">LOG_TIME,</if>
+            <if test="TERMINAL_COUNT != null ">TERMINAL_COUNT,</if>
+            <if test="TERMINAL_INFO != null ">TERMINAL_INFO,</if>
+            <if test="CREATTIME != null ">CREATTIME,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="USERNAME != null ">#{USERNAME},</if>
+           <if test="GROUPNAME != null ">#{GROUPNAME},</if>
+           <if test="IP != null ">#{IP},</if>
+           <if test="LOG_TIME != null ">#{LOG_TIME},</if>
+           <if test="TERMINAL_COUNT != null ">#{TERMINAL_COUNT},</if>
+           <if test="TERMINAL_INFO != null ">#{TERMINAL_INFO},</if>
+           <if test="CREATTIME != null ">#{CREATTIME},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_AC_PROXY   
+		<set>
+				    <if test="USERNAME!=null"> USERNAME=#{USERNAME},</if> 
+		    <if test="GROUPNAME!=null"> GROUPNAME=#{GROUPNAME},</if> 
+		    <if test="IP!=null"> IP=#{IP},</if> 
+		    <if test="LOG_TIME!=null"> LOG_TIME=#{LOG_TIME},</if> 
+		    <if test="TERMINAL_COUNT!=null"> TERMINAL_COUNT=#{TERMINAL_COUNT},</if> 
+		    <if test="TERMINAL_INFO!=null"> TERMINAL_INFO=#{TERMINAL_INFO},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

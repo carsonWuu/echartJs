@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="WfDevolveHis"> 
+<sql id="listColumns">
+	
+            RID,
+            FLOWINSTANCEID,
+            BIZTYPEID,
+            BIZRID,
+            TBLID,
+            NODEID,
+            DEVOLVEMAN,
+            ASSIGNEE,
+            DEVOLVEREMARK,
+            DEVOLVETIME,
+            CREATTIME,
+            CREATORID,
+            RECORDSTATE,
+            MODIFIEDTIME,
+            MODIFIERID,
+            LIABMAN,
+            LIABDEPT,
+            LIABORG
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            FLOWINSTANCEID,
+            BIZTYPEID,
+            BIZRID,
+            TBLID,
+            NODEID,
+            DEVOLVEMAN,
+            ASSIGNEE,
+            DEVOLVEREMARK,
+            DEVOLVETIME,
+            CREATTIME,
+            CREATORID,
+            RECORDSTATE,
+            MODIFIEDTIME,
+            MODIFIERID,
+            LIABMAN,
+            LIABDEPT,
+            LIABORG
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from WF_DEVOLVEHIS
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from WF_DEVOLVEHIS
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from WF_DEVOLVEHIS where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from WF_DEVOLVEHIS where RID = #{RID} 
+</select> 
+
+
+
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update WF_DEVOLVEHIS set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from WF_DEVOLVEHIS where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into WF_DEVOLVEHIS(
+            RID,
+            FLOWINSTANCEID,
+            BIZTYPEID,
+            BIZRID,
+            TBLID,
+            NODEID,
+            DEVOLVEMAN,
+            ASSIGNEE,
+            DEVOLVEREMARK,
+            DEVOLVETIME,
+            CREATTIME,
+            CREATORID,
+            RECORDSTATE,
+            MODIFIEDTIME,
+            MODIFIERID,
+            LIABMAN,
+            LIABDEPT,
+            LIABORG)
+	   values (
+            #{RID},
+            #{FLOWINSTANCEID},
+            #{BIZTYPEID},
+            #{BIZRID},
+            #{TBLID},
+            #{NODEID},
+            #{DEVOLVEMAN},
+            #{ASSIGNEE},
+            #{DEVOLVEREMARK},
+            #{DEVOLVETIME},
+            #{CREATTIME},
+            #{CREATORID},
+            #{RECORDSTATE},
+            #{MODIFIEDTIME},
+            #{MODIFIERID},
+            #{LIABMAN},
+            #{LIABDEPT},
+            #{LIABORG})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update WF_DEVOLVEHIS  
+		<set>
+			<if test="FLOWINSTANCEID!=null"> FLOWINSTANCEID=#{FLOWINSTANCEID},</if> 
+		    <if test="BIZTYPEID!=null"> BIZTYPEID=#{BIZTYPEID},</if> 
+		    <if test="BIZRID!=null"> BIZRID=#{BIZRID},</if> 
+		    <if test="TBLID!=null"> TBLID=#{TBLID},</if> 
+		    <if test="NODEID!=null"> NODEID=#{NODEID},</if> 
+		    <if test="DEVOLVEMAN!=null"> DEVOLVEMAN=#{DEVOLVEMAN},</if> 
+		    <if test="ASSIGNEE!=null"> ASSIGNEE=#{ASSIGNEE},</if> 
+		    <if test="DEVOLVEREMARK!=null"> DEVOLVEREMARK=#{DEVOLVEREMARK},</if> 
+            <if test="DEVOLVETIME!=null">DEVOLVETIME=#{DEVOLVETIME},</if>
+		    <if test="CREATTIME!=null"> CREATTIME=#{CREATTIME},</if> 
+		    <if test="CREATORID!=null"> CREATORID=#{CREATORID},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="LIABMAN!=null"> LIABMAN=#{LIABMAN},</if> 
+		    <if test="LIABDEPT!=null"> LIABDEPT=#{LIABDEPT},</if> 
+		    <if test="LIABORG!=null"> LIABORG=#{LIABORG},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+
+</mapper>

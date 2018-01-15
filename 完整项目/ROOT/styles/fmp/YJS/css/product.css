@@ -1,0 +1,437 @@
+﻿.luara-left {
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+}
+
+    .luara-left ul {
+        position: relative;
+        padding: inherit;
+        margin: 0;
+    }
+
+        .luara-left ul li {
+            float: left;
+            padding: inherit;
+            margin: inherit;
+            list-style: none;
+        }
+
+            .luara-left ul li img {
+                width: inherit;
+                height: inherit;
+            }
+
+li {
+    list-style: none;
+}
+
+.slides {
+}
+
+    .slides ol {
+        position: relative;
+        width: 80px;
+        height: 20px;
+        top: -30px;
+        left: 50%;
+    }
+
+        .slides ol li {
+            float: left;
+            width: 10px;
+            height: 10px;
+            margin: 5px;
+            background: #fff;
+        }
+
+            .slides ol li.seleted {
+                background: #1AA4CA;
+            }
+/*login浮块*/
+.wrap-scroll {
+    position: relative;
+}
+
+.login-wrap {
+    position: absolute;
+    top: 12%;
+    right: 10%;
+    width: 330px;
+    height: 300px;
+}
+
+.login-bg {
+    position: absolute;
+    top: 0;
+    width: 330px;
+    height: 300px;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    background: #000;
+    z-index: 1;
+}
+
+.login-intro {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 10;
+    color: #fff;
+}
+
+    .login-intro p {
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .login-intro h3 {
+        height: 55px;
+        line-height: 55px;
+        font-size: 45px;
+    }
+
+    .login-intro a.apply {
+        height: 37px;
+        line-height: 37px;
+        display: inline-block;
+        width: 240px;
+        background: #edad00;
+        border-radius: 2px;
+        font-size: 16px;
+        color: #fff;
+        text-align: center;
+        margin-top: 20px;
+    }
+/*product*/
+.content {
+    background: #F0F0F0;
+}
+
+.product-content {
+    width: 1200px;
+    margin: 30px auto;
+}
+
+.product-list .product-item {
+    position: relative;
+    width: 810px;
+    height: 185px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    background: #fff;
+}
+
+.corner_icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background: url(/Content/themes/base/images/recommend.png) no-repeat;
+}
+
+.product-item div.quarwid {
+    width: 200px;
+    height: 80px;
+    margin-top: 40px;
+    background: url(/Content/themes/base/images/line.png) no-repeat right;
+}
+
+.product-item p.pro_desrc {
+    width: 750px;
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 12px;
+    color: #9099A4;
+    line-height: 25px;
+}
+
+.quarwid img {
+    margin-left: 30px;
+}
+
+.quarwid div.pro_data {
+    margin-top: 15px;
+    margin-left: 5px;
+}
+
+.quarwid a {
+    display: inline-block;
+    height: 37px;
+    line-height: 37px;
+    width: 115px;
+    background: #edad00;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+}
+
+.pro-list-title {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+    .pro-list-title span.fl {
+        display: inline-block;
+        font-size: 14px;
+        font-weight: bold;
+        color: #747474;
+        padding-right: 8px;
+        padding-left: 20px;
+        background: url(/Content/themes/base/images/proname.png) no-repeat left;
+        border-right: 1px solid #E2DEDE;
+    }
+
+    .pro-list-title a.fr {
+        display: inline-block;
+        margin-right: 20px;
+        font-size: 12px;
+        color: #aaa;
+        cursor: pointer;
+    }
+
+        .pro-list-title a.fr:after {
+            position: absolute;
+            right: 10px;
+            top: 30%;
+            display: block;
+            width: 5px;
+            height: 5px;
+            content: '\20';
+            transform: rotate(135deg); /*旋转135度*/
+            -ms-transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+            border-top: 1px solid #7d7d7d;
+            border-left: 1px solid #7d7d7d;
+            background: none;
+        }
+/*申请弹窗*/
+.apply_dialog {
+    position: fixed;
+    display: none;
+    top: 25%;
+    left: 30%;
+    width: 490px;
+    height: 380px;
+    background: #fff;
+    z-index: 800;
+}
+
+.apply_title {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    letter-spacing: 8px;
+    color: #fff;
+    background: #3A9AFC;
+}
+
+span.exit {
+    position: absolute;
+    display: inline-block;
+    top: 5px;
+    right: 5px;
+    width: 27px;
+    height: 27px;
+    background: url(/Content/themes/base/images/exit.png);
+    cursor: pointer;
+}
+
+.apply_dialog ul, .login-intro ul {
+    width: 290px;
+    margin: 5px auto;
+}
+
+.cen_li {
+    position: relative;
+}
+
+    .cen_li input {
+        width: 230px;
+        height: 30px;
+        margin-bottom: 15px;
+        padding-left: 10px;
+        color: #A9A9A9;
+    }
+
+.req_sign {
+    position: absolute;
+    top: 8px;
+    left: -18px;
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+a.apply_sub {
+    height: 37px;
+    line-height: 37px;
+    display: inline-block;
+    width: 360px;
+    background: #edad00;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+}
+/*无交互弹窗*/
+.dialog_al {
+    position: fixed;
+    display: none;
+    top: 25%;
+    left: 30%;
+    width: 490px;
+    height: 300px;
+    background: #fff;
+    z-index: 800;
+}
+
+    .dialog_al .title {
+        height: 35px;
+        line-height: 35px;
+        padding-left: 10px;
+        text-align: left;
+        letter-spacing: 8px;
+        color: #524545;
+        background: #ccc;
+    }
+
+    .dialog_al p.big {
+        height: 140px;
+        line-height: 140px;
+        text-align: center;
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    .dialog_al p.desc {
+        height: 30px;
+        line-height: 30px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .dialog_al a {
+        display: inline-block;
+        height: 37px;
+        line-height: 37px;
+        width: 150px;
+        background: #edad00;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #fff;
+        text-align: center;
+    }
+/*借款流水滚动*/
+
+.turnover-list {
+    width: 325px;
+    margin-top: 35px;
+    margin-right: 20px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.turnover-ul span.spanl {
+    display: inline-block;
+    width: 95px;
+    margin-left: 35px;
+    vertical-align: bottom;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.turnover-ul span.spanr {
+    display: inline-block;
+    width: 130px;
+    margin-left: 50px;
+}
+
+.turnover-list .col_1 {
+    display: inline-block;
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.turnover-list .col_2 {
+    display: inline-block;
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-weight: 700;
+}
+
+ul.turnover-ul {
+    width: 325px;
+    height: 505px;
+    /*background: #eee;*/
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+    ul.turnover-ul li {
+        height: 30px;
+        line-height: 30px;
+        list-style: none;
+    }
+
+.turnover_title {
+    border-bottom: 1px solid #ccc;
+}
+
+img.fl {
+    width: 70px;
+}
+
+.big img {
+    width: 32px;
+    position: absolute;
+    left: 145px;
+    top: 30%;
+}
+/*申请流程*/
+.im_flow {
+    width: 800px;
+    height: 250px;
+    margin-left: 30px;
+}
+
+    .im_flow p.title {
+        height: 40px;
+        line-height: 40px;
+        font-size: 24px;
+        color: #3C3C3C;
+        border-bottom: 2px solid #D6D6D6;
+    }
+
+    .im_flow p {
+        text-align: center;
+        color: #818181;
+    }
+
+.im_f {
+    width: 125px;
+    height: 80px;
+}
+
+    .im_f div {
+        width: 80px;
+        height: 90px;
+        margin: 0 auto;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+.arr_d {
+    margin-top: 25px;
+}

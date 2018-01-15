@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SCustomModule"> 
+<sql id="listColumns">
+	
+            RID,
+            CUSTOMMODULEID,
+            CUSTOMMODULENAME,
+            PARENTID,
+            DESMODULEID,
+            DESTABLEMODELID,
+            ORDERID,
+            USERID,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            CUSTOMMODULEID,
+            CUSTOMMODULENAME,
+            PARENTID,
+            DESMODULEID,
+            DESTABLEMODELID,
+            ORDERID,
+            USERID,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from S_CUSTOMMODULE
+	<where>
+		USERID=#{CURR_USERID} AND RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from S_CUSTOMMODULE
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_CUSTOMMODULE where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from S_CUSTOMMODULE where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_CUSTOMMODULE set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+
+<delete id="deleteDataByCondition" parameterType="hashmap" > 
+	delete from S_CUSTOMMODULE 
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+</delete> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from S_CUSTOMMODULE where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_CUSTOMMODULE(
+            RID,
+            CUSTOMMODULEID,
+            CUSTOMMODULENAME,
+            PARENTID,
+            DESMODULEID,
+            DESTABLEMODELID,
+            ORDERID,
+            USERID,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE)
+	   values (
+            #{RID},
+            #{CUSTOMMODULEID},
+            #{CUSTOMMODULENAME},
+            #{PARENTID},
+            #{DESMODULEID},
+            #{DESTABLEMODELID},
+            #{ORDERID},
+            #{USERID},
+            #{CREATTIME},
+            #{CREATORID},
+            #{MODIFIEDTIME},
+            #{MODIFIERID},
+            #{RECORDSTATE})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_CUSTOMMODULE  
+		<set>
+		    <if test="CUSTOMMODULENAME!=null"> CUSTOMMODULENAME=#{CUSTOMMODULENAME},</if> 
+		    <if test="PARENTID!=null"> PARENTID=#{PARENTID},</if> 
+		    <if test="DESMODULEID!=null"> DESMODULEID=#{DESMODULEID},</if> 
+		    <if test="DESTABLEMODELID!=null"> DESTABLEMODELID=#{DESTABLEMODELID},</if> 
+		    <if test="ORDERID!=null"> ORDERID=#{ORDERID},</if> 
+		    <if test="USERID!=null"> USERID=#{USERID},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where CUSTOMMODULEID=#{CUSTOMMODULEID}
+</update>
+
+</mapper>

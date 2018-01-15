@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SOrgbankacc"> 
+<sql id="listColumns">
+	
+            bank.RID,
+            bank.ORGID,
+            bank.OPEN_NAME,
+            bank.OPEN_BANK,
+            bank.ACCOUNTNO,
+            bank.OPEN_BANKCODE,
+            bank.OPEN_PROVINCE,
+            bank.OPEN_CITY,
+            bank.OPEN_BRANCHCODE,
+            bank.OPEN_BRANCH,
+            bank.CERTTYPE,
+            bank.CERTCODE,
+            bank.MOBILE,
+            bank.IS_DEFAULT,
+            bank.ACC_DESCR,
+            bank.CREATTIME,
+            bank.CREATORID,
+            bank.MODIFIEDTIME,
+            bank.MODIFIERID,
+            bank.RECORDSTATE
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            ORGID,
+            OPEN_NAME,
+            OPEN_BANK,
+            ACCOUNTNO,
+            OPEN_BANKCODE,
+            OPEN_PROVINCE,
+            OPEN_CITY,
+            OPEN_BRANCHCODE,
+            OPEN_BRANCH,
+            CERTTYPE,
+            CERTCODE,
+            MOBILE,
+            IS_DEFAULT,
+            ACC_DESCR,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/>,org.ORGNAME as TRANS_ORGID
+	from 
+		S_ORG_BANKACC bank,
+		S_ORG org
+	<where>
+		bank.RECORDSTATE='0'
+		and org.ORGID=bank.ORGID
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from S_ORG_BANKACC 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_ORG_BANKACC  where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	SELECT bank.*,org.ORGNAME as TRANS_ORGID from S_ORG_BANKACC bank,S_ORG org WHERE BANK.ORGID=ORG.ORGID and bank.RID=#{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_ORG_BANKACC  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      SELECT bank.*,org.ORGNAME as TRANS_ORGID from S_ORG_BANKACC bank,S_ORG org WHERE BANK.ORGID=ORG.ORGID and bank.RID=#{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_ORG_BANKACC (
+            RID,
+            ORGID,
+            OPEN_NAME,
+            OPEN_BANK,
+            ACCOUNTNO,
+            OPEN_BANKCODE,
+            OPEN_PROVINCE,
+            OPEN_CITY,
+            OPEN_BRANCHCODE,
+            OPEN_BRANCH,
+            CERTTYPE,
+            CERTCODE,
+            MOBILE,
+            IS_DEFAULT,
+            ACC_DESCR,
+            CREATTIME,
+            CREATORID,
+            MODIFIEDTIME,
+            MODIFIERID,
+            RECORDSTATE)
+	   values (
+            #{RID},
+            #{ORGID},
+            #{OPEN_NAME},
+            #{OPEN_BANK},
+            #{ACCOUNTNO},
+            #{OPEN_BANKCODE},
+            #{OPEN_PROVINCE},
+            #{OPEN_CITY},
+            #{OPEN_BRANCHCODE},
+            #{OPEN_BRANCH},
+            #{CERTTYPE},
+            #{CERTCODE},
+            #{MOBILE},
+            #{IS_DEFAULT},
+            #{ACC_DESCR},
+            #{CREATTIME},
+            #{CREATORID},
+            #{MODIFIEDTIME},
+            #{MODIFIERID},
+            #{RECORDSTATE})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_ORG_BANKACC   
+		<set>
+				    <if test="ORGID!=null"> ORGID=#{ORGID},</if> 
+		    <if test="OPEN_NAME!=null"> OPEN_NAME=#{OPEN_NAME},</if> 
+		    <if test="OPEN_BANK!=null"> OPEN_BANK=#{OPEN_BANK},</if> 
+		    <if test="ACCOUNTNO!=null"> ACCOUNTNO=#{ACCOUNTNO},</if> 
+		    <if test="OPEN_BANKCODE!=null"> OPEN_BANKCODE=#{OPEN_BANKCODE},</if> 
+		    <if test="OPEN_PROVINCE!=null"> OPEN_PROVINCE=#{OPEN_PROVINCE},</if> 
+		    <if test="OPEN_CITY!=null"> OPEN_CITY=#{OPEN_CITY},</if> 
+		    <if test="OPEN_BRANCHCODE!=null"> OPEN_BRANCHCODE=#{OPEN_BRANCHCODE},</if> 
+		    <if test="OPEN_BRANCH!=null"> OPEN_BRANCH=#{OPEN_BRANCH},</if> 
+		    <if test="CERTTYPE!=null"> CERTTYPE=#{CERTTYPE},</if> 
+		    <if test="CERTCODE!=null"> CERTCODE=#{CERTCODE},</if> 
+		    <if test="MOBILE!=null"> MOBILE=#{MOBILE},</if> 
+		    <if test="IS_DEFAULT!=null"> IS_DEFAULT=#{IS_DEFAULT},</if> 
+		    <if test="ACC_DESCR!=null"> ACC_DESCR=#{ACC_DESCR},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="MODIFIERID!=null"> MODIFIERID=#{MODIFIERID},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+<select id="getAccountNo" parameterType="hashmap" resultType="hashmap">
+	select ACCOUNTNO from S_ORG_BANKACC where ORGID=#{ORGID} and IS_DEFAULT=#{IS_DEFAULT}
+</select>
+
+<update id="updateAllSrgCard" parameterType="String">
+	update S_ORG_BANKACC set IS_DEFAULT='2' where ORGID=#{ORGID} and RECORDSTATE='0'
+</update>
+
+<select id="getOrgidByRid" parameterType="String" resultType="hashmap">
+	select ORGID from S_ORG_BANKACC where RID=#{RID}
+</select>
+
+<update id="updateStateByRid" parameterType="String">
+	update S_ORG_BANKACC set IS_DEFAULT='1' where RID=#{RID}  and RECORDSTATE='0'
+</update>
+
+</mapper>

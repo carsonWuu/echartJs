@@ -1,0 +1,782 @@
+/**** CSS for China Constuction Bank perbank ****/
+/**** First created on 2007.02.13 ****/
+/**** Page Structure / 页面结构设置 ****/
+* { 
+margin:0; 
+padding:0;
+//overflow-y: hidden;
+}
+img {
+border:0;
+}
+
+body,div,td,span,input,select,p {
+font:12px "宋体",Tahoma;
+color: #373737;
+}
+
+body {
+/*background-color:#CCFFFF;*/
+background-color:#ffffff;
+padding:0;
+margin:0;
+}
+
+.mainbody{
+	font:12px "宋体",Tahoma;
+	width: 100%;
+    overflow-x:hidden;	
+    overflow-y:hidden;	
+}
+ 
+
+#Header {
+background:#ffffff;
+width:100%;
+}
+
+
+
+
+.logo_background {
+background:url(../../images/logo_background.jpg) right top repeat-x;
+background-color:#dee8f1;	
+width:100%;
+height:55px;
+
+}
+
+/** use as pic **/
+.logo_icon {
+background:url(../../images/zscrd/logo.jpg) left top no-repeat;
+width:100%;
+height:55px;
+}
+
+.logo_area {
+	float: right;
+	padding-top: 0px;
+	position: relative;
+	color:#373737; 
+	height:55px;
+}
+
+
+.logo_icon_bottom {
+background:url(../../images/blueidea/logo_icon_bottom.gif) left bottom no-repeat;
+width:418px;
+height:40px;
+margin-right:30px;
+float:left;
+}
+
+
+
+
+.slide_l {
+background:url(../../images/blueidea/space_1.gif) left top no-repeat;
+cursor:pointer;
+vertical-align:bottom;
+margin-top:150px;
+width:10px;
+height:108px;
+}
+
+.slide_r {
+background:url(../../images/blueidea/space_2.gif) left top no-repeat;
+cursor:pointer;
+vertical-align:top;
+margin-top:130px;
+width:10px;
+height:108px;
+}
+
+div.menubar_lv2{
+	background: url(../../images/zscrd/daohang.gif) left top repeat-x;
+	overflow-y: hidden;
+	height: 31px;
+	color: #ffffff;
+}
+
+/** 一级菜单条样式 **/
+.table_menu_lv1{
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-width: 0px;
+}
+
+.banner_div {
+	padding-top:25px;
+	float: right;
+	text-display:inline;
+	line-height:25px;
+}
+
+.div_version{
+  position: absolute;
+  top: 25px;
+  left: 350px;
+  font-size: 14;
+  font-family:"Microsoft Yahei";
+  color: black;
+
+}
+
+
+
+.userInfoBar_left {
+	width: 44px;
+	height: 30px;
+	background: url(../../images/zscrd/left5.png) right bottom no-repeat;
+}
+
+div.userInfoBar{
+	height: 30px;
+	font-size: 12px;
+	color: #455c6f;
+	vertical-align:bottom;
+	line-height:10px;
+	
+	background: url(../../images/zscrd/right4.jpg) right bottom repeat-x;
+}
+div.userButtonBar{
+ 
+	height: 30px;
+	font-size: 12px;
+	color: #455c6f;
+	
+	/*vertical-align:bottom;
+	line-height:-10px;*/
+	background: url(../../images/zscrd/right4.jpg) right bottom repeat-x;
+}
+
+/*
+div.userInfoBar a{
+	font-size: 12px;
+	line-height: 31px;
+	
+}
+
+div.userInfoBar font{
+	font-size: 12px;
+	line-height: 20px;
+}
+*/
+
+/** 二级菜单项样式 **/
+.menu2_off {
+	color: #000000;
+	float: left;
+	line-height:22px;
+ 
+}
+
+.menu2_off a:link,.menu2_off a:visited {
+	text-decoration: none;
+	display: block;
+	color: #014f89;
+	padding: 7px 12px 4px 12px;
+}
+
+.menu2_on {
+	background: url(../../images/zscrd/daohang_2.gif) left bottom no-repeat;
+	float: left;
+}
+
+.menu2_on a:link,.menu2_on a:visited {
+	display: block;
+	background: url(../../images/zscrd/daohang_3.gif) right bottom no-repeat;
+	text-decoration: none;
+	font-weight: bold;		
+	color: white;
+	padding: 11px 10px 6px 10px;
+}
+
+
+
+/** other frames **/
+#Page_left {
+width:200px;
+float:left;
+/*background:url(../../images/treeback.jpg) left top repeat-y;*/
+background-color:#c4d6e4;
+border:0px solid #4499ee;
+padding:0px;
+margin:0px;
+overflow-x:hidden;
+overflow-y:auto;
+/*
+border-top:2px solid #4499ee;
+border-left:2px solid #4499ee;
+*/
+}
+
+#Page_left_tree{
+background-color:white;
+border:1px solid #a5c2d6;
+margin:4px 0px 0px 4px;
+padding:0px;
+width:98%;
+height:99%;
+
+/*padding: 11px 10px 6px 10px;
+cellpadding:20;
+cellspacing:5;*/
+}
+
+#Page_left_tree_tr{
+	background:url(../../images/tree/up.gif) left top repeat-x;
+	height: 26px;
+	width:100%;
+	margin:0px;
+}
+
+#Page_right_tree_tr{
+	float:left;
+	width:100%;
+	margin:0px;
+}
+
+#openAllSubTree{
+	background:url(../../images/tree/unfold.gif) left top no-repeat;
+}
+
+.slide_l {
+background:url(../../images/blueidea/space_1.gif) left top no-repeat;
+cursor:pointer;
+vertical-align:top;
+margin-top:130px;
+width:10px;
+height:108px;
+}
+
+.slide_r {
+background:url(../../images/blueidea/space_2.gif) left top no-repeat;
+cursor:pointer;
+vertical-align:top;
+margin-top:130px;
+width:10px;
+height:108px;
+}
+
+#wrapdiv{
+  text-display:inline;
+}
+
+#Page_right {
+width:83%;
+padding-bottom:2px;
+float:left;
+display:inline;
+position:absolute;
+/*
+border-top:2px solid #4499ee;
+border-right:2px solid #4499ee;
+*/
+}
+
+#Page_middle {
+float:left;
+display:inline;
+
+/*
+background-color:#d3e8fd;
+border-top:2px solid #4499ee;
+*/
+}
+
+#infoFrame {
+width:100%;
+}
+
+
+#Footer {
+text-align:center;
+color:#fff;
+float:left;
+}
+
+.footer_td {
+background:url(../../images/blueidea/footer_middle.gif) left top repeat-x;
+}
+
+.footer_left {
+background:url(../../images/blueidea/footer_left.gif) left top no-repeat;
+width:7px;
+height:31px;
+float:left;
+}
+
+.footer_right {
+background:url(../../images/blueidea/footer_right.gif) left top no-repeat;
+width:7px;
+height:31px;
+display:inline;
+float:right;
+}
+
+
+.bottonCopyright{
+	
+	position: relative;
+	height:20px;
+
+	padding-left:300px;
+	color: #014F89;
+	background:url(../../images/zscrd/bottom_background.gif) left top repeat-x;
+}
+
+.bottonCopyright0{
+    position:absolute;   bottom:0; 
+    width: 100%;
+}
+
+
+
+
+
+/*******************************  原moneystyle.css样式  ****************************************/
+.money {
+	text-align: right;
+}
+
+.bottonbelow {
+	position: absolute;
+	bottom: 0px;
+}
+
+li {
+	float: left;
+}
+
+#mycontent { /* 具体内容 */
+	border-left: 1px solid #76a0d0; /* 左边框 */
+	border-right: 2px solid #76a0d0; /* 右边框 */
+	border-bottom: 2px solid #76a0d0; /* 下边框 */
+	padding: 10px;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	margin-left: 4px;
+	margin-right: 4px;
+	height: 300px;
+	PADDING-LEFT: 10px;
+	SCROLLBAR-FACE-COLOR: #ffffff;
+	SCROLLBAR-HIGHLIGHT-COLOR: #76a0d0;
+	OVERFLOW: auto;
+	SCROLLBAR-SHADOW-COLOR: #919192;
+	SCROLLBAR-3DLIGHT-COLOR: #ffffff;
+	SCROLLBAR-ARROW-COLOR: #919192;
+	SCROLLBAR-TRACK-COLOR: #ffffff;
+	SCROLLBAR-DARKSHADOW-COLOR: #ffffff;
+	LETTER-SPACING: 1pt;
+}
+
+#mycontent1 { /* 具体内容 */
+	border-left: 1px solid #76a0d0; /* 左边框 */
+	border-right: 2px solid #76a0d0; /* 右边框 */
+	border-bottom: 2px solid #76a0d0; /* 下边框 */
+	padding: 10px;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	margin-left: 4px;
+	margin-right: 4px;
+	height: 360px;
+	PADDING-LEFT: 10px;
+	SCROLLBAR-FACE-COLOR: #ffffff;
+	SCROLLBAR-HIGHLIGHT-COLOR: #76a0d0;
+	OVERFLOW: auto;
+	SCROLLBAR-SHADOW-COLOR: #919192;
+	SCROLLBAR-3DLIGHT-COLOR: #ffffff;
+	SCROLLBAR-ARROW-COLOR: #919192;
+	SCROLLBAR-TRACK-COLOR: #ffffff;
+	SCROLLBAR-DARKSHADOW-COLOR: #ffffff;
+	LETTER-SPACING: 1pt;
+}
+
+ul#tabnav {
+	list-style-type: none;
+	margin-left: 4px;
+	margin-right: 4px;
+	padding-left: 10px; /* 左侧无空隙 */
+	padding-bottom: 23px;
+	border-bottom: 1px solid #76a0d0; /* 菜单的下边框 */
+	font: bold 12px verdana, arial;
+}
+
+ul#tabnav li {
+	float: left;
+	height: 22px;
+	/*background-color:#a3dbff;*/
+	background: url(../../images/blueidea/info_time.gif) bottom repeat-x;
+	margin: 0px 3px 0px 0px;
+	border: 1px solid #76a0d0;
+}
+
+ul#tabnav a:link,ul#tabnav a:visited {
+	display: block; /* 块元素 */ /*color:#006eb3;*/
+	color: #333333;
+	text-decoration: none;
+	padding: 5px 10px 3px 10px;
+}
+
+ul#tabnav a:hover {
+	background-color: #006eb3;
+	color: #FFCC66;
+}
+
+
+.pageon {
+	border-bottom: 1px solid #FFFFFF; /* 白色下边框，覆盖<ul>中的蓝色下边框 */
+	color: #000000;
+	background-color: #FFFFFF;
+}
+
+.alterow {
+	background-color: #FFFFFF;
+}
+
+.bdclor {
+	background: #f5fbfe
+}
+
+.newcd {
+	background-color: #FFFFFF
+}
+
+.titileinfo {
+	font-size: 12px;
+	color: #330099;
+	font-variant: inherit;
+}
+
+.result_table1 {
+	border-collapse: collapse;
+	margin: 0px 0px 10px 0px;
+	font-style: italic;
+}
+
+.result_table1 td {
+	border: 1px solid #11a3ff;
+	padding: 0 3px 0 0;
+}
+
+#up_donwdiv { /* 具体内容 */
+	border-left: 1px solid #76a0d0; /* 左边框 */
+	border-right: 1px solid #76a0d0; /* 右边框 */
+	border-bottom: 1px solid #76a0d0; /* 下边框 */
+	border-top: 1px solid #76a0d0;
+	/*padding:10px;
+	padding-top:2px;
+	padding-bottom:8px;
+	
+	margin-left:20px;
+	margin-right:20px;*/
+	font-size: 9px;
+}
+
+#up_donwdiv table {
+	width: 93%;
+}
+
+#up_donwdivlist { /* 具体内容 */
+	border-left: 1px solid #76a0d0; /* 左边框 */
+	border-right: 1px solid #76a0d0; /* 右边框 */
+	border-bottom: 1px solid #76a0d0; /* 下边框 */
+	border-top: 1px solid #76a0d0;
+	padding: 10px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	margin-left: 4px;
+	margin-right: 4px;
+	font-size: 9px;
+}
+
+#up_donwdivlist table {
+	width: 93%;
+	width: inherit;
+}
+
+#up_donwdivlist table td {
+	
+}
+
+.result_table_6cols {
+	border-collapse: collapse;
+	margin: 0px 0px 10px 0px;
+}
+
+.result_table_6cols  td {
+	border: 1px solid #c8c8c8;
+	padding: 0 3px 0 0;
+}
+
+.result_table_6cols  input {
+	width: 80px;
+	text-align: center;
+}
+
+.result_table_right {
+	border-collapse: collapse;
+	margin: 0px 0px 10px 0px;
+}
+
+.result_table_right td {
+	border: 1px solid #c8c8c8;
+	padding: 0 3px 0 0;
+}
+
+.result_table_right  input {
+	text-align: right;
+}
+
+.button_text_center input {
+	text-align: center;
+}
+
+.middletable {
+	padding-top: 20px;
+	padding-bottom: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-left: 1px solid #76a0d0; /* 左边框 */
+	border-right: 3px solid #76a0d0; /* 右边框 */
+	border-bottom: 2px solid #76a0d0; /* 下边框 */
+	border-top: 1px solid #76a0d0;
+	height: 460px;
+}
+
+.bodybackco {
+	background-color: #EBEBEB;
+}
+
+.fontdown {
+	border-bottom-width: 1px;
+	background-color: transparent;
+	border-bottom-color: #999999;
+	border-left: #FFFFFF;
+	border-right: #FFFFFF;
+	border-top: #FFFFFF;
+}
+
+.xiangdao_table {
+	border-collapse: collapse;
+	margin: 0px 0px 10px 0px;
+}
+
+.xiangdao_table td {
+	border: 1px solid #c8c8c8;
+	padding: 0 3px 0 0;
+}
+
+.xiangdao_table input {
+	border: 10px;
+	border-bottom: 0px;
+}
+
+.tongzhi_div {
+	float: right;
+}
+
+.tongzhi_div a {
+	text-decoration: none;
+}
+
+.tixing_div {
+	margin: 30px;
+}
+
+.new_txing {
+	margin-top: 40px;
+}
+
+.dbsy_div {
+	float: left;
+	font-size: 13px;
+	width: 168px;
+	background-color: #FFFFFF;
+}
+
+.page_content { /*background-color:#e8e8eb;*/
+	background: url(../../images/blueidea/main_back.gif);
+}
+
+.div_content { /*background-color:#FFFffC;*/
+	background: url(../../images/blueidea/main_back.gif) top repeat-y;
+	width: 100%;
+	height: 450px;
+	margin: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-top: 5px;
+	padding: 3px;
+	border-top: 1px solid #04477c;
+	border-left: 1px solid #04477c;
+	border-bottom: 1px solid #ffffff;
+	border-right: 1px solid #ffffff;
+}
+
+/*current positon style 当前位置的style*/
+.current_postion {
+	font-weight: 100;
+	font-size: 13px;
+	color: #04477c;
+	margin: 0px;
+	width: 100%;
+	height: 20px;
+	margin-top: 20px;
+	margin-left: 8px padding-bottom :       0px;
+}
+
+.current_font {
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.current_icon {
+	background: url(../../images/bar/current.gif) right center no-repeat;
+	width: 20px;
+	padding-left: 5px;
+	height: 15px;
+	float: left;
+}
+
+.current_iconxh {
+	background: url(../../images/default/form_clew_icon.gif) right center no-repeat;
+	width: 20px;
+	padding-left: 5px;
+	height: 15px;
+	float: left;;
+}
+
+.current_icon1 {
+	background: url(../../images/bar/current1.gif) right center no-repeat;
+	width: 20px;
+	padding-left: 5px;
+	height: 18px;
+	float: left;;
+}
+
+.total_banner {
+	float: right;
+}
+
+
+
+
+/** 一级菜单项样式 **/
+.menu1_on {
+	height: 30px;
+	float: left;
+	padding-top: 10px;
+	font-size: 13px;
+	color: #FFFFFF;
+}
+
+.menu1_on a:link,.menu1_on a:visited {
+	text-decoration: none;
+	font-weight: bold;
+	color: #FFCC66;
+	padding: 7px 10px 4px 10px;;
+}
+
+.menu1_off {
+	height: 30px;
+	float: left;
+	padding-top: 10px;
+	font-size: 13px;
+	color: #CCCCCC;
+}
+
+.menu1_off a:link,.menu1_off a:visited {
+	text-decoration: none;
+	font-weight: bold;
+	color: #CCCCCC;
+	padding: 7px 10px 4px 10px;;
+}
+ 
+
+
+
+/*banner style*/
+.banner_out {
+	padding-bottom: 0px;
+	BACKGROUND: url(../../images/banner/banner.gif) left 0px;
+	FLOAT: left;
+	MARGIN: 0px 5px 0px 0px;
+	COLOR: #fff;
+	HEIGHT: 30px;
+	TEXT-DECORATION: none
+}
+
+.banner_in {
+	PADDING-RIGHT: 8px;
+	PADDING-LEFT: 0px;
+	padding-bottom: 0px;
+	BACKGROUND: url(../../images/banner/banner.gif) right 0px;
+	FLOAT: left;
+	MARGIN: 0px 0px 0px 8px;
+	HEIGHT: 30px
+}
+
+.button_area {
+	float: right;
+	margin: 0px;
+	padding: 0px;
+	width: 600px;
+	color:#373737; 
+}
+
+.between_search {
+	height: 20px;
+}
+
+#D1 {
+	BACKGROUND-COLOR: lightgreen;
+	BORDER-BOTTOM: white 2px outset;
+	BORDER-LEFT: white 2px outset;
+	BORDER-RIGHT: white 2px outset;
+	BORDER-TOP: white 2px outset;
+	LEFT: 100px;
+	TOP: 20px;
+	POSITION: absolute;
+	VISIBILITY: hidden;
+	WIDTH: 180px;
+	background: url(../../images/blueidea/main_back.gif);
+}
+
+.projectinfo {
+	border-bottom: 1px #000000 solid;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	background: url(../../images/blueidea/main_back.gif);
+	text-align: center;
+}
+
+.button_areas {
+	position: absolute;
+	top: 490px;
+	left: 420px;
+	color:#373737; 
+}
+
+#hint{  
+    width:150px;  
+    border:1px solid #78ACD3;  
+    background:#FBFFFD;  
+    position:absolute;  
+    z-index:99999;  
+    padding:6px;  
+    line-height:17px;  
+    text-align:left;  
+    //top:1520px;  
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=135,strength=8);
+   }  
+ 
+
+/*******************************  原moneystyle.css样式  ****************************************/
+
+.versionTitle{
+  font: bold 22px microsoft yahei;
+  color: red;
+}

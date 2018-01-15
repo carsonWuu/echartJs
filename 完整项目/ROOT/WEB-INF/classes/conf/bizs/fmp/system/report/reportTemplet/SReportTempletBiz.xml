@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="fmp.system.report.reportTemplet.SReportTempletBiz" namespace="/fmp/system/report/reportTemplet/SReportTempletBiz" extends="fmp.FrameCommonBiz">        
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.fmp.system.report.reportTemplet.action.{1}SReportTempletAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+        </action>    
+		<!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.fmp.system.report.reportTemplet.action.SaveSReportTempletAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>   
+		<!--保存可修改的列表信息-->
+        <action  name="SaveDataList" class="com.zstar.fmp.system.report.reportTemplet.action.SaveSReportTempletDataListAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>  
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.fmp.system.report.reportTemplet.action.DeleteSReportTempletAction">
+        </action> 
+        <!--打开子模板操作-->
+        <action  name="OpenSReportTemplet" class="com.zstar.fmp.system.report.reportTemplet.action.OpenSReportTempletAction">  
+        </action>                           
+    </package>
+</struts>

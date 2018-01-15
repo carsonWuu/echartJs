@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="WfFlowApvHis"> 
+<sql id="listColumns">
+	
+            RID,
+            FLOWINSTANCEID,
+            FLOWTEMPID,
+            NODEID,
+            NODENAME,
+            NODEDESC,
+            NODETYPE,
+            NODEBIZTYPE,
+            TRANSACTDAYS,
+            CREATTIME,
+            APPROVETIME,
+            PASSRATE,
+            APPROVER,
+            APPROVERESULT,
+            APPROVENOTION,
+            PASSCONDITION,
+            CHECKCONDDESC,
+            CHECKCONDRESULT,
+            APPFINISHTIME,
+            STATE
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            FLOWINSTANCEID,
+            FLOWTEMPID,
+            NODEID,
+            NODENAME,
+            NODEDESC,
+            NODETYPE,
+            NODEBIZTYPE,
+            TRANSACTDAYS,
+            CREATTIME,
+            APPROVETIME,
+            PASSRATE,
+            APPROVER,
+            APPROVERESULT,
+            APPROVENOTION,
+            PASSCONDITION,
+            CHECKCONDDESC,
+            CHECKCONDRESULT,
+            APPFINISHTIME,
+            STATE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select distinct u.USERNAME as TRANS_APPROVER,
+		   o.ORGANSHORTFORM as TRANS_ORGID,fah.* 
+    from wf_FlowApvHis fah
+	left outer join S_USER  u
+		on u.USERID = fah.APPROVER
+	left outer join S_ORG o
+		on u.ORGID = o.ORGID
+	left outer join WF_FLOWINSTANCE wfi
+		on wfi.FLOWINSTANCEID = fah.FLOWINSTANCEID
+	<where>
+		APPROVETIME is not null
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where> 
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>		
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(distinct fah.RID) NUM  from wf_FlowApvHis fah
+	left outer join S_USER  u
+		on u.USERID = fah.APPROVER
+	left outer join S_ORG o
+		on u.ORGID = o.ORGID
+	left outer join WF_FLOWINSTANCE wfi
+		on wfi.FLOWINSTANCEID = fah.FLOWINSTANCEID
+	<where>
+		<if test="flowinstanceidCondition!=null and flowinstanceidCondition!='' ">   
+             ${flowinstanceidCondition}
+        </if>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from wf_FlowApvHis where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from wf_FlowApvHis where RID = #{RID} 
+</select> 
+
+
+
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update wf_FlowApvHis set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from wf_FlowApvHis where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into wf_FlowApvHis(
+            RID,
+            FLOWINSTANCEID,
+            FLOWTEMPID,
+            NODEID,
+            NODENAME,
+            NODEDESC,
+            NODETYPE,
+            NODEBIZTYPE,
+            TRANSACTDAYS,
+            CREATTIME,
+            APPROVETIME,
+            PASSRATE,
+            APPROVER,
+            APPROVERESULT,
+            APPROVENOTION,
+            PASSCONDITION,
+            APPFINISHTIME,
+            STATE)
+	   values (
+            #{RID},
+            #{FLOWINSTANCEID},
+            #{FLOWTEMPID},
+            #{NODEID},
+            #{NODENAME},
+            #{NODEDESC},
+            #{NODETYPE},
+            #{NODEBIZTYPE},
+            #{TRANSACTDAYS},
+            #{CREATTIME},
+            #{APPROVETIME},
+            #{PASSRATE},
+            #{APPROVER},
+            #{APPROVERESULT},
+            #{APPROVENOTION},
+            #{PASSCONDITION},
+            #{APPFINISHTIME},
+            #{STATE})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update wf_FlowApvHis  
+		<set>
+			<if test="FLOWINSTANCEID!=null"> FLOWINSTANCEID=#{FLOWINSTANCEID},</if> 
+		    <if test="FLOWTEMPID!=null"> FLOWTEMPID=#{FLOWTEMPID},</if> 
+		    <if test="NODEID!=null"> NODEID=#{NODEID},</if> 
+		    <if test="NODENAME!=null"> NODENAME=#{NODENAME},</if> 
+		    <if test="NODEDESC!=null"> NODEDESC=#{NODEDESC},</if> 
+		    <if test="NODETYPE!=null"> NODETYPE=#{NODETYPE},</if> 
+		    <if test="NODEBIZTYPE!=null"> NODEBIZTYPE=#{NODEBIZTYPE},</if> 
+		    <if test="TRANSACTDAYS!=null"> TRANSACTDAYS=#{TRANSACTDAYS},</if> 
+		    <if test="CREATTIME!=null"> CREATTIME=#{CREATTIME},</if> 
+		    <if test="APPROVETIME!=null"> APPROVETIME=#{APPROVETIME},</if> 
+		    <if test="PASSRATE!=null"> PASSRATE=#{PASSRATE},</if> 
+		    <if test="APPROVER!=null"> APPROVER=#{APPROVER},</if> 
+		    <if test="APPROVERESULT!=null"> APPROVERESULT=#{APPROVERESULT},</if> 
+		    <if test="APPROVENOTION!=null"> APPROVENOTION=#{APPROVENOTION},</if> 
+		    <if test="PASSCONDITION!=null"> PASSCONDITION=#{PASSCONDITION},</if> 
+            <if test="APPFINISHTIME!=null"> APPFINISHTIME=#{APPFINISHTIME},</if>
+		    <if test="STATE!=null"> STATE=#{STATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+
+<update id="approveUpdate" parameterType="hashmap" > 
+	update wf_FlowApvHis  
+		<set>
+		    <if test="APPROVERESULT!=null"> APPROVERESULT=#{APPROVERESULT},</if> 
+		    <if test="APPROVENOTION!=null"> APPROVENOTION=#{APPROVENOTION},</if> 
+		    <if test="PASSCONDITION!=null"> PASSCONDITION=#{PASSCONDITION},</if> 
+		    <if test="APPROVETIME!=null"> APPROVETIME=#{APPROVETIME},</if> 
+		    <if test="APPROVER!=null"> APPROVER=#{APPROVER},</if> 
+		    <if test="CHECKCONDDESC!=null"> CHECKCONDDESC=#{CHECKCONDDESC},</if> 
+		    <if test="CHECKCONDRESULT!=null">CHECKCONDRESULT=#{CHECKCONDRESULT},</if> 
+		</set>
+	where FLOWINSTANCEID=#{FLOWINSTANCEID} and 
+	      FLOWTEMPID=#{FLOWTEMPID}  and 
+	      NODEID=#{NODEID} and
+	      STATE = '1'
+	      
+	      
+</update> 
+
+
+<select id="approveView" parameterType="hashmap" resultType="hashmap">
+	select * from wf_FlowApvHis 
+	where FLOWINSTANCEID=#{FLOWINSTANCEID} and 
+	      FLOWTEMPID=#{FLOWTEMPID}  and 
+	      NODEID=#{NODEID} and
+	      STATE = #{STATE}
+</select>
+
+<!--获取节点的生成时间-->
+<select id="getCreateTimeOfNode" parameterType="hashmap" resultType="String">
+	 select CREATTIME from wf_FlowApvHis where NODEID = #{NODEID} and STATE = '1' and FLOWINSTANCEID=#{FLOWINSTANCEID}
+</select>
+<!--根据某节点的生成时间获取此节点经过的节点id-->
+<select id="getPassNodeId" parameterType="hashmap" resultType="hashmap">
+	select NODEID from wf_FlowApvHis where CREATTIME >= #{CREATTIME} and STATE ='1' and FLOWINSTANCEID=#{FLOWINSTANCEID}
+</select>
+
+<!--更新节点审批历史状态-->
+<update id="approveStateUpdate" parameterType="hashmap" > 
+	update wf_FlowApvHis  
+		<set>
+		    <if test="STATE!=null"> STATE=#{STATE},</if> 
+		</set>
+	where FLOWINSTANCEID=#{FLOWINSTANCEID} and  NODEID=#{NODEID} and STATE ='1'
+</update> 
+<update id="approveHisStateUpdate" parameterType="hashmap" > 
+	update wf_FlowApvHis  
+		<set>
+		    <if test="STATE!=null"> STATE=#{STATE},</if> 
+		</set>
+	where FLOWINSTANCEID=#{FLOWINSTANCEID} and STATE ='1'
+</update>
+
+<select id="getNumByApvResult" parameterType="String" resultType="String">
+		select count(*) NUM from  wf_FlowApvHis 
+		where FLOWINSTANCEID=#{flowinstanceId} and  STATE = '1' and APPROVERESULT = '3'
+</select>
+
+<select id="getNodeOfHis" parameterType="String" resultType="hashmap">
+	SELECT fah.NODEID,
+		   fah.NODENAME,
+		   fah.APPROVETIME,
+		   fah.FLOWINSTANCEID,
+		   fi.BIZTYPEID,
+		   fi.BIZRID
+	FROM wf_FlowApvHis fah
+		LEFT OUTER JOIN wf_flowinstance fi
+			on fi.FLOWINSTANCEID = fah.FLOWINSTANCEID and fi.RECORDSTATE = '0'
+	WHERE fi.RID = #{RID}
+	  	and fah.STATE = '1'
+			and fah.NODEID != '000'
+				and fah.NODEID != '999'
+	ORDER BY fah.APPROVETIME DESC
+</select>
+
+<!--干掉指点实例和节点ID的记录-->
+<delete id="deleteEndNode" parameterType="hashmap" > 
+	delete from wf_FlowApvHis where FLOWINSTANCEID = #{FLOWINSTANCEID} and NODEID = #{NODEID}
+</delete> 
+
+
+<!--获取审批结果是有条件通过的审批历史-->
+<select id="getCondiconfirmNum" parameterType="hashmap" resultType="String">
+	 select count(*) NUM from wf_FlowApvHis where FLOWINSTANCEID=#{FLOWINSTANCEID} and APPROVERESULT = '3' and STATE ='1'
+</select>
+
+<!-- 风控单据专用显示明细 -->
+<select id="riskBillUpdateDetail" parameterType="hashmap" resultType="hashmap"> 
+	select fah.* 
+	from wf_FlowApvHis fah
+	where fah.FLOWINSTANCEID=#{FLOWINSTANCEID} and fah.FLOWTEMPID=#{FLOWTEMPID} and fah.NODEID=#{NODEID}
+</select>
+
+<!--word打印模板中获取风控审批相关信息-->
+<select id="getRiskBillFlowApv" parameterType="hashmap" resultType="hashmap">
+	select u.USERNAME as TRANS_APPROVER,fah.APPROVENOTION,dic.DATAVALUE as APPROVERESULT,fah.PASSCONDITION,fah.NODENAME,fah.APPROVETIME
+		from wf_FlowApvHis fah
+	left outer join S_USER u
+		on u.USERID = fah.APPROVER
+	left outer join S_DIC dic
+	    on fah.APPROVERESULT=dic.DATAKEY and dic.DATATYPE = 'CRD_SPJG'
+	inner join wf_FlowInstance fi
+		on fi.FLOWINSTANCEID = fah.FLOWINSTANCEID and fi.FLOWTEMPID=#{FLOWTEMPID_XMFKSP} and fi.BIZTYPEID=#{BIZTYPEID_FKSP} 
+		   and fi.BIZRID=#{REPORTDATARID} and fi.RECORDSTATE = '0' 
+	where fah.NODETYPE=#{JDLX_ZJJD} and fah.STATE ='1' order by fah.APPROVETIME
+</select>
+</mapper>
+
+

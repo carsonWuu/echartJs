@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="WfFlowNode"> 
+<sql id="listColumns">
+	
+  RID,
+  FLOWTEMPID,
+  NODEID,
+  NODENAME,
+  NODEDESC,
+  NODETYPE,
+  NODEBIZTYPE,
+  PASSRATE,
+  ORGDEFINE,
+  ORGNAMESET,
+  ORGEXTSET,
+  DEPTDEFINE,
+  DEPTNAMESET,
+  DEPTEXTSET,
+  POSTDEFINE,
+  POSTNAMESET,
+  MEETINGPOSTDEFINE,
+  MEETINGPOSTNAMESET,
+  TRANSACTDAYS,
+  POSTLEFT,
+  POSTTOP,
+  CREATTIME,
+  ISLASTREJECT,
+  ISCONDICONFIRM,
+  ISCHECKCONDITION,
+  CREATORID,
+  SMSSENDCOND,
+  SMSTEMPCODE
+  
+</sql>
+
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+
+	select <include refid="listColumns"/> from wf_FlowNode
+	<where>
+		FLOWTEMPID = #{FLOWTEMPID}
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="getAllNodes" parameterType="hashmap" resultType="hashmap">
+	select fn.*,u.USERNAME as APPROVERNAME from wf_FlowNode fn
+		LEFT OUTER JOIN wf_FlowApvHis fah
+			on fah.NODEID = fn.NODEID and fah.FLOWTEMPID = fn.FLOWTEMPID and fah.STATE='1' and fah.FLOWINSTANCEID = #{FLOWINSTANCEID}
+		LEFT OUTER JOIN s_user u
+			on fah.APPROVER = u.USERID
+	where fn.FLOWTEMPID =  #{FLOWTEMPID}  
+</select>
+<select id="getSvgNodes" parameterType="hashmap" resultType="hashmap">
+	SELECT from_node.NODEID,
+       from_node.NODENAME,
+       from_node.FLOWTEMPID,
+       from_node.NODEID as ID,
+       to_node.NODEID as PROCESS_TO,
+       from_node.FLOWTEMPID as FLOW_ID,
+       from_node.POSTTOP,
+       from_node.NODENAME as PROCESS_NAME,
+       from_node.POSTLEFT, 
+       from_node.NODEDESC,
+       from_node.NODETYPE,
+       from_node.NODEBIZTYPE,
+       from_node.PASSRATE,
+       from_node.ORGDEFINE,
+       from_node.ORGNAMESET,
+       from_node.ORGEXTSET,
+       from_node.DEPTNAMESET,
+       from_node.DEPTDEFINE,
+       from_node.DEPTEXTSET,
+       from_node.POSTDEFINE,
+       from_node.POSTNAMESET,
+       from_node.ISLASTREJECT,
+       from_node.ISCHECKCONDITION,
+       from_node.ISCONDICONFIRM,
+       from_node.TRANSACTDAYS,
+       from_node.SMSSENDCOND,
+       from_node.SMSTEMPCODE,
+       from_node.CREATTIME,
+       from_node.CREATORID from wf_nodelink link
+        LEFT OUTER JOIN wf_FlowNode from_node
+            on link.FROMNODE = from_node.NODEID and link.FLOWTEMPID = from_node.FLOWTEMPID
+        LEFT OUTER JOIN wf_FlowNode to_node
+            on link.TONODE = to_node.NODEID and link.FLOWTEMPID = to_node.FLOWTEMPID
+              where from_node.FLOWTEMPID=#{FLOWTEMPID} order by from_node.NODEID 
+</select>
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from wf_FlowNode where FLOWTEMPID = #{FLOWTEMPID}
+</delete> 
+<select id="getEndNodes" parameterType="hashmap" resultType="hashmap">
+	SELECT 
+		RID,
+		NODEDESC,
+		NODETYPE,
+		NODEBIZTYPE,
+		PASSRATE,
+		ORGDEFINE,
+		FLOWTEMPID,
+		ORGNAMESET,
+		ORGEXTSET,
+		DEPTDEFINE,
+		DEPTNAMESET,
+		DEPTEXTSET,
+		POSTDEFINE,
+		POSTNAMESET,
+		MEETINGPOSTDEFINE,
+		MEETINGPOSTNAMESET,
+		TRANSACTDAYS,
+		POSTLEFT,
+		POSTTOP,
+		CREATTIME,
+		ISLASTREJECT,
+		ISCONDICONFIRM,
+		ISCHECKCONDITION,
+		CREATORID,
+		SMSSENDCOND,
+		SMSTEMPCODE,
+		NODENAME,
+		NODEID,
+		NODEID as ID, 
+		FLOWTEMPID as FLOW_ID,
+		NODENAME as PROCESS_NAME 
+	FROM 
+		wf_flownode 
+	where 
+		FLOWTEMPID=#{FLOWTEMPID} AND NODEID='999'
+</select>
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into wf_FlowNode(
+		  RID,
+		  FLOWTEMPID,
+		  NODEID,
+		  NODENAME,
+		  NODEDESC,
+		  NODETYPE,
+		  NODEBIZTYPE,
+		  PASSRATE,
+		  ORGDEFINE,
+		  ORGNAMESET,
+		  ORGEXTSET,
+		  DEPTDEFINE,
+		  DEPTNAMESET,
+		  DEPTEXTSET,
+		  POSTDEFINE,
+		  POSTNAMESET,
+		  MEETINGPOSTDEFINE,
+		  MEETINGPOSTNAMESET,
+		  TRANSACTDAYS,
+		  POSTLEFT,
+		  POSTTOP,
+		  CREATTIME,
+		  ISLASTREJECT,
+  		  ISCONDICONFIRM,
+  		  ISCHECKCONDITION,
+		  CREATORID,
+		  SMSSENDCOND,
+		  SMSTEMPCODE)
+	   values (
+		  #{RID},
+		  #{FLOWTEMPID},
+		  #{NODEID},
+		  #{NODENAME},
+		  #{NODEDESC},
+		  #{NODETYPE},
+		  #{NODEBIZTYPE},
+		  #{PASSRATE},
+		  #{ORGDEFINE},
+		  #{ORGNAMESET},
+		  #{ORGEXTSET},
+  		  #{DEPTDEFINE},
+  		  #{DEPTNAMESET},
+  		  #{DEPTEXTSET},
+		  #{POSTDEFINE},
+		  #{POSTNAMESET},
+		  #{MEETINGPOSTDEFINE},
+		  #{MEETINGPOSTNAMESET},
+		  #{TRANSACTDAYS},
+		  #{POSTLEFT},
+		  #{POSTTOP},
+		  #{CREATTIME},
+		  #{ISLASTREJECT},
+  		  #{ISCONDICONFIRM},
+  		  #{ISCHECKCONDITION},
+		  #{CREATORID},
+		  #{SMSSENDCOND},
+		  #{SMSTEMPCODE})
+</insert> 
+<select id="getNodeDetail" parameterType="hashmap" resultType="hashmap"> 
+	select * from wf_FlowNode where FLOWTEMPID =#{FLOWTEMPID} and NODEID =#{NODEID}
+</select>
+
+<select id="getNodes" parameterType="String" resultType="hashmap"> 
+	select * from wf_FlowNode where FLOWTEMPID =#{FLOWTEMPID}
+</select>
+
+
+<!--获取某一节点的下一节点-->
+<select id="getNextNodes" parameterType="hashmap" resultType="hashmap"> 
+	SELECT fn.*,nl.* FROM wf_FlowNode fn
+		LEFT OUTER JOIN wf_NodeLink nl
+			on fn.NODEID = nl.TONODE and fn.FLOWTEMPID = nl.FLOWTEMPID
+	where fn.FLOWTEMPID = #{FLOWTEMPID} and nl.FROMNODE = #{FROMNODE}
+</select>
+
+</mapper>

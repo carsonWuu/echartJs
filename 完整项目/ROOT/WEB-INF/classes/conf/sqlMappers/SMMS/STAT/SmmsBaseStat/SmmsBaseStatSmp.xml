@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SmmsBaseStat"> 
+<sql id="listColumns">
+	
+            RID,
+            IDC_COUNT,
+            ROOM_COUNT,
+            BUSSY_COUNT,
+            AC_ONLINE,
+            AC_OFFLINE,
+            AF_ONLINE,
+            AF_OFFLINE,
+            STA_ONLINE,
+            STA_OFFLINE,
+            NO_CASE,
+            MONTH_EVENT,
+            MONTH_DEALT,
+            MONTH_NOT_DEAL,
+            CLOSED_COUNT,
+            NEED_CLOSE_COUNT,
+            RECTIFY_COUNT,
+            NEED_RECTIFY_COUNT,
+            KEY_020,
+            KEY_030,
+            KEY_010,
+            KEY_040,
+            KEY_050,
+            KEY_060,
+            MODIFIEDTIME,
+            RECORDSTATE,
+            CREATTIME
+</sql>
+<sql id="detailColumns">
+	
+            RID,
+            IDC_COUNT,
+            ROOM_COUNT,
+            BUSSY_COUNT,
+            AC_ONLINE,
+            AC_OFFLINE,
+            AF_ONLINE,
+            AF_OFFLINE,
+            STA_ONLINE,
+            STA_OFFLINE,
+            NO_CASE,
+            MONTH_EVENT,
+            MONTH_DEALT,
+            MONTH_NOT_DEAL,
+            CLOSED_COUNT,
+            NEED_CLOSE_COUNT,
+            RECTIFY_COUNT,
+            NEED_RECTIFY_COUNT,
+            KEY_020,
+            KEY_030,
+            KEY_010,
+            KEY_040,
+            KEY_050,
+            KEY_060,
+            MODIFIEDTIME,
+            RECORDSTATE,
+            CREATTIME
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from SMMS_BASE_STAT 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM  from SMMS_BASE_STAT 
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<select id="selectData" parameterType="hashmap" resultType="hashmap"> 
+	select IDC_COUNT,
+            ROOM_COUNT,
+            BUSSY_COUNT,
+            AC_ONLINE,
+            AC_OFFLINE,
+            AF_ONLINE,
+            AF_OFFLINE,
+            STA_ONLINE,
+            STA_OFFLINE,
+            NO_CASE,
+            MONTH_EVENT,
+            MONTH_DEALT,
+            MONTH_NOT_DEAL,
+            CLOSED_COUNT,
+            NEED_CLOSE_COUNT,
+            RECTIFY_COUNT,
+            NEED_RECTIFY_COUNT,
+            KEY_020,
+            KEY_030,
+            KEY_010,
+            KEY_040,
+            KEY_050,
+            KEY_060
+           from SMMS_BASE_STAT 
+	<where>
+		RECORDSTATE='0'
+	</where>		
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from SMMS_BASE_STAT  where RID = #{RID}
+</delete> 
+
+<delete id="deleteTableData" parameterType="hashmap" > 
+	delete from SMMS_BASE_STAT
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from SMMS_BASE_STAT  where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update SMMS_BASE_STAT  set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from SMMS_BASE_STAT  where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into SMMS_BASE_STAT (
+            <if test="RID != null ">RID,</if>
+            <if test="IDC_COUNT != null ">IDC_COUNT,</if>
+            <if test="ROOM_COUNT != null ">ROOM_COUNT,</if>
+            <if test="BUSSY_COUNT != null ">BUSSY_COUNT,</if>
+            <if test="AC_ONLINE != null ">AC_ONLINE,</if>
+            <if test="AC_OFFLINE != null ">AC_OFFLINE,</if>
+            <if test="AF_ONLINE != null ">AF_ONLINE,</if>
+            <if test="AF_OFFLINE != null ">AF_OFFLINE,</if>
+            <if test="STA_ONLINE != null ">STA_ONLINE,</if>
+            <if test="STA_OFFLINE != null ">STA_OFFLINE,</if>
+            <if test="NO_CASE != null ">NO_CASE,</if>
+            <if test="MONTH_EVENT != null ">MONTH_EVENT,</if>
+            <if test="MONTH_DEALT != null ">MONTH_DEALT,</if>
+            <if test="MONTH_NOT_DEAL != null ">MONTH_NOT_DEAL,</if>
+            <if test="CLOSED_COUNT != null ">CLOSED_COUNT,</if>
+            <if test="NEED_CLOSE_COUNT != null ">NEED_CLOSE_COUNT,</if>
+            <if test="RECTIFY_COUNT != null ">RECTIFY_COUNT,</if>
+            <if test="NEED_RECTIFY_COUNT != null ">NEED_RECTIFY_COUNT,</if>
+            
+            <if test="KEY_020 != null ">KEY_020,</if>
+            <if test="KEY_030 != null ">KEY_030,</if>
+            <if test="KEY_010 != null ">KEY_010,</if>
+            <if test="KEY_040 != null ">KEY_040,</if>
+            <if test="KEY_050 != null ">KEY_050,</if>
+            <if test="KEY_060 != null ">KEY_060,</if>
+            <if test="MODIFIEDTIME != null ">MODIFIEDTIME,</if>
+            <if test="RECORDSTATE != null ">RECORDSTATE,</if>
+            <if test="CREATTIME != null ">CREATTIME</if>)
+	   values (
+           <if test="RID != null ">#{RID},</if>
+           <if test="IDC_COUNT != null ">#{IDC_COUNT},</if>
+           <if test="ROOM_COUNT != null ">#{ROOM_COUNT},</if>
+           <if test="BUSSY_COUNT != null ">#{BUSSY_COUNT},</if>
+           <if test="AC_ONLINE != null ">#{AC_ONLINE},</if>
+           <if test="AC_OFFLINE != null ">#{AC_OFFLINE},</if>
+           <if test="AF_ONLINE != null ">#{AF_ONLINE},</if>
+           <if test="AF_OFFLINE != null ">#{AF_OFFLINE},</if>
+           <if test="STA_ONLINE != null ">#{STA_ONLINE},</if>
+           <if test="STA_OFFLINE != null ">#{STA_OFFLINE},</if>
+           <if test="NO_CASE != null ">#{NO_CASE},</if>
+           <if test="MONTH_EVENT != null ">#{MONTH_EVENT},</if>
+           <if test="MONTH_DEALT != null ">#{MONTH_DEALT},</if>
+           <if test="MONTH_NOT_DEAL != null ">#{MONTH_NOT_DEAL},</if>
+           <if test="CLOSED_COUNT != null ">#{CLOSED_COUNT},</if>
+           <if test="NEED_CLOSE_COUNT != null ">#{NEED_CLOSE_COUNT},</if>
+           <if test="RECTIFY_COUNT != null ">#{RECTIFY_COUNT},</if>
+           <if test="NEED_RECTIFY_COUNT != null ">#{NEED_RECTIFY_COUNT},</if>
+           <if test="KEY_020 != null ">#{KEY_020},</if>
+           <if test="KEY_030 != null ">#{KEY_030},</if>
+           <if test="KEY_010 != null ">#{KEY_010},</if>
+           <if test="KEY_040 != null ">#{KEY_040},</if>
+           <if test="KEY_050 != null ">#{KEY_050},</if>
+           <if test="KEY_060 != null ">#{KEY_060},</if>
+           <if test="MODIFIEDTIME != null ">#{MODIFIEDTIME},</if>
+           <if test="RECORDSTATE != null ">#{RECORDSTATE},</if>
+           <if test="CREATTIME != null ">#{CREATTIME}</if>)
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update SMMS_BASE_STAT   
+		<set>
+				    <if test="IDC_COUNT!=null"> IDC_COUNT=#{IDC_COUNT},</if> 
+		    <if test="ROOM_COUNT!=null"> ROOM_COUNT=#{ROOM_COUNT},</if> 
+		    <if test="BUSSY_COUNT!=null"> BUSSY_COUNT=#{BUSSY_COUNT},</if> 
+		    <if test="AC_ONLINE!=null"> AC_ONLINE=#{AC_ONLINE},</if> 
+		    <if test="AC_OFFLINE!=null"> AC_OFFLINE=#{AC_OFFLINE},</if> 
+		    <if test="AF_ONLINE!=null"> AF_ONLINE=#{AF_ONLINE},</if> 
+		    <if test="AF_OFFLINE!=null"> AF_OFFLINE=#{AF_OFFLINE},</if> 
+		    <if test="STA_ONLINE!=null"> STA_ONLINE=#{STA_ONLINE},</if> 
+		    <if test="STA_OFFLINE!=null"> STA_OFFLINE=#{STA_OFFLINE},</if> 
+		    <if test="NO_CASE!=null"> NO_CASE=#{NO_CASE},</if> 
+		    <if test="MONTH_EVENT!=null"> MONTH_EVENT=#{MONTH_EVENT},</if> 
+		    <if test="MONTH_DEALT!=null"> MONTH_DEALT=#{MONTH_DEALT},</if> 
+		    <if test="MONTH_NOT_DEAL!=null"> MONTH_NOT_DEAL=#{MONTH_NOT_DEAL},</if> 
+		    <if test="CLOSED_COUNT!=null"> CLOSED_COUNT=#{CLOSED_COUNT},</if> 
+		    <if test="NEED_CLOSE_COUNT!=null"> NEED_CLOSE_COUNT=#{NEED_CLOSE_COUNT},</if> 
+		    <if test="RECTIFY_COUNT!=null"> RECTIFY_COUNT=#{RECTIFY_COUNT},</if> 
+		    <if test="NEED_RECTIFY_COUNT!=null"> NEED_RECTIFY_COUNT=#{NEED_RECTIFY_COUNT},</if> 
+		    <if test="KEY_020!=null"> KEY_020=#{KEY_020},</if> 
+		    <if test="KEY_030!=null"> KEY_030=#{KEY_030},</if> 
+		    <if test="KEY_010!=null"> KEY_010=#{KEY_010},</if> 
+		    <if test="KEY_040!=null"> KEY_040=#{KEY_040},</if> 
+		    <if test="KEY_050!=null"> KEY_050=#{KEY_050},</if> 
+		    <if test="KEY_060!=null"> KEY_060=#{KEY_060},</if> 
+		    <if test="MODIFIEDTIME!=null"> MODIFIEDTIME=#{MODIFIEDTIME},</if> 
+		    <if test="RECORDSTATE!=null"> RECORDSTATE=#{RECORDSTATE},</if> 
+		</set>
+	where RID=#{RID}
+</update> 
+
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN "
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+ 
+    <package name="fmp.workflow.ApproveWorkFlowBiz" namespace="/fmp/workflow/ApproveWorkFlowBiz" extends="fmp.FrameCommonBiz">   
+		<!--进入操作界面List View Add Update -->
+        <action  name="DoApprove" class="com.zstar.fmp.workflow.flowEngine.action.ViewApproveAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/approvePage.jsp</result>
+        </action>    
+       
+        <action  name="DataList" class="com.zstar.fmp.core.frame.action.SearchDataListAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/partialJsp/DataList.jsp</result>
+        </action> 
+        
+        <action  name="HisDataList" class="com.zstar.fmp.workflow.flowEngine.action.ListApproveAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/partialJsp/DataList.jsp</result>
+        </action>   
+        <action  name="ViewFlowReDiscuss" class="com.zstar.fmp.workflow.flowEngine.action.ViewFlowReDiscussAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/reDiscussPage.jsp</result>
+        </action> 
+        
+        <action  name="SaveFlowReDiscuss" class="com.zstar.fmp.workflow.flowEngine.action.SaveFlowReDiscussAction">
+        </action>       
+         
+        <action  name="DoSave" class="com.zstar.fmp.workflow.flowEngine.action.SaveApproveAction">
+        </action> 
+        <action  name="DoSubmit" class="com.zstar.fmp.workflow.flowEngine.action.ApproveAction">
+        </action>        
+    </package>    
+</struts>

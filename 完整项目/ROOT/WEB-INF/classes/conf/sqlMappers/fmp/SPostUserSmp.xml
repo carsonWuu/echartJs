@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SPostUser"> 
+	<sql id="spostUserColumns">RID,POSTID,USERID,CREATORID,CREATTIME</sql> 
+	<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="spostUserColumns"/> from S_POSTUSER 
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+   </select>
+
+   <select id="getPostInfoByUserID" parameterType="hashmap" resultType="hashmap"> 
+	select p.POSTNAME,pu.POSTID from S_POST p ,S_POSTUSER pu 
+	   where p.POSTID = pu.POSTID AND pu.USERID =#{USERID}
+   </select>
+   
+   <select id="selectUserIdByPostID" parameterType="hashmap" resultType="hashmap"> 
+	select USERID from S_POSTUSER where POSTID = #{POSTID}  
+   </select>
+   
+   <delete id="deleteDataByUSERID" parameterType="hashmap" > 
+	delete from S_POSTUSER where USERID = #{USERID}
+   </delete>
+   <insert id="insertSave" parameterType="hashmap" > 
+   insert into S_POSTUSER (
+	    	 RID
+		    ,POSTID
+		    ,USERID
+		    ,CREATORID
+		    ,CREATTIME
+		    
+		)
+	    values(
+	         #{RID}
+		    ,#{POSTID}
+		    ,#{USERID}
+		    ,#{CREATORID}
+		    ,#{CREATTIME}	    
+	    )
+</insert> 
+</mapper>

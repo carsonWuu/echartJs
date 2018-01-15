@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SAttachment"> 
+<sql id="sattachmentColumns">RID,ATTACHMENTID,ATTACHMENTNAME,ARCHIVETYPE,ATTACHMENTREMARK,TABLEID,RECORDRID,FILESIZE,FILEPATH,
+							LIABDEPT,LIABORG,CREATTIME,CREATORID,MODIFIEDTIME,MODIFIERID,RECORDSTATE,ATTACHMENTSTATE</sql> 
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select sde.DEPSHORTFORM as TRANS_LIABDEPT,
+	       sus.USERNAME as TRANS_CREATORID,
+	       cci.CUSTNAME as TRANS_CUSTID,
+	       cci.CUSTNAME,cci.CUSTID,
+	       cci.CASECODE,
+	       cci.FILECODE,
+	       cci.CASENAME,
+	       cci.CASESTATE,substr(sam.FILEPATH,instr(sam.FILEPATH,'.')+1) as FILEPATHTYPE,
+	       sam.* 
+	from S_Attachment sam
+	left outer join CRD_CASEINFO cci
+		on sam.RECORDRID = cci.RID
+	left outer join S_USER sus
+	    on sus.USERID=sam.CREATORID
+	left outer join S_DEPT sde
+	    on sde.DEPTID=sam.LIABDEPT   
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}  and 
+        </if>
+             sam.RECORDSTATE='0'			
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select>
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from S_Attachment sam 
+	left outer join CRD_CASEINFO cci
+		on sam.RECORDRID = cci.RID
+	left outer join S_USER sus
+	    on sus.USERID=sam.CREATORID
+	left outer join S_DEPT sde
+	    on sde.DEPTID=sam.LIABDEPT    
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition} and 
+        </if>	
+             sam.RECORDSTATE='0'		
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_Attachment where RID = #{RID}
+</delete> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_Attachment set                     
+                        RECORDSTATE=#{RECORDSTATE}
+	where RID=#{RID}
+</update> 
+
+<delete id="updateDataRecordstate" parameterType="hashmap" > 
+	update  S_Attachment set RECORDSTATE= '1' where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select sde.DEPSHORTFORM as TRANS_LIABDEPT,
+	       sus.USERNAME as TRANS_CREATORID,
+	       cci.CUSTNAME,
+	       cci.CASECODE,
+	       cci.FILECODE,
+	       cci.CASENAME,
+	       cci.CASESTATE,substr(sam.FILEPATH,instr(sam.FILEPATH,'.')+1) as FILEPATHTYPE,
+	       sam.* 
+	from S_Attachment sam
+	left outer join CRD_CASEINFO cci
+		on sam.RECORDRID = cci.RID
+	left outer join S_USER sus
+	    on sus.USERID=sam.CREATORID
+	left outer join S_DEPT sde
+	    on sde.DEPTID=sam.LIABDEPT  
+	where sam.RID = #{RID}  
+</select>
+
+ <select id="updateDetail" parameterType="String" resultType="hashmap"> 
+	select sde.DEPSHORTFORM as TRANS_LIABDEPT,
+	       sus.USERNAME as TRANS_CREATORID,
+	       cci.CUSTNAME,
+	       cci.CASECODE,
+	       cci.FILECODE,
+	       cci.CASENAME,
+	       cci.CASESTATE,substr(sam.FILEPATH,instr(sam.FILEPATH,'.')+1) as FILEPATHTYPE,
+	       sam.* 
+	from S_Attachment sam
+	left outer join CRD_CASEINFO cci
+		on sam.RECORDRID = cci.RID
+	left outer join S_USER sus
+	    on sus.USERID=sam.CREATORID
+	left outer join S_DEPT sde
+	    on sde.DEPTID=sam.LIABDEPT  
+	where sam.RID = #{RID} 
+</select> 
+
+<select id="viewDetailByCondition" parameterType="hashmap" resultType="hashmap"> 
+	select * from S_Attachment
+	<where>
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" > 
+  insert into S_Attachment (RID,ATTACHMENTID,ATTACHMENTNAME,ARCHIVETYPE,ATTACHMENTREMARK,
+  							TABLEID,RECORDRID,FILESIZE,TRANS_FILESIZE,FILEPATH,LIABDEPT,LIABORG,
+  							ATTACHMENTSTATE,CREATTIME,CREATORID,MODIFIEDTIME,MODIFIERID,RECORDSTATE)
+    values(#{RID},#{ATTACHMENTID},#{ATTACHMENTNAME},#{ARCHIVETYPE},#{ATTACHMENTREMARK},
+    		#{TABLEID},#{RECORDRID},#{FILESIZE},#{TRANS_FILESIZE},#{FILEPATH},#{LIABDEPT},#{LIABORG},
+    		#{ATTACHMENTSTATE},#{CREATTIME},#{CREATORID},#{MODIFIEDTIME},#{MODIFIERID},#{RECORDSTATE}
+	    )
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+update S_Attachment
+	<set>   
+ 		<if test="ATTACHMENTID != null ">ATTACHMENTID = #{ATTACHMENTID},</if>
+    	<if test="ATTACHMENTNAME != null ">ATTACHMENTNAME = #{ATTACHMENTNAME},</if>
+    	<if test="ARCHIVETYPE != null ">ARCHIVETYPE = #{ARCHIVETYPE},</if>
+    	<if test="ATTACHMENTREMARK != null ">ATTACHMENTREMARK = #{ATTACHMENTREMARK},</if>
+    	<if test="TABLEID != null ">TABLEID = #{TABLEID},</if>
+    	<if test="RECORDRID != null ">RECORDRID = #{RECORDRID},</if>
+    	<if test="LIABDEPT != null ">LIABDEPT = #{LIABDEPT},</if>
+    	<if test="LIABORG != null ">LIABORG = #{LIABORG},</if>
+        <if test="FILESIZE != null ">FILESIZE = #{FILESIZE},</if>
+    	<if test="FILEPATH != null ">FILEPATH = #{FILEPATH},</if>
+    	<if test="MODIFIEDTIME != null ">MODIFIEDTIME = #{MODIFIEDTIME},</if>
+    	<if test="MODIFIERID != null ">MODIFIERID = #{MODIFIERID},</if>  
+    	<if test="RECORDSTATE != null ">RECORDSTATE = #{RECORDSTATE},</if>
+    	<if test="ATTACHMENTSTATE != null ">ATTACHMENTSTATE = #{ATTACHMENTSTATE}</if>
+	</set>
+where RID =#{RID}
+</update> 
+
+<!-- 将附件状态为”未确认“的附件修改为”已确认“ -->
+<update id="confirmFileState" parameterType="hashmap" > 
+	update S_Attachment set                     
+          ATTACHMENTSTATE = #{ATTACHMENTSTATE}
+	where ATTACHMENTSTATE = '1'
+</update>
+
+<!--根据客户编码获取相关的附件信息-->
+<select id="getAttsOfCust" parameterType="String" resultType="hashmap">
+	SELECT am.* FROM S_Attachment am
+		LEFT OUTER JOIN crd_custbase cb
+			on cb.RID = am.RECORDRID 
+				and ( am.TABLEID = 'CrdCustBase_Indi' or am.TABLEID = 'CrdCustBase_Corp' )
+				and cb.RECORDSTATE ='0'
+	WHERE 	am.RECORDSTATE = '0' 
+			and cb.CUSTCODE = #{CUSTCODE} 
+			and am.ATTACHMENTSTATE = '2'
+</select>
+
+<!--用于判断附件是否已经存在-->
+<select id="isExistAtt" parameterType="hashmap" resultType="hashmap">
+	select * from S_Attachment where 
+	RECORDRID = #{RECORDRID} and FILEPATH = #{FILEPATH} and RECORDSTATE = #{RECORDSTATE}
+</select>
+
+<!-- 根据关键业务主键和关键业务表名更新最后上传人和最后上传时间 -->
+<select id="updateUploadData" parameterType="hashmap" resultType="hashmap">
+	update S_ATTACHMENT set                     
+          MODIFIERID = #{MODIFIERID}, MODIFIEDTIME = #{MODIFIEDTIME}
+	where RECORDRID = #{RECORDRID} and TABLEID = #{TABLEID} and RECORDSTATE = '0'
+</select>
+
+<!-- 根据业务主键获取该主键所拥有的所有的报表扩展文件-->
+<select id="getExtFileByBizRid" parameterType="hashmap" resultType="hashmap"> 
+	select ARCHIVETYPE,FILEPATH from S_ATTACHMENT
+	<where>
+		RECORDSTATE='0' and RECORDRID = #{REPORTDATARID} and ARCHIVETYPE like 'A%'		
+	</where>			
+</select> 
+<select id="GetRid" parameterType="hashmap" resultType="hashmap"> 
+		select * from S_Attachment  where RECORDSTATE='0'
+</select>
+<update id="updateState" parameterType="hashmap" > 
+	update S_Attachment set RECORDSTATE ='1' where RID = #{RID}
+</update>
+</mapper>

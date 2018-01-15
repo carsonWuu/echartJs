@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="WfFlowApvHis" desc="07 流程审批历史" tblName="WF_FLOWAPVHIS" pageSize="10" uniteTableModelId="" listURL="" sqlMapNamespace="WfFlowApvHis">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40"  listGroupName="" webType="text" webTypeExt="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="T" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="FLOWINSTANCEID" colName="FLOWINSTANCEID" desc="流程实例ID" dataType="VARCHAR" length="20"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="FLOWTEMPID" colName="FLOWTEMPID" desc="模板ID" dataType="VARCHAR" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="NODEID" colName="NODEID" desc="流程节点ID" dataType="VARCHAR" length="20"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="NODENAME" colName="NODENAME" desc="流程节点名称" dataType="VARCHAR" length="30"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="NODEDESC" colName="NODEDESC" desc="流程节点描述" dataType="VARCHAR" length="100"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="NODETYPE" colName="NODETYPE" desc="流程节点类型" dataType="CHAR" length="1"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="NODEBIZTYPE" colName="NODEBIZTYPE" desc="流程节点功能类型" dataType="CHAR" length="1"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="PASSRATE" colName="PASSRATE" desc="会签通过率" dataType="DECIMAL" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="APPROVER" colName="APPROVER" desc="审批人" dataType="VARCHAR" length="10"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="date" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="APPROVETIME" colName="APPROVETIME" desc="审批时间" dataType="CHAR" length="20"  listGroupName="" webType="text" webTypeExt="date" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="APPROVERESULT" colName="APPROVERESULT" desc="审批结果" dataType="CHAR" length="1"  listGroupName="" webType="radio" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="APPROVENOTION" colName="APPROVENOTION" desc="审批意见" dataType="VARCHAR" length="200"  listGroupName="" webType="textarea" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="PASSCONDITION" colName="PASSCONDITION" desc="通过条件" dataType="VARCHAR" length="200"  listGroupName="" webType="textarea" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="F" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+		<TableField id="STATE" colName="STATE" desc="状态" dataType="CHAR" length="1"  listGroupName="" webType="text" webTypeExt="" create="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isRangeSearch="F"/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="fmp.author.moduleDataRange.SModleDataRangeBiz" namespace="/fmp/author/moduleDataRange/SModleDataRangeBiz" extends="fmp.FrameCommonBiz">        
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.fmp.author.moduleDataRange.action.{1}SModleDataRangeAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+        </action>    
+		<!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.fmp.author.moduleDataRange.action.SaveSModleDataRangeAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>   
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.fmp.author.moduleDataRange.action.DeleteSModleDataRangeAction">
+        </action>
+        <!--跳转操作-->
+        <action  name="SModleDataRangeInvocate" class="com.zstar.fmp.author.moduleDataRange.action.SModleDataRangeInvocateAction">
+        	<result type="chain" name="addSuccess">DoAdd</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>                    
+    </package>
+</struts>

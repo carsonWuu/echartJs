@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SArea"> 
+<sql id="listColumns">
+  AREANAME,
+  CREATTIME,
+  CREATORID,
+  MODIFIEDTIME,
+  MODIFIERID,
+  RECORDSTATE,
+  RID,
+  AREACODE
+</sql>
+<sql id="detailColumns">
+	
+  AREANAME,
+  CREATTIME,
+  CREATORID,
+  MODIFIEDTIME,
+  MODIFIERID,
+  RECORDSTATE,
+  RID,
+  AREACODE
+</sql>
+<select id="listData" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="listColumns"/> from S_AREA
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>		
+	</where>
+        <if test="order!=null and order!='' ">   
+             order by ${order}
+        </if>				
+</select> 
+
+<select id="totalNum" parameterType="hashmap" resultType="hashmap"> 
+	select count(*) NUM from S_AREA
+	<where>
+		RECORDSTATE='0'
+        <if test="whereCondition!=null and whereCondition!='' ">   
+             ${whereCondition}
+        </if>	
+	</where>
+</select> 
+
+<delete id="deleteData" parameterType="hashmap" > 
+	delete from S_AREA where RID = #{RID}
+</delete> 
+
+<select id="viewDetail" parameterType="hashmap" resultType="hashmap"> 
+	select <include refid="detailColumns"/>  from S_AREA where RID = #{RID} 
+</select> 
+
+<update id="deleteUpdate" parameterType="hashmap" > 
+	update S_AREA set RECORDSTATE=#{RECORDSTATE} where RID=#{RID}
+</update> 
+ 
+<select id="updateDetail" parameterType="String" resultType="hashmap"> 
+      select <include refid="detailColumns"/> from S_AREA where RID = #{RID} 
+</select> 
+
+<insert id="insertSave" parameterType="hashmap" >
+	insert into S_AREA(
+  AREANAME,
+  CREATTIME,
+  CREATORID,
+  MODIFIEDTIME,
+  MODIFIERID,
+  RECORDSTATE,
+  RID,
+  AREACODE)
+	   values (
+  #{AREANAME},
+  #{CREATTIME},
+  #{CREATORID},
+  #{MODIFIEDTIME},
+  #{MODIFIERID},
+  #{RECORDSTATE},
+  #{RID},
+  #{AREACODE})
+</insert> 
+
+<update id="updateSave" parameterType="hashmap" > 
+	update S_AREA  set 
+  AREANAME=#{AREANAME},
+  CREATTIME=#{CREATTIME},
+  CREATORID=#{CREATORID},
+  MODIFIEDTIME=#{MODIFIEDTIME},
+  MODIFIERID=#{MODIFIERID},
+  RECORDSTATE=#{RECORDSTATE},
+  RID=#{RID},
+  AREACODE=#{AREACODE}
+	where RID=#{RID}
+</update> 
+
+</mapper>

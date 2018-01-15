@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="fmp.system.report.reportSubTemplet.SReportSubTempletBiz" namespace="/fmp/system/report/reportSubTemplet/SReportSubTempletBiz" extends="fmp.FrameCommonBiz">        
+		<!--进入操作界面List View Add Update -->
+        <action  name="Do*" class="com.zstar.fmp.system.report.reportSubTemplet.action.{1}SReportSubTempletAction">
+            <result>/WEB-INF/jsp/fmp/frame/common/Common{1}.jsp</result>
+        </action>    
+		<!--新增的保存操作-->
+        <action  name="*Save" class="com.zstar.fmp.system.report.reportSubTemplet.action.SaveSReportSubTempletAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>   
+		<!--保存可修改的列表信息-->
+        <action  name="SaveDataList" class="com.zstar.fmp.system.report.reportSubTemplet.action.SaveSReportSubTempletDataListAction">
+        	<result type="chain" name="inserSuccess">DoUpdate</result>
+        	<result type="chain" name="updateSuccess">DoUpdate</result>
+        </action>  
+		<!--删除操作-->
+        <action  name="Delete" class="com.zstar.fmp.system.report.reportSubTemplet.action.DeleteSReportSubTempletAction">
+        </action> 
+        <!-- 进入新增页面-->
+        <action name="addSReportSubTemletData" class="com.zstar.fmp.system.report.reportSubTemplet.action.AddSReportSubTemletDataAction">
+        	<result  name="success">/WEB-INF/jsp/fmp/system/report/SReportSubTempletDataAdd.jsp</result>
+        </action>  
+        
+          <!-- 进入修改页面-->
+        <action name="updateSReportSubTemletData" class="com.zstar.fmp.system.report.reportSubTemplet.action.UpdateSReportSubTemletDataAction">
+        	<result  name="success">/WEB-INF/jsp/fmp/system/report/SReportSubTempletDataUpdate.jsp</result>
+        </action>
+        
+        <!-- 新增保存操作-->
+        <action name="SaveSReportSubTemletData" class="com.zstar.fmp.system.report.reportSubTemplet.action.SaveSReportSubTemletDataAction">
+        </action> 
+         <!-- 修改保存操作-->
+        <action name="updateSaveSReportSubTemletData" class="com.zstar.fmp.system.report.reportSubTemplet.action.UpdateSaveSReportSubTemletDataAction">
+        </action>                 
+    </package>
+</struts>

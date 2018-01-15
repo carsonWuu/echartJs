@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablemodel id="SmmsAcProxy" desc="防共享日志" tblName="SMMS_AC_PROXY" pageSize="20" uniteTableModelId="" listURL="" sqlMapNamespace="SmmsAcProxy">
+	<Fields>
+		<TableField id="RID" colName="RID" desc="主键" dataType="VARCHAR" length="40" cssClass="" listGroupName="" create="LVUA" hidden="LVU" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="T" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="USERNAME" colName="USERNAME" desc="用户名" dataType="VARCHAR" length="128" cssClass="" listGroupName="" create="LVUA" hidden="" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="GROUPNAME" colName="GROUPNAME" desc="组名" dataType="VARCHAR" length="1664" cssClass="" listGroupName="" create="LVUA" hidden="" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="IP" colName="IP" desc="IP" dataType="VARCHAR" length="50" cssClass="" listGroupName="" create="LVUA" hidden="" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="LOG_TIME" colName="LOG_TIME" desc="日志时间" dataType="CHAR" length="20" cssClass="" listGroupName="" create="LVUA" hidden="" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="TERMINAL_COUNT" colName="TERMINAL_COUNT" desc="共享终端个数" dataType="INTEGER" length="10" cssClass="" listGroupName="" create="LVUA" hidden="" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="TERMINAL_INFO" colName="TERMINAL_INFO" desc="终端详情" dataType="VARCHAR" length="200" cssClass="" listGroupName="" create="LVUA" hidden="" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="CHAR" length="20" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+		<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="CHAR" length="1" cssClass="" listGroupName="" create="LVUA" hidden="LVUA" groupEnd="F" isSearch="F" fuzzy="F" orderInList="F" required="T" isPK="F" inputInList="F" forceNewRow="F" isSensitive="F" isRangeSearch="F" tableAlias=""/>
+	</Fields>
+	<SubTableModels>
+	</SubTableModels>
+</tablemodel>

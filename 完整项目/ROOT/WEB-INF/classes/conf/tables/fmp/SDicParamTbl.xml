@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<TableModel id="SDicParam" desc="字典表" tblName="s_dic" pageSize="10" listURL="/fmp/SDicBiz/DoList?tableModelId=SDicParam" sqlMapNamespace="SDic">
+		<Fields>
+			<TableField id="DATAVALUE" colName="DATAVALUE" desc="参数名" dataType="VARCHAR2" length="100"  required="" create="LVAU"  webType="text" inputInList="T" isSearch="T"/>
+			<TableField id="DATAKEY" colName="DATAKEY" desc="参数值" dataType="VARCHAR2" length="50"  required="" create="LVAU" webType="text" inputInList="T" isSearch="T"/>
+			<TableField id="DATATYPE" colName="DATATYPE" desc="数据类型" dataType="VARCHAR2" length="30"  required="F" isSearch="" create="LVAU" hidden="LVAU" inputInList="T" />
+			<TableField id="RID" colName="RID" desc="记录主键" dataType="VARCHAR2" length="30" required="T" isPK="T"   dicType=""  create="VLAU" hidden="LVAU"  webTypeExt=""  />
+			<TableField id="CREATTIME" colName="CREATTIME" desc="创建时间" dataType="VARCHAR2" length="20"  webType="text" webTypeExt="date" required="F" isSearch="F" create="LVAU" hidden="LVAU" />
+			<TableField id="CREATORID" colName="CREATORID" desc="创建人ID" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LVAU" hidden="LVAU" webType="text" />
+			<TableField id="MODIFIEDTIME" colName="MODIFIEDTIME" desc="最后修改时间" dataType="VARCHAR2" length="20"  webType="text" webTypeExt="date" create="LVAU" hidden="LVAU"  />
+			<TableField id="MODIFIERID" colName="MODIFIERID" desc="最后修改人ID" dataType="VARCHAR2" length="10"  required="F" isSearch="F" create="LVAU" hidden="LVAU" webType="text" />
+			<TableField id="RECORDSTATE" colName="RECORDSTATE" desc="记录状态" dataType="VARCHAR2" length="1"  required="F" isSearch="F" create="LVAU" hidden="LVAU" webType="text"  />
+		</Fields>	
+	</TableModel>
