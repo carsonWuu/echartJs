@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ajax</title>
+<!-- 引入 echarts.js -->
+<script type="text/javascript" src="echarts.min.js"></script>
+<script src="jquery-3.2.1.js"></script>
+<script>
+function Internet_safe(idc,a1,a2,a3,a4,a5,a6,a7,divId){
+var colorL=['rgb(122 ,139 ,139)','rgb(0, 104, 139)','rgb(0, 0, 139)','rgb(85, 26, 139)','rgb(24 ,116 ,205)','rgb(0 ,0 ,255)','rgb(70 ,130 ,180)','rgb(0 ,139 ,139)','rgb(0, 255, 255)','rgb(78 ,238 ,148)','rgb(0 ,191 ,255)','rgb(46 ,139 ,87)'];
+
+var element=['遭受入侵', '黑客控制','黑产牟利','内部攻击','翻墙软件','代理工具','VPN'];
+var idc=idc;
+var IDC=idc;
+var Element=element;
+var myChart = echarts.init(document.getElementById(divId));
+
+
+// 指定图表的配置项和数据
+option = {
+    tooltip : {
+        trigger: 'axis',
+    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+    }
+},
+legend: {
+    data:Element,
+    
+    // icon: 'circle',
+    align:'auto',
+    itemGap: 6 ,
+    itemWidth : 15,
+    itemHeight : 8 ,
+
+    align: 'left',
+    selectedMode: true,
+    formatter: function(v) {
+       return v ;
+   },
+   textStyle:{
+    fontSize:10,
+    color: '#666'
+}
+},
+grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    top : '10%',
+    containLabel: true
+},
+xAxis:  {
+    type: 'value',
+    //inverse: true,
+},
+yAxis: {
+	type: 'category',
+   postion:'right',
+   inverse: true,
+    
+    axisLine: {
+        show: true
+    },
+    axisTick: {
+        show: true
+    },
+    axisLabel: {
+        show: true,
+        margin: 8,
+        textStyle: {
+            color: '#9D9EA0',
+            fontSize: 12,
+        },
+
+    },
+    
+        // axisTick:{
+        // 	show:false
+        // },
+        //position:'right',
+    
+    data: IDC
+    },
+series: [
+{
+    name: '遭受入侵',
+    type: 'bar',
+    barWidth:15,
+    barCategoryGap: '15%',
+    boundaryGap : true, 
+    stack: '总量',
+    label: {
+        normal: {
+            show: false,
+            position: 'insideRight'
+        }
+    },
+    itemStyle : {
+        normal : { 
+            color : colorL[0]
+        },
+    },
+
+    data: a1
+},
+{
+    name: '黑客控制',
+    type: 'bar',
+    stack: '总量',
+    barWidth:15,
+    label: {
+        normal: {
+            show: false,
+            position: 'insideRight'
+        }
+    },
+    itemStyle : {
+        normal : { 
+            color : colorL[1]
+        },
+    },
+    data:a2
+},
+{
+    name: '黑产牟利',
+    type: 'bar',
+    stack: '总量',
+    barWidth:15,
+    label: {
+        normal: {
+            show: false,
+            position: 'insideRight'
+        }
+    },
+    itemStyle : {
+        normal : { 
+            color : colorL[2]
+        },
+    },
+    data: a3
+},
+{
+    name: '内部攻击',
+    type: 'bar',
+    stack: '总量',
+    barWidth:15,
+    label: {
+        normal: {
+            show: false,
+            position: 'insideRight'
+        }
+    },
+    itemStyle : {
+        normal : { 
+            color : colorL[3]
+        },
+    },
+    data: a4
+},
+{
+    name: '翻墙软件',
+    type: 'bar',
+    stack: '总量',
+    barWidth:15,
+    label: {
+        normal: {
+            show: false,
+            position: 'insideRight'
+        }
+    },
+    itemStyle : {
+        normal : { 
+            color : colorL[4]
+        },
+    },
+    data: a5
+}
+,
+{
+    name: '代理工具',
+    type: 'bar',
+    stack: '总量',
+    barWidth:15,
+    label: {
+        normal: {
+            show: false,
+            position: 'insideRight'
+        }
+    },
+    itemStyle : {
+        normal : { 
+            color : colorL[5]
+        },
+    },
+    data: a6
+}
+,
+{
+    name: 'VPN',
+    type: 'bar',
+    stack: '总量',
+    barWidth:15,
+    label: {
+        normal: {
+            show: false,
+            position: 'insideRight'
+        }
+    },
+    itemStyle : {
+        normal : { 
+            color : colorL[6]
+        },
+    },
+    data: a7,
+    }
+    ]
+};
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+}
+</script>
+<script>
+function Bar(dataArray,divname){
+    var colorL=[ 'rgb(122 ,139 ,139)','rgb(0, 104, 139)','rgb(0, 0, 139)','rgb(85, 26, 139)','rgb(24 ,116 ,205)','rgb(0 ,0 ,255)','rgb(70 ,130 ,180)','rgb(0 ,139 ,139)','rgb(0, 255, 255)','rgb(78 ,238 ,148)','rgb(0 ,191 ,255)','rgb(46 ,139 ,87)' ];
+    var name=dataArray.map(function(data){
+        return data.name;
+    }),
+        data=dataArray.map(function(data){
+        return data.value;
+    });
+    var myChart = echarts.init(document.getElementById(divname));
+    option = {
+    
+    tooltip: {
+         formatter: '{b} ({c})'
+    },
+    legend: {
+        data:''
+    },
+    grid: {
+        left: '2%',
+        right: '4%',
+        bottom: '3%',
+        width:'95%',
+        height:'90%',
+
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+        
+        
+    },
+    yAxis: {
+        type: 'category',
+        data: name
+    },
+    series: [
+        {
+            name: name,
+            type: 'bar',
+            barWidth : 10,  
+            data: data,
+            //label:{normal:{show:true, position:"top",textStyle:{color:"#9EA7C4"}}},
+             itemStyle : {
+                normal : {
+                    //柱状图颜色  
+                    color : function(params) {
+                        // 颜色列表  
+                        var colorList = colorL;
+                        //返回颜色  
+                        return colorList[params.dataIndex];
+                    },
+
+                }
+            }
+        }
+    ]
+};
+
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+};
+</script>
+	
+</head>
+<body>
+<div id='data' style='width:600px;height:600px;border:2px solid green;'></div>
+<div id='data1' style='width:600px;height:600px;border:2px solid green;'></div>
+<script>
+	var SMMS_EVENT_STAT,
+		SMMS_EVENT_TOP10,
+		SMMS_BASE_STAT,
+		
+		SMMS_EVENT_STAT_CURRENT,
+		SMMS_EVENT_TOP10_CURRENT;
+	
+	var	eventTop10=[],
+		eventTop10_current=[];
+	
+	var close_count,
+		no_case,
+		idc_count,
+		
+		sta_offline,
+		sta_online,
+		
+		month_not_deal,
+		need_close_count,
+		af_online,
+		af_offline,
+		
+		room_count,
+		month_dealt,
+		month_event,
+		
+		bussy_count,
+		
+		ac_online,
+		ac_offline,
+		
+		rectify_count,
+		need_rectify_count,
+		
+
+		
+		key_010,
+		key_020,
+		key_030,
+		key_040,
+		key_050,
+		key_060;
+		
+	var IDC_NAME=[],
+		INVADE=[],
+		HACKER=[],
+		BLACK_PROFIT=[],
+		INSIDER_ATTACK=[],
+		OVER_WALL=[],
+		PROXY=[],
+		VPN=[];
+	
+	var IDC_NAME_CURRENT=[],
+	INVADE_CURRENT=[],
+	HACKER_CURRENT=[],
+	BLACK_PROFIT_CURRENT=[],
+	INSIDER_ATTACK_CURRENT=[],
+	OVER_WALL_CURRENT=[],
+	PROXY_CURRENT=[],
+	VPN_CURRENT=[];
+		
+		
+		
+	var compare = function (obj1, obj2) {
+	    var val1 = obj1.value;
+	    var val2 = obj2.value;
+	    if (val1 < val2) {
+	        return -1;
+	    } else if (val1 > val2) {
+	        return 1;
+	    } else {
+	        return 0;
+	    }            
+	}
+	function add(name,value){this.name=name;this.value=value;}
+	function element(){}
+	function AjaxData(){
+		 $.ajax({
+            type:"POST",
+            async:false,
+            url:"data.json",
+            dataType:"json",
+            success:function(data){
+               
+                SMMS_EVENT_STAT=eval(data.SMMS_EVENT_STAT_COUNT);
+                SMMS_EVENT_TOP10=eval(data.SMMS_EVENT_TOP10_COUNT);
+                SMMS_BASE_STAT=eval(data.SMMS_BASE_STAT);
+                
+                SMMS_EVENT_STAT_CURRENT=eval(data.SMMS_EVENT_STAT_CURRENT);
+                SMMS_EVENT_TOP10_CURRENT=eval(data.SMMS_EVENT_TOP10_CURRENT);
+                
+                
+                $.each(SMMS_EVENT_TOP10,function(i,item){
+                	eventTop10[eventTop10.length] = new add(item.EVENT_NAME,item.EVENT_COUNT); 
+   
+               		
+                }); 
+                
+                
+                 $.each(SMMS_EVENT_STAT,function(i,item){
+                	IDC_NAME.push(item.IDC_NAME);
+                	
+                	INVADE.push(item.INVADE);
+                	
+                	HACKER.push(item.HACKER);
+                	BLACK_PROFIT.push(item.BLACK_PROFIT);
+                	INSIDER_ATTACK.push(item.INSIDER_ATTACK);
+                	OVER_WALL.push(item.OVER_WALL);
+                	PROXY.push(item.PROXY);
+                	VPN.push(item.VPN);
+                	
+                	//students[students.length].name = item.strNowEngineer; 
+                	//students[students.length].age =item.completeNum;  
+               		
+                });
+                 
+                 $.each(SMMS_EVENT_TOP10_CURRENT,function(i,item){
+                 	eventTop10_current[eventTop10_current.length] = new add(item.EVENT_NAME,item.EVENT_COUNT); 
+                 	
+                		
+                 });   
+                 eventTop10=eventTop10.sort(compare);
+                 eventTop10_current=eventTop10_current.sort(compare);
+                  $.each(SMMS_EVENT_STAT_CURRENT,function(i,item){
+                 	IDC_NAME_CURRENT.push(item.IDC_NAME);
+                 	
+                 	INVADE_CURRENT.push(item.INVADE);
+                 	
+                 	HACKER_CURRENT.push(item.HACKER);
+                 	BLACK_PROFIT_CURRENT.push(item.BLACK_PROFIT);
+                 	INSIDER_ATTACK_CURRENT.push(item.INSIDER_ATTACK);
+                 	OVER_WALL_CURRENT.push(item.OVER_WALL);
+                 	PROXY_CURRENT.push(item.PROXY);
+                 	VPN_CURRENT.push(item.VPN);
+                 	
+                 	//students[students.length].name = item.strNowEngineer; 
+                 	//students[students.length].age =item.completeNum;  
+                		
+                 });
+                 //alert(VPN_CURRENT[0]);
+            },
+            error:function(data){
+                alert("Get Data Failed");
+            }
+        })
+	}
+	function dealData(){
+		close_count=SMMS_BASE_STAT.CLOSE_COUNT;
+		need_close_count=SMMS_BASE_STAT.NEED_CLOSE_COUNT;
+		
+		no_case=SMMS_BASE_STAT.NO_CASE;
+		idc_count=SMMS_BASE_STAT.IDC_COUNT;
+		sta_online=SMMS_BASE_STAT.STA_ONLINE;
+		
+		
+		af_online=SMMS_BASE_STAT.AF_ONLINE;
+		af_offline=SMMS_BASE_STAT.AF_OFFLINE;
+		
+		room_count=SMMS_BASE_STAT.ROOM_COUNT;
+		
+		month_not_deal=SMMS_BASE_STAT.MONTH_NOT_DEAL;
+		month_dealt=SMMS_BASE_STAT.MONTH_DEALT;
+		month_event=SMMS_BASE_STAT.MONTH_EVENT;
+		
+		bussy_count=SMMS_BASE_STAT.BUSSY_COUNT;
+		
+		ac_online=SMMS_BASE_STAT.AC_ONLINE;
+		ac_offline=SMMS_BASE_STAT.AC_OFFLINE;
+		
+		sta_offline= SMMS_BASE_STAT.STA_OFFLINE;
+		sta_online= SMMS_BASE_STAT.STA_ONLINE;
+		
+		rectify_count= SMMS_BASE_STAT.RECTIFY_COUNT;
+		need_rectify_count= SMMS_BASE_STAT.NEED_RECTIFY_COUNT;
+		
+		key_010=SMMS_BASE_STAT.KEY_010;
+		key_020=SMMS_BASE_STAT.KEY_020;
+		key_030=SMMS_BASE_STAT.KEY_030;
+		key_040=SMMS_BASE_STAT.KEY_040;
+		key_050=SMMS_BASE_STAT.KEY_050;
+		key_060=SMMS_BASE_STAT.KEY_060;		
+	}
+	function getFirstPart(){//第一栏所取数据依次
+		return [idc_count,room_count,bussy_count,ac_online,ac_offline,af_online,af_offline,sta_online,sta_offline];
+	}
+	function getSecondPart(){//第二栏所取数据依次
+		return [no_case,month_event,month_dealt,month_not_deal];
+	}
+	function getThirdPart(){//第三栏所取数据依次 
+		var access = month_dealt / month_event;//综合评价的分数；
+		return [access,close_count,need_close_count,rectify_count,need_rectify_count,key_010,key_020,key_030,key_040,key_050,key_060];
+	}
+	AjaxData();
+	dealData();
+	var color=[ 'rgb(122 ,139 ,139)','rgb(0, 104, 139)','rgb(0, 0, 139)','rgb(85, 26, 139)','rgb(24 ,116 ,205)','rgb(0 ,0 ,255)','rgb(70 ,130 ,180)','rgb(0 ,139 ,139)','rgb(0, 255, 255)','rgb(78 ,238 ,148)','rgb(0 ,191 ,255)','rgb(46 ,139 ,87)' ];
+	Internet_safe(IDC_NAME_CURRENT,INVADE_CURRENT,
+			HACKER_CURRENT,
+			BLACK_PROFIT_CURRENT,
+			INSIDER_ATTACK_CURRENT,
+			OVER_WALL_CURRENT,
+			PROXY_CURRENT,
+			VPN_CURRENT,'data');
+	Bar(eventTop10_current,'data1');
+	
+</script>
+</body>
+</html>
