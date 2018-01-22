@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="UI.ico" rel="shortcut icon" type="image/x-icon"/>
+    <title>3D第一个测试</title>
+    <script charset="utf-8" type="text/javascript" language="javascript" src="echarts.min.js"></script> 
+    <script src='echarts-gl.min.js'></script>  
+    <script src="jquery-3.2.1.js"></script>
+    <style>#main {width:1000px; height: 1000px;margin: auto;}</style>
+</head>
+<body>        
+
+    <div id="main"></div>
+        
+    <script type="text/javascript">
+var chart = echarts.init(document.getElementById('main'));
+chart.setOption({
+grid3D: {},
+xAxis3D: {},
+yAxis3D: {},
+zAxis3D: {},
+series: [{
+type: 'scatter3D',
+symbolSize: 50,
+data: [[-1, -1, -1], [0, 0, 0], [1, 1, 1]],
+itemStyle: {
+opacity: 1
+}
+}]
+})
+</script>
+
+</body>
+</html>

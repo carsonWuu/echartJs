@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>广东省3D</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script src="echarts.min.js"></script>
+    <script src="echarts-gl.min.js"></script>
+    <script src="guangdong.js"></script>
+
+    <style type="text/css">
+    #main {
+        width:100%;
+        border:2px solid green;
+        height: 500px;
+    }
+</style>
+
+</head>
+
+<body>
+    <div id="main"></div>
+    <script type="text/javascript">
+        option = {
+     title: {
+         text: '测试bar3D、scatter3D、geo3D',
+         x: 'left',
+         top: "10",
+         textStyle: {
+             color: '#000',
+             fontSize: 14
+         }
+     },
+     tooltip: {
+         show: true,
+         // formatter:(params)=>{
+         //   let data = "测试1:"+params.name + "<br/>"+"值:"+ params.value[2]+"<br/>"+"地理坐标:[" + params.value[0]+","+params.value[1] +"]";
+         //   return data;
+         // },
+     },
+     
+     geo3D: {
+         map: '广东',
+         roam: true,
+         itemStyle: {
+             areaColor: '#f00',
+             opacity: 1,
+             borderWidth: 0.4,
+             borderColor: '#000'
+         },
+         label: {
+             show: true,
+             textStyle: {
+                 color: '#f00', //地图初始化区域字体颜色
+                 fontSize: 8,
+                 opacity: 1,
+                 backgroundColor: 'rgba(0,23,11,0)'
+             },
+         },
+         emphasis: { //当鼠标放上去  地区区域是否显示名称
+             label: {
+                 show: true,
+                 textStyle: {
+                     color: '#fff',
+                     fontSize: 3,
+                     backgroundColor: 'rgba(0,23,11,0)'
+                 }
+             }
+         },
+         //shading: 'lambert',
+         light: { //光照阴影
+             main: {
+                 color: '#fff', //光照颜色
+                 intensity: 1.2, //光照强度
+                 //shadowQuality: 'high', //阴影亮度
+                 shadow: false, //是否显示阴影
+                 alpha:55,
+                 beta:10
+ 
+             },
+              ambient: {
+                 intensity: 0.3
+             }
+         }
+     },
+     series: [{
+         name: 'map',
+         type: "map3D",
+         coordinateSystem: 'geo3D',
+         barSize: 1, //柱子粗细
+         shading: 'lambert',
+         opacity: 1,
+         bevelSize:0.3,
+         label: {
+             show: true,
+             formatter: '{b}'
+         },
+         
+     }
+     ]
+ }
+        var chart=echarts.init(document.getElementById('main')).setOption(option)
+    </script>
+</body>
+</html>

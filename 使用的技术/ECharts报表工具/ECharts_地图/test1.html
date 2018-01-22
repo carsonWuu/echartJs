@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+    <title>ECharts</title>
+     <script src="http://api.map.baidu.com/api?v=2.0&ak=ZorndOjbGwV94cj0FqaNRHG66P07U5Fq
+"></script>
+    <script src="jquery-3.2.1.js"></script>
+    <script src="echarts.min.js"></script>
+    <script src="bmap.min.js"></script>
+    <script src='guangdong.js'></script>
+    <style>#main {width:1000px; height: 1000px;margin: auto;}</style>
+</head>
+<body>        
+
+    <div id="main"></div>
+        
+        <script>
+            var myChart = echarts.init(document.getElementById('main'));
+            var option = {
+                tooltip: {
+//                    show: false //不显示提示标签
+                    formatter: '{b}{c}', //提示标签格式
+                    backgroundColor:"#ff7f50",//提示标签背景颜色
+                    textStyle:{color:"#fff"} //提示标签字体颜色
+                },
+                series: [{
+                    type: 'map',
+                    mapType: '广东',
+                    label: {
+                        normal: {
+                            show: true,//显示省份标签
+                            textStyle:{color:"#c71585"}//省份标签字体颜色
+                        },    
+                        emphasis: {//对应的鼠标悬浮效果
+                            show: true,
+                            textStyle:{color:"#800080"}
+                        } 
+                    },
+                    itemStyle: {
+                        normal: {
+                            borderWidth: .5,//区域边框宽度
+                            borderColor: '#009fe8',//区域边框颜色
+                            areaColor:"#ffefd5",//区域颜色
+                            color : function(params) {  
+                                // 颜色列表  
+                                var colorList = ['rgb(30, 144, 255)','rgb(124, 205, 124)','rgb(255, 160, 122)','rgb(30, 144, 255)','rgb(124, 205, 124)','rgb(255, 160, 122)','rgb(30, 144, 255)','rgb(124, 205, 124)','rgb(255, 160, 122)','rgb(30, 144, 255)','rgb(124, 205, 124)','rgb(255, 160, 122)','rgb(30, 144, 255)','rgb(124, 205, 124)','rgb(255, 160, 122)','rgb(30, 144, 255)','rgb(124, 205, 124)','rgb(255, 160, 122)','rgb(30, 144, 255)','rgb(124, 205, 124)','rgb(255, 160, 122)','rgb(30, 144, 255)','rgb(124, 205, 124)','rgb(255, 160, 122)'];  
+                                //返回颜色  
+                                return colorList[params.dataIndex];  
+                            }
+                        },
+                        emphasis: {
+                            borderWidth: .5,
+                            borderColor: '#4b0082',
+                            areaColor:"#ffdead",
+                            
+                        }
+                    },
+                    data:[
+                        {name:'珠海市', value:30}//福建为选中状态
+                    ]
+                }],
+            };
+            
+            myChart.setOption(option);
+            myChart.on('click', function (params) {
+                var dataIndex = params.dataIndex;
+                if(dataIndex==1)window.open('https://www.baidu.com');
+                console.log(params.dataIndex);
+            });
+        </script>
+
+</body>
+</html>
