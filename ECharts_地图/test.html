@@ -1,0 +1,34 @@
+third
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>         
+            #ccc {
+                position: relative;
+                top: 200px;
+                width: 15%;
+                overflow: hidden;
+
+            }
+            
+            #ccc img {
+                width: 100%;
+                height: auto;
+                position: relative;
+                vertical-align: bottom; /*设置图片底部对齐*/
+            }
+        </style>
+    </head>
+
+    <body>
+        <pre name="code" class="html"><div style="position: relative;">//这个层为外面的父层，只需设置相对位置样式即可  
+  <div style="position: absolute;">//这个为里面要叠加的层，只需设置绝对样式  
+    <img src="dog.jpg"/>//这个为层里面的内容图片  
+  </div>  
+  <img src="ui.jpg"/>//这个为父层内容  
+</div>  
+    </body>
+    <html>

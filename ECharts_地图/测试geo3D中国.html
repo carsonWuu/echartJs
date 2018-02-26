@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=EDGE"> -->
+    <title>3D中国</title>
+    <script src="echarts.js"></script>
+    <script src="echarts-gl.min.js"></script>
+    <!-- <script src="http://echarts.baidu.com/resource/echarts-gl-latest/dist/echarts-gl.min.js"></script> -->
+    <!-- <script src='china.js'></script> -->
+    <script src="jquery-3.2.1.js"></script>
+    <script src="http://gallery.echartsjs.com/dep/echarts/map/js/china.js"></script>
+    
+
+    <style>#main {width:1000px; height: 500px;margin: auto;border:2px solid green;}</style>
+</head>
+<body>
+    <div id='main'></div>
+    <script>
+     
+ function randomValue() {
+    return Math.round(Math.random()*1000);
+}
+
+
+ 
+ option = {
+     title: {
+         text: '测试bar3D、scatter3D、geo3D',
+         x: 'left',
+         top: "10",
+         textStyle: {
+             color: '#000',
+             fontSize: 14
+         }
+     },
+     // tooltip: {
+     //     show: true,
+     //     // formatter:(params)=>{
+     //     //   let data = "测试1:"+params.name + "<br/>"+"值:"+ params.value[2]+"<br/>"+"地理坐标:[" + params.value[0]+","+params.value[1] +"]";
+     //     //   return data;
+     //     // },
+     // },
+     // visualMap: {
+     //     type: 'continuous',
+     //     seriesIndex: [0],
+     //     text: ['scatter3D'],
+     //     left: 'left',
+     //     max: 100,
+     //     calculable: true,
+     //     inRange: {
+     //         color: ['#000', 'blue', 'purple']
+     //     }
+     // },
+      geo3D: {
+         map: 'china',
+         roam: true,
+         itemStyle: {
+             color:'#0dd',
+             opacity: 1,
+             borderWidth: 0.4,
+             borderColor: '#000'
+         },
+         label: {
+             show: true,
+             textStyle: {
+                 color: '#000', //地图初始化区域字体颜色
+                 fontSize: 8,
+                 opacity: 1,
+                 backgroundColor: 'rgba(0,23,11,0)'
+             },
+         },
+         emphasis: { //当鼠标放上去  地区区域是否显示名称
+             label: {
+                 show: true,
+                 textStyle: {
+                     color: '#fff',
+                     fontSize: 3,
+                     backgroundColor: 'rgba(0,23,11,0)'
+                 }
+             }
+         },
+         //shading: 'lambert',
+         light: { //光照阴影
+             main: {
+                 color: '#fff', //光照颜色
+                 intensity: 1.2, //光照强度
+                 //shadowQuality: 'high', //阴影亮度
+                 shadow: false, //是否显示阴影
+                 alpha:55,
+                 beta:10
+ 
+             },
+              ambient: {
+                 intensity: 0.3
+             }
+         }
+     },
+     series:  {
+            name: 'categoryA',
+            type: 'map3D',
+            //geoIndex: 0,
+            tooltip: {show: true},
+            data:[
+                {name: '北京', value: randomValue()},
+                {name: '天津', value: randomValue()},
+                {name: '上海', value: randomValue()},
+                {name: '重庆', value: randomValue()},
+                {name: '河北', value: randomValue()},
+                {name: '河南', value: randomValue()},
+                {name: '云南', value: randomValue()},
+                {name: '辽宁', value: randomValue()},
+                {name: '黑龙江', value: randomValue()},
+                {name: '湖南', value: randomValue()},
+                {name: '安徽', value: randomValue()},
+                {name: '山东', value: randomValue()},
+                {name: '新疆', value: randomValue()},
+                {name: '江苏', value: randomValue()},
+                {name: '浙江', value: randomValue()},
+                {name: '江西', value: randomValue()},
+                {name: '湖北', value: randomValue()},
+                {name: '广西', value: randomValue()},
+                {name: '甘肃', value: randomValue()},
+                {name: '山西', value: randomValue()},
+                {name: '内蒙古', value: randomValue()},
+                {name: '陕西', value: randomValue()},
+                {name: '吉林', value: randomValue()},
+                {name: '福建', value: randomValue()},
+                {name: '贵州', value: randomValue()},
+                {name: '广东', value: randomValue()},
+                {name: '青海', value: randomValue()},
+                {name: '西藏', value: randomValue()},
+                {name: '四川', value: randomValue()},
+                {name: '宁夏', value: randomValue()},
+                {name: '海南', value: randomValue()},
+                {name: '台湾', value: randomValue()},
+                {name: '香港', value: randomValue()},
+                {name: '澳门', value: randomValue()}
+            ]
+        }
+ }
+        var chart=echarts.init(document.getElementById('main'));
+        chart.setOption(option);
+        chart.on('click', function (params) {
+                        //var cout=params.data.name;
+
+                        //window.open('https://www.baidu.com');
+                        console.log(params);
+        });
+        </script>
+    </body>
+    </html>

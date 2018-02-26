@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>广东省3D</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script src="echarts.min.js"></script>
+    <script src="echarts-gl.min.js"></script>
+    <!-- <script src="http://echarts.baidu.com/resource/echarts-gl-latest/dist/echarts-gl.min.js"></script> -->
+    <script src="guangdong.js"></script>
+
+    <style type="text/css">
+    #main {
+        width:100%;
+        border:2px solid green;
+        height: 500px;
+    }
+</style>
+
+</head>
+
+<body>
+    <div id="main"></div>
+    <script type="text/javascript">
+        var city=[
+        {name:'珠海市',value:[123,'idc']},
+        {name:'广州市',value:[123,'idc']},
+        {name:'湛江市',value:[123,'idc']},
+        {name:'茂名市',value:[123,'idc']},
+        {name:'阳江市',value:[123,'idc']},
+        {name:'云浮市',value:[123,'idc']},
+        {name:'肇庆市',value:[123,'idc']},
+        {name:'江门市',value:[123,'idc']},
+        {name:'中山市',value:[123,'idc']},
+        {name:'佛山市',value:[123,'idc']},
+        {name:'清远市',value:[100,'idc']},
+        {name:'韶关市',value:[123,'idc']},
+        {name:'河源市',value:[0,'idc']},
+        {name:'梅州市',value:[123,'idc']},
+        {name:'潮州市',value:[255,'idc']},
+        {name:'揭阳市',value:[123,'idc']},
+        {name:'汕头市',value:[123,'idc']},
+        {name:'汕尾市',value:[123,'idc']},
+        {name:'深圳市',value:[123,'idc']},
+        {name:'东莞市',value:[123,'idc']},
+        {name:'惠州市',value:[123,'idc']}
+        ]
+        var min=100;
+        var max=150;
+        var chart = echarts.init(document.getElementById('main'));
+        var option = {
+            tooltip:{
+                formatter:function(params){
+                    var content='',
+                    content=params.name+params.value[0]+params.value[1];
+                    return content;
+                },
+            },
+            backgroundColor:'#fff',
+            visualMap: {
+                show: false,
+                min: min,
+                max: max,
+                inRange: {
+                    color: ['#e0ffff', '#006edd']
+                },
+                calculable:true
+
+            },
+            series: {
+                name:'广东',
+                type: 'map3D',
+                map: '广东',
+                data:city,
+                // shading: 'lambert',
+                // realisticMaterial: {
+                //     roughness: 0.2,
+                //     metalness:1
+                // },
+                // postEffect: {
+                //     enable: true,
+                //     SSAO: {
+                //         enable: true,
+                //         radius: 2,
+                //         intensity: 1
+                //     }
+                // },
+
+                regionHeight: 2,
+                boxWidth:70,
+                //boxHeight:50,
+                boxDepth:50,
+
+               // left:'10%',
+
+                    //environment:'#fff',
+                    // environment: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    //     offset: 0,
+                    //         color: '#00aaff' // 天空颜色
+                    //     }, {
+                    //         offset: 0.7,
+                    //         color: '#998866' // 地面颜色
+                    //     }, {
+                    //         offset: 1,
+                    //         color: '#998866' // 地面颜色
+                    //     }], false),
+
+                    // groundPlane: {
+                    //     show: false
+                    // },
+                    label: {
+                        show:true,
+                        formatter:function(params){
+                            var content='',
+                            content=params.name;
+                            return content;
+                        },
+                        textStyle:{
+                            color:'#EECBAD',
+                            fontWeight : 'normal',
+                            fontSize : 5,
+                            backgroundColor: 'rgba(0,23,11,0)'
+                        },
+                        
+                        // normal: {
+                        //     show: true,//显示省份标签
+                        //     textStyle:{color:"#f00"}//省份标签字体颜色
+                        // },    
+                        emphasis: {//对应的鼠标悬浮效果
+                            show: true,
+                            textStyle:{color:"#f00"}
+                        } 
+                    },
+                    itemStyle: {
+                        // areaColor: "#5896A7",
+                        // opacity: 1,
+                        // borderWidth: 1
+                        normal: {
+                        //     color : function(params) {
+                        // // 颜色列表  
+                        // var colorList=['rgb(255, 215, 0)','rgb(30, 144, 255)','rgb(208,32,144)','rgb(255, 215, 0)','rgb(30, 144, 255)','rgb(208,32,144)','rgb(255, 215, 0)','rgb(30, 144, 255)','rgb(208,32,144)','rgb(255, 215, 0)','rgb(30, 144, 255)','rgb(208,32,144)','rgb(255, 215, 0)','rgb(30, 144, 255)','rgb(208,32,144)','rgb(255, 215, 0)','rgb(30, 144, 255)','rgb(208,32,144)','rgb(255, 215, 0)','rgb(30, 144, 255)','rgb(208,32,144)','rgb(255, 215, 0)','rgb(30, 144, 255)','rgb(208,32,144)']
+                        // //返回颜色  
+                        // return colorList[params.dataIndex];
+                        // },
+
+                        // shadowBlur: 1,
+                        // shadowColor: '#0f0',
+                        // areaColor: '#0f0',
+                        // opacity: 1,
+                        borderWidth: 0.4
+                        }, //阴影效果
+                        emphasis: {
+                            color: 'rgb(255,255,255)'
+                        }
+                    },
+                        // data:{},
+                        //                    data: [{"name":"主机","value":"400","regionHeight":"100"}],
+                        // light: {
+                        //     main: {
+                        //         intensity: 1,
+                        //         shadow: true
+                        //     },
+                        //     ambient: {
+                        //         intensity: 0
+                        //     },
+                        //     // ambientCubemap: {
+                        //     //     diffuseIntensity: 1,
+                        //     //     texture: 'UI.jpg'
+                        //     // },         
+                        // },
+                        viewControl: {
+                            autoRotate: false,
+                            distance: 70
+                        }
+
+
+                    }
+                }
+                chart.setOption(option);
+                chart.on('click', function (params) {
+                    var cout=params.data.name;
+
+                if(cout=='广州市')window.open('http://smms.idc.com/SMMS/fmp/base/ShowLogin');
+                console.log(params);
+            });
+        </script>
+    </body>
+    </html>
