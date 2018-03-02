@@ -1,0 +1,213 @@
+<html>
+<head><title></title>
+<link rel='icon' href='w.ico' type='image/x-icon'>
+    <title>广东省3D</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script src="echarts.min.js"></script>
+    <script src="echarts-gl.min.js"></script>
+    <!-- <script src="http://echarts.baidu.com/resource/echarts-gl-latest/dist/echarts-gl.min.js"></script> -->
+    <script src="guangdong.js"></script>
+    <script src="jquery-3.2.1.js"></script>
+    <script src='Map_guangdong.js'></script>
+<script>
+        function goBackProeMap(){
+                        $('#cont_pro_map').css('display','block');
+                        $('#cont_city_map').css('display','none');
+                        $('.retPro').css('display','none');
+            }
+    </script>    
+</head>
+<body>
+        <div class="main" style="width:1300px;height:;margin:50px auto;">
+            <div id="p" style="width:1300px;height:680px;padding:10px;background:#F6F8F7;">
+                    <!--下属单位完成项目概况-->
+                <div class="proj fl pro_map" style="position: relative;">
+                    <div class="proj_top">
+                        <p>地图总览</p>
+                    </div>
+                    <div class="retPro">
+                        <a href="javascript:void(0);" onclick="goBackProeMap()">
+                            返回省级地图
+                        </a>
+                    </div>
+                    <div id="cont_pro_map" style="width:580px;height:440px;float:left;left:10px;top:50px;z-index:1;"></div>
+                    <div id="cont_city_map" style="width:580px;height:440px;float:left;display: none;left:10px;top:50px;z-index:99;"></div>
+                     
+                </div>
+                 
+            </div>
+        </div>
+         
+        <script>
+            $().ready(function(){
+                  /*echarts*/
+                   $.get('../js/广东/广东.json', function (mapJson) {
+                        echarts.registerMap('guangdong', mapJson);
+                        var chart = echarts.init(document.getElementById('cont_pro_map'));//在id为mainMap的dom元素中显示地图
+                        chart.setOption({
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: function loadData(result){//回调函数，参数params具体格式参加官方API
+                                    //鼠标放到某个地市上，显示这个地市的名称加人口数
+                                    //例如 params.name：当前地市名称。params.value：你传入的json数据与当前地市匹配的一项。
+                                    //params.data.value:你传入的json数据与当前地市匹配的一项中'value'对应的数据
+                                    return result.name+'<br />数据:'+result.value;
+                                }
+                            },
+                            visualMap: {
+                show: false,
+                min: 0,
+                max: 255,
+                inRange: {
+                    color: ['#e0ffff', '#006edd']
+                },
+                calculable:true
+
+            },
+                            dataRange:{ 
+                                min:0, 
+                                max:50, 
+                                splitNumber:0,
+                                text:['高','低'], 
+                                realtime:false,
+                                calculable:false,
+                                selectedMode:false,
+                                realtime:false,
+                                itemWidth:10,
+                                itemHeight:60,
+                                color:['lightskyblue','#f2f2f2']
+                            },
+                            title:{
+                                text:'广东省各市区数据总览',
+                                //subtext:'',
+                                x:'center',
+                                y:'top',
+                                textAlign:'left'
+                            },
+                            series: [{
+                                type: 'map',
+                                map: 'guangdong',//要和echarts.registerMap（）中第一个参数一致
+                                scaleLimit: { min: 0.8, max: 1.9 },//缩放
+                                 mapLocation:{ 
+                                    y:60 
+                                }, 
+                                itemSytle:{ 
+                                    emphasis:{label:{show:false}} 
+                                },
+                                label: {
+                                    normal: {
+                                        show: true
+                                    },
+                                    emphasis: {
+                                        show: true
+                                    }
+                                },
+                                data : [
+        {name:'珠海市',value:[123,'idc']},
+        {name:'广州市',value:[123,'idc']},
+        {name:'湛江市',value:[123,'idc']},
+        {name:'茂名市',value:[123,'idc']},
+        {name:'阳江市',value:[123,'idc']},
+        {name:'云浮市',value:[123,'idc']},
+        {name:'肇庆市',value:[123,'idc']},
+        {name:'江门市',value:[123,'idc']},
+        {name:'中山市',value:[123,'idc']},
+        {name:'佛山市',value:[123,'idc']},
+        {name:'清远市',value:[100,'idc']},
+        {name:'韶关市',value:[123,'idc']},
+        {name:'河源市',value:[0,'idc']},
+        {name:'梅州市',value:[123,'idc']},
+        {name:'潮州市',value:[255,'idc']},
+        {name:'揭阳市',value:[123,'idc']},
+        {name:'汕头市',value:[123,'idc']},
+        {name:'汕尾市',value:[123,'idc']},
+        {name:'深圳市',value:[123,'idc']},
+        {name:'东莞市',value:[123,'idc']},
+        {name:'惠州市',value:[123,'idc']}
+        ]
+                            }]
+                        }),
+                        
+                        chart.on('click', function (result) {//回调函数，点击时触发，参数params格式参加官方API
+                                setTimeout(function () {
+                                            $('#cont_pro_map').css('display','none');
+                                            $('#cont_city_map').css('display','block');
+                                            $('.retPro').css('display','block');
+                                }, 500);
+                             //选择地级市的单击事件
+                            var selectCity = result.name;
+                            alert(selectCity);
+                            //    调取后台数据
+                            $.get('../js/广东/'+selectCity+'.json', function (Citymap) {
+                                    echarts.registerMap(selectCity, Citymap);
+                                    var myChartCity = echarts.init(document.getElementById('cont_city_map'));
+                                    myChartCity.setOption({
+                                        tooltip: {
+                                            trigger: 'item',
+                                            formatter: function loadData(result){//回调函数，参数params具体格式参加官方API
+                                                //鼠标放到某个地市上，显示这个地市的名称加人口数
+                                                //例如 params.name：当前地市名称。params.value：你传入的json数据与当前地市匹配的一项。
+                                                //params.data.value:你传入的json数据与当前地市匹配的一项中'value'对应的数据
+                                                return result.name+'<br />数据:'+result.value;
+                                            }
+                                        },
+                                        dataRange:{ 
+                                            min:0, 
+                                            max:50, 
+                                            text:['高','低'], 
+                                            realtime:false,
+                                            calculable:false,
+                                            splitNumber:0,
+                                            itemWidth:10,
+                                            itemHeight:60,
+                                            color:['lightskyblue','#f2f2f2']
+                                        },
+                                        title:{
+                                            text:selectCity+'地图数据总览',
+                                            //subtext:'',
+                                            x:'center',
+                                            y:'top',
+                                            textAlign:'left'
+                                        },
+                                        series: [{
+                                            type: 'map',
+                                            map: selectCity ,//要和echarts.registerMap（）中第一个参数一致
+                                            scaleLimit: { min: 0.8, max: 1.9 },//缩放
+                                             mapLocation:{ 
+                                                y:60 
+                                            }, 
+                                            itemSytle:{ 
+                                                emphasis:{label:{show:false}} 
+                                            },
+                                            label: {
+                                                normal: {
+                                                    show: true
+                                                },
+                                                emphasis: {
+                                                    show: true
+                                                }
+                                            },
+                                            data : [
+                                                {name:'大方县',value:'5'}, 
+                                                {name:'金沙县',value:'0'}, 
+                                                {name:'织金县',value:'10'}, 
+                                                {name:'七星关区',value:'30'}, 
+                                                {name:'纳雍县',value:'50'}, 
+                                                {name:'赫章县',value:'15'}
+                                            ]//dataParam//人口数据：例如[{name:'济南',value:'100万'},{name:'菏泽'，value:'100万'}......]
+                                        }]
+                                    })
+                                    myChartCity.on('click',function(rel){
+                                        setTimeout(function () {
+                                            //$('#cont_pro_map').css('display','block');
+                                            //$('#cont_city_map').css('display','none');
+                                        }, 500);
+                                         
+                                    })
+                                });
+                            });
+                    });
+                });
+        </script>
+</body>
+</html>

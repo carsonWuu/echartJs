@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='icon' href='w.ico' type='image/x-icon'>
+    <title>双击返回</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script src="echarts.min.js"></script>
+    <script src="echarts-gl.min.js"></script>
+    <!-- <script src="http://echarts.baidu.com/resource/echarts-gl-latest/dist/echarts-gl.min.js"></script> -->
+    <script src="guangdong.js"></script>
+    <script src="jquery-3.2.1.js"></script>
+    
+    <style type="text/css">
+    #id1 {
+        position: absolute;
+        width:500px;
+        border:2px solid green;
+        height: 500px;
+        z-index:0;
+    }
+    #id2,#id3,#id4{position: absolute;width:500px;z-index:-1;height:500px;}
+</style>
+
+</head>
+
+<body>
+    <div id="id1"></div>
+    <div id="id2"></div>
+    <div id="id3"></div>
+    <div id="id4"></div>
+    <script>
+
+     function Map(){     
+        var cityData=[
+        {name:'珠海市',value:[123,'idc']},
+        {name:'广州市',value:[123,'idc']},
+        {name:'湛江市',value:[123,'idc']},
+        {name:'茂名市',value:[123,'idc']},
+        {name:'阳江市',value:[123,'idc']},
+        {name:'云浮市',value:[123,'idc']},
+        {name:'肇庆市',value:[123,'idc']},
+        {name:'江门市',value:[123,'idc']},
+        {name:'中山市',value:[123,'idc']},
+        {name:'佛山市',value:[123,'idc']},
+        {name:'清远市',value:[100,'idc']},
+        {name:'韶关市',value:[123,'idc']},
+        {name:'河源市',value:[0,'idc']},
+        {name:'梅州市',value:[123,'idc']},
+        {name:'潮州市',value:[255,'idc']},
+        {name:'揭阳市',value:[123,'idc']},
+        {name:'汕头市',value:[123,'idc']},
+        {name:'汕尾市',value:[123,'idc']},
+        {name:'深圳市',value:[123,'idc']},
+        {name:'东莞市',value:[123,'idc']},
+        {name:'惠州市',value:[123,'idc']}
+        ];
+
+        var min=100;
+        var max=150;
+        var chart =  echarts.init(document.getElementById('id1'));
+        var chart2 = echarts.init(document.getElementById('id2'));
+        $('#id2').on('dblclick', function (params) {
+                $('#id2').css('z-index','-1');
+        });
+        var option = {
+            tooltip:{
+                formatter:function(params){
+                    var content='',
+                    content=params.name+params.value[0]+params.value[1];
+                    return content;
+                },
+            },
+            backgroundColor:'#fff',
+            visualMap: {
+                show: false,
+                min: min,
+                max: max,
+                inRange: {
+                    color: ['#e0ffff', '#006edd']
+                },
+                calculable:true
+
+            },
+            series: {
+                name:'广东',
+                type: 'map3D',
+                map: '广东',
+                data:cityData,
+
+
+                regionHeight: 2,
+                boxWidth:70,
+                //boxHeight:50,
+                boxDepth:50,
+                top:'-10%',
+               //left:'10%',
+
+
+               label: {
+                show:true,
+                formatter:function(params){
+                    var content='',
+                    content=params.name;
+                    return content;
+                },
+                textStyle:{
+                    color:'#EECBAD',
+                    fontWeight : 'normal',
+                    fontSize : 5,
+                    backgroundColor: 'rgba(0,23,11,0)'
+                },
+
+
+                    emphasis: {//对应的鼠标悬浮效果
+                        show: true,
+                        textStyle:{color:"#f00"}
+                    } 
+                },
+                itemStyle: {
+
+                    normal: {
+
+                        borderWidth: 0.4
+                        }, //阴影效果
+                        emphasis: {
+                            color: 'rgb(255,255,255)'
+                        }
+                    },
+
+                    viewControl: {
+                        autoRotate: false,
+                        distance: 70
+                    }
+
+
+                }
+            }
+
+            chart.setOption(option);
+
+
+            chart.on('click', function (params) {
+                var cout=params.data.name;
+                console.log(cout);
+                
+                if(cout!=''){
+                   // window.open('http://smms.idc.com/SMMS/fmp/base/ShowLogin');
+                   
+                   $('#id2').css('z-index', '999');
+                   $.getJSON('../js/广东/'+cout+'.json', function (usaJson) {
+                    
+                      echarts.registerMap('city', usaJson);
+                      chart2.showLoading();
+                      chart2.setOption({
+                        title : {
+                            text: 'IDC市区分布',
+                            //subtext: '纯属虚构',
+                            x:'center'
+                        },
+                        tooltip : {
+                            formatter:function(params){
+                                var content='';
+                                content=params.name;//+params.value[0]+params.value[1];
+                                return content;
+                            },
+                        },
+                        backgroundColor:'#fff',
+            
+                        series: [
+                        {
+                            name: name,
+                            type: 'map3D',
+                            map: 'city', /* // 自定义扩展图表类型 */
+                            roam: false,
+
+                            regionHeight: 2,
+                            boxWidth:70,
+                            //boxHeight:50,
+                            boxDepth:50,
+                            label: {
+                                show:true,
+                                formatter:function(params){
+                                    var content='',
+                                    content=params.name;
+                                    return content;
+                                },
+                                textStyle:{
+                                    color:'#EECBAD',
+                                    fontWeight : 'normal',
+                                    fontSize : 5,
+                                    backgroundColor: 'rgba(0,23,11,1)'
+                                },
+
+
+                                emphasis: {//对应的鼠标悬浮效果
+                                    show: true,
+                                    textStyle:{color:"#f00"}
+                                } 
+                            },
+                            itemStyle: {
+
+                                normal: {
+                                    color:'#e0ffff',
+                                    borderWidth: 0.4
+                                    }, //阴影效果
+                                    emphasis: {
+                                        color: 'rgb(255,255,255)'
+                                    }
+                                },
+
+                                viewControl: {
+                                    autoRotate: false,
+                                    distance: 70
+                                },
+
+                                data:[
+                                {name: '斗门区', value: 0},
+                                {name: '金湾区', value: 0},
+                                {name: '香洲区', value: 0}
+
+                                ],
+                            } 
+                            ]
+                        });
+                      chart2.hideLoading();
+
+                    });//getJSON
+               }
+           });//click
+
+            
+
+        
+        }
+        
+
+    </script>
+
+    <script>
+
+
+
+        $(function (){
+           Map();
+
+
+       });
+
+   </script>
+
+</body>
+</html>
