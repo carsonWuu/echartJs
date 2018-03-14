@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='icon' href='w.ico' type='image/x-icon'>
+    <title>广东地图2D</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script src="echarts.min.js"></script>
+    <script src="echarts-gl.min.js"></script>
+    <!-- <script src="http://echarts.baidu.com/resource/echarts-gl-latest/dist/echarts-gl.min.js"></script> -->
+    <script src="guangdong.js"></script>
+    <script src="jquery-3.2.1.js"></script>
+    
+    <style type="text/css">
+    #id1 {
+
+        border:2px solid green;
+        height: 450px;
+        
+    }
+    
+</style>
+
+</head>
+
+<body>
+    <div id="id1"></div>
+    
+    
+    <script>
+        var rawData = [
+        {name: '珠海市',value:130},
+        {name: '广州市',value: 50},
+        {name: '中山市',value:30},
+        {name: '佛山市',value: 50},
+        {name: '清远市',value:30},
+        {name: '梅州市',value: 50},
+        {name: '汕头市',value:30},
+        {name: '东莞市',value: 50},
+        {name: '惠州市',value:30},
+        {name: '深圳市',value: 50}
+        ];
+        
+        function Map(id,cityData){     
+            
+            function sortRule(a,b){return a.value-b.value;}
+            cityData.sort(sortRule);
+            var name=cityData.map(name=>name.name);
+
+            var chart =  echarts.init(document.getElementById(id));
+
+            var geoCoordMap = {
+            '珠海市': [113.353986,21.924979]
+            ,'广州市':[113.480637,23.125178]
+            ,'湛江市':[110.264977,21.274898]
+            ,'茂名市':[110.919229,21.659751]
+            ,'阳江市':[111.825107,21.859222]
+            ,'云浮市':[112.044439,22.629801]
+            ,'肇庆市':[112.472529,23.051546]
+            ,'江门市':[112.894942,22.090431]
+            ,'中山市':[113.382391,22.321113]
+            ,'佛山市':[113.022717,22.828762]
+            ,'清远市':[113.051227,23.685022]
+            ,'韶关市':[113.591544,24.501322]
+            ,'河源市':[114.897802,23.746266]
+            ,'梅州市':[116.117582,24.099112]
+            ,'潮州市':[116.692301,23.661701]
+            ,'揭阳市':[116.255733,23.143778]
+            ,'汕头市':[116.708463,22.87102]
+            ,'汕尾市':[115.364238,22.774485]
+            ,'深圳市':[114.085947,22.347]
+            ,'东莞市':[113.746262,22.746237]
+            ,'惠州市':[114.412599,23.079404]
+        };
+
+        var option = {
+            legend: [],
+            xAxis: [{
+                type: "value",
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+            },],
+            yAxis: [{
+                type: "category",
+                
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false,
+                    alignWithLabel: true
+                },
+                axisLabel: {
+                    textStyle:{
+                       show:false
+                    }
+                },
+                data:name,
+            },],
+            grid: [{
+                left: "70%",
+                right: "20",
+                bottom: "10",
+                top:'60%',
+                containLabel: true
+            },],
+            title:[{
+                text:'全省IDC安全态势',
+                x:0,
+                textStyle:{
+                    color:'rgb(0,147,203)',
+                    fontSize:14
+                }
+            },{
+                text: "综合安全事件影响排名Top10",
+                textStyle: {
+                    color: "#000",
+                    fontWeight: "bold",
+                    fontSize: 14
+                },
+                top: "55%",
+                left: "69%"
+            }],
+            tooltip:[{
+                // formatter:function(params){
+                //     console.log(params)
+                //     var content='',
+                //     content=params.name+params.value[0]+params.value[1]+params.value[2];
+                //     return content;
+                // },
+                show:true,
+            }],
+            backgroundColor:'#fff',
+            // visualMap: {
+            //     show: false,
+            //     min: 0,
+            //     max: 3000,
+            //     inRange: {
+            //         color: ['#00ffff', '#006edd'],
+            //          color: ['#00467F', '#A5CC82']
+            //     },
+            //     calculable:true
+
+            // },
+
+            geo:{
+
+                show:true,
+                map:'广东',
+                type:'map',
+                label: {
+                    normal: {
+                        show: false
+                    },
+                    emphasis: {
+                        show: true,
+                        fontSize:15,
+                        fontWeight:'bold',
+                        color:'rgb(80,50,180)',
+                    }
+                },
+                roam: false,
+                itemStyle: {
+                    normal: {
+                        areaColor: ['rgb(0,90,157)'],
+                        borderColor: '#fff',
+                        borderWidth: '0.8',
+                    },
+                    emphasis: {
+                        areaColor: '#2B91B7',
+                    }
+                }
+            },
+            series: [{
+                name: "安全事件数量",
+                type: "bar",
+                data: cityData,
+                barWidth:7,
+                barCategoryGap: "50%",
+                label: {
+                    normal: {
+                        left:'right',
+                        show: true,
+                        position: "right",
+                        formatter: function(params) {
+                            console.log(params);
+                            return params.data.value;
+                        },
+                        textStyle: {
+                    color: "#000" //color of value
+                        }
+                    }
+                },
+        itemStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                    offset: 0,
+                    color: "rgb(231,91,250)" // 0% 处的颜色
+                }, {
+                    offset: 1,
+                    color: "rgb(80,50,180)" // 100% 处的颜色
+                }], false),
+                barBorderRadius: [30, 30,30, 30],
+            }
+        }
+    },]
+
+        };//option
+        chart.setOption(option);
+        
+        function renderEachCity() {  
+            var width=$('#id1').width();
+            var height=$('#id1').height();
+            // option.xAxis.push();
+            // option.yAxis.push();
+            // option.grid.push();
+            // option.series.push();
+            echarts.util.each(rawData, function(dataItem, idx) {
+
+                var geoCoord = geoCoordMap[dataItem.name];
+
+                var coord = chart.convertToPixel('geo', geoCoord);
+                console.log(geoCoord+":"+coord);
+                idx += '';
+
+
+                option.xAxis.push({
+                    id: idx,
+                    gridId: idx,
+                    type: 'category',
+                    show: false
+                });
+                option.yAxis.push({
+                    id: idx,
+                    gridId: idx,
+                    show: false
+                });
+                option.grid.push({
+                    id: idx,
+                    width: 10,
+                    height: (dataItem.value),
+                    left: coord[0],
+                    bottom:height-coord[1]+10,
+                });
+
+
+                option.series.push({
+                    name:dataItem.name,
+                    type: 'bar',
+                    xAxisId: idx,
+                    yAxisId: idx,
+                    road:true,
+                    itemStyle: {
+                        normal: {
+                            color:new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgba(231,91,250,1)'
+                            }, {
+                                offset: 1,
+                                color: 'rgba(80,50,180,0.9)'
+                            }], false),
+                            barBorderRadius: [30, 30,30, 30],
+                             borderColor:'rgba(255,255,255,0.8)',
+                        },
+                        emphasis:{
+                            color:new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 1,
+                                color: 'rgb(231,91,250)'
+                            }, {
+                                offset: 0,
+                                color: 'rgb(80,50,180)'
+                            }], false)
+                        }
+                    },
+                    data: [dataItem.value]
+                });
+
+
+            });
+            chart.setOption(option);
+        }
+
+        renderEachCity();
+
+        
+        chart.on('click',function(params){console.log(params);})
+
+    }
+    Map('id1',rawData);
+</script>
+</body>
+</html>
